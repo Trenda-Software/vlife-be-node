@@ -1,0 +1,29 @@
+{
+  "menu": [
+    {
+      "title": "Our Services",
+      "url": "/services",
+      "text": "SERVICES"
+    },
+    {
+      "title": "Our Projects",
+      "url": "url",
+      "text": "PROJECTS"
+    },
+    {
+      "title": "Tech Articles",
+      "url": "url",
+      "text": "DEVCENTER"
+    },
+    {
+      "title": "About Us",
+      "url": "url",
+      "text": "ABOUTUS"
+    },
+    {
+      "title": "Contact",
+      "url": "url",
+      "text": "CONTACT"
+    }
+  ]
+}
