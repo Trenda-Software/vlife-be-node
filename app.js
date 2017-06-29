@@ -5,6 +5,7 @@ var express = require('express');
 var logoData = require('./data/logo-data.json');
 var bannerData = require('./data/banner-data.json');
 var menuData = require('./data/menu-data.json');
+var servicesData = require('./data/services-data.json');
 var app = new express();
 var cors = require('cors');
 var _  = require('lodash');
@@ -20,7 +21,7 @@ app.use(function(req, res, next) {
 app.use(cors());
 
 app.get('/content-api', function(req, res) {
-  const data = _.merge(logoData, bannerData, menuData);
+  const data = _.merge(logoData, bannerData, menuData, servicesData);
   res.json(data);
 });
 

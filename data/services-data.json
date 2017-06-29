@@ -1,0 +1,21 @@
+{
+  "servicesData": {
+    "items": [
+      {
+        "fa_icon": "fa-mobile-phone",
+        "title": "MOBILE FIRST & DESKTOP FRIENDLY",
+        "text": "Fully responsive web sites and applications with the latest technologies running in the Cloud"
+      },
+      {
+        "fa_icon": "fa-usd",
+        "title": "BEST VALUE SERVICES",
+        "text": "Invest as a small business and get Top of the range Designs and Applications, usually provided at enterprise level."
+      },
+      {
+        "fa_icon": "fa-thumbs-o-up",
+        "title": "AFFORDABLE MOBILE APPLICATIONS",
+        "text": "By using the latest techs, we deliver both Android and iOS apps at a fraction of the cost. Forget about hiring an Android and iOS developer and see your mobile costs heavily reduced"
+      }
+    ]
+  }
+}

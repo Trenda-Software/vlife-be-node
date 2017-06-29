@@ -1,28 +1,28 @@
 {
-  "menu": [
+  "menuData": [
     {
       "title": "Our Services",
-      "url": "/services",
+      "url": "#",
       "text": "SERVICES"
     },
     {
       "title": "Our Projects",
-      "url": "url",
+      "url": "#",
       "text": "PROJECTS"
     },
     {
       "title": "Tech Articles",
-      "url": "url",
+      "url": "#",
       "text": "DEVCENTER"
     },
     {
       "title": "About Us",
-      "url": "url",
+      "url": "#",
       "text": "ABOUTUS"
     },
     {
       "title": "Contact",
-      "url": "url",
+      "url": "#",
       "text": "CONTACT"
     }
   ]
