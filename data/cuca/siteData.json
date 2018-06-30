@@ -7,6 +7,28 @@
     "tagLine": "Naturaleza &amp; Relax",
     "logoImage": "logo_cucalambe_web.png",
     "headerBkgImg": "pics_units/exterior/IMG_0270.jpg",
+    "menu": [
+      {
+        "code": "units",
+        "name": "Units",
+        "pos": 1
+      },
+      {
+        "code": "activ",
+        "name": "Activities",
+        "pos": 2
+      },
+      {
+        "code": "loc",
+        "name": "Location",
+        "pos": 3
+      },
+      {
+        "code": "contact",
+        "name": "Contact",
+        "pos": 4
+      }
+    ],
     "welcomeDesc": [
       "Cabañas construidas en bloque y madera, en un entorno natural unico a 400 m. del mar en una delas zonas mas tranquilas y hermosas de la costa Atlántica ...",
       "Su diseño se destaca por los variados y amplios ventanales que le otorgan gran luminosidad y una agradable vista del entorno natural",
