@@ -15,7 +15,6 @@ app.use(function (req, res, next) {
 app.use(cors());
 
 app.get('/cuca', function (req, res) {
-    // const data = _.merge(logoData, bannerData, menuData, servicesData);
     const data = cucaSiteData;
     res.json(data);
 });
