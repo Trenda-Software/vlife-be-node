@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app"
   },
-  "author": "Javier Hack <javier@southswell.com.au>",
+  "author": "Javier Hack <javier@javierhack.com>",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.2",

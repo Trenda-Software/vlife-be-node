@@ -5,8 +5,8 @@ var cors = require('cors');
 // var _ = require('lodash');
 
 app.use(function (req, res, next) {
-    console.log(`${req.method} request for '${req.url}`);
-    next();
+	console.log(`${req.method} request for '${req.url}`);
+	next();
 });
 
 // app.use(express.static('./public')); our client is another application
@@ -14,9 +14,12 @@ app.use(function (req, res, next) {
 // apply CORS middleware to allow requests from any domain
 app.use(cors());
 
-app.get('/cuca', function (req, res) {
-    const data = cucaSiteData;
-    res.json(data);
+// serve static files for test environment
+app.use(express.static('public'));
+
+app.get('/dev/cms-service/api/v1/cuca', function (req, res) {
+	const data = cucaSiteData;
+	res.json(data);
 });
 
 app.listen(3002);
