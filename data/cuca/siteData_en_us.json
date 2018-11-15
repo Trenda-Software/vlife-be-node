@@ -19,16 +19,25 @@
             "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/tree-of-life.jpg"
         ]
     },
-    "menu": [
+
+    ['Cabanas', 'Servicios y Equipamiento', 'Actividades', 'Ubicacion', 'Contacto']
+    "mainMenu": [
         {
             "code": "units",
-            "name": "Units",
+            "name": "Cabanas",
             "pos": 1
         },
+
+        {
+          "code": "services",
+          "name": "Servicios y Equipamiento"
+          "pos": 2
+        },
+
         {
             "code": "activ",
-            "name": "Activities",
-            "pos": 2
+            "name": "Actividades",
+            "pos": 3
         },
         {
             "code": "loc",
