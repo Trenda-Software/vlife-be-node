@@ -282,21 +282,30 @@
             }
         ]
     },
-    "moreInfo": "Para mas informacion, tarifas y promociones, no dude en contactarnos. GRACIAS POR ELEGIRNOS !",
-    "phones": [
-        {
-            "text": "(02255) 45 7245",
-            "phType": "landLine"
-        },
+    "contact": {
+        "summary": "Para mas informacion, tarifas y promociones, no dude en contactarnos. GRACIAS POR ELEGIRNOS !",
+        "phones": [
+            {
+                "number": "02255457245",
+                "showNumber": "(02255) 45 7245",
+                "title": "Telefono fijo",
+                "type": "landLine"
+            },
 
-        {
-            "text": "(02255) 15 523627",
-            "phType": "mobile"
-        },
-        {
-            "text": "(02255) 15 537139",
-            "phType": "mobile"
-        }
-    ],
-    "email": "cucalambelasgaviotas@gmail.com"
+            {
+                "number": "0225515523627",
+                "showNumber": "(02255) 15 523627",
+                "title": "Telefono movil 1",
+                "type": "mobile"
+            },
+            {
+                "number": "0225515537139",
+                "showNumber": "(02255) 15 537139",
+                "title": "Telefono movil 2",
+                "type": "mobile"
+            }
+        ],
+        "email": "cucalambelasgaviotas@gmail.com",
+        "facebook": "https://www.facebook.com/CabaniasCucalambe"
+    }
 }
