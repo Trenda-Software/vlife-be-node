@@ -22,6 +22,6 @@ app.get('/cuca', function(req, res) {
 
 app.listen(3002);
 
-console.log('SouthSwell express server app running in port 3002');
+console.log('Breeze CMS BackEnd server app running in port 3002');
 
 module.exports = app;
