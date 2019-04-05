@@ -1,0 +1,158 @@
+{
+  "id": "deos",
+  "lang": "sp_AR",
+  "header": "DeoS",
+  "subHeader": "Constructora y Negocios Inmobiliarios",
+  "tagLine": "Directo del constructor al duenio",
+  "logoImage": "logo_deos_web.png",
+  "logoUrl": "https://s3-sa-east-1.amazonaws.com/deos-content/img/logo.jpg",
+  "home": {
+    "pics": [
+      "https://s3-sa-east-1.amazonaws.com/deos-content/img/promo/promo.jpg"
+    ]
+  },
+
+  "properties": {
+    "home": "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3928.jpg",
+    "pics": [
+      "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3919.jpg",
+      "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3928.jpg",
+      "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3940.jpg",
+      "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3955.jpg",
+      "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3958.jpg"
+    ],
+    "items": [
+      {
+        "id": "mono",
+        "code": "unit_mono",
+        "title": "Monoambiente",
+        "desc": "<h3>Sus 26 m2 de superficie cubierta se encuentra compuesta por un ambiente con cocina y ba&ntilde;o completo.</h3><p>Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.</p><h4>IDEAL PAREJAS !</h4>",
+        "pics": [
+          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/mono/DSC_3857.jpg",
+          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/mono/DSC_3858.jpg",
+          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/mono/DSC_3860.jpg",
+          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/mono/DSC_3866.jpg",
+          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/mono/DSC_3867.jpg",
+          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/mono/DSC_3871.jpg"
+        ]
+      },
+      {
+        "id": "monoGde",
+        "code": "unit_mono_gde",
+        "title": "Monoambiente Grande",
+        "desc": "<p>Sus 40 m2 de superficie cubierta se encuentra compuesta por un ambiente grande con cocina y ba&ntilde;o completo.</p><p>Cama matrimonial, cama simple fija y espacio para cuna de bebe.</p><p>Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.</p><h4>IDEAL FAMILIA JOVEN !</h4>",
+        "pics": [
+          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/monogde/DSC_3876.jpg",
+          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/monogde/DSC_3883_1.jpg",
+          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/monogde/DSC_3886_1.jpg",
+          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/monogde/DSC_3893.jpg"
+        ]
+      },
+      {
+        "id": "cab4",
+        "code": "unit_cab_4",
+        "title": "Cabaña 4 personas",
+        "desc": "<h3>Sus 55 m2 de superficie cubierta se reparten en dos plantas</h3><h4>Planta baja</h4><p>Compuesta por un comedor con cocina integrada y ba&ntilde;o completo.</p><h4>Planta alta</h4><p>Compuesta por dos dormitorios. Un dormitorio con cama matrimonial y balc&oacute;n al frente. El segundo dormitorio posee dos camas fijas.</p><h4>IDEAL FAMILIA JOVEN !</h4>",
+        "pics": [
+          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/cab4/DSC_3896.jpg",
+          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/cab4/DSC_3898.jpg",
+          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/cab4/DSC_3899.jpg"
+        ]
+      },
+      {
+        "id": "cab5",
+        "code": "unit_cab_5",
+        "title": "Cabaña 5 personas",
+        "desc": "<h3>Sus 62 m2 de superficie cubierta se reparten en dos plantas</h3><h4>Planta baja</h4><p>Compuesta por un comedor con cocina integrada y toilette. Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.<h4>Planta alta</h4><p>Compuesta por dos dormitorios y el ba&ntilde;o principal. Un dormitorio con cama matrimonial y balc&oacute;n al frente.El segundo dormitorio posee tres camas fijas.</p><h4>IDEAL FAMILIA !</h4>",
+        "pics": [
+          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/cab5/md/IMG_0393_md.jpg",
+          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/cab5/md/Cabana_cinco1.png",
+          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/cab5/md/cab5_banio.png"
+        ]
+      }
+    ]
+  },
+  "mainMenu": [
+    {
+      "code": "",
+      "name": "Inicio",
+      "pos": 1
+    },
+    {
+      "code": "sale",
+      "name": "Venta",
+      "pos": 2
+    },
+    {
+      "code": "rent",
+      "name": "Alquiler",
+      "pos": 3
+    },
+    {
+      "code": "location",
+      "name": "Ubicacion",
+      "pos": 4
+    }
+  ],
+  "summary": "<h1>Constructora y Negocios inmobiliarios en Chascomus, Pcia de Bs. As.</h1><p>Proyectos de inversion y construccion. Residencial y comercial</p>",
+
+  "welcomeDesc": "<p>Cabañas construidas en bloque y madera, en un entorno natural unico a 400 m. del mar en una delas zonas mas tranquilas y hermosas de la costa Atlántica ...</p><p>Su diseño se destaca por los variados y amplios ventanales que le otorgan gran luminosidad y una agradable vista del entorno natural</p><p>Atendidas por sus dueños, en cálido ambiente familiar</p>",
+
+  "services": {
+    "intro": "EXCELENTE SERVICIO, ATENDIDA POR SUS DUEÑOS, QUE VIVEN EN EL COMPLEJO ...",
+    "title": "Servicios",
+    "list": [
+      {
+        "text": "Desayuno",
+        "icon": "someicon.jpg"
+      },
+      {
+        "text": "Servicio de mucama",
+        "icon": "someicon.jpg"
+      }
+    ]
+  },
+  "location": {
+    "title": "Ubicación",
+    "intro": "blah blah"
+  },
+  "notes": {
+    "title": "Atencion",
+    "items": [
+      {
+        "icon": "icon.jpg",
+        "text": "En temporada baja el minimo son dos noches de alquiler."
+      },
+      {
+        "icon": "icon.jpg",
+        "text": "Horario de ingreso (check-in): 15 hs."
+      }
+    ]
+  },
+  "contact": {
+    "summary": "Para mas informacion, tarifas y promociones, no dude en contactarnos. GRACIAS POR ELEGIRNOS !",
+    "phones": [
+      {
+        "number": "02255457245",
+        "showNumber": "(02255) 45 7245",
+        "title": "Telefono fijo",
+        "type": "landLine"
+      },
+
+      {
+        "number": "0225515523627",
+        "showNumber": "(02255) 15 523627",
+        "title": "Telefono movil 1",
+        "type": "mobile"
+      },
+      {
+        "number": "0225515537139",
+        "showNumber": "(02255) 15 537139",
+        "title": "Telefono movil 2",
+        "type": "mobile"
+      }
+    ],
+    "email": "deos@gmail.com",
+    "facebook": "https://www.facebook.com/DeoS"
+  }
+}
