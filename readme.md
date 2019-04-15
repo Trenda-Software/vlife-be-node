@@ -90,9 +90,18 @@ https://hackernoon.com/tutorial-creating-and-managing-a-node-js-server-on-aws-pa
 
 # Managing the EBS environment
 
+## open the console
+
 \$ eb console --profile breeze-ebs
 
-set the environment you want to work with
+## set the environment you want to work with
+
 \$ eb use BreezeCmsBack-env --profile breeze-ebs
 
+## check status
+
 \$ eb status --profile breeze-ebs
+
+## deploy a new version
+
+\$ eb deploy --profile breeze-ebs
