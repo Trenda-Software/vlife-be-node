@@ -1,0 +1,2 @@
+- codelizer / eslint
+- mongoose connect to mongo atlas

@@ -105,3 +105,62 @@ https://hackernoon.com/tutorial-creating-and-managing-a-node-js-server-on-aws-pa
 ## deploy a new version
 
 \$ eb deploy --profile breeze-ebs
+
+# DATABASE
+
+## LOCAL SERVER
+
+### mongo start local server
+
+    $ mongod
+
+## CLOUD SERVER
+
+Whitelist your IP !!!!!!
+Clusters -> Security -> IP whitelist
+after that wait a few seconds before loggin in.
+
+Mongo Atlas
+
+CLUSTER
+COLLECTION: breeze
+USR: breeze
+PWD: check web console
+
+## Connect with NodeJS
+
+    const MongoClient = require('mongodb').MongoClient;
+    const uri = "mongodb+srv://breeze:<password>@clustermongoatlas0-wiy2i.mongodb.net/test?retryWrites=true";
+    const client = new MongoClient(uri, { useNewUrlParser: true });
+    client.connect(err => {
+    const collection = client.db("test").collection("devices");
+    // perform actions on the collection object
+    client.close();
+    });
+
+## Connect with compass
+
+Copy the connection string below, and open Compass:
+mongodb+srv://breeze:<password>@clustermongoatlas0-wiy2i.mongodb.net/test
+
+# MONGO utils
+
+## Import data into mongo DB
+
+### to the local server
+
+    $ mongoimport --username breeze --password <pwd> --host 120.0.0.1:27017 --db breeze --collection sites --file /data/deos/siteData.json --type json
+
+### to the cloud server
+
+    $ mongoimport --host clustermongoatlas0-wiy2i.mongodb.net:27017 --db breeze --collection sites --file ./data/deos/siteData.json --type json
+
+mongodb+srv://breeze:<password>@clustermongoatlas0-wiy2i.mongodb.net/test?retryWrites=true
+
+# ENV variables
+
+for the static files environment
+for the db
+$ export NG_CMD=prod
+$ export MONGO_URL=mongodb+srv://breeze:<password>@clustermongoatlas0-wiy2i.mongodb.net/test?retryWrites=true
+they ar eonlyset in the working terminal, you need to put them in the resource files for your shell or bash profile
