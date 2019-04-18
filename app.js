@@ -1,14 +1,17 @@
-var express = require('express');
-var cucaSiteData = require('./data/cuca/siteData.json');
-// var deosSiteData = require("./data/deos/siteData.json");
-var app = new express();
-var cors = require('cors');
+const express = require('express');
+const cucaSiteData = require('./data/cuca/siteData.json');
+const deosSiteData = require('./data/deos/siteData.json');
+const app = new express();
+const cors = require('cors');
+const DataService = require('./src/DataService');
 // var _ = require('lodash');
 
 app.use(function(req, res, next) {
   console.log(`${req.method} request for '${req.url}`);
   next();
 });
+
+const service = new DataService();
 
 // app.use(express.static('./public')); our client is another application
 
