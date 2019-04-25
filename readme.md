@@ -160,7 +160,66 @@ mongodb+srv://breeze:<password>@clustermongoatlas0-wiy2i.mongodb.net/test?retryW
 # ENV variables
 
 for the static files environment
+\$ export NG_CMD=prod
+
 for the db
-$ export NG_CMD=prod
-$ export MONGO_URL=mongodb+srv://breeze:<password>@clustermongoatlas0-wiy2i.mongodb.net/test?retryWrites=true
-they ar eonlyset in the working terminal, you need to put them in the resource files for your shell or bash profile
+\$ export MONGO_URL=mongodb+srv://breeze:<password>@clustermongoatlas0-wiy2i.mongodb.net/breeze?retryWrites=true
+
+for the environment
+\$ export ENVIRONMENT=heroku
+
+check if there
+
+        $ env | grep MONGO
+
+they are only set in the working terminal, you need to put them in the resource files for your shell or bash profile
+
+# Deploy
+
+## Heroku
+
+CONS:
+
+- static files dont work well in heroku
+
+  //dont work for secutirty reasons
+  app.use(express.static(\_\_dirname + 'htdocs'));
+  app.use(express.static('../htdocs'));
+
+  // use 'public' directory instead
+
+- Slow startup after idle, few seconds
+
+- Careful with Costs in non-free tier
+
+### Setup
+
+- Install the CLI
+- Login
+
+  heroku login
+
+- crete the app if not exists already
+
+  heroku create breeze-cms-back
+
+https://breeze-cms-back.herokuapp.com/
+https://git.heroku.com/breeze-cms-back.git
+
+add a remote 'heroku' to your git remotes list
+
+- setup ENV vars
+  get it from your local env
+
+      $ env | grep MONGO
+
+set it in heroku
+
+    $ heroku config:set MONGO_URL=mongodb+srv://breeze:<password>@clustermongoatlas0-wiy2i.mongodb.net/breeze?retryWrites=true
+
+set another ENV to define the environment
+\$ heroku config:set ENVIRONMENT=heroku
+
+- push to heroku repo
+
+  \$ git push heroku

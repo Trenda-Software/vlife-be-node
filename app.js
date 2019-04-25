@@ -1,5 +1,4 @@
 const express = require('express');
-const cucaSiteData = require('./data/cuca/siteData.json');
 const deosSiteData = require('./data/deos/siteData.json');
 const app = new express();
 const cors = require('cors');
@@ -22,7 +21,7 @@ app.use(cors());
 app.use(express.static('public'));
 
 app.get('/dev/api/v1/cuca', function(req, res) {
-  const data = cucaSiteData;
+  const data = service.getContent('cuca');
   res.json(data);
 });
 
@@ -33,6 +32,10 @@ app.get('/dev/api/v1/deos', function(req, res) {
 
 app.listen(3002);
 
-console.log('SouthSwell express server app running in port 3002');
+console.log(
+  'SouthSwell express server app running in port 3002 in the ' +
+    process.env.ENVIRONMENT +
+    ' environment ',
+);
 
 module.exports = app;
