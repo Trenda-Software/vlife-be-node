@@ -1,6 +1,4 @@
 var express = require('express');
-// var cucaSiteData = require('./data/cuca/siteData_sp_ar.json');
-const deosSiteData = require('./data/deos/siteData.json');
 const app = new express();
 const cors = require('cors');
 const DataService = require('./src/DataService');

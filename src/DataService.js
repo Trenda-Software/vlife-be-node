@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const mongodb = require('mongodb');
-const cucaSiteData = require('./../data/cuca/siteData.json');
+const cucaSiteData = require('./../data/cuca/siteData_sp_ar.json');
 const deosSiteData = require('./../data/deos/siteData.json');
 
 const url = process.env.MONGO_URL;
