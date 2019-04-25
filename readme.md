@@ -220,6 +220,8 @@ set it in heroku
 set another ENV to define the environment
 \$ heroku config:set ENVIRONMENT=heroku
 
-- push to heroku repo
+- Allow Mongo Atlas to receive connections from the heroku instance
+
+* push to heroku repo
 
   \$ git push heroku

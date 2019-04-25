@@ -33,7 +33,7 @@ app.listen(3002);
 console.log(
   'Breeze CMS express server app running in port 3002 in the ' +
     process.env.ENVIRONMENT +
-    ' environment ',
+    ' environment !!!',
 );
 
 module.exports = app;
