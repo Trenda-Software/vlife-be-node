@@ -225,3 +225,16 @@ set another ENV to define the environment
 * push to heroku repo
 
   \$ git push heroku
+
+### Troubleshooting
+
+When asking for a endpoint like: https://breeze-cms-back.herokuapp.com/dev/api/v1/deos
+
+2013-09-08T01:15:34.427477+00:00 heroku[web.1]: Error R10 (Boot timeout) -> Web process failed to bind to \$PORT within 60 seconds of launch
+
+Heroku sets a dynamically assigned port number to your app. Hence if you are strictly specifying a port number to be used, Heroku won't be able to do that.
+
+However, you should set a port number so that your app can execute on localhost. Hence, the pipe to a specified port number '3000'.
+
+    var port_number = server.listen(process.env.PORT || 3000);
+    app.listen(port_number);

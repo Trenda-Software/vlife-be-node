@@ -28,10 +28,13 @@ app.get('/dev/api/v1/deos', function(req, res) {
   res.json(data);
 });
 
-app.listen(3002);
+const port_number = server.listen(process.env.PORT || 3000);
+app.listen(port_number);
 
 console.log(
-  'Breeze CMS express server app running in port 3002 in the ' +
+  'Breeze CMS express server app running in port: ' +
+    port_number +
+    ' in the ' +
     process.env.ENVIRONMENT +
     ' environment !!!',
 );
