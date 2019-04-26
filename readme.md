@@ -199,6 +199,7 @@ CONS:
 ### Setup
 
 - Install the CLI
+
 - Login
 
   heroku login
@@ -229,6 +230,8 @@ set another ENV to define the environment
 * push to heroku repo
 
   \$ git push heroku
+
+- create a staging environment
 
 ### Troubleshooting
 

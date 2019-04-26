@@ -38,8 +38,8 @@ console.log(
 function getSiteContent(res, site) {
   service
     .getContent(site)
-    .then(siteData => {
-      // console.log('site data: ', siteData);
+    .then(data => {
+      const siteData = data[0].content;
       res.json(siteData);
     })
     .catch(err => {
