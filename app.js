@@ -19,24 +19,32 @@ app.use(cors());
 app.use(express.static('public'));
 
 app.get('/dev/api/v1/cuca', function(req, res) {
-  const data = service.getContent('cuca');
-  res.json(data);
+  getSiteContent(res, 'cuca');
 });
 
 app.get('/dev/api/v1/deos', function(req, res) {
-  const data = deosSiteData;
-  res.json(data);
+  getSiteContent(res, 'deos');
 });
 
 const port_number = process.env.PORT || 3000;
 app.listen(port_number);
 
 console.log(
-  'Breeze CMS express server app running in port: ' +
-    port_number +
-    ' in the ' +
-    process.env.ENVIRONMENT +
-    ' environment !!!',
+  `Breeze CMS express server app running in port: ${port_number} in the ${
+    process.env.ENVIRONMENT
+  } environment !!!`,
 );
+
+function getSiteContent(res, site) {
+  service
+    .getContent(site)
+    .then(siteData => {
+      // console.log('site data: ', siteData);
+      res.json(siteData);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
 
 module.exports = app;

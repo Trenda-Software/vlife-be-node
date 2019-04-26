@@ -174,6 +174,10 @@ check if there
 
 they are only set in the working terminal, you need to put them in the resource files for your shell or bash profile
 
+    $ touch ~/.bash_profile
+    if exists
+    $ open ~/.bash_profile
+
 # Deploy
 
 ## Heroku

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const mongodb = require('mongodb');
-const cucaSiteData = require('./../data/cuca/siteData_sp_ar.json');
-const deosSiteData = require('./../data/deos/siteData.json');
+const cucaSiteData = require('../public/data/cuca/siteData_sp_ar.json');
+const deosSiteData = require('../public/data/deos/siteData.json');
 
 const url = process.env.MONGO_URL;
 
@@ -32,7 +32,7 @@ class DataService {
       .connect(url, {
         useNewUrlParser: true,
       })
-      .catch(err => console.log('COONN ERR: ', err));
+      .catch(err => console.log('CONN ERR: ', err));
 
     const SitesModel = mongoose.model('sites', { content: Object });
     SitesModel.deleteMany({}, err => {
@@ -49,21 +49,9 @@ class DataService {
     deosSite.save().then(() => console.log('deosSite saved'));
   }
 
-  async getContent(siteId) {
+  getContent(siteId) {
     const SitesModel = mongoose.model('sites');
-
-    const query = SitesModel.find({ 'content.id': siteId }, function(
-      err,
-      docs,
-    ) {
-      if (err) {
-        console.log('site CANT be retrieved');
-      } else {
-        console.log('site retrieved: ', docs);
-
-        return docs;
-      }
-    });
+    return SitesModel.find({ 'content.id': siteId });
   }
 }
 
