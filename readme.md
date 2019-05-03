@@ -249,3 +249,11 @@ However, you should set a port number so that your app can execute on localhost.
 ## AWS Elastic BEanstalk
 
 EB is an app deployment service
+Careful:
+
+- dont use the UI in the console, and then the CLI, they have inconsistencies
+- you shoud have SSH access to the system for trouble shooting
+
+root acc usr: deos.aws@gmail.com
+
+- setup access keys

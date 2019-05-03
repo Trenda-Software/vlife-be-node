@@ -6,72 +6,6 @@
   "tagLine": "Directo del constructor al duenio",
   "logoImage": "logo_deos_web.png",
   "logoUrl": "https://s3-sa-east-1.amazonaws.com/deos-content/img/logo.jpg",
-  "home": {
-    "pics": [
-      "https://s3-sa-east-1.amazonaws.com/deos-content/img/promo/promo.jpg"
-    ]
-  },
-
-  "properties": {
-    "home": "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3928.jpg",
-    "pics": [
-      "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3919.jpg",
-      "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3928.jpg",
-      "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3940.jpg",
-      "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3955.jpg",
-      "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3958.jpg"
-    ],
-    "items": [
-      {
-        "id": "mono",
-        "code": "unit_mono",
-        "title": "Monoambiente",
-        "desc": "<h3>Sus 26 m2 de superficie cubierta se encuentra compuesta por un ambiente con cocina y ba&ntilde;o completo.</h3><p>Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.</p><h4>IDEAL PAREJAS !</h4>",
-        "pics": [
-          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/mono/DSC_3857.jpg",
-          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/mono/DSC_3858.jpg",
-          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/mono/DSC_3860.jpg",
-          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/mono/DSC_3866.jpg",
-          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/mono/DSC_3867.jpg",
-          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/mono/DSC_3871.jpg"
-        ]
-      },
-      {
-        "id": "monoGde",
-        "code": "unit_mono_gde",
-        "title": "Monoambiente Grande",
-        "desc": "<p>Sus 40 m2 de superficie cubierta se encuentra compuesta por un ambiente grande con cocina y ba&ntilde;o completo.</p><p>Cama matrimonial, cama simple fija y espacio para cuna de bebe.</p><p>Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.</p><h4>IDEAL FAMILIA JOVEN !</h4>",
-        "pics": [
-          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/monogde/DSC_3876.jpg",
-          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/monogde/DSC_3883_1.jpg",
-          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/monogde/DSC_3886_1.jpg",
-          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/monogde/DSC_3893.jpg"
-        ]
-      },
-      {
-        "id": "cab4",
-        "code": "unit_cab_4",
-        "title": "Cabaña 4 personas",
-        "desc": "<h3>Sus 55 m2 de superficie cubierta se reparten en dos plantas</h3><h4>Planta baja</h4><p>Compuesta por un comedor con cocina integrada y ba&ntilde;o completo.</p><h4>Planta alta</h4><p>Compuesta por dos dormitorios. Un dormitorio con cama matrimonial y balc&oacute;n al frente. El segundo dormitorio posee dos camas fijas.</p><h4>IDEAL FAMILIA JOVEN !</h4>",
-        "pics": [
-          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/cab4/DSC_3896.jpg",
-          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/cab4/DSC_3898.jpg",
-          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/cab4/DSC_3899.jpg"
-        ]
-      },
-      {
-        "id": "cab5",
-        "code": "unit_cab_5",
-        "title": "Cabaña 5 personas",
-        "desc": "<h3>Sus 62 m2 de superficie cubierta se reparten en dos plantas</h3><h4>Planta baja</h4><p>Compuesta por un comedor con cocina integrada y toilette. Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.<h4>Planta alta</h4><p>Compuesta por dos dormitorios y el ba&ntilde;o principal. Un dormitorio con cama matrimonial y balc&oacute;n al frente.El segundo dormitorio posee tres camas fijas.</p><h4>IDEAL FAMILIA !</h4>",
-        "pics": [
-          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/cab5/md/IMG_0393_md.jpg",
-          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/cab5/md/Cabana_cinco1.png",
-          "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/cab5/md/cab5_banio.png"
-        ]
-      }
-    ]
-  },
   "mainMenu": [
     {
       "code": "",
@@ -94,10 +28,73 @@
       "pos": 4
     }
   ],
-  "summary": "<h1>Constructora y Negocios inmobiliarios en Chascomus, Pcia de Bs. As.</h1><p>Proyectos de inversion y construccion. Residencial y comercial</p>",
-
-  "welcomeDesc": "<p>Cabañas construidas en bloque y madera, en un entorno natural unico a 400 m. del mar en una delas zonas mas tranquilas y hermosas de la costa Atlántica ...</p><p>Su diseño se destaca por los variados y amplios ventanales que le otorgan gran luminosidad y una agradable vista del entorno natural</p><p>Atendidas por sus dueños, en cálido ambiente familiar</p>",
-
+  "sections": {
+    "home": {
+      "summary": "<h1>Constructora y Negocios inmobiliarios en Chascomus, Pcia de Bs. As.</h1><p>Proyectos de inversion y construccion. Residencial y comercial</p>",
+      "pics": [
+        "https://s3-sa-east-1.amazonaws.com/deos-content/img/promo/promo.jpg"
+      ]
+    },
+    "forsale": {
+      "home": "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3928.jpg",
+      "pics": [
+        "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3919.jpg",
+        "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3928.jpg",
+        "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3940.jpg",
+        "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3955.jpg",
+        "https://s3-sa-east-1.amazonaws.com/deos-content/img/pics_units/11_2018/ext/DSC_3958.jpg"
+      ]
+    }
+  },
+  "units": [
+    {
+      "id": "casaeeuu",
+      "code": "casa_eeuu",
+      "title": "Casa en calle EE.UU.",
+      "desc": [
+        {
+          "elem": "h1",
+          "content": "VENTA DE CASA A ESTRENAR, Chascomús"
+        },
+        {
+          "elem": "h4",
+          "content": "EXCELENTES DIMENSIONES!! 75 mts2 construidos"
+        },
+        {
+          "elem": "p",
+          "content": "3 habitaciones, cocina comedor muy amplio, patio en frente y patio en el fondo, cochera , parrilla , lavadero."
+        },
+        {
+          "elem": "p",
+          "content": "Termotanques y calefactores incluidos"
+        },
+        {
+          "elem": "p",
+          "content": "Servicios: luz, agua y gas natural"
+        },
+        {
+          "elem": "h4",
+          "content": "VALOR: antes US$ 85.000 Ahora US$ 75.000"
+        }
+      ],
+      "operation": "sale",
+      "address": "EE.UU. 470",
+      "area": "Chascomus",
+      "location-lat": -35.576604,
+      "location-long": -57.990096,
+      "built_area": 75,
+      "built_area_unit": "mts2",
+      "floors": 2,
+      "rooms": 3,
+      "bathrooms": 1,
+      "state": "new",
+      "garage": 1,
+      "pics": [
+        "https://s3-sa-east-1.amazonaws.com/deos-content/VENTAS/CASAS/CASA+EE.UU/FOTOS/IMG_5931.jpg",
+        "https://s3-sa-east-1.amazonaws.com/deos-content/VENTAS/CASAS/CASA+EE.UU/FOTOS/IMG_5936.jpg"
+      ]
+    }
+  ],
   "services": {
     "intro": "EXCELENTE SERVICIO, ATENDIDA POR SUS DUEÑOS, QUE VIVEN EN EL COMPLEJO ...",
     "title": "Servicios",
