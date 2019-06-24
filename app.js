@@ -23,7 +23,10 @@ app.get('/dev/api/v1/cuca', function(req, res) {
 });
 
 app.get('/dev/api/v1/deos', function(req, res) {
-  getSiteContent(res, 'deos');
+  // getSiteContent(res, 'deos');
+  console.log('DAFUQ: ');
+
+  testDB(res);
 });
 
 const port_number = process.env.PORT || 3000;
@@ -39,12 +42,19 @@ function getSiteContent(res, site) {
   service
     .getContent(site)
     .then(data => {
+      console.log('getSiteContent: ', data);
       const siteData = data[0].content;
       res.json(siteData);
     })
     .catch(err => {
       console.log(err);
     });
+}
+
+function testDB(res) {
+  console.log('testDB: ');
+
+  service.testDB();
 }
 
 module.exports = app;

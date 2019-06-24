@@ -4,8 +4,8 @@
   "header": "DeoS",
   "subHeader": "Constructora y Negocios Inmobiliarios",
   "tagLine": "Directo del constructor al duenio",
-  "logoImage": "logo_deos_web.png",
-  "logoUrl": "https://s3-sa-east-1.amazonaws.com/deos-content/img/logo.jpg",
+  "logoImage": "https://s3-sa-east-1.amazonaws.com/deos-content/img/isologo.png",
+  "logoUrl": "https://s3-sa-east-1.amazonaws.com/deos-content/img/isologo.png",
   "mainMenu": [
     {
       "code": "",
@@ -95,37 +95,12 @@
       ]
     }
   ],
-  "services": {
-    "intro": "EXCELENTE SERVICIO, ATENDIDA POR SUS DUEÑOS, QUE VIVEN EN EL COMPLEJO ...",
-    "title": "Servicios",
-    "list": [
-      {
-        "text": "Desayuno",
-        "icon": "someicon.jpg"
-      },
-      {
-        "text": "Servicio de mucama",
-        "icon": "someicon.jpg"
-      }
-    ]
-  },
+
   "location": {
     "title": "Ubicación",
     "intro": "blah blah"
   },
-  "notes": {
-    "title": "Atencion",
-    "items": [
-      {
-        "icon": "icon.jpg",
-        "text": "En temporada baja el minimo son dos noches de alquiler."
-      },
-      {
-        "icon": "icon.jpg",
-        "text": "Horario de ingreso (check-in): 15 hs."
-      }
-    ]
-  },
+
   "contact": {
     "summary": "Para mas informacion, tarifas y promociones, no dude en contactarnos. GRACIAS POR ELEGIRNOS !",
     "phones": [
