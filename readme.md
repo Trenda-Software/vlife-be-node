@@ -2,10 +2,47 @@
 
 Node JS / Express server for Content Management System API to provide content to various client web sites
 
+# Dependencies
+
+https://github.com/babel/example-node-server
+
+    yarn add body-parser
+
+DEV
+
+- for es6
+  yarn add @babel/cli @babel/core @babel/preset-env @babel/node nodemon --dev
+
+- for watching file changes
+  yarn add nodemon --dev
+
+- for eslint
+  yarn add eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard --dev
+
+- for testing
+  yarn add mocha @babel/register --dev
+
+preset-es2015 and preset-stage-x are deprecated as of 6-2019
+
 # Run locally
 
-npm run start
+- npm scripts
+
+  "build": "babel index.js -d dist",
+  "start": "npm run build && nodemon dist/index.js",
+  "serve": "npm run build && node dist/index.js",
+  "test": "npm run build && mocha --require @babel/register"
+
+\$ npm run start
+
 localhost:3002
+
+# Directory structure
+
+- src
+  - controllers: logic, provides data to endpoints, mvc pattern
+  - models: data models, mvc pattern. Schema, connection to DB,
+  - routes: API endpoints
 
 # Deploy NETVIRTUE
 
@@ -112,7 +149,13 @@ https://hackernoon.com/tutorial-creating-and-managing-a-node-js-server-on-aws-pa
 
 ### mongo start local server
 
-    $ mongod
+host: 127.0.0.1:27017
+db: breeze
+
+START
+\$ mongod
+
+\$
 
 ## CLOUD SERVER
 
@@ -159,6 +202,8 @@ mongodb+srv://breeze:<password>@clustermongoatlas0-wiy2i.mongodb.net/test?retryW
 
 # ENV variables
 
+## env from
+
 for the static files environment
 \$ export NG_CMD=prod
 
@@ -177,6 +222,8 @@ they are only set in the working terminal, you need to put them in the resource 
     $ touch ~/.bash_profile
     if exists
     $ open ~/.bash_profile
+
+## env with webpack
 
 # Deploy
 

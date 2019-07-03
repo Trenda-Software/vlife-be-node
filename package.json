@@ -5,25 +5,33 @@
   "repository": "https://jhackbitb@bitbucket.org/jhackbitb/breeze-cms-back.git",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app",
-    "start-local": "nodemon app"
+    "build": "babel index.js -d dist",
+    "start": "npm run build && nodemon dist/index.js",
+    "serve": "npm run build && node dist/index.js",
+    "test": "npm run build && mocha --require @babel/register"
   },
   "author": "Javier Hack <javier@southswell.com.au>",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.17.2",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.3",
     "express": "^4.15.3",
     "lodash": "^4.17.11",
     "mongoose": "^5.6.0"
   },
   "devDependencies": {
-    "eslint": "^5.16.0",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
+    "eslint": "^6.0.1",
     "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.17.2",
-    "eslint-plugin-node": "^8.0.1",
-    "eslint-plugin-promise": "^4.1.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "mocha": "^6.1.4",
+    "nodemon": "^1.19.1"
   }
 }
