@@ -72,12 +72,10 @@ Enter to the virtual environment.
 To enter to virtual environment, run the command:
 \$ source /home/southswe/nodevenv/api/10/bin/activate && cd /home/southswe/api
 
-# Deploy AWS
+# Deploy AWS with EBS
 
 breeze.aws@gmail.com
 Brze)(-93
-
-## with EBS
 
 https://medium.freecodecamp.org/how-to-deploy-a-node-js-app-to-the-aws-elastic-beanstalk-f150899ed977
 
@@ -119,12 +117,6 @@ test it
 
 eb console --profile breeze-ebs
 
-## manually
-
-### create a EC micro instance
-
-https://hackernoon.com/tutorial-creating-and-managing-a-node-js-server-on-aws-part-1-d67367ac5171
-
 # Managing the EBS environment
 
 ## open the console
@@ -142,6 +134,12 @@ https://hackernoon.com/tutorial-creating-and-managing-a-node-js-server-on-aws-pa
 ## deploy a new version
 
 \$ eb deploy --profile breeze-ebs
+
+# Deploy to EC2 AWS Manually
+
+### create a EC micro instance
+
+https://hackernoon.com/tutorial-creating-and-managing-a-node-js-server-on-aws-part-1-d67367ac5171
 
 # DATABASE
 
