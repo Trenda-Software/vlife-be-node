@@ -1,13 +1,9 @@
 import express from 'express';
 import routes from './routes/siteRoutes.js';
 // import cors from 'cors';
-import DataService from './service/DataService';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const ds = new DataService();
-
-console.log(ds);
 
 routes(app);
 
@@ -40,8 +36,6 @@ app.get('/', (req, res) => res.send(`BREEZE CMS API on PORT: ${PORT}`));
 // });
 
 app.listen(PORT, () => {
-    console.log(ds);
-
     console.log(
         `Breeze CMS express server app running in: http://localhost:${PORT} in the ${process.env.ENVIRONMENT} environment !!!`
     );
