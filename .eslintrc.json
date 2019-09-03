@@ -1,7 +1,7 @@
 {
   "extends": ["eslint:recommended"],
   "plugins": ["prettier"],
-  "parser": "babel-eslint",
+  // "parser": "babel-eslint", //@TODO review this
 
   "parserOptions": {
     "ecmaVersion": 2018,

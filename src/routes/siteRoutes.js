@@ -1,4 +1,4 @@
-const routes = app => {
+const router = app => {
   app
     .route('/contact')
     .get((req, res) => res.send('CONTACT GET Req Ok'))
@@ -14,6 +14,28 @@ const routes = app => {
     .get((req, res) => res.send('UNIT ID GET Req Ok'))
     .put((req, res) => res.send('UNIT ID PUT Req Ok'))
     .delete((req, res) => res.send('UNIT ID DELETE Req Ok'));
+
+  app
+    .route('/testMiddleware')
+    .get(
+      (req, res, next) => {
+        // middleware example that logs request data before moving on to next
+        console.log(`Request from: ${req.originalUrl}`);
+        console.log(`Request type: ${req.method}`);
+        next();
+      },
+      (req, res, next) => {
+        res.send('GET request successfull AFTER middleware!!!');
+      },
+    )
+    .post((req, res) => res.send('POST request in middleware!!!'));
+
+  app
+    .route('/testDB')
+    .get((req, res, next) => {
+      res.send('GET request testDB');
+    })
+    .post((req, res) => res.send('POST request in testDB'));
 };
 
-export default routes;
+module.exports = router;

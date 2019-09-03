@@ -40,6 +40,6 @@ localhost:3002
 # Directory structure
 
 - src
+  - routes: API endpoints
   - controllers: logic, provides data to endpoints, mvc pattern
   - models: data models, mvc pattern. Schema, connection to DB,
-  - routes: API endpoints
