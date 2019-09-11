@@ -1,11 +1,11 @@
 import express from 'express';
-import routes from './routes/siteRoutes.js';
+// import routes from './routes/siteRoutes.js';
 // import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-routes(app);
+// routes(app);
 
 app.get('/', (req, res) => res.send(`BREEZE CMS API on PORT: ${PORT}`));
 
@@ -37,27 +37,27 @@ app.get('/', (req, res) => res.send(`BREEZE CMS API on PORT: ${PORT}`));
 
 app.listen(PORT, () => {
     console.log(
-        `Breeze CMS express server app running in: http://localhost:${PORT} in the ${process.env.ENVIRONMENT} environment !!!`
+        `Breeze CMS express server app running in: http://localhost:${PORT} in the ${process.env.ENVIRONMENT} env WITH Typescript!!!`
     );
 });
 
-function getSiteContent(res, site) {
-    service
-        .getContent(site)
-        .then(data => {
-            console.log('getSiteContent: ', data);
-            const siteData = data[0].content;
-            res.json(siteData);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-}
+// function getSiteContent(res, site) {
+//     service
+//         .getContent(site)
+//         .then(data => {
+//             console.log('getSiteContent: ', data);
+//             const siteData = data[0].content;
+//             res.json(siteData);
+//         })
+//         .catch(err => {
+//             console.log(err);
+//         });
+// }
 
-function testDB(res) {
-    console.log('testDB: ');
+// function testDB(res) {
+//     console.log('testDB: ');
 
-    service.testDB();
-}
+//     service.testDB();
+// }
 
 module.exports = app;

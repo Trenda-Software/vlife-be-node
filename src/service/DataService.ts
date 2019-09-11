@@ -5,15 +5,15 @@ import cucaSiteData from '../../public/data/cuca/siteData_sp_ar.json';
 import deosSiteData from '../../public/data/deos/siteData_sp_ar.json';
 import 'dotenv/config';
 
-const url = process.env.MONGO_URL;
+const url: string = process.env.MONGO_URL || '';
 
-class DataService {
+export default class DataService {
     constructor() {
         this.connectWithMongoose(url);
         // this.connect(url);
     }
 
-    connect(url) {
+    connect(url: string) {
         const MongoClient = mongodb.MongoClient;
         const uri = url;
         const client = new MongoClient(uri, { useNewUrlParser: true });
@@ -26,7 +26,7 @@ class DataService {
             // collection.save(cucaSiteData);
             // collection.save(deosSiteData);
 
-            collection.deleteMany(function(err, r) {
+            collection.deleteMany(function(err: any, r: any) {
                 assert.equal(null, err);
                 // console.log('deleted r : ', r);
 
@@ -39,30 +39,29 @@ class DataService {
         });
     }
 
-    connectWithMongoose(url) {
+    connectWithMongoose(url: string) {
         console.log('MONGO_URL: ', url);
 
         this.getConn().then(() => {
-            const SitesModel = mongoose.model('sites', { content: Object });
-            SitesModel.deleteMany({}, err => {
-                if (err) {
-                    console.log('all items CANT be deleted from sites collection');
-                } else {
-                    console.log('all items deleted from sites collection');
-                }
-            });
-            const cucaSite = new SitesModel({ content: cucaSiteData });
-            const deosSite = new SitesModel({ content: deosSiteData });
-
+            // const SitesModel = mongoose.model('sites', { content:any });
+            // SitesModel.deleteMany({}, (err:any) => {
+            //     if (err) {
+            //         console.log('all items CANT be deleted from sites collection');
+            //     } else {
+            //         console.log('all items deleted from sites collection');
+            //     }
+            // });
+            // const cucaSite = new SitesModel({ content: cucaSiteData });
+            // const deosSite = new SitesModel({ content: deosSiteData });
             // cucaSite.markModified('content');
-            cucaSite.save().then(() => {
-                console.log('cucaSite saved');
-                // deosSite.markModified('content');
-                deosSite.save().then(() => {
-                    console.log('deosSite saved');
-                    mongoose.disconnect();
-                });
-            });
+            // cucaSite.save().then(() => {
+            //     console.log('cucaSite saved');
+            //     // deosSite.markModified('content');
+            //     deosSite.save().then(() => {
+            //         console.log('deosSite saved');
+            //         mongoose.disconnect();
+            //     });
+            // });
         });
     }
 
@@ -94,5 +93,3 @@ class DataService {
         });
     }
 }
-
-module.exports = DataService;
