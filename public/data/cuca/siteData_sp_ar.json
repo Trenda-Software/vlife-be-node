@@ -98,23 +98,19 @@
             "group": "units",
             "id": "mono",
             "title": "Monoambiente",
-            "desc1": "Sus 26 m2 de superficie cubierta se encuentra compuesta por un ambiente con cocina y ba&ntilde;o completo.",
-            "desc2": "Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.",
-            "footer": "IDEAL PAREJAS !"
+            "content": "<p>Sus 26 m2 de superficie cubierta se encuentra compuesta por un ambiente con cocina y ba&ntilde;o completo.</p><p>Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.</p><footer>IDEAL PAREJAS !</footer>"
         },
         {
             "group": "units",
             "id": "monoGde",
             "title": "Monoambiente Grande",
-            "desc1": "Sus 40 m2 de superficie cubierta se encuentra compuesta por un ambiente grande con cocina y ba&ntilde;o completo. Cama matrimonial, cama simple fija y espacio para cuna de bebe.",
-            "desc2": "Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.",
-            "footer": "IDEAL FAMILIA JOVEN !"
+            "content": "<p>Sus 40 m2 de superficie cubierta se encuentra compuesta por un ambiente grande con cocina y ba&ntilde;o completo. Cama matrimonial, cama simple fija y espacio para cuna de bebe.</p><p>Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.</p><footer>IDEAL FAMILIA JOVEN !</footer>"
         },
         {
             "group": "units",
             "id": "cab4",
             "title": "Cabaña 4 personas",
-            "desc1": "Sus 55 m2 de superficie cubierta se reparten en dos plantas",
+            "content": "<p>Sus 55 m2 de superficie cubierta se reparten en dos plantas</p>",
             "desc2": {
                 "title": "Planta baja",
                 "content": "Compuesta por un comedor con cocina integrada y ba&ntilde;o completo."

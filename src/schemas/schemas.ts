@@ -1,18 +1,3 @@
-// interface SiteSchemaI {
-//     content: {
-//         title: string;
-//         author: string;
-//         body: string;
-//         comments: [{ body: String; date: Date }];
-//         date: { type: Date; default: Date.now };
-//         hidden: Boolean;
-//         meta: {
-//             votes: Number;
-//             favs: Number;
-//         };
-//     };
-// }
-
 import { Schema } from 'mongoose';
 
 export const SiteSchema = new Schema({
@@ -56,50 +41,3 @@ export const SiteSchema = new Schema({
         ],
     },
 });
-
-export interface MediaItemI {
-    location: string;
-    elements: string[];
-}
-
-export interface SiteSchemaI {
-    content: {
-        id: string;
-        lang: string;
-        header: string;
-        subHeader: string;
-        tagLine: string;
-        logoImage: string;
-        logoUrl: string;
-        comments: string[];
-        media: MediaItemI[];
-        menus: [
-            {
-                name: string;
-                elements: [
-                    {
-                        code: string;
-                        name: string;
-                        pos: number;
-                    }
-                ];
-            }
-        ];
-        posts: object[];
-        pages: [
-            {
-                group: string;
-                id: string;
-                title: string;
-                content: string;
-            }
-        ];
-        users: object[];
-        custom: [
-            {
-                name: string;
-                content: string;
-            }
-        ];
-    };
-}

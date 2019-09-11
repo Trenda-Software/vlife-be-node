@@ -4,7 +4,8 @@ import assert from 'assert';
 import cucaSiteData from '../../public/data/cuca/siteData_sp_ar.json';
 import deosSiteData from '../../public/data/deos/siteData_sp_ar.json';
 import 'dotenv/config';
-import { SiteSchema, SiteSchemaI } from '../schemas/schemas';
+import { SiteSchema } from '../schemas/schemas';
+import { SiteSchemaI } from '../types/types';
 
 const url: string = process.env.MONGO_URL || '';
 
@@ -29,7 +30,7 @@ export default class DataService {
         });
 
         this.saveSiteData({ content: cucaSiteData }, SiteModel);
-        this.saveSiteData({ content: deosSiteData }, SiteModel);
+        // this.saveSiteData({ content: deosSiteData }, SiteModel);
     }
 
     saveSiteData = async (siteData: SiteSchemaI, SiteModel: any) => {
