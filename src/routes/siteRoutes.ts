@@ -1,19 +1,9 @@
 import DataService from '../service/DataService';
-const ds = new DataService();
 
-const router = (app: any) => {
+const router = (app: any, ds: DataService) => {
     app.route('/contact')
         .get((req: any, res: any) => res.send('CONTACT GET Req Ok'))
         .post((req: any, res: any) => res.send('CONTACT POST Req Ok'));
-
-    app.route('/page')
-        .get((req: any, res: any) => res.send('page GET Req Ok'))
-        .post((req: any, res: any) => res.send('page POST Req Ok'));
-
-    app.route('/page:pageId')
-        .get((req: any, res: any) => res.send('page ID GET Req Ok'))
-        .put((req: any, res: any) => res.send('page ID PUT Req Ok'))
-        .delete((req: any, res: any) => res.send('page ID DELETE Req Ok'));
 
     app.route('/testMiddleware')
         .get(
@@ -37,4 +27,4 @@ const router = (app: any) => {
         .post((req: any, res: any) => res.send('POST request in testDB'));
 };
 
-module.exports = router;
+export default router;

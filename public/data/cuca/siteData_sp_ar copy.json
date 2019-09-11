@@ -44,16 +44,12 @@
             ]
         },
         {
-            "location": "activities",
-            "elements": [
+            "activities": [
                 "https://s3-sa-east-1.amazonaws.com/cuca-content/img/pics_units/exterior/IMG_0239.jpg",
                 "https://s3-sa-east-1.amazonaws.com/cuca-content/img/pics_units/exterior/IMG_0261.jpg"
             ]
         },
-        {
-            "location": "unitsHome",
-            "elements": ["https://s3-sa-east-1.amazonaws.com/cuca-content/img/pics_units/exterior/IMG_0270.jpg"]
-        }
+        { "unitsHome": ["https://s3-sa-east-1.amazonaws.com/cuca-content/img/pics_units/exterior/IMG_0270.jpg"] }
     ],
     "menus": [
         {

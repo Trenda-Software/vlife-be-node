@@ -1,22 +1,23 @@
 import express from 'express';
-// import routes from './routes/siteRoutes.js';
+import siteRoutes from './routes/siteRoutes';
+import pageRoutes from './routes/pageRoutes';
+import DataService from './service/DataService';
 // import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const ds = new DataService();
 
-// routes(app);
+// add routes
+siteRoutes(app, ds);
+pageRoutes(app, ds);
 
-app.get('/', (req, res) => res.send(`BREEZE CMS API on PORT: ${PORT}`));
-
-// const DataService = require('./src/DataService');
+app.get('/', (req: any, res: any) => res.send(`BREEZE CMS API on PORT: ${PORT}`));
 
 // app.use(function(req, res, next) {
 //   console.log(`${req.method} request for '${req.url}`);
 //   next();
 // });
-
-// const service = new DataService();
 
 // apply CORS middleware to allow requests from any domain
 // app.use(cors());
@@ -24,40 +25,10 @@ app.get('/', (req, res) => res.send(`BREEZE CMS API on PORT: ${PORT}`));
 // // serve static files for test environment
 // app.use(express.static('public'));
 
-// app.get('/dev/api/v1/cuca', function(req, res) {
-//   getSiteContent(res, 'cuca');
-// });
-
-// app.get('/dev/api/v1/deos', function(req, res) {
-//   // getSiteContent(res, 'deos');
-//   console.log('DAFUQ: ');
-
-//   testDB(res);
-// });
-
 app.listen(PORT, () => {
     console.log(
         `Breeze CMS express server app running in: http://localhost:${PORT} in the ${process.env.ENVIRONMENT} env WITH Typescript!!!`
     );
 });
 
-// function getSiteContent(res, site) {
-//     service
-//         .getContent(site)
-//         .then(data => {
-//             console.log('getSiteContent: ', data);
-//             const siteData = data[0].content;
-//             res.json(siteData);
-//         })
-//         .catch(err => {
-//             console.log(err);
-//         });
-// }
-
-// function testDB(res) {
-//     console.log('testDB: ');
-
-//     service.testDB();
-// }
-
-module.exports = app;
+export default app;

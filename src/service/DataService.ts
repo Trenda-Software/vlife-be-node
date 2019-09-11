@@ -1,9 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose, { ConnectionOptions } from 'mongoose';
 import mongodb from 'mongodb';
 import assert from 'assert';
 import cucaSiteData from '../../public/data/cuca/siteData_sp_ar.json';
 import deosSiteData from '../../public/data/deos/siteData_sp_ar.json';
 import 'dotenv/config';
+import { SiteSchema, SiteSchemaI } from '../schemas/schemas';
 
 const url: string = process.env.MONGO_URL || '';
 
@@ -12,6 +13,31 @@ export default class DataService {
         this.connectWithMongoose(url);
         // this.connect(url);
     }
+
+    async connectWithMongoose(url: string) {
+        console.log('MONGO_URL: ', url);
+
+        await this.getConn();
+
+        const SiteModel = mongoose.model('sites', SiteSchema);
+        SiteModel.deleteMany({}, (err: any) => {
+            if (err) {
+                console.log('all items CANT be deleted from sites collection');
+            } else {
+                console.log('all items deleted from sites collection');
+            }
+        });
+
+        this.saveSiteData({ content: cucaSiteData }, SiteModel);
+        this.saveSiteData({ content: deosSiteData }, SiteModel);
+    }
+
+    saveSiteData = async (siteData: SiteSchemaI, SiteModel: any) => {
+        const siteModelData: SiteSchemaI = siteData;
+        const siteModel = new SiteModel(siteModelData);
+        await siteModel.save();
+        console.log('siteData: ', siteData.content.id, ' saved !');
+    };
 
     connect(url: string) {
         const MongoClient = mongodb.MongoClient;
@@ -39,38 +65,24 @@ export default class DataService {
         });
     }
 
-    connectWithMongoose(url: string) {
-        console.log('MONGO_URL: ', url);
-
-        this.getConn().then(() => {
-            // const SitesModel = mongoose.model('sites', { content:any });
-            // SitesModel.deleteMany({}, (err:any) => {
-            //     if (err) {
-            //         console.log('all items CANT be deleted from sites collection');
-            //     } else {
-            //         console.log('all items deleted from sites collection');
-            //     }
-            // });
-            // const cucaSite = new SitesModel({ content: cucaSiteData });
-            // const deosSite = new SitesModel({ content: deosSiteData });
-            // cucaSite.markModified('content');
-            // cucaSite.save().then(() => {
-            //     console.log('cucaSite saved');
-            //     // deosSite.markModified('content');
-            //     deosSite.save().then(() => {
-            //         console.log('deosSite saved');
-            //         mongoose.disconnect();
-            //     });
-            // });
-        });
-    }
-
     getConn() {
-        return mongoose
-            .connect(url, {
-                useNewUrlParser: true,
-            })
-            .catch(err => console.log('CONN ERR: ', err));
+        const options: ConnectionOptions = {
+            useNewUrlParser: true,
+            useCreateIndex: true,
+            useFindAndModify: false,
+            autoIndex: false, // Don't build indexes
+            reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
+            reconnectInterval: 500, // Reconnect every 500ms
+            poolSize: 10, // Maintain up to 10 socket connections
+            // If not connected, return errors immediately rather than waiting for reconnect
+            bufferMaxEntries: 0,
+            connectTimeoutMS: 10000, // Give up initial connection after 10 seconds
+            socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+            family: 4, // Use IPv4, skip trying IPv6
+            useUnifiedTopology: true,
+        };
+
+        return mongoose.connect(url, options).catch(err => console.log('CONN ERR: ', err));
     }
 
     getContent() {
@@ -78,6 +90,12 @@ export default class DataService {
             const SitesModel = mongoose.model('sites');
             return SitesModel.find();
         });
+    }
+
+    async getPages() {
+        await this.getConn();
+        const SitesModel = mongoose.model('sites');
+        return SitesModel.find();
     }
 
     testDB() {
