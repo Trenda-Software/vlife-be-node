@@ -39,9 +39,9 @@ export interface CommentI {
 }
 
 export interface SiteSchemaI {
+    id: string;
+    lang: string;
     content: {
-        id: string;
-        lang: string;
         header: string;
         subHeader: string;
         tagLine: string;

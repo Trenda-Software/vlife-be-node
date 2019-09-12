@@ -1,9 +1,9 @@
 import { Schema } from 'mongoose';
 
 export const SiteSchema = new Schema({
+    id: String,
+    lang: String,
     content: {
-        id: String,
-        lang: String,
         header: String,
         subHeader: String,
         tagLine: String,

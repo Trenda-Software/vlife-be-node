@@ -29,7 +29,7 @@ export default class DataService {
             }
         });
 
-        this.saveSiteData({ content: cucaSiteData }, SiteModel);
+        this.saveSiteData(cucaSiteData, SiteModel);
         // this.saveSiteData({ content: deosSiteData }, SiteModel);
     }
 
@@ -37,7 +37,7 @@ export default class DataService {
         const siteModelData: SiteSchemaI = siteData;
         const siteModel = new SiteModel(siteModelData);
         await siteModel.save();
-        console.log('siteData: ', siteData.content.id, ' saved !');
+        console.log('siteData: ', siteData.id, ' saved !');
     };
 
     connect(url: string) {
@@ -93,10 +93,18 @@ export default class DataService {
         });
     }
 
-    async getPages() {
+    async getPages(site: string) {
         await this.getConn();
         const SitesModel = mongoose.model('sites');
-        return SitesModel.find();
+        const result = await SitesModel.findOne()
+            .where('id')
+            .equals(site);
+        // console.log('result: ', result);
+        // console.log('content.pages: ', result ? result.get('content.pages') : null);
+        const pages = result ? result.get('content.pages') : null;
+        // console.log('pages: ', pages);
+
+        return pages;
     }
 
     testDB() {
