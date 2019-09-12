@@ -1,8 +1,8 @@
 import mongoose, { ConnectionOptions } from 'mongoose';
 import mongodb from 'mongodb';
 import assert from 'assert';
-import cucaSiteData from '../../public/data/cuca/siteData_sp_ar.json';
-import deosSiteData from '../../public/data/deos/siteData_sp_ar.json';
+import cucaSiteData from '../data/cuca/siteData_sp_ar.json';
+import deosSiteData from '../data/deos/siteData_sp_ar.json';
 import 'dotenv/config';
 import { SiteSchema } from '../schemas/schemas';
 import { SiteSchemaI } from '../types/types';

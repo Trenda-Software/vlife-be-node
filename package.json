@@ -5,8 +5,8 @@
     "repository": "https://jhackbitb@bitbucket.org/jhackbitb/breeze-cms-back.git",
     "main": "app.js",
     "scripts": {
-        "dev": "ts-node-dev --respawn --transpileOnly ./src/server.ts",
-        "build": "tsc",
+        "dev": "npm test && ts-node-dev --respawn --transpileOnly ./src/server.ts",
+        "build": "rm -R ./dist && tsc",
         "prod": "npm run build && node ./dist/server.js",
         "serve": "node dist/server.js",
         "migrate:reset": "mongo localhost:27017/breeze-test ./src/test/reset-test-db.js",
