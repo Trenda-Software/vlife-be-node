@@ -44,16 +44,12 @@
             ]
         },
         {
-            "location": "activities",
-            "elements": [
+            "activities": [
                 "https://s3-sa-east-1.amazonaws.com/cuca-content/img/pics_units/exterior/IMG_0239.jpg",
                 "https://s3-sa-east-1.amazonaws.com/cuca-content/img/pics_units/exterior/IMG_0261.jpg"
             ]
         },
-        {
-            "location": "unitsHome",
-            "elements": ["https://s3-sa-east-1.amazonaws.com/cuca-content/img/pics_units/exterior/IMG_0270.jpg"]
-        }
+        { "unitsHome": ["https://s3-sa-east-1.amazonaws.com/cuca-content/img/pics_units/exterior/IMG_0270.jpg"] }
     ],
     "menus": [
         {
@@ -98,19 +94,23 @@
             "group": "units",
             "id": "mono",
             "title": "Monoambiente",
-            "content": "<p>Sus 26 m2 de superficie cubierta se encuentra compuesta por un ambiente con cocina y ba&ntilde;o completo.</p><p>Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.</p><footer>IDEAL PAREJAS !</footer>"
+            "desc1": "Sus 26 m2 de superficie cubierta se encuentra compuesta por un ambiente con cocina y ba&ntilde;o completo.",
+            "desc2": "Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.",
+            "footer": "IDEAL PAREJAS !"
         },
         {
             "group": "units",
             "id": "monoGde",
             "title": "Monoambiente Grande",
-            "content": "<p>Sus 40 m2 de superficie cubierta se encuentra compuesta por un ambiente grande con cocina y ba&ntilde;o completo. Cama matrimonial, cama simple fija y espacio para cuna de bebe.</p><p>Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.</p><footer>IDEAL FAMILIA JOVEN !</footer>"
+            "desc1": "Sus 40 m2 de superficie cubierta se encuentra compuesta por un ambiente grande con cocina y ba&ntilde;o completo. Cama matrimonial, cama simple fija y espacio para cuna de bebe.",
+            "desc2": "Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.",
+            "footer": "IDEAL FAMILIA JOVEN !"
         },
         {
             "group": "units",
             "id": "cab4",
             "title": "Cabaña 4 personas",
-            "content": "<p>Sus 55 m2 de superficie cubierta se reparten en dos plantas</p>",
+            "desc1": "Sus 55 m2 de superficie cubierta se reparten en dos plantas",
             "desc2": {
                 "title": "Planta baja",
                 "content": "Compuesta por un comedor con cocina integrada y ba&ntilde;o completo."

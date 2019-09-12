@@ -1,6 +1,6 @@
 {
-    "extends": ["eslint:recommended"],
-
+    "extends": ["eslint:recommended", "prettier"],
+    "plugins": ["prettier"],
     "parserOptions": {
         "ecmaVersion": 2018,
         "sourceType": "module"
@@ -20,6 +20,7 @@
         "linebreak-style": ["error", "unix"],
         "quotes": ["error", "single"],
         "semi": ["error", "always"],
-        "no-console": "off"
+        "no-console": "off",
+        "prettier/prettier": ["error"]
     }
 }
