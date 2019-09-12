@@ -10,9 +10,8 @@ import { SiteSchemaI } from '../types/types';
 const url: string = process.env.MONGO_URL || '';
 
 export default class DataService {
-    constructor() {
+    async connect() {
         this.connectWithMongoose(url);
-        // this.connect(url);
     }
 
     async connectWithMongoose(url: string) {
@@ -20,17 +19,7 @@ export default class DataService {
 
         await this.getConn();
 
-        const SiteModel = mongoose.model('sites', SiteSchema);
-        SiteModel.deleteMany({}, (err: any) => {
-            if (err) {
-                console.log('all items CANT be deleted from sites collection');
-            } else {
-                console.log('all items deleted from sites collection');
-            }
-        });
-
-        this.saveSiteData(cucaSiteData, SiteModel);
-        // this.saveSiteData({ content: deosSiteData }, SiteModel);
+        await this.refreshDB();
     }
 
     saveSiteData = async (siteData: SiteSchemaI, SiteModel: any) => {
@@ -40,7 +29,18 @@ export default class DataService {
         console.log('siteData: ', siteData.id, ' saved !');
     };
 
-    connect(url: string) {
+    private async refreshDB() {
+        const SiteModel = mongoose.model('sites', SiteSchema);
+        const results = await SiteModel.deleteMany({});
+        if (results.ok) {
+            console.log('all items deleted from sites collection');
+        } else {
+            console.log('all items CANT be deleted from sites collection');
+        }
+        await this.saveSiteData(cucaSiteData, SiteModel);
+    }
+
+    connectSimple(url: string) {
         const MongoClient = mongodb.MongoClient;
         const uri = url;
         const client = new MongoClient(uri, { useNewUrlParser: true });

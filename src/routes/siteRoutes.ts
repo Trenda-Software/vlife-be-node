@@ -1,9 +1,12 @@
 import DataService from '../service/DataService';
 
 const router = (app: any, ds: DataService) => {
-    app.route('/contact')
-        .get((req: any, res: any) => res.send('CONTACT GET Req Ok'))
-        .post((req: any, res: any) => res.send('CONTACT POST Req Ok'));
+    app.route('/live')
+        .get((req: any, res: any) => res.send('live GET Req Ok'))
+        .post((req: any, res: any) => {
+            res.status(201);
+            res.send('live POST Req Ok');
+        });
 
     app.route('/testMiddleware')
         .get(

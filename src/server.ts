@@ -7,6 +7,7 @@ import DataService from './service/DataService';
 const app = express();
 const PORT = process.env.PORT || 3000;
 const ds = new DataService();
+ds.connect();
 
 // add routes
 siteRoutes(app, ds);
