@@ -94,173 +94,45 @@
             "group": "units",
             "id": "mono",
             "title": "Monoambiente",
-            "desc1": "Sus 26 m2 de superficie cubierta se encuentra compuesta por un ambiente con cocina y ba&ntilde;o completo.",
-            "desc2": "Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.",
-            "footer": "IDEAL PAREJAS !"
+            "content": "<p>Sus 26 m2 de superficie cubierta se encuentra compuesta por un ambiente con cocina y ba&ntilde;o completo.</p><p>Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.</p><footer>IDEAL PAREJAS !</footer>"
         },
         {
             "group": "units",
             "id": "monoGde",
             "title": "Monoambiente Grande",
-            "desc1": "Sus 40 m2 de superficie cubierta se encuentra compuesta por un ambiente grande con cocina y ba&ntilde;o completo. Cama matrimonial, cama simple fija y espacio para cuna de bebe.",
-            "desc2": "Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.",
-            "footer": "IDEAL FAMILIA JOVEN !"
+            "content": "<p>Sus 40 m2 de superficie cubierta se encuentra compuesta por un ambiente grande con cocina y ba&ntilde;o completo. Cama matrimonial, cama simple fija y espacio para cuna de bebe.</p><p>Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.</p><footer>IDEAL FAMILIA JOVEN !</footer>"
         },
         {
             "group": "units",
             "id": "cab4",
             "title": "Cabaña 4 personas",
-            "desc1": "Sus 55 m2 de superficie cubierta se reparten en dos plantas",
-            "desc2": {
-                "title": "Planta baja",
-                "content": "Compuesta por un comedor con cocina integrada y ba&ntilde;o completo."
-            },
-            "desc3": {
-                "title": "Planta alta",
-                "content": "Compuesta por dos dormitorios. Un dormitorio con cama matrimonial y balc&oacute;n al frente. El segundo dormitorio posee dos camas fijas."
-            },
-            "footnote": "IDEAL FAMILIA JOVEN !"
+            "content": "<p>Sus 55 m2 de superficie cubierta se reparten en dos plantas</p><h3>Planta baja</h3><p>Compuesta por un comedor con cocina integrada y ba&ntilde;o completo.</p><h3>Planta alta</h3><p>Compuesta por dos dormitorios. Un dormitorio con cama matrimonial y balc&oacute;n al frente. El segundo dormitorio posee dos camas fijas.</p><footer>IDEAL FAMILIA JOVEN !</footer>"
         },
         {
             "group": "units",
             "id": "cab5",
             "title": "Cabaña 5 personas",
-            "desc1": {
-                "content": "Sus 62 m2 de superficie cubierta se reparten en dos plantas"
-            },
-            "desc2": {
-                "title": "Planta baja",
-                "content": [
-                    "Compuesta por un comedor con cocina integrada y toilette.",
-                    "Deck al frente y deck con parrilla y pileta para lavar en la parte de atras."
-                ]
-            },
-            "desc3": {
-                "title": "Planta alta",
-                "content": [
-                    "Compuesta por dos dormitorios y el ba&ntilde;o principal. Un dormitorio con cama matrimonial y balc&oacute;n al frente.El segundo dormitorio posee tres camas fijas."
-                ]
-            },
-            "footnote": {
-                "content": "IDEAL FAMILIA !"
-            }
+            "content": "<p>Sus 62 m2 de superficie cubierta se reparten en dos plantas</p><h3>Planta baja</h3><p>Compuesta por un comedor con cocina integrada y toilette.</p><p>Deck al frente y deck con parrilla y pileta para lavar en la parte de atras.</p><h3>Planta alta</h3><p>Compuesta por dos dormitorios y el ba&ntilde;o principal. Un dormitorio con cama matrimonial y balc&oacute;n al frente.El segundo dormitorio posee tres camas fijas.</p><footer>IDEAL FAMILIA !</footer>"
         },
-
         {
             "id": "services",
             "title": "Servicios",
-            "intro": "EXCELENTE SERVICIO, ATENDIDA POR SUS DUEÑOS, QUE VIVEN EN EL COMPLEJO ...",
-            "list": [
-                {
-                    "text": "Desayuno",
-                    "icon": "someicon.jpg"
-                },
-                {
-                    "text": "Servicio de mucama",
-                    "icon": "someicon.jpg"
-                },
-                {
-                    "text": "Wi Fi - Banda Ancha",
-                    "icon": "someicon.jpg"
-                },
-                {
-                    "text": "Ropa blanca (Toallas y Sabanas)",
-                    "icon": "someicon.jpg"
-                },
-                {
-                    "text": "Videoteca",
-                    "icon": "someicon.jpg"
-                },
-                {
-                    "text": "Cochera semicubierta",
-                    "icon": "someicon.jpg"
-                }
-            ]
+            "content": "<h1>EXCELENTE SERVICIO, ATENDIDA POR SUS DUEÑOS, QUE VIVEN EN EL COMPLEJO ...</h1><ul><li>Desayuno</li><li>Servicio de mucama</li><li>Wi Fi - Banda Ancha</li><li>Ropa blanca (Toallas y Sabanas)</li><li>Videoteca</li><li>Cochera semicubierta</li></ul>"
         },
         {
             "id": "equipment",
             "title": "Equipamiento",
-            "list": [
-                {
-                    "text": "DVD en todas las unidades",
-                    "icon": "f"
-                },
-                {
-                    "text": "Horno a microondas",
-                    "icon": "someicon.jpg"
-                },
-                {
-                    "text": "Vajilla completa",
-                    "icon": "someicon.jpg"
-                },
-                {
-                    "text": "Estufa en todos los ambientes",
-                    "icon": "someicon.jpg"
-                },
-                {
-                    "text": "Practicunas y baneras para bebes",
-                    "icon": "someicon.jpg"
-                },
-                {
-                    "text": "Deck con parrilla individual",
-                    "icon": "someicon.jpg"
-                },
-                {
-                    "text": "Juegos de mesa",
-                    "icon": "someicon.jpg"
-                },
-                {
-                    "text": "Juegos exteriores para ninos",
-                    "icon": "someicon.jpg"
-                },
-                {
-                    "text": "Cocina con horno",
-                    "icon": "someicon.jpg"
-                },
-                {
-                    "text": "TV en dormitorio matrimonial",
-                    "icon": "someicon.jpg"
-                },
-                {
-                    "text": "Alarma en todas las unidades",
-                    "icon": "someicon.jpg"
-                }
-            ]
+            "content": "<ul><li>DVD en todas las unidades</li><li>Horno a microondas</li><li>Vajilla completa</li><li>Estufa en todos los ambientes</li><li>Practicunas y baneras para bebes</li><li>Deck con parrilla individual</li><li>Juegos de mesa</li><li>Juegos exteriores para ninos</li><li>Cocina con horno</li><li>TV en dormitorio matrimonial</li><li>Alarma en todas las unidades</li></ul>"
         },
         {
             "id": "activities",
             "intro": "La zona ofrece gran cantidad de actividades posibles tanto al aire libre como en espacios cubiertos",
-            "list": [
-                {
-                    "text": "Alquiler de cuatriciclos y bicicletas",
-                    "icon": "icon"
-                },
-                {
-                    "text": "Cabalgatas Diurnas y Nocturnas",
-                    "icon": "icon"
-                },
-                {
-                    "text": "Excursiones al faro",
-                    "icon": "icon"
-                },
-                {
-                    "text": "Actividades culturales",
-                    "icon": "icon"
-                },
-                {
-                    "text": "Surf, Windsruf, Kitesurf, Kayak",
-                    "icon": "icon"
-                },
-                {
-                    "text": "Pintorescos centros comerciales: Mar de las Pampas (400 mt.), Mar Azul (300 mt.) y Villa Gesell (6 km.)",
-                    "icon": "icon"
-                }
-            ]
+            "content": "<ul><li>Alquiler de cuatriciclos y bicicletas</li><li>Cabalgatas Diurnas y Nocturnas</li><li>Excursiones al faro</li><li>Actividades culturales</li><li>Surf, Windsruf, Kitesurf, Kayak</li><li>Pintorescos centros comerciales: Mar de las Pampas (400 mt.), Mar Azul (300 mt.) y Villa Gesell (6 km.)</li></ul>"
         },
         {
             "id": "location",
             "title": "Ubicación",
-            "intro": "<p>A 365 km. de Buenos Aires, y a 12 Km a sur de la ciudad de Villa Gesell, entre las localidades de Mar de Las Pampas y Mar Azul, existe una zona de complejos turisticos denominada Las Gaviotas, que se destaca por la tranquilidad y amplitud de espacios.</p><p>Las Cabañas Cucalambe, se encuentran en la esquina de las calles 29 (tambien llamada Azopardo) y Copacabana.</p><p>A tan solo 400 mts. del mar.</p>"
+            "content": "<p>A 365 km. de Buenos Aires, y a 12 Km a sur de la ciudad de Villa Gesell, entre las localidades de Mar de Las Pampas y Mar Azul, existe una zona de complejos turisticos denominada Las Gaviotas, que se destaca por la tranquilidad y amplitud de espacios.</p><p>Las Cabañas Cucalambe, se encuentran en la esquina de las calles 29 (tambien llamada Azopardo) y Copacabana.</p><p>A tan solo 400 mts. del mar.</p>"
         },
         {
             "id": "tariffs",
@@ -270,44 +142,11 @@
         {
             "id": "notes",
             "title": "Atencion",
-            "items": [
-                {
-                    "icon": "icon.jpg",
-                    "text": "En temporada baja el minimo son dos noches de alquiler."
-                },
-                {
-                    "icon": "icon.jpg",
-                    "text": "Horario de ingreso (check-in): 15 hs."
-                },
-                {
-                    "icon": "icon.jpg",
-                    "text": "Horario de salida (check-out): 10 hs."
-                },
-                {
-                    "icon": "icon.jpg",
-                    "text": "Consultar por mascotas"
-                },
-                {
-                    "icon": "icon.jpg",
-                    "text": "No aceptamos cuatriciclos, motos, motos de agua, etc."
-                },
-                {
-                    "icon": "icon.jpg",
-                    "text": "No se aceptaran mas personas que las acordadas al momento de la reserva."
-                },
-                {
-                    "icon": "icon.jpg",
-                    "text": "Las reservas se concretan con un deposito bancario del 50 %, saldando el resto al momento del ingreso."
-                },
-                {
-                    "icon": "icon.jpg",
-                    "text": "Consultar por horario de ingreso y egreso en temporada baja"
-                }
-            ]
+            "content": "<ul><li>En temporada baja el minimo son dos noches de alquiler.</li><li>Horario de ingreso (check-in): 15 hs.</li><li>Horario de salida (check-out): 10 hs.</li><li>Consultar por mascotas</li><li>No aceptamos cuatriciclos, motos, motos de agua, etc.</li><li>No se aceptaran mas personas que las acordadas al momento de la reserva.</li><li>Las reservas se concretan con un deposito bancario del 50 %, saldando el resto al momento del ingreso.</li><li>Consultar por horario de ingreso y egreso en temporada baja</li></ul>"
         },
         {
             "id": "contact",
-            "summary": "Para mas informacion, tarifas y promociones, no dude en contactarnos. GRACIAS POR ELEGIRNOS !",
+            "content": "<h1>Para mas informacion, tarifas y promociones, no dude en contactarnos. GRACIAS POR ELEGIRNOS !</h1>",
             "phones": [
                 {
                     "number": "02255457245",
