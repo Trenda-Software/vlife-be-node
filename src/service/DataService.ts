@@ -57,10 +57,10 @@ export default class DataService {
                 assert.equal(null, err);
                 // console.log('deleted r : ', r);
 
-                collection.insertMany([cucaSiteData, deosSiteData], function(err, r) {
+                collection.insertMany([cucaSiteData, deosSiteData], async function(err, r) {
                     assert.equal(null, err);
                     console.log('inserted: ', assert.equal(2, r.insertedCount));
-                    client.close();
+                    await client.close();
                 });
             });
         });
