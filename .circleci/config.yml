@@ -3,20 +3,15 @@ orbs:
     aws-cli: circleci/aws-cli@0.1.16
 jobs:
     aws-cli-example:
-      executor: aws-cli/default
-      steps:
-        - aws-cli/setup:
-          profile-name: example
-      - run: echo "Run your code here"
-    build:
-        docker:
-            - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
+        executor: aws-cli/default
         steps:
-            - checkout # check out the code in the project directory
-            - run: echo "hello world" # run the `echo` command
+            - aws-cli/setup:
+              profile-name: example
+            - run: echo "Run your code here"
+
 workflows:
-  version: 2
-  aws-cli:
-    jobs:
-      - aws-cli-example:
-          context: aws
+    version: 2
+    aws-cli:
+        jobs:
+            - aws-cli-example:
+                  context: aws
