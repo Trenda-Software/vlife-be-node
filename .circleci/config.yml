@@ -9,8 +9,18 @@ jobs:
         steps:
             - checkout
             - aws-cli/install
-            - run: |
-                  aws configure set aws_access_key_id \ $AWS_ACCESS_KEY_ID \
+            - run:
+                  name: Configure AWS Access Key ID
+                  command: |
+                      aws configure set aws_access_key_id \ $AWS_ACCESS_KEY_ID \
+            - run:
+                  name: Configure AWS Secret Access Key
+                  command: |
+                      aws configure set aws_secret_access_key \ $AWS_SECRET_ACCESS_KEY \
+            - run:
+                  name: Check AWS Config
+                  command: |
+                      aws configure
             - run: echo "Run your code here"
 
 workflows:
