@@ -20,7 +20,7 @@ jobs:
             - run:
                   name: Check AWS Config
                   command: |
-                      aws configure
+                      aws sts get-caller-identity
             - run: echo "Run your code here"
 
 workflows:
