@@ -9,8 +9,8 @@ jobs:
         steps:
             - run: echo "Run your code here"
             - run: |
-                  apt-get update && apt-get upgrade -y
-                  apt-get install -y python-dev python-pip
+                  sudo apt-get update && apt-get upgrade -y
+                  sudo apt-get install -y python-dev python-pip
                   pip install awscli
             - run: |
                   aws -v
