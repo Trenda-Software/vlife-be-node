@@ -2,8 +2,15 @@ version: 2.1
 orbs:
     aws-cli: circleci/aws-cli@0.1.16
 jobs:
-    executor: aws-cli/default
-    steps:
-        - aws-cli/setup:
-              profile-name: example
-        - run: echo "Run your code here"
+    build:
+        working_directory: ~/circleci-breeze-cms
+        docker:
+            - image: circleci/node:9.0 # the primary container, where your job's commands are run
+        steps:
+            - run: echo "Run your code here"
+            - run: |
+                  apt-get update && apt-get upgrade -y
+                  apt-get install -y python-dev python-pip
+                  pip install awscli
+            - run: |
+                  aws -v
