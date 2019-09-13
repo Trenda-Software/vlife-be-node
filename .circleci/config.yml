@@ -8,8 +8,7 @@ jobs:
         executor: aws-cli/default
         steps:
             - checkout
-            - aws-cli/setup:
-                  profile-name: example
+            - aws-cli/setup
             - run: echo "Run your code here"
 
 workflows:
