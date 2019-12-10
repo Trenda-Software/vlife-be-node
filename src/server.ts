@@ -13,7 +13,7 @@ ds.connect();
 siteRoutes(app, ds);
 pageRoutes(app, ds);
 
-app.get('/', (req: any, res: any) => res.send(`BREEZE CMS API on PORT: ${PORT}`));
+app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT}`));
 
 // app.use(function(req, res, next) {
 //   console.log(`${req.method} request for '${req.url}`);
@@ -28,7 +28,7 @@ app.get('/', (req: any, res: any) => res.send(`BREEZE CMS API on PORT: ${PORT}`)
 
 app.listen(PORT, () => {
     console.log(
-        `Breeze CMS express server app running in: http://localhost:${PORT} in the ${process.env.ENVIRONMENT} env WITH Typescript!!!`
+        `VLife server app running in: http://localhost:${PORT} in the ${process.env.ENVIRONMENT} env WITH Typescript!!!`
     );
 });
 

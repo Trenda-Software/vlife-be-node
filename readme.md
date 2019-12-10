@@ -4,7 +4,29 @@ Node JS / Express server for the VLife app
 
 # Dependencies
 
-Uses Typescript for type safety and OOP.
+## MySQL
+
+## Typescript
+
+    for type safety and OOP.
+
+### Types to add
+
+"@types/express": "^4.17.1",
+
+"@types/jest": "^24.0.18",
+
+"@types/mysql2": "github:types/mysql2#semver:^1.0.0",
+
+"@types/supertest": "^2.0.8",
+
+Installing them
+
+-   mysql2
+
+    npm i --save-dev types/mysql2#semver:^1.0.0
+
+## body-parser
 
 https://github.com/babel/example-node-server
 
@@ -28,12 +50,12 @@ preset-es2015 and preset-stage-x are deprecated as of 6-2019
 
 # Run locally
 
--   npm scripts
+## npm scripts
 
     "build": "babel index.js -d dist", // builds locally, transpiles with babel and puts results in /dist
-    
+
     "start": "npm run build && nodemon dist/index.js", // run build, then serves web app with nodemon (autorefresh) from dist/index.html as entry point
-    
+
     "serve": "npm run build && node dist/index.js", //  run build, then serves web app with node (without autorefresh) from dist/index.html as entry point
 
     "test": "npm run build && mocha --require @babel/register" // run test with mocha framework
@@ -47,7 +69,7 @@ localhost:3002
 -   src
     -   routes: API endpoints
     -   controllers: logic, provides data to endpoints, mvc pattern
-    -   models: data models, mvc pattern. 
+    -   models: data models, mvc pattern.
     -   schemas, connection to DB
     -   types: typescript types
 
