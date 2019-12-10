@@ -11,7 +11,8 @@ const url: string = process.env.MONGO_URL || '';
 
 export default class DataService {
     async connect() {
-        this.connectWithMongoose(url);
+        // this.connectWithMongoose(url);
+        this.connectWithSequelize(url);
     }
 
     async connectWithMongoose(url: string) {

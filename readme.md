@@ -1,8 +1,10 @@
 # Intro
 
-Node JS / Express server for Content Management System API to provide content to various client web sites
+Node JS / Express server for the VLife app
 
 # Dependencies
+
+Uses Typescript for type safety and OOP.
 
 https://github.com/babel/example-node-server
 
@@ -11,16 +13,16 @@ https://github.com/babel/example-node-server
 DEV
 
 -   for es6
-    yarn add @babel/cli @babel/core @babel/preset-env @babel/node nodemon --dev
+    npm i @babel/cli @babel/core @babel/preset-env @babel/node nodemon --dev
 
 -   for watching file changes
-    yarn add nodemon --dev
+    npm i nodemon --dev
 
--   for eslint
-    yarn add eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard --dev
+-   for eslint (ECMAScript syntax validation)
+    npm i eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard --dev
 
 -   for testing
-    yarn add mocha @babel/register --dev
+    npm i mocha @babel/register --dev
 
 preset-es2015 and preset-stage-x are deprecated as of 6-2019
 
@@ -28,10 +30,13 @@ preset-es2015 and preset-stage-x are deprecated as of 6-2019
 
 -   npm scripts
 
-    "build": "babel index.js -d dist",
-    "start": "npm run build && nodemon dist/index.js",
-    "serve": "npm run build && node dist/index.js",
-    "test": "npm run build && mocha --require @babel/register"
+    "build": "babel index.js -d dist", // builds locally, transpiles with babel and puts results in /dist
+    
+    "start": "npm run build && nodemon dist/index.js", // run build, then serves web app with nodemon (autorefresh) from dist/index.html as entry point
+    
+    "serve": "npm run build && node dist/index.js", //  run build, then serves web app with node (without autorefresh) from dist/index.html as entry point
+
+    "test": "npm run build && mocha --require @babel/register" // run test with mocha framework
 
 \$ npm run start
 
@@ -42,7 +47,9 @@ localhost:3002
 -   src
     -   routes: API endpoints
     -   controllers: logic, provides data to endpoints, mvc pattern
-    -   models: data models, mvc pattern. Schema, connection to DB,
+    -   models: data models, mvc pattern. 
+    -   schemas, connection to DB
+    -   types: typescript types
 
 # Data modelling
 
