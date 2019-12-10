@@ -38,7 +38,8 @@ export default class DataService {
 
     async connect() {
         // this.connectWithSequelize();
-        this.testMySQL();
+        // this.testMySQL();
+        this.testSequelize();
     }
 
     // testDB() {

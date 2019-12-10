@@ -1,11 +1,12 @@
 {
     "development": {
+        "host": "localhost",
+        "port": 3306,
+        "database": "vlife",
         "username": "vlife_user",
         "password": "final_shandaw90",
-        "database": "vlife",
-        "host": "127.0.0.1",
         "dialect": "mysql",
-        "operatorsAliases": false
+        "client": null
     },
     "test": {
         "username": "root",

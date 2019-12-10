@@ -1,17 +1,37 @@
 import express from 'express';
+import usuariosRoutes from './routes/usuariosRoutes';
 import siteRoutes from './routes/siteRoutes';
 import pageRoutes from './routes/pageRoutes';
 import DataService from './service/DataService';
+const Sequelize = require('sequelize');
+import config from './db/config/config.json';
+
 // import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const ds = new DataService();
-ds.connect();
+
+const sequelize = new Sequelize(config.development);
+
+const connPromise = sequelize.authenticate();
+connPromise
+    .then(() => {
+        console.log('conn ok volvi');
+    })
+    .catch((err: any) => {
+        console.log(err);
+        process.exit(1);
+    });
+
+// config.development.client = sequelize;
+
+// ds.connect();
 
 // add routes
 siteRoutes(app, ds);
 pageRoutes(app, ds);
+usuariosRoutes(app, sequelize);
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT}`));
 
