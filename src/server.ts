@@ -3,9 +3,8 @@ import usuariosRoutes from './routes/usuariosRoutes';
 import provinciaRoutes from './routes/provinciaRoutes';
 import siteRoutes from './routes/siteRoutes';
 import pageRoutes from './routes/pageRoutes';
+import paisRoutes from './routes/paisRoutes';
 import DataService from './service/DataService';
-const Sequelize = require('sequelize');
-import config from './db/config/config.json';
 
 // import cors from 'cors';
 
@@ -18,6 +17,7 @@ ds.connect();
 siteRoutes(app, ds);
 pageRoutes(app, ds);
 usuariosRoutes(app, ds);
+paisRoutes(app, ds);
 provinciaRoutes(app, ds);
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT}`));

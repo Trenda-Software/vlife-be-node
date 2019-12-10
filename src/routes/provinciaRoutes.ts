@@ -1,10 +1,11 @@
-const ProvinciaModel = require('../db/models/provincia');
+import DataService from '../service/DataService';
 
-const router = (app: any, sequelizeClient: any) => {
+const router = (app: any, ds: DataService) => {
     app.route('/provincia')
         .get((req: any, res: any) => {
-            const Provincia: any = ProvinciaModel(sequelizeClient);
-            Provincia.findAll().then((provincias: any[]) => {
+            const provincia: any = ds.dbModels.provincia;
+
+            provincia.findAll().then((provincias: any[]) => {
                 res.send(provincias);
             });
         })

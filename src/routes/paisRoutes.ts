@@ -1,11 +1,12 @@
-const PaisModel = require('../db/models/Pais');
+import DataService from '../service/DataService';
 
-const router = (app: any, sequelizeClient: any) => {
-    app.route('/Pais')
+const router = (app: any, ds: DataService) => {
+    app.route('/pais')
         .get((req: any, res: any) => {
-            const Pais: any = PaisModel(sequelizeClient);
-            Pais.findAll().then((Paiss: any[]) => {
-                res.send(Paiss);
+            const pais: any = ds.dbModels.pais;
+
+            pais.findAll().then((paises: any[]) => {
+                res.send(paises);
             });
         })
         .post((req: any, res: any) => {
