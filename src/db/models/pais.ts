@@ -1,9 +1,9 @@
-'use strict';
+import Sequelize from 'sequelize';
 
-module.exports = (sequelize: any, DataTypes: any) => {
+const PaisModel = (sequelize: any) => {
     const Pais = sequelize.define('Pais', {
-        nombre: DataTypes.STRING,
-        codigo: DataTypes.STRING,
+        nombre: Sequelize.STRING,
+        codigo: Sequelize.STRING,
     });
 
     Pais.associate = (models: any) => {
@@ -12,3 +12,5 @@ module.exports = (sequelize: any, DataTypes: any) => {
 
     return Pais;
 };
+
+export default PaisModel;

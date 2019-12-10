@@ -1,11 +1,7 @@
-'use strict';
-
-import { generateKeyPairSync } from 'crypto';
-
-// import { UsuarioI } from '../../types/types';
 import Sequelize from 'sequelize';
+import { DBModelsI } from '../../types/types';
 
-module.exports = (sequelize: any) => {
+const UsuarioModel = (sequelize: any) => {
     const Usuario = sequelize.define(
         'Usuarios',
         {
@@ -22,14 +18,22 @@ module.exports = (sequelize: any) => {
             celular: Sequelize.STRING,
             ciudad: Sequelize.STRING,
             direccion: Sequelize.STRING,
+            idPais: Sequelize.INTEGER,
+            idProvincia: Sequelize.INTEGER,
         },
         { timestamps: false }
     );
 
-    Usuario.associate = (models: any) => {
-        Usuario.belongsTo(models.Pais, {
+    Usuario.associate = (models: DBModelsI) => {
+        Usuario.belongsTo(models.pais, {
             foreignKey: {
                 name: 'idPais',
+                allowNull: false,
+            },
+        });
+        Usuario.belongsTo(models.provincia, {
+            foreignKey: {
+                name: 'idProvincia',
                 allowNull: false,
             },
         });
@@ -38,25 +42,4 @@ module.exports = (sequelize: any) => {
     return Usuario;
 };
 
-// const Model = Sequelize.Model;
-
-// class User extends Model {}
-
-// User.init(
-//     {
-//         // attributes
-//         firstName: {
-//             type: Sequelize.STRING,
-//             allowNull: false,
-//         },
-//         lastName: {
-//             type: Sequelize.STRING,
-//             // allowNull defaults to true
-//         },
-//     },
-//     {
-//         sequelize,
-//         modelName: 'user',
-//         // options
-//     }
-// );
+export default UsuarioModel;

@@ -1,3 +1,11 @@
+import { Model } from 'sequelize';
+
+export interface DBModelsI {
+    usuario: any;
+    pais: any;
+    provincia: any;
+}
+
 export interface UsuarioI {
     nombre: string;
     clave: string;
@@ -46,21 +54,21 @@ export interface CommentI {
     content: string;
 }
 
-export interface SiteSchemaI {
-    id: string;
-    lang: string;
-    content: {
-        header: string;
-        subHeader: string;
-        tagLine: string;
-        logoImage: string;
-        logoUrl: string;
-        comments: CommentI[];
-        media: MediaItemI[];
-        menus: MenuI[];
-        posts: PostI[];
-        pages: PageI[];
-        users: UserI[];
-        custom: CustomI[];
-    };
-}
+// export interface SiteSchemaI {
+//     id: string;
+//     lang: string;
+//     content: {
+//         header: string;
+//         subHeader: string;
+//         tagLine: string;
+//         logoImage: string;
+//         logoUrl: string;
+//         comments: CommentI[];
+//         media: MediaItemI[];
+//         menus: MenuI[];
+//         posts: PostI[];
+//         pages: PageI[];
+//         users: UserI[];
+//         custom: CustomI[];
+//     };
+// }

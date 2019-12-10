@@ -1,17 +1,10 @@
-// import UsuarioService from '../service/UsuarioService';
-// import config from '../db/config/config.json';
-const Usuario = require('../db/models/usuario');
-// import models from '../db/models';
+import DataService from '../service/DataService';
 
-const router = (app: any, sequelizeClient: any) => {
+const router = (app: any, ds: DataService) => {
     app.route('/usuario')
         .get((req: any, res: any) => {
-            const usuario: any = Usuario(sequelizeClient);
-
-            // const service = UsuarioService(sequelizeClient);
-            // const Usuario = models['Usuario'];
+            const usuario: any = ds.dbModels.usuario;
             usuario.findAll().then((usuarios: any[]) => {
-                // projects will be an array of all Project instances
                 res.send(usuarios);
             });
         })
