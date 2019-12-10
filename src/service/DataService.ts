@@ -1,14 +1,16 @@
 import 'dotenv/config';
-import mysql from 'mysql2';
-
-const url: string = process.env.MONGO_URL || '';
+const Sequelize = require('sequelize');
+// import { Usuario } from '../db/models/index.js';
+import { Usuario } from '../db/models/';
 
 export default class DataService {
     async connect() {
-        const connection = this.connectWithSequelize();
-        connection.connect((err: any) => {
-            if (err) throw err;
-        });
+        this.connectWithSequelize();
+    }
+
+    getTestRows(connection: any, callback: Function) {
+        const sql = 'SELECT * FROM VLife.Provincias;';
+        connection.query(sql, callback);
     }
 
     // testDB() {
@@ -33,6 +35,24 @@ export default class DataService {
             password: 'final_shandaw90',
         };
 
-        return mysql.createConnection(dbConfig);
+        const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
+            host: dbConfig.host,
+            dialect: 'mysql',
+        });
+
+        sequelize
+            .authenticate()
+            .then(() => {
+                console.log('Connection has been established successfully.');
+                // Find all users
+                Usuario.findAll().then((users: Usuario[]) => {
+                    console.log('All users:', JSON.stringify(users, null, 4));
+                });
+            })
+            .catch((err: any) => {
+                console.error('Unable to connect to the database:', err);
+            });
+
+        // return mysql.createConnection(dbConfig);
     };
 }

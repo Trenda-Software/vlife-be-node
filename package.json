@@ -2,7 +2,7 @@
     "name": "breeze-cms-backend-server",
     "version": "0.1.0",
     "description": "Server side app for many Breeze customer apps",
-    "repository": "https://jhackbitb@bitbucket.org/jhackbitb/breeze-cms-back.git",
+    "repository": "https://github.com/Trenda-Software/vlife-be-node.git",
     "main": "app.js",
     "scripts": {
         "dev": "ts-node-dev --respawn --transpileOnly ./src/server.ts",

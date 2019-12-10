@@ -1,6 +1,14 @@
-export interface MediaItemI {
-    location: string;
-    elements: string[];
+export interface UsuarioI {
+    nombre: string;
+    clave: string;
+    coordenadas: string;
+    apellido: string;
+    foto: string;
+    mail: string;
+    celular: string;
+    ciudad: string;
+    direccion: string;
+    associate: any;
 }
 
 export interface MenuI {

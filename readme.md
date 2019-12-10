@@ -77,9 +77,25 @@ localhost:3002
 
 Entities
 
--   Posts
--   Pages
--   Tags
--   Media
--   Comments
--   Users
+-   Especialidad
+-   ListaPrecios
+-   Pago
+-   Pais
+-   Practica
+-   Profesional
+-   Provincia
+-   RangoEdad
+-   Reputacion
+-   Solicitud
+-   Usuario
+
+## creating sequelize models
+
+sequelize model:create --name Usuario --attributes nombre:string
+sequelize model:create --name Especialidad
+sequelize model:create --name ListaPrecios
+sequelize model:create --name Pago
+sequelize model:create --name Pais
+sequelize model:create --name Practica
+sequelize model:create --name Profesional
+sequelize model:create --name Provincia ...
