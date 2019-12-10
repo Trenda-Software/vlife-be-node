@@ -8,6 +8,7 @@
         "dev": "ts-node-dev --respawn --transpileOnly ./src/server.ts",
         "build": "rm -R ./dist && tsc",
         "prod": "npm run build && node ./dist/server.js",
+        "start": "npm run build && node ./dist/server.js",
         "serve": "node dist/server.js",
         "migrate:reset": "mongo localhost:27017/breeze-test ./src/test/reset-test-db.js",
         "pretest": "cross-env NODE_ENV=test MONGO_URL=mongodb://127.0.0.1:27017/breeze-test npm run migrate:reset",

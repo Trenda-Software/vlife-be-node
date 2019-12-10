@@ -1,9 +1,10 @@
 import { Model } from 'sequelize';
 
 export interface DBModelsI {
-    usuario: any;
-    pais: any;
-    provincia: any;
+    usuario: Model | null;
+    pais: Model | null;
+    provincia: Model | null;
+    especialidadViewModel: Model | null;
 }
 
 export interface UsuarioI {

@@ -4,6 +4,7 @@ import provinciaRoutes from './routes/provinciaRoutes';
 import siteRoutes from './routes/siteRoutes';
 import pageRoutes from './routes/pageRoutes';
 import paisRoutes from './routes/paisRoutes';
+import especialidadRoutes from './routes/especialidadRoutes';
 import DataService from './service/DataService';
 
 // import cors from 'cors';
@@ -19,6 +20,7 @@ pageRoutes(app, ds);
 usuariosRoutes(app, ds);
 paisRoutes(app, ds);
 provinciaRoutes(app, ds);
+especialidadRoutes(app, ds);
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT}`));
 

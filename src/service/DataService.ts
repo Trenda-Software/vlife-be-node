@@ -8,10 +8,11 @@ import { DBModelsI } from '../types/types.js';
 import UsuarioModel from '../db/models/usuario';
 import PaisModel from '../db/models/pais';
 import ProvinciaModel from '../db/models/provincia';
+import EspecialidadViewModel from '../db/models/especialidad-view';
 
 export default class DataService {
     dbClient: any = null;
-    dbModels: DBModelsI = { usuario: null, pais: null, provincia: null };
+    dbModels: DBModelsI = { usuario: null, pais: null, provincia: null, especialidadViewModel: null };
 
     async testMySQL() {
         console.log('Testing query to mysql');
@@ -86,10 +87,12 @@ export default class DataService {
         const usuarioModel = UsuarioModel(this.dbClient);
         const paisModel = PaisModel(this.dbClient);
         const provinciaModel = ProvinciaModel(this.dbClient);
+        const especialidadViewModel = EspecialidadViewModel(this.dbClient);
 
         this.dbModels.usuario = usuarioModel;
         this.dbModels.pais = paisModel;
         this.dbModels.provincia = provinciaModel;
+        this.dbModels.especialidadViewModel = especialidadViewModel;
 
         usuarioModel.associate(this.dbModels);
 
@@ -97,5 +100,6 @@ export default class DataService {
         this.dbModels.usuario = usuarioModel;
         this.dbModels.pais = paisModel;
         this.dbModels.provincia = provinciaModel;
+        this.dbModels.especialidadViewModel = especialidadViewModel;
     };
 }
