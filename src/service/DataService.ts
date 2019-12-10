@@ -1,16 +1,44 @@
 import 'dotenv/config';
+const mysql = require('mysql2');
 const Sequelize = require('sequelize');
 // import { Usuario } from '../db/models/index.js';
-import { Usuario } from '../db/models/';
+// import { Usuario } from '../db/models/';
 
 export default class DataService {
-    async connect() {
-        this.connectWithSequelize();
+    // sequelize: Sequelize;
+
+    async testMySQL() {
+        console.log('Testing query to mysql');
+        const sql = 'SELECT * FROM Provincias;';
+        const dbConfig = {
+            host: 'localhost',
+            port: 3306,
+            database: 'vlife',
+            user: 'vlife_user',
+            password: 'final_shandaw90',
+        };
+
+        const connection = mysql.createConnection(dbConfig);
+
+        connection.connect((err: any) => {
+            if (err) throw err;
+            console.time('MYSQL TIMING');
+
+            connection.query(sql, (err: any, results: any, fields: any) => {
+                console.log(`##### TESTING MYSQL results #####`, results); // results contains rows returned by server
+                // console.log(fields); // fields contains extra meta data about results, if available
+                connection.close();
+            });
+        });
     }
 
-    getTestRows(connection: any, callback: Function) {
-        const sql = 'SELECT * FROM VLife.Provincias;';
-        connection.query(sql, callback);
+    async testSequelize() {
+        console.log('testign query with Sequelize');
+    }
+
+    async connect() {
+        // this.connectWithSequelize();
+        this.testMySQL();
     }
 
     // testDB() {
@@ -43,16 +71,10 @@ export default class DataService {
         sequelize
             .authenticate()
             .then(() => {
-                console.log('Connection has been established successfully.');
-                // Find all users
-                Usuario.findAll().then((users: Usuario[]) => {
-                    console.log('All users:', JSON.stringify(users, null, 4));
-                });
+                console.log('Connection to MYSQL has been established successfully.');
             })
             .catch((err: any) => {
                 console.error('Unable to connect to the database:', err);
             });
-
-        // return mysql.createConnection(dbConfig);
     };
 }
