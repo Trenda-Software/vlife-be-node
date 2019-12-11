@@ -3,28 +3,28 @@ const Sequelize = require('sequelize');
 
 import 'dotenv/config';
 import { Model } from 'sequelize';
-import config from '../db/config/config.json';
 import { DBModelsI } from '../types/types.js';
 import UsuarioModel from '../db/models/usuario';
 import PaisModel from '../db/models/pais';
 import ProvinciaModel from '../db/models/provincia';
 import EspecialidadViewModel from '../db/models/especialidad-view';
+import config from '../db/config/config.json';
+
+const dbConfig = {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    database: process.env.DB_NAME,
+    user: process.env.DB_USER,
+    password: process.env.DB_PWD,
+};
 
 export default class DataService {
     dbClient: any = null;
     dbModels: DBModelsI = { usuario: null, pais: null, provincia: null, especialidadViewModel: null };
 
     async testMySQL() {
-        console.log('Testing query to mysql');
+        console.log('Testing query to mysql. dbConfig: ', dbConfig);
         const sql = 'SELECT * FROM Provincias;';
-        const dbConfig = {
-            host: 'localhost',
-            port: 3306,
-            database: 'vlife',
-            user: 'vlife_user',
-            password: 'final_shandaw90',
-        };
-
         const connection = mysql.createConnection(dbConfig);
 
         connection.connect((err: any) => {
@@ -39,32 +39,15 @@ export default class DataService {
         });
     }
 
-    async testSequelize() {
-        console.log('testign query with Sequelize');
-    }
-
     async connect() {
         this.connectWithSequelize();
         // this.testMySQL();
-        // this.testSequelize();
     }
 
-    // testDB() {
-    //     this.getConn().then(() => {
-    //         var db = mongoose.connection;
-    //         console.log(console, 'connection readyState DB: ', db.readyState);
-
-    //         // db.on('error', console.error.bind(console, 'connection error:'));
-    //         // db.once('open', function() {
-    //         // we're connected!
-    //         // console.log(console, 'connection OK');
-    //         // });
-    //     });
-    // }
-
     connectWithSequelize = () => {
-        const dbConfig = config.development;
-        const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
+        console.log('connectWithSequelize. dbConfig: ', dbConfig);
+
+        const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
             host: dbConfig.host,
             dialect: 'mysql',
         });
