@@ -12,7 +12,15 @@ const PaisModel = (sequelize: any) => {
             nombre: Sequelize.STRING,
             codigo: Sequelize.STRING,
         },
-        { timestamps: false, tableName: 'Pais' }
+        {
+            timestamps: false,
+            tableName: 'Pais',
+            // Aliases for joins
+            name: {
+                singular: 'Pais',
+                plural: 'Paises',
+            },
+        }
     );
 
     Pais.associate = (models: any) => {

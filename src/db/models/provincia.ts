@@ -12,7 +12,15 @@ const ProvinciaModel = (sequelize: any) => {
             nombre: Sequelize.STRING,
             codigo: Sequelize.STRING,
         },
-        { timestamps: false, tableName: 'Provincia' }
+        {
+            timestamps: false,
+            tableName: 'Provincia',
+            // Aliases for joins
+            name: {
+                singular: 'Provincia',
+                plural: 'Provincias',
+            },
+        }
     );
 
     Provincia.associate = (models: any) => {

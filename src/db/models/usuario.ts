@@ -21,7 +21,15 @@ const UsuarioModel = (sequelize: any) => {
             IdPais: Sequelize.INTEGER,
             IdProvincia: Sequelize.INTEGER,
         },
-        { timestamps: false, tableName: 'Usuario' }
+        {
+            timestamps: false,
+            tableName: 'Usuario',
+            // Aliases for joins
+            name: {
+                singular: 'Usuario',
+                plural: 'Usuarios',
+            },
+        }
     );
 
     Usuario.associate = (models: DBModelsI) => {
