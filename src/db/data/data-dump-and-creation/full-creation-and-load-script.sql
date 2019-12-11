@@ -25,10 +25,10 @@ DROP TABLE IF EXISTS `Especialidad`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `Especialidad` (
-  `idEspecialidad` int(11) NOT NULL AUTO_INCREMENT,
+  `IdEspecialidad` int(11) NOT NULL AUTO_INCREMENT,
   `Codigo` int(11) DEFAULT NULL,
   `Especialidad` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`idEspecialidad`)
+  PRIMARY KEY (`IdEspecialidad`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -49,17 +49,17 @@ DROP TABLE IF EXISTS `ListaPrecios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `ListaPrecios` (
-  `idListaPrecios` int(11) NOT NULL AUTO_INCREMENT,
+  `IdListaPrecios` int(11) NOT NULL AUTO_INCREMENT,
   `Codigo` int(11) DEFAULT NULL,
   `IdProfesional` int(11) DEFAULT NULL,
   `IdPractica` int(11) DEFAULT NULL,
   `Precio` double DEFAULT NULL,
   `Fecha` datetime DEFAULT NULL,
-  PRIMARY KEY (`idListaPrecios`),
-  KEY `fk_ListaPrecios_Profesionales1_idx` (`IdProfesional`),
+  PRIMARY KEY (`IdListaPrecios`),
+  KEY `fk_ListaPrecios_Profesional1_idx` (`IdProfesional`),
   KEY `fk_ListaPrecios_Practica1_idx` (`IdPractica`),
-  CONSTRAINT `fk_ListaPrecios_Practica1` FOREIGN KEY (`IdPractica`) REFERENCES `practica` (`idpractica`),
-  CONSTRAINT `fk_ListaPrecios_Profesionales1` FOREIGN KEY (`IdProfesional`) REFERENCES `profesionales` (`idprofesionales`)
+  CONSTRAINT `fk_ListaPrecios_Practica1` FOREIGN KEY (`IdPractica`) REFERENCES `practica` (`Idpractica`),
+  CONSTRAINT `fk_ListaPrecios_Profesional1` FOREIGN KEY (`IdProfesional`) REFERENCES `profesional` (`Idprofesional`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -73,14 +73,14 @@ LOCK TABLES `ListaPrecios` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Pagos`
+-- Table structure for table `Pago`
 --
 
-DROP TABLE IF EXISTS `Pagos`;
+DROP TABLE IF EXISTS `Pago`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `Pagos` (
-  `idPagos` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Pago` (
+  `IdPago` int(11) NOT NULL AUTO_INCREMENT,
   `Codigo` int(11) DEFAULT NULL,
   `IdSolicitud` int(11) DEFAULT NULL,
   `Fecha` date DEFAULT NULL,
@@ -88,20 +88,19 @@ CREATE TABLE `Pagos` (
   `Monto` double DEFAULT NULL,
   `FormaPago` varchar(255) DEFAULT NULL,
   `Estado` int(11) DEFAULT NULL,
-  `Solicitud_idSolicitud` int(11) NOT NULL,
-  PRIMARY KEY (`idPagos`,`Solicitud_idSolicitud`),
-  KEY `fk_Pagos_Solicitud1_idx` (`Solicitud_idSolicitud`),
-  CONSTRAINT `fk_Pagos_Solicitud1` FOREIGN KEY (`Solicitud_idSolicitud`) REFERENCES `solicitud` (`idsolicitud`)
+  PRIMARY KEY (`IdPago`,`IdSolicitud`),
+  KEY `fk_Pago_Solicitud1_idx` (`IdSolicitud`),
+  CONSTRAINT `fk_Pago_Solicitud1` FOREIGN KEY (`IdSolicitud`) REFERENCES `solicitud` (`IdSolicitud`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Pagos`
+-- Dumping data for table `Pago`
 --
 
-LOCK TABLES `Pagos` WRITE;
-/*!40000 ALTER TABLE `Pagos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Pagos` ENABLE KEYS */;
+LOCK TABLES `Pago` WRITE;
+/*!40000 ALTER TABLE `Pago` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Pago` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -112,10 +111,10 @@ DROP TABLE IF EXISTS `Pais`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `Pais` (
-  `idPais` int(11) NOT NULL AUTO_INCREMENT,
+  `IdPais` int(11) NOT NULL AUTO_INCREMENT,
   `Codigo` int(11) DEFAULT NULL,
   `Nombre` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`idPais`)
+  PRIMARY KEY (`IdPais`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -137,12 +136,12 @@ DROP TABLE IF EXISTS `Practica`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `Practica` (
-  `idPractica` int(11) NOT NULL AUTO_INCREMENT,
+  `IdPractica` int(11) NOT NULL AUTO_INCREMENT,
   `Codigo` int(11) DEFAULT NULL,
   `Practica` varchar(255) DEFAULT NULL,
   `IdEspecialidad` int(11) DEFAULT NULL,
   `Precio` double DEFAULT NULL,
-  PRIMARY KEY (`idPractica`)
+  PRIMARY KEY (`IdPractica`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -156,19 +155,19 @@ LOCK TABLES `Practica` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Profesionales`
+-- Table structure for table `Profesional`
 --
 
-DROP TABLE IF EXISTS `Profesionales`;
+DROP TABLE IF EXISTS `Profesional`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `Profesionales` (
-  `idProfesionales` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Profesional` (
+  `IdProfesional` int(11) NOT NULL AUTO_INCREMENT,
   `Codigo` int(11) DEFAULT NULL,
   `Nombre` varchar(255) DEFAULT NULL,
   `Apellido` varchar(255) DEFAULT NULL,
   `Celular` varchar(255) DEFAULT NULL,
-  `mail` varchar(255) DEFAULT NULL,
+  `Mail` varchar(255) DEFAULT NULL,
   `IdProfEsp` int(11) DEFAULT NULL,
   `Coordenadas` varchar(255) DEFAULT NULL,
   `Direccion` varchar(255) DEFAULT NULL,
@@ -179,17 +178,17 @@ CREATE TABLE `Profesionales` (
   `Foto` varbinary(255) DEFAULT NULL,
   `Reputacion` int(11) DEFAULT NULL,
   `Descripcion` multilinestring DEFAULT NULL,
-  PRIMARY KEY (`idProfesionales`)
+  PRIMARY KEY (`IdProfesional`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Profesionales`
+-- Dumping data for table `Profesional`
 --
 
-LOCK TABLES `Profesionales` WRITE;
-/*!40000 ALTER TABLE `Profesionales` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Profesionales` ENABLE KEYS */;
+LOCK TABLES `Profesional` WRITE;
+/*!40000 ALTER TABLE `Profesional` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Profesional` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -200,14 +199,14 @@ DROP TABLE IF EXISTS `ProfesionalEspecialidad`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `ProfesionalEspecialidad` (
-  `idProfesionalEspecialidad` int(11) NOT NULL AUTO_INCREMENT,
+  `IdProfesionalEspecialidad` int(11) NOT NULL AUTO_INCREMENT,
   `IdProfesional` int(11) DEFAULT NULL,
-  `IdEspacialidad` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idProfesionalEspecialidad`),
-  KEY `fk_ProfesionalEspecialidad_Profesionales1_idx` (`IdProfesional`),
-  KEY `fk_ProfesionalEspecialidad_Especialidad1_idx` (`IdEspacialidad`),
-  CONSTRAINT `fk_ProfesionalEspecialidad_Especialidad1` FOREIGN KEY (`IdEspacialidad`) REFERENCES `especialidad` (`idespecialidad`),
-  CONSTRAINT `fk_ProfesionalEspecialidad_Profesionales1` FOREIGN KEY (`IdProfesional`) REFERENCES `profesionales` (`idprofesionales`)
+  `IdEspecialidad` int(11) DEFAULT NULL,
+  PRIMARY KEY (`IdProfesionalEspecialidad`),
+  KEY `fk_ProfesionalEspecialidad_Profesional1_idx` (`IdProfesional`),
+  KEY `fk_ProfesionalEspecialidad_Especialidad1_idx` (`IdEspecialidad`),
+  CONSTRAINT `fk_ProfesionalEspecialidad_Especialidad1` FOREIGN KEY (`IdEspecialidad`) REFERENCES `especialidad` (`IdEspecialidad`),
+  CONSTRAINT `fk_ProfesionalEspecialidad_Profesional1` FOREIGN KEY (`IdProfesional`) REFERENCES `profesional` (`IdProfesional`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -221,31 +220,31 @@ LOCK TABLES `ProfesionalEspecialidad` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Provincias`
+-- Table structure for table `Provincia`
 --
 
-DROP TABLE IF EXISTS `Provincias`;
+DROP TABLE IF EXISTS `Provincia`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `Provincias` (
-  `idProvincias` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Provincia` (
+  `IdProvincia` int(11) NOT NULL AUTO_INCREMENT,
   `Codigo` int(11) DEFAULT NULL,
   `Nombre` varchar(255) DEFAULT NULL,
-  `Pais_idPais` int(11) NOT NULL,
-  PRIMARY KEY (`idProvincias`,`Pais_idPais`),
-  KEY `fk_Provincias_Pais1_idx` (`Pais_idPais`),
-  CONSTRAINT `fk_Provincias_Pais1` FOREIGN KEY (`Pais_idPais`) REFERENCES `pais` (`idpais`)
+  `IdPais` int(11) NOT NULL,
+  PRIMARY KEY (`IdProvincia`,`IdPais`),
+  KEY `fk_Provincia_Pais1_idx` (`IdPais`),
+  CONSTRAINT `fk_Provincia_Pais1` FOREIGN KEY (`IdPais`) REFERENCES `pais` (`IdPais`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Provincias`
+-- Dumping data for table `Provincia`
 --
 
-LOCK TABLES `Provincias` WRITE;
-/*!40000 ALTER TABLE `Provincias` DISABLE KEYS */;
-INSERT INTO `Provincias` VALUES (1,123,'Buenos Aires',1),(2,123,'Mendoza',1),(3,453,'Medellin',2),(4,4567,'Bogota',2);
-/*!40000 ALTER TABLE `Provincias` ENABLE KEYS */;
+LOCK TABLES `Provincia` WRITE;
+/*!40000 ALTER TABLE `Provincia` DISABLE KEYS */;
+INSERT INTO `Provincia` VALUES (1,123,'Buenos Aires',1),(2,123,'Mendoza',1),(3,453,'Medellin',2),(4,4567,'Bogota',2);
+/*!40000 ALTER TABLE `Provincia` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -256,10 +255,10 @@ DROP TABLE IF EXISTS `RangoEdad`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `RangoEdad` (
-  `idRangoEdad` int(11) NOT NULL AUTO_INCREMENT,
+  `IdRangoEdad` int(11) NOT NULL AUTO_INCREMENT,
   `Codigo` int(11) DEFAULT NULL,
   `Descripcion` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`idRangoEdad`)
+  PRIMARY KEY (`IdRangoEdad`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -280,19 +279,19 @@ DROP TABLE IF EXISTS `Reputacion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `Reputacion` (
-  `idReputacion` int(11) NOT NULL AUTO_INCREMENT,
+  `IdReputacion` int(11) NOT NULL AUTO_INCREMENT,
   `Codigo` int(11) DEFAULT NULL,
   `IdProfesional` int(11) DEFAULT NULL,
   `IdUsuario` int(11) DEFAULT NULL,
   `Comentario` multilinestring DEFAULT NULL,
   `Like` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idReputacion`),
-  KEY `fk_Reputacion_Usuarios1_idx` (`IdUsuario`),
-  KEY `fk_Reputacion_Profesionales1_idx` (`IdProfesional`),
-  CONSTRAINT `fk_Reputacion_Profesionales1` FOREIGN KEY (`IdProfesional`) REFERENCES `profesionales` (`idprofesionales`),
-  CONSTRAINT `fk_Reputacion_Usuarios1` FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios` (`idusuario`),
-  CONSTRAINT `fk_Reputacion_Usuarios2` FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios` (`idusuario`),
-  CONSTRAINT `fk_Reputacion_Usuarios3` FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios` (`idusuario`)
+  PRIMARY KEY (`IdReputacion`),
+  KEY `fk_Reputacion_Usuario1_idx` (`IdUsuario`),
+  KEY `fk_Reputacion_Profesional1_idx` (`IdProfesional`),
+  CONSTRAINT `fk_Reputacion_Profesional1` FOREIGN KEY (`IdProfesional`) REFERENCES `profesional` (`Idprofesional`),
+  CONSTRAINT `fk_Reputacion_Usuario1` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`),
+  CONSTRAINT `fk_Reputacion_Usuario2` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`),
+  CONSTRAINT `fk_Reputacion_Usuario3` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -313,7 +312,7 @@ DROP TABLE IF EXISTS `Solicitud`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `Solicitud` (
-  `idSolicitud` int(11) NOT NULL AUTO_INCREMENT,
+  `IdSolicitud` int(11) NOT NULL AUTO_INCREMENT,
   `Codigo` int(11) DEFAULT NULL,
   `IdUsuario` int(11) DEFAULT NULL,
   `IdProfesional` int(11) DEFAULT NULL,
@@ -322,13 +321,13 @@ CREATE TABLE `Solicitud` (
   `Hora` datetime(6) DEFAULT NULL,
   `Comentario` varchar(255) DEFAULT NULL,
   `Estado` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idSolicitud`),
-  KEY `fk_Solicitud_Usuarios_idx` (`IdUsuario`),
-  KEY `fk_Solicitud_Profesionales1_idx` (`IdProfesional`),
+  PRIMARY KEY (`IdSolicitud`),
+  KEY `fk_Solicitud_Usuario_idx` (`IdUsuario`),
+  KEY `fk_Solicitud_Profesional1_idx` (`IdProfesional`),
   KEY `fk_Solicitud_Practica1_idx` (`IdPractica`),
-  CONSTRAINT `fk_Solicitud_Practica1` FOREIGN KEY (`IdPractica`) REFERENCES `practica` (`idpractica`),
-  CONSTRAINT `fk_Solicitud_Profesionales1` FOREIGN KEY (`IdProfesional`) REFERENCES `profesionales` (`idprofesionales`),
-  CONSTRAINT `fk_Solicitud_Usuarios` FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios` (`idusuario`)
+  CONSTRAINT `fk_Solicitud_Practica1` FOREIGN KEY (`IdPractica`) REFERENCES `practica` (`Idpractica`),
+  CONSTRAINT `fk_Solicitud_Profesional1` FOREIGN KEY (`IdProfesional`) REFERENCES `profesional` (`Idprofesional`),
+  CONSTRAINT `fk_Solicitud_Usuario` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -342,14 +341,14 @@ LOCK TABLES `Solicitud` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Usuarios`
+-- Table structure for table `Usuario`
 --
 
-DROP TABLE IF EXISTS `Usuarios`;
+DROP TABLE IF EXISTS `Usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `Usuarios` (
-  `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Usuario` (
+  `IdUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `Codigo` int(11) DEFAULT NULL,
   `Usuario` varchar(255) DEFAULT NULL,
   `Clave` varchar(255) DEFAULT NULL,
@@ -361,24 +360,24 @@ CREATE TABLE `Usuarios` (
   `Celular` varchar(255) DEFAULT NULL,
   `Direccion` varchar(255) DEFAULT NULL,
   `Ciudad` varchar(255) DEFAULT NULL,
-  `Provincias_idProvincias` int(11) NOT NULL,
-  `Pais_idPais` int(11) NOT NULL,
-  PRIMARY KEY (`idUsuario`,`Provincias_idProvincias`,`Pais_idPais`),
-  KEY `fk_Usuarios_Provincias1_idx` (`Provincias_idProvincias`),
-  KEY `fk_Usuarios_Pais1_idx` (`Pais_idPais`),
-  CONSTRAINT `fk_Usuarios_Pais1` FOREIGN KEY (`Pais_idPais`) REFERENCES `pais` (`idpais`),
-  CONSTRAINT `fk_Usuarios_Provincias1` FOREIGN KEY (`Provincias_idProvincias`) REFERENCES `provincias` (`idprovincias`)
+  `IdProvincia` int(11) NOT NULL,
+  `IdPais` int(11) NOT NULL,
+  PRIMARY KEY (`IdUsuario`,`IdProvincia`,`IdPais`),
+  KEY `fk_Usuario_Provincia1_idx` (`IdProvincia`),
+  KEY `fk_Usuario_Pais1_idx` (`IdPais`),
+  CONSTRAINT `fk_Usuario_Pais1` FOREIGN KEY (`IdPais`) REFERENCES `pais` (`Idpais`),
+  CONSTRAINT `fk_Usuario_Provincia1` FOREIGN KEY (`IdProvincia`) REFERENCES `provincia` (`Idprovincia`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Usuarios`
+-- Dumping data for table `Usuario`
 --
 
-LOCK TABLES `Usuarios` WRITE;
-/*!40000 ALTER TABLE `Usuarios` DISABLE KEYS */;
-INSERT INTO `Usuarios` VALUES (1,1,'maca','pepe01','145','Mariano','Escudero',_binary 'tenia_rulos.com','m@gmail.com','1135679876','Olmos 134','Chascomus',1,1),(2,2,'jhack','pep01','134','Javier','Hack',_binary 'una_foto.com','j@gmail.com','1135679876','Olmos 567','Medellin',3,2);
-/*!40000 ALTER TABLE `Usuarios` ENABLE KEYS */;
+LOCK TABLES `Usuario` WRITE;
+/*!40000 ALTER TABLE `Usuario` DISABLE KEYS */;
+INSERT INTO `Usuario` VALUES (1,1,'maca','pepe01','145','Mariano','Escudero',_binary 'tenia_rulos.com','m@gmail.com','1135679876','Olmos 134','Chascomus',1,1),(2,2,'jhack','pep01','134','Javier','Hack',_binary 'una_foto.com','j@gmail.com','1135679876','Olmos 567','Medellin',3,2);
+/*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

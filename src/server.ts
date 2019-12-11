@@ -28,8 +28,8 @@ const ds = new DataService(dbConfig);
 ds.connect();
 
 // add routes
-siteRoutes(app, ds);
-pageRoutes(app, ds);
+// siteRoutes(app, ds);
+// pageRoutes(app, ds);
 usuariosRoutes(app, ds);
 paisRoutes(app, ds);
 provinciaRoutes(app, ds);
