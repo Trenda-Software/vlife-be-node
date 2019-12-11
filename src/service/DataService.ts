@@ -6,11 +6,12 @@ import UsuarioModel from '../db/models/usuario';
 import PaisModel from '../db/models/pais';
 import ProvinciaModel from '../db/models/provincia';
 import EspecialidadModel from '../db/models/especialidad';
+import ProfesionalModel from '../db/models/profesional';
 
 export default class DataService {
     dbConfig: any = null;
     dbClient: any = null;
-    dbModels: DBModelsI = { usuario: null, pais: null, provincia: null, especialidadModel: null };
+    dbModels: DBModelsI = { usuario: null, pais: null, provincia: null, especialidad: null, profesional: null };
 
     constructor(dbConfig: any) {
         this.dbConfig = dbConfig;
@@ -66,14 +67,17 @@ export default class DataService {
         const paisModel = PaisModel(this.dbClient);
         const provinciaModel = ProvinciaModel(this.dbClient);
         const especialidadModel = EspecialidadModel(this.dbClient);
+        const profesionalModel = ProfesionalModel(this.dbClient);
 
         this.dbModels.usuario = usuarioModel;
         this.dbModels.pais = paisModel;
         this.dbModels.provincia = provinciaModel;
         this.dbModels.especialidad = especialidadModel;
+        this.dbModels.profesional = profesionalModel;
 
         // set up the associations here
-        usuarioModel.associate(this.dbModels);
+        // usuarioModel.associate(this.dbModels);
+        // profesionalModel.associate(this.dbModels);
         paisModel.associate(this.dbModels);
         provinciaModel.associate(this.dbModels);
 
@@ -82,5 +86,6 @@ export default class DataService {
         this.dbModels.pais = paisModel;
         this.dbModels.provincia = provinciaModel;
         this.dbModels.especialidad = especialidadModel;
+        this.dbModels.profesional = profesionalModel;
     };
 }
