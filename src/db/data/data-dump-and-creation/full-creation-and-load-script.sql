@@ -82,7 +82,7 @@ DROP TABLE IF EXISTS `Pago`;
 CREATE TABLE `Pago` (
   `IdPago` int(11) NOT NULL AUTO_INCREMENT,
   `Codigo` int(11) DEFAULT NULL,
-  `IdSolicitud` int(11) DEFAULT NULL,
+  `IdSolicitud` int(11) NOT NULL,
   `Fecha` date DEFAULT NULL,
   `Hora` time DEFAULT NULL,
   `Monto` double DEFAULT NULL,

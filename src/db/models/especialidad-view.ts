@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 
 const EspecialidadViewModel = (sequelize: any) => {
     const EspecialidadView = sequelize.define(
-        'V_especialidad',
+        'EspecialidadView',
         {
             idEspecialidad: {
                 type: Sequelize.INTEGER,
@@ -13,7 +13,7 @@ const EspecialidadViewModel = (sequelize: any) => {
             codigo: Sequelize.STRING,
             cantprofesionales: Sequelize.INTEGER,
         },
-        { timestamps: false }
+        { timestamps: false, tableName: 'V_especialidad' }
     );
 
     return EspecialidadView;

@@ -3,7 +3,7 @@ import { DBModelsI } from '../../types/types';
 
 const UsuarioModel = (sequelize: any) => {
     const Usuario = sequelize.define(
-        'Usuarios',
+        'Usuario',
         {
             idUsuario: {
                 type: Sequelize.INTEGER,
@@ -18,22 +18,22 @@ const UsuarioModel = (sequelize: any) => {
             celular: Sequelize.STRING,
             ciudad: Sequelize.STRING,
             direccion: Sequelize.STRING,
-            idPais: Sequelize.INTEGER,
-            idProvincia: Sequelize.INTEGER,
+            IdPais: Sequelize.INTEGER,
+            IdProvincia: Sequelize.INTEGER,
         },
-        { timestamps: false }
+        { timestamps: false, tableName: 'Usuario' }
     );
 
     Usuario.associate = (models: DBModelsI) => {
         Usuario.belongsTo(models.pais, {
             foreignKey: {
-                name: 'idPais',
+                name: 'IdPais',
                 allowNull: false,
             },
         });
         Usuario.belongsTo(models.provincia, {
             foreignKey: {
-                name: 'idProvincia',
+                name: 'IdProvincia',
                 allowNull: false,
             },
         });

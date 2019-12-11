@@ -12,7 +12,7 @@ const ProvinciaModel = (sequelize: any) => {
             nombre: Sequelize.STRING,
             codigo: Sequelize.STRING,
         },
-        { timestamps: false }
+        { timestamps: false, tableName: 'Provincia' }
     );
 
     Provincia.associate = (models: any) => {
