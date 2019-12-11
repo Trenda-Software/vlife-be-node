@@ -6,11 +6,13 @@ import pageRoutes from './routes/pageRoutes';
 import paisRoutes from './routes/paisRoutes';
 import especialidadRoutes from './routes/especialidadRoutes';
 import DataService from './service/DataService';
-import dotenv from 'dotenv';
 
 // import cors from 'cors';
 
-dotenv.config();
+const app = express();
+if (app.get('env') == 'development') {
+    require('dotenv').config();
+}
 
 const dbConfig = {
     host: process.env.DB_HOST,
@@ -20,7 +22,6 @@ const dbConfig = {
     password: process.env.DB_PWD,
 };
 
-const app = express();
 const PORT = process.env.PORT || 3000;
 console.log('############# dbConfig: ', dbConfig);
 
