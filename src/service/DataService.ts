@@ -5,12 +5,12 @@ import { DBModelsI } from '../types/types.js';
 import UsuarioModel from '../db/models/usuario';
 import PaisModel from '../db/models/pais';
 import ProvinciaModel from '../db/models/provincia';
-import EspecialidadViewModel from '../db/models/especialidad-view';
+import EspecialidadModel from '../db/models/especialidad';
 
 export default class DataService {
     dbConfig: any = null;
     dbClient: any = null;
-    dbModels: DBModelsI = { usuario: null, pais: null, provincia: null, especialidadViewModel: null };
+    dbModels: DBModelsI = { usuario: null, pais: null, provincia: null, especialidadModel: null };
 
     constructor(dbConfig: any) {
         this.dbConfig = dbConfig;
@@ -65,19 +65,22 @@ export default class DataService {
         const usuarioModel = UsuarioModel(this.dbClient);
         const paisModel = PaisModel(this.dbClient);
         const provinciaModel = ProvinciaModel(this.dbClient);
-        const especialidadViewModel = EspecialidadViewModel(this.dbClient);
+        const especialidadModel = EspecialidadModel(this.dbClient);
 
         this.dbModels.usuario = usuarioModel;
         this.dbModels.pais = paisModel;
         this.dbModels.provincia = provinciaModel;
-        this.dbModels.especialidadViewModel = especialidadViewModel;
+        this.dbModels.especialidad = especialidadModel;
 
+        // set up the associations here
         usuarioModel.associate(this.dbModels);
+        paisModel.associate(this.dbModels);
+        provinciaModel.associate(this.dbModels);
 
-        // rethink this , re associated updated models
+        // @TODO rethink this , re associated updated models
         this.dbModels.usuario = usuarioModel;
         this.dbModels.pais = paisModel;
         this.dbModels.provincia = provinciaModel;
-        this.dbModels.especialidadViewModel = especialidadViewModel;
+        this.dbModels.especialidad = especialidadModel;
     };
 }

@@ -41,6 +41,9 @@ LOCK TABLES `Especialidad` WRITE;
 /*!40000 ALTER TABLE `Especialidad` ENABLE KEYS */;
 UNLOCK TABLES;
 
+INSERT INTO `Especialidad` VALUES (1,1,'Medico General'),(2,2,'Enfermera'),(3,3,'Kinesiologo');
+
+
 --
 -- Table structure for table `ListaPrecios`
 --

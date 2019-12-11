@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize';
+import { DBModelsI } from '../../types/types';
 
 const PaisModel = (sequelize: any) => {
     const Pais = sequelize.define(
@@ -23,8 +24,8 @@ const PaisModel = (sequelize: any) => {
         }
     );
 
-    Pais.associate = (models: any) => {
-        Pais.hasMany(models.Usuario);
+    Pais.associate = (models: DBModelsI) => {
+        Pais.hasMany(models.usuario);
     };
 
     return Pais;
