@@ -6,8 +6,10 @@ import pageRoutes from './routes/pageRoutes';
 import paisRoutes from './routes/paisRoutes';
 import especialidadRoutes from './routes/especialidadRoutes';
 import DataService from './service/DataService';
-
+const dotenv = require('dotenv');
 // import cors from 'cors';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;

@@ -31,7 +31,6 @@ const router = (app: any, ds: DataService) => {
     app.route('/testDBSeq')
         .get((req: any, res: any, next: any) => {
             res.send('GET request testDBSeq');
-            ds.testSequelize();
         })
         .post((req: any, res: any) => res.send('POST request in testDBSeq'));
 };

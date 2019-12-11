@@ -1,14 +1,11 @@
 const mysql = require('mysql2');
 const Sequelize = require('sequelize');
 
-import 'dotenv/config';
-import { Model } from 'sequelize';
 import { DBModelsI } from '../types/types.js';
 import UsuarioModel from '../db/models/usuario';
 import PaisModel from '../db/models/pais';
 import ProvinciaModel from '../db/models/provincia';
 import EspecialidadViewModel from '../db/models/especialidad-view';
-import config from '../db/config/config.json';
 
 const dbConfig = {
     host: process.env.DB_HOST,
