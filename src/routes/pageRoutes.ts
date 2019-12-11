@@ -3,8 +3,8 @@ import DataService from '../service/DataService';
 const pageRoutes = (app: any, ds: DataService) => {
     app.route('/:site/page')
         .get(async (req: any, res: any) => {
-            const pages = await ds.getPages(req.params.site);
-            res.send(pages);
+            // const pages = await ds.getPages(req.params.site);
+            res.send('');
         })
         .post(async (req: any, res: any) => res.send('page POST Req Ok'));
 
