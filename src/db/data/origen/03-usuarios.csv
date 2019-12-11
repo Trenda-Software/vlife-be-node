@@ -1,0 +1,3 @@
+idUsuario,Codigo ,Usuario,Clave,Coordenadas,Nombre ,Apellido,Foto,mail,Celular,Direccion,Ciudad,Provincias_idProvincias,Pais_idPais
+1,1,maca,pepe01,145,Mariano,Escudero,tenia_rulos.com,m@gmail.com,1135679876,Olmos 134,Chascomus,1,1
+2,2,jhack,pep01,134,Javier,Hack,una_foto.com,j@gmail.com,1135679876,Olmos 567,Medellin,3,2

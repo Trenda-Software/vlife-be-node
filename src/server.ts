@@ -7,13 +7,24 @@ import paisRoutes from './routes/paisRoutes';
 import especialidadRoutes from './routes/especialidadRoutes';
 import DataService from './service/DataService';
 const dotenv = require('dotenv');
+
 // import cors from 'cors';
 
 dotenv.config();
 
+const dbConfig = {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    database: process.env.DB_NAME,
+    user: process.env.DB_USER,
+    password: process.env.DB_PWD,
+};
+
 const app = express();
 const PORT = process.env.PORT || 3000;
-const ds = new DataService();
+console.log('############# dbConfig: ', dbConfig);
+
+const ds = new DataService(dbConfig);
 ds.connect();
 
 // add routes

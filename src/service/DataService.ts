@@ -7,22 +7,19 @@ import PaisModel from '../db/models/pais';
 import ProvinciaModel from '../db/models/provincia';
 import EspecialidadViewModel from '../db/models/especialidad-view';
 
-const dbConfig = {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    database: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PWD,
-};
-
 export default class DataService {
+    dbConfig: any = null;
     dbClient: any = null;
     dbModels: DBModelsI = { usuario: null, pais: null, provincia: null, especialidadViewModel: null };
 
+    constructor(dbConfig: any) {
+        this.dbConfig = dbConfig;
+    }
+
     async testMySQL() {
-        console.log('Testing query to mysql. dbConfig: ', dbConfig);
+        console.log('Testing query to mysql');
         const sql = 'SELECT * FROM Provincias;';
-        const connection = mysql.createConnection(dbConfig);
+        const connection = mysql.createConnection(this.dbConfig);
 
         connection.connect((err: any) => {
             if (err) throw err;
@@ -42,10 +39,10 @@ export default class DataService {
     }
 
     connectWithSequelize = () => {
-        console.log('connectWithSequelize. dbConfig: ', dbConfig);
+        console.log('connectWithSequelize');
 
-        const sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {
-            host: dbConfig.host,
+        const sequelize = new Sequelize(this.dbConfig.database, this.dbConfig.user, this.dbConfig.password, {
+            host: this.dbConfig.host,
             dialect: 'mysql',
         });
 
