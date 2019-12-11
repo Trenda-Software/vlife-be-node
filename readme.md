@@ -99,3 +99,9 @@ sequelize model:create --name Pais
 sequelize model:create --name Practica
 sequelize model:create --name Profesional
 sequelize model:create --name Provincia ...
+
+## ENDPOINTS
+
+https://vlife-api.herokuapp.com/usuario
+
+https://vlife-api.herokuapp.com/cantPorEspecialidad
