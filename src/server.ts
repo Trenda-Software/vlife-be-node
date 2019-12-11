@@ -6,11 +6,11 @@ import pageRoutes from './routes/pageRoutes';
 import paisRoutes from './routes/paisRoutes';
 import especialidadRoutes from './routes/especialidadRoutes';
 import DataService from './service/DataService';
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
 
 // import cors from 'cors';
 
-dotenv.config();
+// dotenv.config();
 
 const dbConfig = {
     host: process.env.DB_HOST,
