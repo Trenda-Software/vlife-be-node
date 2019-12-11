@@ -1,13 +1,12 @@
 {
-    "name": "breeze-cms-backend-server",
+    "name": "vlife-api",
     "version": "0.1.0",
-    "description": "Server side app for many Breeze customer apps",
+    "description": "Server side app for VLife app",
     "repository": "https://github.com/Trenda-Software/vlife-be-node.git",
-    "main": "app.js",
     "scripts": {
         "dev": "ts-node-dev --respawn --transpileOnly ./src/server.ts",
         "clean-check": "rm -R ./dist && tsc",
-        "build": "rm -R ./dist && tsc",
+        "build": "tsc",
         "prod": "npm run build && node ./dist/server.js",
         "start": "node ./dist/server.js",
         "serve": "node dist/server.js",
@@ -46,6 +45,6 @@
         "typescript": "^3.6.3"
     },
     "engines": {
-        "node": "12.x"
-      }
+        "node": "10.16"
+    }
 }
