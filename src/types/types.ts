@@ -6,6 +6,7 @@ export interface DBModelsI {
     provincia: Model | null;
     especialidad: Model | null;
     profesional: Model | null;
+    profesionalespecialidad: Model | null;
 }
 
 export interface UsuarioI {

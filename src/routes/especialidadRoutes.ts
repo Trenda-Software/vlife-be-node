@@ -5,7 +5,19 @@ const router = (app: any, ds: DataService) => {
         .get((req: any, res: any) => {
             const especialidad: any = ds.dbModels.especialidad;
 
-            especialidad.findAll().then((results: any) => {
+            especialidad.findAll({
+                include: [{
+                    model: ds.dbModels.profesionalespecialidad,
+                    as: 'Profesionales',
+                    required: false,
+                    attributes: ['nombre'],
+                    through: {// This block of code allows you to retrieve the properties of the join table
+                        model: ds.dbModels.profesionalespecialidad,
+                        as: 'PE',
+                        attributes: [],
+                    }
+                }],
+            }).then((results: any) => {
                 // console.log('especs: ', especs);
                 const profPorEspec = results.map((result: any) => {
                     console.log('result: ', result);

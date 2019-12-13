@@ -33,18 +33,18 @@ const UsuarioModel = (sequelize: any) => {
     );
 
     Usuario.associate = (models: DBModelsI) => {
-        // Usuario.belongsTo(models.pais, {
-        //     foreignKey: {
-        //         name: 'IdPais',
-        //         allowNull: false,
-        //     },
-        // });
-        // Usuario.belongsTo(models.provincia, {
-        //     foreignKey: {
-        //         name: 'IdProvincia',
-        //         allowNull: false,
-        //     },
-        // });
+        Usuario.belongsTo(models.pais, {
+            foreignKey: {
+                name: 'IdPais',
+                allowNull: false,
+            },
+        });
+        Usuario.belongsTo(models.provincia, {
+            foreignKey: {
+                name: 'IdProvincia',
+                allowNull: false,
+            },
+        });
     };
 
     return Usuario;

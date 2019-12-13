@@ -25,7 +25,11 @@ const ProfesionalModel = (sequelize: any) => {
     );
 
     Profesional.associate = (models: DBModelsI) => {
-        Profesional.hasMany(models.especialidad);
+        Profesional.belongstomany(models.especialidad, {
+            through: 'ProfesionalEspecialidad',
+            as: 'Especialidades',
+            foreignKey: 'IdProfesional'
+        });
     };
 
     return Profesional;

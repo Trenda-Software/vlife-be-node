@@ -25,7 +25,7 @@ const PaisModel = (sequelize: any) => {
     );
 
     Pais.associate = (models: DBModelsI) => {
-        // Pais.hasMany(models.usuario);
+        Pais.hasMany(models.usuario);
     };
 
     return Pais;

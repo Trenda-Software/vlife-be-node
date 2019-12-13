@@ -25,7 +25,11 @@ const EspecialidadModel = (sequelize: any) => {
     );
 
     Especialidad.associate = (models: DBModelsI) => {
-        Especialidad.hasMany(models.profesional);
+        Especialidad.hasMany(models.profesional, {
+            through: 'ProfesionalEspecialidad',
+            as: 'Profesionales',
+            foreignKey: 'IdEspecialidad'
+        });
     };
 
     return Especialidad;

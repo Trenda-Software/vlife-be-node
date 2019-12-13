@@ -7,7 +7,7 @@ const router = (app: any, ds: DataService) => {
             const usuario: any = ds.dbModels.usuario;
             usuario
                 .findAll({
-                    // include: [{ model: ds.dbModels.pais }, { model: ds.dbModels.provincia }],
+                    include: [{ model: ds.dbModels.pais }, { model: ds.dbModels.provincia }],
                 })
                 .then((usuarios: any[]) => {
                     res.send(usuarios);
