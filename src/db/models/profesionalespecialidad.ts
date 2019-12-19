@@ -22,7 +22,23 @@ const ProfesionalEspecialidadModel = (sequelize: any) => {
                 plural: 'ProfesionalEspecialidades',
             },
         }
-    )
+    );
+
+    ProfesionalEspecialidad.associate = (models: DBModelsI) => {
+        ProfesionalEspecialidad.belongsTo(models.profesional, {
+            foreignKey: {
+                name: 'IdProfesional',
+                allowNull: false,
+            },
+        });
+        ProfesionalEspecialidad.belongsTo(models.especialidad, {
+            foreignKey: {
+                name: 'IdEspecialidad',
+                allowNull: false,
+            },
+        });
+    };
+
 
     return ProfesionalEspecialidad;
 

@@ -4,16 +4,16 @@ const Sequelize = require('sequelize');
 import { DBModelsI } from '../types/types.js';
 import UsuarioModel from '../db/models/usuario';
 import PaisModel from '../db/models/pais';
+import PracticaModel from '../db/models/practica';
 import ProvinciaModel from '../db/models/provincia';
 import EspecialidadModel from '../db/models/especialidad';
 import ProfesionalModel from '../db/models/profesional';
-import ProfesionalEspecialidad from '../db/models/profesionalespecialidad';
 import ProfesionalEspecialidadModel from '../db/models/profesionalespecialidad';
 
 export default class DataService {
     dbConfig: any = null;
     dbClient: any = null;
-    dbModels: DBModelsI = { usuario: null, pais: null, provincia: null, especialidad: null, profesional: null, profesionalespecialidad: null };
+    dbModels: DBModelsI = { usuario: null, pais: null, provincia: null, especialidad: null, profesional: null, profesionalespecialidad: null, practica: null };
 
     constructor(dbConfig: any) {
         this.dbConfig = dbConfig;
@@ -67,6 +67,7 @@ export default class DataService {
 
         const usuarioModel = UsuarioModel(this.dbClient);
         const paisModel = PaisModel(this.dbClient);
+        const practicaModel = PracticaModel(this.dbClient);
         const provinciaModel = ProvinciaModel(this.dbClient);
         const especialidadModel = EspecialidadModel(this.dbClient);
         const profesionalModel = ProfesionalModel(this.dbClient);
@@ -74,6 +75,7 @@ export default class DataService {
 
         this.dbModels.usuario = usuarioModel;
         this.dbModels.pais = paisModel;
+        this.dbModels.practica = practicaModel;
         this.dbModels.provincia = provinciaModel;
         this.dbModels.especialidad = especialidadModel;
         this.dbModels.profesional = profesionalModel;
@@ -88,8 +90,10 @@ export default class DataService {
         // @TODO rethink this , re associated updated models
         this.dbModels.usuario = usuarioModel;
         this.dbModels.pais = paisModel;
+        this.dbModels.practica = practicaModel;
         this.dbModels.provincia = provinciaModel;
         this.dbModels.especialidad = especialidadModel;
         this.dbModels.profesional = profesionalModel;
+        this.dbModels.profesionalespecialidad = profesionalespecialidadModel;
     };
 }

@@ -1,36 +1,20 @@
 import Sequelize from 'sequelize';
-import { DBModelsI } from '../../types/types';
 
 const EspecialidadModel = (sequelize: any) => {
     const Especialidad = sequelize.define(
         'Especialidad',
         {
-            IdEspecialidad: {
+            idEspecialidad: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },
-            Especialidad: Sequelize.STRING,
-            Codigo: Sequelize.STRING,
+            especialidad: Sequelize.STRING,
+            codigo: Sequelize.STRING,
+            cantprofesionales: Sequelize.INTEGER,
         },
-        {
-            timestamps: false,
-            tableName: 'Especialidad',
-            // Aliases for joins
-            name: {
-                singular: 'Especialidad',
-                plural: 'Especialidades',
-            },
-        }
+        { timestamps: false, tableName: 'V_especialidad' }
     );
-
-    Especialidad.associate = (models: DBModelsI) => {
-        Especialidad.hasMany(models.profesional, {
-            through: 'ProfesionalEspecialidad',
-            as: 'Profesionales',
-            foreignKey: 'IdEspecialidad'
-        });
-    };
 
     return Especialidad;
 };
