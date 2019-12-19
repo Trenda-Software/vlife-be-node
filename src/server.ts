@@ -2,6 +2,7 @@ import express from 'express';
 import usuariosRoutes from './routes/usuariosRoutes';
 import provinciaRoutes from './routes/provinciaRoutes';
 import paisRoutes from './routes/paisRoutes';
+import practicaRoutes from './routes/practicaRoutes';
 import especialidadRoutes from './routes/especialidadRoutes';
 import DataService from './service/DataService';
 
@@ -31,6 +32,7 @@ usuariosRoutes(app, ds);
 paisRoutes(app, ds);
 provinciaRoutes(app, ds);
 especialidadRoutes(app, ds);
+practicaRoutes(app, ds);
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT}`));
 

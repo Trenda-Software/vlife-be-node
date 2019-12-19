@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize';
+import { DBModelsI } from '../../types/types';
 
 const EspecialidadModel = (sequelize: any) => {
     const Especialidad = sequelize.define(
@@ -16,6 +17,9 @@ const EspecialidadModel = (sequelize: any) => {
         { timestamps: false, tableName: 'V_especialidad' }
     );
 
+    Especialidad.associate = (models: DBModelsI) => {
+        Especialidad.hasMany(models.practica);
+    };
     return Especialidad;
 };
 

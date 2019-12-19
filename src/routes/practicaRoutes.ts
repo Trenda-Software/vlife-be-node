@@ -4,10 +4,12 @@ const router = (app: any, ds: DataService) => {
     app.route('/practica')
         .get((req: any, res: any) => {
             const practica: any = ds.dbModels.practica;
-
-            practica.findAll().then((practicas: any[]) => {
-                res.send(practicas);
-            });
+            practica
+                .findAll({
+                    include: [{ model: ds.dbModels.especialidad }],
+                }).then((practicas: any[]) => {
+                    res.send(practicas);
+                });
         })
         .post((req: any, res: any) => {
             res.status(201);

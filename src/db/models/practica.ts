@@ -27,7 +27,12 @@ const PracticaModel = (sequelize: any) => {
     );
 
     Practica.associate = (models: DBModelsI) => {
-        Practica.hasMany(models.especialidad);
+        Practica.belongsTo(models.especialidad, {
+            foreignKey: {
+                name: 'idEspecialidad',
+                allowNull: false,
+            },
+        });
     };
 
     return Practica;
