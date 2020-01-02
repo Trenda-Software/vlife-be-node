@@ -99,3 +99,27 @@ sequelize model:create --name Pais
 sequelize model:create --name Practica
 sequelize model:create --name Profesional
 sequelize model:create --name Provincia ...
+
+# Deploy
+
+## Heroku
+
+### install heroku client
+
+    https://devcenter.heroku.com/articles/heroku-cli
+
+### Commands
+
+-   check remotes
+
+    git remote -v
+
+GIT URL: https://git.heroku.com/vlife-api.git
+
+-   login into the git account with SSH
+
+    heroku login
+
+*   push changes from the heroku-deploy branch to the remote "heroku" master branch
+
+    \$ git push heroku master
