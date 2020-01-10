@@ -20,6 +20,7 @@ const EspecialidadModel = (sequelize: any) => {
     Especialidad.associate = (models: DBModelsI) => {
         Especialidad.hasMany(models.practica);
     };
+
     return Especialidad;
 };
 
