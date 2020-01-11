@@ -13,7 +13,15 @@ import ProfesionalEspecialidadModel from '../db/models/profesionalespecialidad';
 export default class DataService {
     dbConfig: any = null;
     dbClient: any = null;
-    dbModels: DBModelsI = { usuario: null, pais: null, provincia: null, especialidad: null, profesional: null, profesionalespecialidad: null, practica: null };
+    dbModels: DBModelsI = {
+        usuario: null,
+        pais: null,
+        provincia: null,
+        especialidad: null,
+        profesional: null,
+        profesionalespecialidad: null,
+        practica: null,
+    };
 
     constructor(dbConfig: any) {
         this.dbConfig = dbConfig;
@@ -37,7 +45,7 @@ export default class DataService {
     }
 
     async connect() {
-        this.connectWithSequelize();
+        await this.connectWithSequelize();
         // this.testMySQL();
     }
 

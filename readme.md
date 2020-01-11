@@ -165,3 +165,9 @@ In "origin" remote repository, we will have a "heroku-deploy" branch were we put
     $ git push heroku master
 
 That will push the current heroku-deploy local branch changes to the remote "heroku / master" triggering a new deploy.
+
+### check logs
+
+real time log view
+
+heroku logs --tail
