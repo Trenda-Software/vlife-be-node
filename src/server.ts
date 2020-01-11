@@ -23,6 +23,7 @@ const dbConfig = {
 
 const PORT = process.env.PORT || 3000;
 console.log('############# dbConfig: ', dbConfig);
+console.log('############# CAMBIO MACA : ');
 
 const ds = new DataService(dbConfig);
 ds.connect();
