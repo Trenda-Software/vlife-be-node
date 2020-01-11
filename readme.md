@@ -50,6 +50,8 @@ preset-es2015 and preset-stage-x are deprecated as of 6-2019
 
 # Run locally
 
+    $ npm run start
+
 ## npm scripts
 
     "build": "babel index.js -d dist", // builds locally, transpiles with babel and puts results in /dist
@@ -125,6 +127,13 @@ https://vlife-api.herokuapp.com/cantPorEspecialidad
  The remote + branch that has to be updated to trigger a deploy in heroku is the remote "heroku" branch "master"
  so if you do:
 
+We will organise like this:
+
+We will have a deploy heroku branch were we put the changes we want to go to heroku, we merge our changes to this branch (origin/heroku-deploy) and then push them to heroku / master
+
+    origin / heroku-deploy -> heroku / master
+
+    In the heroku-deploy branch 
     $ git push heroku master
 
-That will push the current local branch changes to the remote "heroku" , branch "master" triggering a new deploy.
+That will push the current heroku-deploy local branch changes to the remote "heroku / master" triggering a new deploy.
