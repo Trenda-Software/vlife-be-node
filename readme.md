@@ -100,8 +100,31 @@ sequelize model:create --name Practica
 sequelize model:create --name Profesional
 sequelize model:create --name Provincia ...
 
-## ENDPOINTS
+# ENDPOINTS
+
+## Local
+
+localhost:3000
+
+localhost:3000/usuario
+
+localhost:3000/cantPorEspecialidad
+
+## Heroku
+
+https://vlife-api.herokuapp.com
 
 https://vlife-api.herokuapp.com/usuario
 
 https://vlife-api.herokuapp.com/cantPorEspecialidad
+
+
+# Deploy
+
+## Heroku
+ The remote + branch that has to be updated to trigger a deploy in heroku is the remote "heroku" branch "master"
+ so if you do:
+
+    $ git push heroku master
+
+That will push the current local branch changes to the remote "heroku" , branch "master" triggering a new deploy.
