@@ -84,6 +84,7 @@ export default class DataService {
         // set up the associations here
         usuarioModel.associate(this.dbModels);
         practicaModel.associate(this.dbModels);
+        profesionalespecialidadModel.associate(this.dbModels);
         // profesionalModel.associate(this.dbModels);
         // paisModel.associate(this.dbModels);
         // provinciaModel.associate(this.dbModels);
