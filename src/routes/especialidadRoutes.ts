@@ -3,10 +3,10 @@ import DataService from '../service/DataService';
 const router = (app: any, ds: DataService) => {
     app.route('/cantPorEspecialidad')
         .get((req: any, res: any) => {
-            const especialidadView: any = ds.dbModels.especialidadViewModel;
+            const especialidad: any = ds.dbModels.especialidad;
 
-            especialidadView.findAll().then((cantPorEspecialidad: any[]) => {
-                res.send(cantPorEspecialidad);
+            especialidad.findAll().then((especialidad: any[]) => {
+                res.send(especialidad);
             });
         })
         .post((req: any, res: any) => {

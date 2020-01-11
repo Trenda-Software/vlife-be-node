@@ -4,7 +4,10 @@ export interface DBModelsI {
     usuario: Model | null;
     pais: Model | null;
     provincia: Model | null;
-    especialidadViewModel: Model | null;
+    especialidad: Model | null;
+    profesional: Model | null;
+    profesionalespecialidad: Model | null;
+    practica: Model | null;
 }
 
 export interface UsuarioI {

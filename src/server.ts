@@ -1,16 +1,17 @@
 import express from 'express';
 import usuariosRoutes from './routes/usuariosRoutes';
 import provinciaRoutes from './routes/provinciaRoutes';
-import siteRoutes from './routes/siteRoutes';
-import pageRoutes from './routes/pageRoutes';
 import paisRoutes from './routes/paisRoutes';
+import practicaRoutes from './routes/practicaRoutes';
 import especialidadRoutes from './routes/especialidadRoutes';
 import DataService from './service/DataService';
-const dotenv = require('dotenv');
 
 // import cors from 'cors';
 
-dotenv.config();
+const app = express();
+if (app.get('env') == 'development') {
+    require('dotenv').config();
+}
 
 const dbConfig = {
     host: process.env.DB_HOST,
@@ -20,7 +21,6 @@ const dbConfig = {
     password: process.env.DB_PWD,
 };
 
-const app = express();
 const PORT = process.env.PORT || 3000;
 console.log('############# dbConfig: ', dbConfig);
 
@@ -28,12 +28,11 @@ const ds = new DataService(dbConfig);
 ds.connect();
 
 // add routes
-// siteRoutes(app, ds);
-// pageRoutes(app, ds);
 usuariosRoutes(app, ds);
 paisRoutes(app, ds);
 provinciaRoutes(app, ds);
 especialidadRoutes(app, ds);
+practicaRoutes(app, ds);
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT}`));
 

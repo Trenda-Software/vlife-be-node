@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize';
+import { DBModelsI } from '../../types/types';
 
 const ProvinciaModel = (sequelize: any) => {
     const Provincia = sequelize.define(
@@ -23,8 +24,8 @@ const ProvinciaModel = (sequelize: any) => {
         }
     );
 
-    Provincia.associate = (models: any) => {
-        Provincia.hasMany(models.Usuario);
+    Provincia.associate = (models: DBModelsI) => {
+        Provincia.hasMany(models.usuario);
     };
 
     return Provincia;

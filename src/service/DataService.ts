@@ -4,13 +4,16 @@ const Sequelize = require('sequelize');
 import { DBModelsI } from '../types/types.js';
 import UsuarioModel from '../db/models/usuario';
 import PaisModel from '../db/models/pais';
+import PracticaModel from '../db/models/practica';
 import ProvinciaModel from '../db/models/provincia';
-import EspecialidadViewModel from '../db/models/especialidad-view';
+import EspecialidadModel from '../db/models/especialidad';
+import ProfesionalModel from '../db/models/profesional';
+import ProfesionalEspecialidadModel from '../db/models/profesionalespecialidad';
 
 export default class DataService {
     dbConfig: any = null;
     dbClient: any = null;
-    dbModels: DBModelsI = { usuario: null, pais: null, provincia: null, especialidadViewModel: null };
+    dbModels: DBModelsI = { usuario: null, pais: null, provincia: null, especialidad: null, profesional: null, profesionalespecialidad: null, practica: null };
 
     constructor(dbConfig: any) {
         this.dbConfig = dbConfig;
@@ -55,6 +58,7 @@ export default class DataService {
             })
             .catch((err: any) => {
                 console.error('Unable to connect to the database:', err);
+                throw err;
             });
     };
 
@@ -63,20 +67,34 @@ export default class DataService {
 
         const usuarioModel = UsuarioModel(this.dbClient);
         const paisModel = PaisModel(this.dbClient);
+        const practicaModel = PracticaModel(this.dbClient);
         const provinciaModel = ProvinciaModel(this.dbClient);
-        const especialidadViewModel = EspecialidadViewModel(this.dbClient);
+        const especialidadModel = EspecialidadModel(this.dbClient);
+        const profesionalModel = ProfesionalModel(this.dbClient);
+        const profesionalespecialidadModel = ProfesionalEspecialidadModel(this.dbClient);
 
         this.dbModels.usuario = usuarioModel;
         this.dbModels.pais = paisModel;
+        this.dbModels.practica = practicaModel;
         this.dbModels.provincia = provinciaModel;
-        this.dbModels.especialidadViewModel = especialidadViewModel;
+        this.dbModels.especialidad = especialidadModel;
+        this.dbModels.profesional = profesionalModel;
+        this.dbModels.profesionalespecialidad = profesionalespecialidadModel;
 
+        // set up the associations here
         usuarioModel.associate(this.dbModels);
+        practicaModel.associate(this.dbModels);
+        // profesionalModel.associate(this.dbModels);
+        // paisModel.associate(this.dbModels);
+        // provinciaModel.associate(this.dbModels);
 
-        // rethink this , re associated updated models
+        // @TODO rethink this , re associated updated models
         this.dbModels.usuario = usuarioModel;
         this.dbModels.pais = paisModel;
+        this.dbModels.practica = practicaModel;
         this.dbModels.provincia = provinciaModel;
-        this.dbModels.especialidadViewModel = especialidadViewModel;
+        this.dbModels.especialidad = especialidadModel;
+        this.dbModels.profesional = profesionalModel;
+        this.dbModels.profesionalespecialidad = profesionalespecialidadModel;
     };
 }

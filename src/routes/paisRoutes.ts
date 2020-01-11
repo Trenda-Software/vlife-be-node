@@ -8,6 +8,7 @@ const router = (app: any, ds: DataService) => {
             pais.findAll().then((paises: any[]) => {
                 res.send(paises);
             });
+
         })
         .post((req: any, res: any) => {
             res.status(201);

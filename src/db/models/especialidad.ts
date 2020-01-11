@@ -1,8 +1,9 @@
 import Sequelize from 'sequelize';
+import { DBModelsI } from '../../types/types';
 
-const EspecialidadViewModel = (sequelize: any) => {
-    const EspecialidadView = sequelize.define(
-        'EspecialidadView',
+const EspecialidadModel = (sequelize: any) => {
+    const Especialidad = sequelize.define(
+        'Especialidad',
         {
             idEspecialidad: {
                 type: Sequelize.INTEGER,
@@ -16,7 +17,10 @@ const EspecialidadViewModel = (sequelize: any) => {
         { timestamps: false, tableName: 'V_especialidad' }
     );
 
-    return EspecialidadView;
+    Especialidad.associate = (models: DBModelsI) => {
+        Especialidad.hasMany(models.practica);
+    };
+    return Especialidad;
 };
 
-export default EspecialidadViewModel;
+export default EspecialidadModel;
