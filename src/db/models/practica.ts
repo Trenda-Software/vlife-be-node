@@ -3,25 +3,25 @@ import { DBModelsI } from '../../types/types';
 
 const PracticaModel = (sequelize: any) => {
     const Practica = sequelize.define(
-        'Practica',
+        'practica',
         {
-            idPractica: {
+            idpractica: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },
             codigo: Sequelize.STRING,
             practica: Sequelize.STRING,
-            IdEspecialidad: Sequelize.INTEGER,
-            Precio: Sequelize.DOUBLE,
+            idespecialidad: Sequelize.INTEGER,
+            precio: Sequelize.DOUBLE,
         },
         {
             timestamps: false,
-            tableName: 'Practica',
+            tableName: 'practica',
             // Aliases for joins
             name: {
-                singular: 'Practica',
-                plural: 'Practicas',
+                singular: 'practica',
+                plural: 'practicas',
             },
         }
     );

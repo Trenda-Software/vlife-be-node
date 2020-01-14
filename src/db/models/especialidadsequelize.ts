@@ -3,23 +3,23 @@ import { DBModelsI } from '../../types/types';
 
 const EspecialidadModel = (sequelize: any) => {
     const Especialidad = sequelize.define(
-        'Especialidad',
+        'especialidad',
         {
-            IdEspecialidad: {
+            Idespecialidad: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },
-            Especialidad: Sequelize.STRING,
-            Codigo: Sequelize.STRING,
+            especialidad: Sequelize.STRING,
+            codigo: Sequelize.STRING,
         },
         {
             timestamps: false,
-            tableName: 'Especialidad',
+            tableName: 'especialidad',
             // Aliases for joins
             name: {
-                singular: 'Especialidad',
-                plural: 'Especialidades',
+                singular: 'especialidad',
+                plural: 'especialidades',
             },
         }
     );
