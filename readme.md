@@ -137,15 +137,6 @@ localhost:3000/usuario
 
 localhost:3000/cantPorEspecialidad
 
-## Heroku
-
-https://vlife-api.herokuapp.com
-
-https://vlife-api.herokuapp.com/usuario
-
-https://vlife-api.herokuapp.com/cantPorEspecialidad
-
-https://vlife-api.herokuapp.com/practica
 
 # Deploy
 
@@ -156,18 +147,30 @@ so if you do:
 
 We will organise like this:
 
-In "origin" remote repository, we will have a "heroku-deploy" branch were we put the changes we want to go to heroku, we merge our changes to this branch (origin/heroku-deploy) and then push them to heroku / master
+In "origin" remote repository, we will have a "master" branch were we put the changes we want to go to heroku, we merge our changes to this branch (origin/master) and then push them to heroku / master
 
-    origin / heroku-deploy -> heroku / master
+    origin / master -> heroku / master
 
-    In the heroku-deploy branch
+    In the master branch
 
     $ git push heroku master
 
-That will push the current heroku-deploy local branch changes to the remote "heroku / master" triggering a new deploy.
+That will push the current master local branch changes to the remote "heroku / master" triggering a new deploy.
 
 ### check logs
 
 real time log view
 
 heroku logs --tail
+
+
+### check API
+
+
+https://vlife-api.herokuapp.com
+
+https://vlife-api.herokuapp.com/usuario
+
+https://vlife-api.herokuapp.com/cantPorEspecialidad
+
+https://vlife-api.herokuapp.com/practica

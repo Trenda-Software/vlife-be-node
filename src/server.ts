@@ -22,8 +22,7 @@ const dbConfig = {
 };
 
 const PORT = process.env.PORT || 3000;
-console.log('############# dbConfig: ', dbConfig);
-console.log('############# CAMBIO MACA concha de tu madre: ');
+// console.log('############# dbConfig: ', dbConfig);
 
 const ds = new DataService(dbConfig);
 ds.connect();
@@ -35,7 +34,7 @@ provinciaRoutes(app, ds);
 especialidadRoutes(app, ds);
 practicaRoutes(app, ds);
 
-app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT}`));
+app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi`));
 
 // app.use(function(req, res, next) {
 //   console.log(`${req.method} request for '${req.url}`);
