@@ -15,7 +15,7 @@ const ProfesionalModel = (sequelize: any) => {
         },
         {
             timestamps: false,
-            tableName: 'Profesional',
+            tableName: 'profesional',
             // Aliases for joins
             name: {
                 singular: 'Profesional',
@@ -34,7 +34,6 @@ const ProfesionalModel = (sequelize: any) => {
         Profesional.associate = (models: DBModelsI) => {
             Profesional.hasMany(models.profesionalespecialidad);
         };
-
     };
 
     return Profesional;

@@ -14,7 +14,7 @@ const EspecialidadModel = (sequelize: any) => {
             codigo: Sequelize.STRING,
             cantprofesionales: Sequelize.INTEGER,
         },
-        { timestamps: false, tableName: 'V_especialidad' }
+        { timestamps: false, tableName: 'v_especialidad' }
     );
 
     Especialidad.associate = (models: DBModelsI) => {

@@ -15,7 +15,7 @@ const ProfesionalEspecialidadModel = (sequelize: any) => {
         },
         {
             timestamps: false,
-            tableName: 'ProfesionalEspecialidad',
+            tableName: 'profesionalespecialidad',
             // Aliases for joins
             name: {
                 singular: 'ProfesionalEspecialidad',
@@ -39,9 +39,7 @@ const ProfesionalEspecialidadModel = (sequelize: any) => {
         });
     };
 
-
     return ProfesionalEspecialidad;
-
 };
 
 export default ProfesionalEspecialidadModel;

@@ -23,7 +23,7 @@ const UsuarioModel = (sequelize: any) => {
         },
         {
             timestamps: false,
-            tableName: 'Usuario',
+            tableName: 'usuario',
             // Aliases for joins
             name: {
                 singular: 'Usuario',

@@ -17,7 +17,7 @@ const PracticaModel = (sequelize: any) => {
         },
         {
             timestamps: false,
-            tableName: 'Practica',
+            tableName: 'practica',
             // Aliases for joins
             name: {
                 singular: 'Practica',

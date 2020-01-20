@@ -15,7 +15,7 @@ const ProvinciaModel = (sequelize: any) => {
         },
         {
             timestamps: false,
-            tableName: 'Provincia',
+            tableName: 'provincia',
             // Aliases for joins
             name: {
                 singular: 'Provincia',

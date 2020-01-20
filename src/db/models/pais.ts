@@ -15,7 +15,7 @@ const PaisModel = (sequelize: any) => {
         },
         {
             timestamps: false,
-            tableName: 'Pais',
+            tableName: 'pais',
             // Aliases for joins
             name: {
                 singular: 'Pais',
