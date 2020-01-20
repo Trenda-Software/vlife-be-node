@@ -3,9 +3,9 @@ import { DBModelsI } from '../../types/types';
 
 const PaisModel = (sequelize: any) => {
     const Pais = sequelize.define(
-        'Pais',
+        'pais',
         {
-            idPais: {
+            idpais: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
@@ -18,8 +18,8 @@ const PaisModel = (sequelize: any) => {
             tableName: 'pais',
             // Aliases for joins
             name: {
-                singular: 'Pais',
-                plural: 'Paises',
+                singular: 'pais',
+                plural: 'paises',
             },
         }
     );

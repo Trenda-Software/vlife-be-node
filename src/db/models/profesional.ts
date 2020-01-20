@@ -3,32 +3,32 @@ import { DBModelsI } from '../../types/types';
 
 const ProfesionalModel = (sequelize: any) => {
     const Profesional = sequelize.define(
-        'Profesional',
+        'profesional',
         {
-            IdProfesional: {
+            idprofesional: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },
-            Codigo: Sequelize.STRING,
-            Nombre: Sequelize.STRING,
+            codigo: Sequelize.STRING,
+            nombre: Sequelize.STRING,
         },
         {
             timestamps: false,
             tableName: 'profesional',
             // Aliases for joins
             name: {
-                singular: 'Profesional',
-                plural: 'Profesionales',
+                singular: 'profesional',
+                plural: 'profesionales',
             },
         }
     );
 
     Profesional.associate = (models: DBModelsI) => {
         //Profesional.belongsTo(models.especialidad, {
-        //    through: 'ProfesionalEspecialidad',
-        //    as: 'Especialidades',
-        //    foreignKey: 'IdProfesional'
+        //    through: 'profesionalespecialidad',
+        //    as: 'especialidades',
+        //    foreignKey: 'idprofesional'
         //});
 
         Profesional.associate = (models: DBModelsI) => {
