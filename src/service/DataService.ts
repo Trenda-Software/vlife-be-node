@@ -46,10 +46,11 @@ export default class DataService {
 
     async connect() {
         await this.connectWithSequelize();
-        // this.testMySQL();
+        console.log('Im connected. Creating models');
+        this.initDBModels();
     }
 
-    connectWithSequelize = () => {
+    connectWithSequelize = async () => {
         console.log('connectWithSequelize');
 
         const sequelize = new Sequelize(this.dbConfig.database, this.dbConfig.user, this.dbConfig.password, {
@@ -57,17 +58,8 @@ export default class DataService {
             dialect: 'mysql',
         });
 
-        sequelize
-            .authenticate()
-            .then(() => {
-                console.log('Connection to MYSQL has been established successfully.');
-                this.dbClient = sequelize;
-                this.initDBModels();
-            })
-            .catch((err: any) => {
-                console.error('Unable to connect to the database:', err);
-                throw err;
-            });
+        await sequelize.authenticate();
+        this.dbClient = sequelize;
     };
 
     initDBModels = () => {

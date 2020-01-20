@@ -2,12 +2,11 @@ import DataService from '../service/DataService';
 
 const router = (app: any, ds: DataService) => {
     app.route('/cantPorEspecialidad')
-        .get((req: any, res: any) => {
+        .get(async (req: any, res: any) => {
             const especialidad: any = ds.dbModels.especialidad;
 
-            especialidad.findAll().then((especialidad: any[]) => {
-                res.send(especialidad);
-            });
+            const especialidades = await especialidad.findAll();
+            res.send(especialidades);
         })
         .post((req: any, res: any) => {
             res.status(201);

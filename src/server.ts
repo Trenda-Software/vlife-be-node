@@ -25,6 +25,7 @@ const PORT = process.env.PORT || 3000;
 // console.log('############# dbConfig: ', dbConfig);
 
 const ds = new DataService(dbConfig);
+
 ds.connect();
 
 // add routes
