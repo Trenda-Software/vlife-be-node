@@ -6,6 +6,20 @@ Node JS / Express server for the VLife app
 
 ## MySQL
 
+### Issues when dropping tables or schemas
+
+if you get something about the SDI schema, delete all rows in table before dropping it.
+
+### Issues when accesing some specific table or view
+
+Sometimes the user can't access a view or a table, directly or by a join, so double check if the user can read that view or table
+
+if it is a view, be careful with this line
+
+/_!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER _/
+
+this can mess with the access privileges
+
 ## Typescript
 
     for type safety and OOP.
@@ -137,7 +151,6 @@ localhost:3000/usuario
 
 localhost:3000/cantPorEspecialidad
 
-
 # Deploy
 
 ## Heroku
@@ -163,9 +176,7 @@ real time log view
 
 heroku logs --tail
 
-
 ### check API
-
 
 https://vlife-api.herokuapp.com
 

@@ -3,9 +3,9 @@ import { DBModelsI } from '../../types/types';
 
 const EspecialidadModel = (sequelize: any) => {
     const Especialidad = sequelize.define(
-        'Especialidad',
+        'especialidad',
         {
-            idEspecialidad: {
+            idespecialidad: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
@@ -14,7 +14,7 @@ const EspecialidadModel = (sequelize: any) => {
             codigo: Sequelize.STRING,
             cantprofesionales: Sequelize.INTEGER,
         },
-        { timestamps: false, tableName: 'V_especialidad' }
+        { timestamps: false, tableName: 'v_especialidad' }
     );
 
     Especialidad.associate = (models: DBModelsI) => {

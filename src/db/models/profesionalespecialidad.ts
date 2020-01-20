@@ -3,23 +3,23 @@ import { DBModelsI } from '../../types/types';
 
 const ProfesionalEspecialidadModel = (sequelize: any) => {
     const ProfesionalEspecialidad = sequelize.define(
-        'ProfesionalEspecialidad',
+        'profesionalespecialidad',
         {
-            IdProfesionalEspecialidad: {
+            idprofesionalespecialidad: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
             },
-            IdProfesional: Sequelize.INTEGER,
-            IdEspecialidad: Sequelize.INTEGER,
+            idprofesional: Sequelize.INTEGER,
+            idespecialidad: Sequelize.INTEGER,
         },
         {
             timestamps: false,
-            tableName: 'ProfesionalEspecialidad',
+            tableName: 'profesionalespecialidad',
             // Aliases for joins
             name: {
-                singular: 'ProfesionalEspecialidad',
-                plural: 'ProfesionalEspecialidades',
+                singular: 'profesionalespecialidad',
+                plural: 'profesionalespecialidades',
             },
         }
     );
@@ -27,21 +27,19 @@ const ProfesionalEspecialidadModel = (sequelize: any) => {
     ProfesionalEspecialidad.associate = (models: DBModelsI) => {
         ProfesionalEspecialidad.belongsTo(models.profesional, {
             foreignKey: {
-                name: 'IdProfesional',
+                name: 'idprofesional',
                 allowNull: false,
             },
         });
         ProfesionalEspecialidad.belongsTo(models.especialidad, {
             foreignKey: {
-                name: 'IdEspecialidad',
+                name: 'idespecialidad',
                 allowNull: false,
             },
         });
     };
 
-
     return ProfesionalEspecialidad;
-
 };
 
 export default ProfesionalEspecialidadModel;

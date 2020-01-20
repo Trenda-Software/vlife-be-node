@@ -3,9 +3,9 @@ import { DBModelsI } from '../../types/types';
 
 const UsuarioModel = (sequelize: any) => {
     const Usuario = sequelize.define(
-        'Usuario',
+        'usuario',
         {
-            idUsuario: {
+            idusuario: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
             },
@@ -23,11 +23,11 @@ const UsuarioModel = (sequelize: any) => {
         },
         {
             timestamps: false,
-            tableName: 'Usuario',
+            tableName: 'usuario',
             // Aliases for joins
             name: {
-                singular: 'Usuario',
-                plural: 'Usuarios',
+                singular: 'usuario',
+                plural: 'usuarios',
             },
         }
     );

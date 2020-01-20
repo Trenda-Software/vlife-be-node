@@ -3,9 +3,9 @@ import { DBModelsI } from '../../types/types';
 
 const ProvinciaModel = (sequelize: any) => {
     const Provincia = sequelize.define(
-        'Provincia',
+        'provincia',
         {
-            idProvincia: {
+            idprovincia: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
@@ -15,11 +15,11 @@ const ProvinciaModel = (sequelize: any) => {
         },
         {
             timestamps: false,
-            tableName: 'Provincia',
+            tableName: 'provincia',
             // Aliases for joins
             name: {
-                singular: 'Provincia',
-                plural: 'Provincias',
+                singular: 'provincia',
+                plural: 'provincias',
             },
         }
     );
