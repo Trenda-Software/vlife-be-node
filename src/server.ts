@@ -34,7 +34,7 @@ provinciaRoutes(app, ds);
 especialidadRoutes(app, ds);
 practicaRoutes(app, ds);
 
-app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi`));
+app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));
 
 // app.use(function(req, res, next) {
 //   console.log(`${req.method} request for '${req.url}`);
