@@ -6,6 +6,20 @@ Node JS / Express server for the VLife app
 
 ## MySQL
 
+### Issues when dropping tables or schemas
+
+if you get something about the SDI schema, delete all rows in table before dropping it.
+
+### Issues when accesing some specific table or view
+
+Sometimes the user can't access a view or a table, directly or by a join, so double check if the user can read that view or table
+
+if it is a view, be careful with this line
+
+/_!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER _/
+
+this can mess with the access privileges
+
 ## Typescript
 
     for type safety and OOP.
@@ -120,12 +134,12 @@ https://vlife-api.herokuapp.com/usuario
 
 https://vlife-api.herokuapp.com/cantPorEspecialidad
 
-
 # Deploy
 
 ## Heroku
- The remote + branch that has to be updated to trigger a deploy in heroku is the remote "heroku" branch "master"
- so if you do:
+
+The remote + branch that has to be updated to trigger a deploy in heroku is the remote "heroku" branch "master"
+so if you do:
 
 We will organise like this:
 
@@ -133,7 +147,7 @@ We will have a deploy heroku branch were we put the changes we want to go to her
 
     origin / heroku-deploy -> heroku / master
 
-    In the heroku-deploy branch 
+    In the heroku-deploy branch
     $ git push heroku master
 
 That will push the current heroku-deploy local branch changes to the remote "heroku / master" triggering a new deploy.
