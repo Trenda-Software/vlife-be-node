@@ -49,7 +49,8 @@ export default class DataService {
     async connect() {
         await this.connectWithSequelize();
         console.log('Im connected. Creating models');
-        this.initDBModels();
+        await this.initDBModels();
+        console.log('Models created');
     }
 
     connectWithSequelize = async () => {
@@ -64,7 +65,7 @@ export default class DataService {
         this.dbClient = sequelize;
     };
 
-    initDBModels = () => {
+    initDBModels = async () => {
         // creates models and initializes them
 
         const usuarioModel = UsuarioModel(this.dbClient);
