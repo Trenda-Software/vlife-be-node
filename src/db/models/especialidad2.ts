@@ -1,11 +1,11 @@
 import Sequelize from 'sequelize';
 import { DBModelsI } from '../../types/types';
 
-const EspecialidadModel = (sequelize: any) => {
+const EspecialidadModel2 = (sequelize: any) => {
     const Especialidad = sequelize.define(
         'especialidad',
         {
-            Idespecialidad: {
+            idespecialidad: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
@@ -31,4 +31,4 @@ const EspecialidadModel = (sequelize: any) => {
     return Especialidad;
 };
 
-export default EspecialidadModel;
+export default EspecialidadModel2;

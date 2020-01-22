@@ -5,6 +5,7 @@ export interface DBModelsI {
     pais: Model | null;
     provincia: Model | null;
     especialidad: Model | null;
+    especialidad2: Model | null;
     profesional: Model | null;
     profesionalespecialidad: Model | null;
     practica: Model | null;

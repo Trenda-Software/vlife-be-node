@@ -12,6 +12,17 @@ const router = (app: any, ds: DataService) => {
             res.status(201);
             res.send('live POST Req Ok');
         });
+    app.route('/cantPorEspecialidad2')
+        .get(async (req: any, res: any) => {
+            const especialidad2: any = ds.dbModels.especialidad2;
+
+            const especialidades2 = await especialidad2.findAll();
+            res.send(especialidades2);
+        })
+        .post((req: any, res: any) => {
+            res.status(201);
+            res.send('live POST Req Ok');
+        });
 };
 
 export default router;

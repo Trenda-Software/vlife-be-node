@@ -7,6 +7,7 @@ import PaisModel from '../db/models/pais';
 import PracticaModel from '../db/models/practica';
 import ProvinciaModel from '../db/models/provincia';
 import EspecialidadModel from '../db/models/especialidad';
+import EspecialidadModel2 from '../db/models/especialidad2';
 import ProfesionalModel from '../db/models/profesional';
 import ProfesionalEspecialidadModel from '../db/models/profesionalespecialidad';
 
@@ -21,6 +22,7 @@ export default class DataService {
         profesional: null,
         profesionalespecialidad: null,
         practica: null,
+        especialidad2: null,
     };
 
     constructor(dbConfig: any) {
@@ -70,6 +72,7 @@ export default class DataService {
         const practicaModel = PracticaModel(this.dbClient);
         const provinciaModel = ProvinciaModel(this.dbClient);
         const especialidadModel = EspecialidadModel(this.dbClient);
+        const especialidadModel2 = EspecialidadModel2(this.dbClient);
         const profesionalModel = ProfesionalModel(this.dbClient);
         const profesionalespecialidadModel = ProfesionalEspecialidadModel(this.dbClient);
 
@@ -78,6 +81,7 @@ export default class DataService {
         this.dbModels.practica = practicaModel;
         this.dbModels.provincia = provinciaModel;
         this.dbModels.especialidad = especialidadModel;
+        this.dbModels.especialidad2 = especialidadModel2;
         this.dbModels.profesional = profesionalModel;
         this.dbModels.profesionalespecialidad = profesionalespecialidadModel;
 
@@ -85,6 +89,7 @@ export default class DataService {
         usuarioModel.associate(this.dbModels);
         practicaModel.associate(this.dbModels);
         profesionalespecialidadModel.associate(this.dbModels);
+        especialidadModel2.associate(this.dbModels);
         // profesionalModel.associate(this.dbModels);
         // paisModel.associate(this.dbModels);
         // provinciaModel.associate(this.dbModels);
@@ -95,6 +100,7 @@ export default class DataService {
         this.dbModels.practica = practicaModel;
         this.dbModels.provincia = provinciaModel;
         this.dbModels.especialidad = especialidadModel;
+        this.dbModels.especialidad2 = especialidadModel2;
         this.dbModels.profesional = profesionalModel;
         this.dbModels.profesionalespecialidad = profesionalespecialidadModel;
     };
