@@ -28,6 +28,7 @@ const ds = new DataService(dbConfig);
 
 ds.connect();
 
+console.log('############# Adding routes');
 // add routes
 usuariosRoutes(app, ds);
 paisRoutes(app, ds);
