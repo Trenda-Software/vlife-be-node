@@ -50,16 +50,55 @@ export default class DataService {
 
     async connect() {
         await this.connectWithSequelize();
+
         console.log('Im connected. Creating models');
         await this.initDBModels();
-        // console.log('Models NEW created');
+        console.log('Models created');
 
-        // await this.testManyToManyRel();
+        console.log('Re-Loading DB');
+        await this.initDBData();
         console.log('Init Data re-loaded');
     }
 
     async resetInitialData() {
         await this.dbClient.sync({ force: true });
+    }
+
+    async initDBData() {
+        await this.dbClient.sync({ force: true });
+
+        const ProfessionalModel: any = this.dbClient.models.Professional;
+        const SpecialtyModel: any = this.dbClient.models.Specialty;
+
+        const professional1 = await ProfessionalModel.create({ name: 'Javier', surname: 'Doctoret' });
+        const professional2 = await ProfessionalModel.create({ name: 'Pedro', surname: 'Del Medico' });
+        const professional3 = await ProfessionalModel.create({ name: 'Pablo', surname: 'Del Hopitalet' });
+        const professional4 = await ProfessionalModel.create({ name: 'Juan', surname: 'Camillet' });
+        const professional5 = await ProfessionalModel.create({ name: 'Maria', surname: 'DeGuardia' });
+
+        const kinesio = await SpecialtyModel.create({ name: 'Kinesiologia', code: 'kinesio' });
+        const radio = await SpecialtyModel.create({ name: 'Radioterapia', code: 'radio' });
+
+        await kinesio.addProfessionals([professional1, professional2, professional3]);
+        await radio.addProfessionals([professional1, professional4]);
+
+        const kinesioResults = await SpecialtyModel.findOne({
+            where: { code: 'kinesio' },
+            include: ProfessionalModel,
+        });
+        console.log('Kinesio Professional QTY:' + kinesioResults.Professionals.length);
+        kinesioResults.Professionals.forEach((specialty: any) => {
+            console.log(`Kinesio Professional - ID: ${specialty.dataValues.id} NAME: ${specialty.dataValues.name}`);
+        });
+
+        const radioResults = await SpecialtyModel.findOne({
+            where: { code: 'radio' },
+            include: ProfessionalModel,
+        });
+        console.log('Radio Professional QTY:' + radioResults.Professionals.length);
+        radioResults.Professionals.forEach((specialty: any) => {
+            console.log(`adio Professional - ID: ${specialty.dataValues.id} NAME: ${specialty.dataValues.name}`);
+        });
     }
 
     connectWithSequelize = async () => {
@@ -95,60 +134,6 @@ export default class DataService {
         // profileModel.belongsToMany(userModel, { through: 'User_Profiles' });
 
         // @TODO rethink this , re associated updated models
-        // this.dbModels.usuario = usuarioModel;
-        // this.dbModels.pais = paisModel;
-        // this.dbModels.practica = practicaModel;
-        // this.dbModels.provincia = provinciaModel;
-        // this.dbModels.especialidad = SpecialtyModel;
-        // this.dbModels.profesional = profesionalModel;
-        // this.dbModels.profesionalespecialidad = profesionalSpecialtyModel;
-        // this.dbModels.user = userModel;
-        // this.dbModels.profile = profileModel;
-    };
-
-    initDBModelsNew = async () => {
-        // creates models and initializes them
-
-        const User = UserModel(this.dbClient);
-
-        // `sequelize.define` also returns the model
-        console.log('this.dbClient.models.user: ', this.dbClient.models.user === User); // true
-        console.log('User model: ', User); // true
-
-        // const usuarioModel = UsuarioModel(this.dbClient);
-        // const paisModel = PaisModel(this.dbClient);
-        // const practicaModel = PracticaModel(this.dbClient);
-        // const provinciaModel = ProvinciaModel(this.dbClient);
-        // const SpecialtyModel = SpecialtyModel(this.dbClient);
-        // const SpecialtyModel2 = SpecialtyModel2(this.dbClient);
-        // const profesionalModel = ProfesionalModel(this.dbClient);
-        // const profesionalSpecialtyModel = ProfesionalSpecialtyModel(this.dbClient);
-        // const userModel = UserModel(this.dbClient);
-        // const profileModel = ProfileModel(this.dbClient);
-
-        // this.dbModels.usuario = usuarioModel;
-        // this.dbModels.pais = paisModel;
-        // this.dbModels.practica = practicaModel;
-        // this.dbModels.provincia = provinciaModel;
-        // this.dbModels.especialidad = SpecialtyModel;
-        // this.dbModels.profesional = profesionalModel;
-        // this.dbModels.profesionalespecialidad = profesionalSpecialtyModel;
-        // this.dbModels.user = userModel;
-        // this.dbModels.profile = profileModel;
-
-        // // set up the associations here
-        // usuarioModel.associate(this.dbModels);
-        // practicaModel.associate(this.dbModels);
-        // profesionalSpecialtyModel.associate(this.dbModels);
-        // SpecialtyModel2.associate(this.dbModels);
-        // // profesionalModel.associate(this.dbModels);
-        // // paisModel.associate(this.dbModels);
-        // // provinciaModel.associate(this.dbModels);
-
-        // userModel.belongsToMany(profileModel, { through: 'User_Profiles' });
-        // profileModel.belongsToMany(userModel, { through: 'User_Profiles' });
-
-        // // @TODO rethink this , re associated updated models
         // this.dbModels.usuario = usuarioModel;
         // this.dbModels.pais = paisModel;
         // this.dbModels.practica = practicaModel;
