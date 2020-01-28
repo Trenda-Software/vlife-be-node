@@ -4,6 +4,7 @@ import provinciaRoutes from './routes/provinciaRoutes';
 import paisRoutes from './routes/paisRoutes';
 import practicaRoutes from './routes/practicaRoutes';
 import especialidadRoutes from './routes/especialidadRoutes';
+import LoginJWTRoutes from './routes/LoginJWTRoutes';
 import DataService from './service/DataService';
 
 // import cors from 'cors';
@@ -34,9 +35,10 @@ paisRoutes(app, ds);
 provinciaRoutes(app, ds);
 especialidadRoutes(app, ds);
 practicaRoutes(app, ds);
+LoginJWTRoutes(app, ds);
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));
-
+app.post('/post', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello Maca en el Post 20200127`));
 // app.use(function(req, res, next) {
 //   console.log(`${req.method} request for '${req.url}`);
 //   next();
