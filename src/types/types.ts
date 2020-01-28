@@ -9,6 +9,8 @@ export interface DBModelsI {
     profesional: Model | null;
     profesionalespecialidad: Model | null;
     practica: Model | null;
+    user: Model | null;
+    profile: Model | null;
 }
 
 export interface UsuarioI {
