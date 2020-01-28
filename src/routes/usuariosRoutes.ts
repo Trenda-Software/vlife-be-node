@@ -1,5 +1,5 @@
 import DataService from '../service/DataService';
-import PaisModel from '../db/models/pais';
+import PaisModel from '../db/models/Country';
 
 const router = (app: any, ds: DataService) => {
     app.route('/usuario')

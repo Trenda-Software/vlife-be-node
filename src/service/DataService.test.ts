@@ -1,33 +1,21 @@
 const mysql = require('mysql2');
 
 import { DBModelsI } from '../types/types.js';
-import UsuarioModel from '../db/models/usuario';
-import PaisModel from '../db/models/pais';
-import PracticaModel from '../db/models/practica';
-import ProvinciaModel from '../db/models/provincia';
-import EspecialidadModel from '../db/models/Specialty';
-import EspecialidadModel2 from '../db/models/especialidad2';
-import ProfesionalModel from '../db/models/Professional';
-import ProfesionalEspecialidadModel from '../db/models/profesionalespecialidad';
 
-import UserModel from '../db/models/user';
-import ProfileModel from '../db/models/profile';
+import UserModel from '../db/models/User';
+import ProfileModel from '../db/models/Profile';
 const { Sequelize, DataTypes, Model } = require('sequelize');
 
 export default class DataService {
     dbConfig: any = null;
     dbClient: any = null;
     dbModels: DBModelsI = {
-        usuario: null,
-        pais: null,
-        provincia: null,
-        especialidad: null,
-        especialidad2: null,
-        profesional: null,
-        profesionalespecialidad: null,
-        practica: null,
+        country: null,
+        province: null,
+        specialty: null,
+        professional: null,
+        practice: null,
         user: null,
-        profile: null,
     };
 
     constructor(dbConfig: any) {
@@ -194,54 +182,6 @@ export default class DataService {
         } catch (error) {
             console.error('Unable to connect to the database:', error);
         }
-    };
-
-    initDBModels = async () => {
-        // creates models and initializes them
-
-        const usuarioModel = UsuarioModel(this.dbClient);
-        const paisModel = PaisModel(this.dbClient);
-        const practicaModel = PracticaModel(this.dbClient);
-        const provinciaModel = ProvinciaModel(this.dbClient);
-        const especialidadModel = EspecialidadModel(this.dbClient);
-        const especialidadModel2 = EspecialidadModel2(this.dbClient);
-        const profesionalModel = ProfesionalModel(this.dbClient);
-        const profesionalespecialidadModel = ProfesionalEspecialidadModel(this.dbClient);
-        const userModel = UserModel(this.dbClient);
-        const profileModel = ProfileModel(this.dbClient);
-
-        this.dbModels.usuario = usuarioModel;
-        this.dbModels.pais = paisModel;
-        this.dbModels.practica = practicaModel;
-        this.dbModels.provincia = provinciaModel;
-        this.dbModels.especialidad = especialidadModel;
-        this.dbModels.profesional = profesionalModel;
-        this.dbModels.profesionalespecialidad = profesionalespecialidadModel;
-        this.dbModels.user = userModel;
-        this.dbModels.profile = profileModel;
-
-        // set up the associations here
-        usuarioModel.associate(this.dbModels);
-        practicaModel.associate(this.dbModels);
-        profesionalespecialidadModel.associate(this.dbModels);
-        especialidadModel2.associate(this.dbModels);
-        // profesionalModel.associate(this.dbModels);
-        // paisModel.associate(this.dbModels);
-        // provinciaModel.associate(this.dbModels);
-
-        userModel.belongsToMany(profileModel, { through: 'User_Profiles' });
-        profileModel.belongsToMany(userModel, { through: 'User_Profiles' });
-
-        // @TODO rethink this , re associated updated models
-        this.dbModels.usuario = usuarioModel;
-        this.dbModels.pais = paisModel;
-        this.dbModels.practica = practicaModel;
-        this.dbModels.provincia = provinciaModel;
-        this.dbModels.especialidad = especialidadModel;
-        this.dbModels.profesional = profesionalModel;
-        this.dbModels.profesionalespecialidad = profesionalespecialidadModel;
-        this.dbModels.user = userModel;
-        this.dbModels.profile = profileModel;
     };
 
     initDBModelsNew = async () => {

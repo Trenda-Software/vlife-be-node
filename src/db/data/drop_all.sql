@@ -1,10 +1,7 @@
-#
-drop all
-DROP TABLE IF EXISTS `VLife`.`ListaPrecios`;
-DROP TABLE IF EXISTS `VLife`.`Reputacion`;
-DROP TABLE IF EXISTS `VLife`.`Solicitud`;
-DROP TABLE IF EXISTS `VLife`.`Usuario`;
-DROP TABLE IF EXISTS `VLife`.`Pais`;
-DROP TABLE IF EXISTS `VLife`.`Provincia`;
-DROP TABLE IF EXISTS `VLife`.`Profesional`;
-DROP TABLE IF EXISTS `VLife`.`RangoEdad`;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Practices;
+DROP TABLE IF EXISTS Specialties_Professionals;
+DROP TABLE IF EXISTS Specialties;
+DROP TABLE IF EXISTS Professionals;
+DROP TABLE IF EXISTS Provinces;
+DROP TABLE IF EXISTS Countries;
