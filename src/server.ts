@@ -29,6 +29,10 @@ const ds = new DataService(dbConfig);
 
 ds.connect();
 
+//Middelware
+
+app.use(express.json());
+
 // add routes
 usuariosRoutes(app, ds);
 paisRoutes(app, ds);
