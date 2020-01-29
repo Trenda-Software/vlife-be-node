@@ -3,10 +3,16 @@ import DataService from '../service/DataService';
 const router = (app: any, ds: DataService) => {
     app.route('/cantPorEspecialidad')
         .get(async (req: any, res: any) => {
-            const especialidad: any = ds.dbModels.especialidad;
+            const SpecialtyModel: any = ds.dbModels.specialty;
 
-            const especialidades = await especialidad.findAll();
-            res.send(especialidades);
+            const specialties = await SpecialtyModel.findAll();
+
+            // Hasta aqui llegue ... hay que arreglar esto
+            const profPerSpecialties = specialties.map((specialty: any) => {
+                name: specialty.name;
+                qty: specialty.getProfessionals().length;
+            });
+            res.send(profPerSpecialties);
         })
         .post((req: any, res: any) => {
             res.status(201);

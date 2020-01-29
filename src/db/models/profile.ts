@@ -1,18 +1,9 @@
 import Sequelize from 'sequelize';
 
 const ProfileModel = (sequelize: any) => {
-    const Profile = sequelize.define(
-        'profile',
-        {
-            idProfile: {
-                type: Sequelize.INTEGER,
-                primaryKey: true,
-                autoIncrement: true,
-            },
-            name: Sequelize.STRING,
-        },
-        { tableName: 'profile' }
-    );
+    const Profile = sequelize.define('Profile', {
+        name: Sequelize.STRING,
+    });
 
     return Profile;
 };

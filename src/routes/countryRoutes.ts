@@ -1,14 +1,13 @@
 import DataService from '../service/DataService';
 
 const router = (app: any, ds: DataService) => {
-    app.route('/pais')
+    app.route('/country')
         .get((req: any, res: any) => {
-            const pais: any = ds.dbModels.pais;
+            const country: any = ds.dbModels.country;
 
-            pais.findAll().then((paises: any[]) => {
-                res.send(paises);
+            country.findAll().then((countries: any[]) => {
+                res.send(countries);
             });
-
         })
         .post((req: any, res: any) => {
             res.status(201);

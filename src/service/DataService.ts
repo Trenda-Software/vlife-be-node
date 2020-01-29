@@ -64,6 +64,21 @@ export default class DataService {
 
         const ProfessionalModel: any = this.dbClient.models.Professional;
         const SpecialtyModel: any = this.dbClient.models.Specialty;
+        const UserModel: any = this.dbClient.models.User;
+        const ProvinceModel: any = this.dbClient.models.Province;
+        const CountryModel: any = this.dbClient.models.Country;
+
+        const province1 = await ProvinceModel.create({ code: 'BSAS', name: 'Buenos Aires' });
+        const country1 = await CountryModel.create({ code: 'ARG', name: 'Argentina' });
+        await province1.setCountry(country1);
+
+        const user1 = await UserModel.create({ name: 'Javier', surname: 'Hack', email: 'javierhack@gmail.com' });
+        await user1.setCountry(country1);
+        await user1.setProvince(province1);
+
+        const user2 = await UserModel.create({ name: 'Mariano', surname: 'Escudero', email: 'maca@gmail.com' });
+        await user2.setCountry(country1);
+        await user2.setProvince(province1);
 
         const professional1 = await ProfessionalModel.create({ name: 'Javier', surname: 'Doctoret' });
         const professional2 = await ProfessionalModel.create({ name: 'Pedro', surname: 'Del Medico' });
