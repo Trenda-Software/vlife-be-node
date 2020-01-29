@@ -1,26 +1,12 @@
 import { Model } from 'sequelize';
 
 export interface DBModelsI {
-    usuario: Model | null;
-    pais: Model | null;
-    provincia: Model | null;
-    especialidad: Model | null;
-    profesional: Model | null;
-    profesionalespecialidad: Model | null;
-    practica: Model | null;
-}
-
-export interface UsuarioI {
-    nombre: string;
-    clave: string;
-    coordenadas: string;
-    apellido: string;
-    foto: string;
-    mail: string;
-    celular: string;
-    ciudad: string;
-    direccion: string;
-    associate: any;
+    country: Model | null;
+    province: Model | null;
+    specialty: Model | null;
+    professional: Model | null;
+    practice: Model | null;
+    user: Model | null;
 }
 
 export interface MenuI {
@@ -47,6 +33,14 @@ export interface PageI {
 
 export interface UserI {
     name: string;
+    surname: string;
+    pwd: string;
+    coordinates: string;
+    picture: string;
+    email: string;
+    mobile: string;
+    city: string;
+    address: string;
 }
 export interface CustomI {
     name: string;
@@ -57,22 +51,3 @@ export interface CommentI {
     name: string;
     content: string;
 }
-
-// export interface SiteSchemaI {
-//     id: string;
-//     lang: string;
-//     content: {
-//         header: string;
-//         subHeader: string;
-//         tagLine: string;
-//         logoImage: string;
-//         logoUrl: string;
-//         comments: CommentI[];
-//         media: MediaItemI[];
-//         menus: MenuI[];
-//         posts: PostI[];
-//         pages: PageI[];
-//         users: UserI[];
-//         custom: CustomI[];
-//     };
-// }

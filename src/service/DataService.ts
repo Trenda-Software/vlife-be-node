@@ -1,26 +1,24 @@
 const mysql = require('mysql2');
-const Sequelize = require('sequelize');
 
 import { DBModelsI } from '../types/types.js';
-import UsuarioModel from '../db/models/usuario';
-import PaisModel from '../db/models/pais';
-import PracticaModel from '../db/models/practica';
-import ProvinciaModel from '../db/models/provincia';
-import EspecialidadModel from '../db/models/especialidad';
-import ProfesionalModel from '../db/models/profesional';
-import ProfesionalEspecialidadModel from '../db/models/profesionalespecialidad';
+import Country from '../db/models/Country';
+import Province from '../db/models/Province';
+import Specialty from '../db/models/Specialty';
+import Professional from '../db/models/Professional';
+import Practice from '../db/models/Practice';
+import User from '../db/models/User';
+const { Sequelize } = require('sequelize');
 
 export default class DataService {
     dbConfig: any = null;
     dbClient: any = null;
     dbModels: DBModelsI = {
-        usuario: null,
-        pais: null,
-        provincia: null,
-        especialidad: null,
-        profesional: null,
-        profesionalespecialidad: null,
-        practica: null,
+        user: null,
+        country: null,
+        province: null,
+        specialty: null,
+        professional: null,
+        practice: null,
     };
 
     constructor(dbConfig: any) {
@@ -46,8 +44,71 @@ export default class DataService {
 
     async connect() {
         await this.connectWithSequelize();
+
         console.log('Im connected. Creating models');
-        this.initDBModels();
+        await this.initDBModels();
+        console.log('Models created');
+
+        console.log('Re-Loading DB');
+        await this.initDBData();
+        console.log('Init Data re-loaded');
+    }
+
+    async resetInitialData() {
+        await this.dbClient.sync({ force: true });
+    }
+
+    async initDBData() {
+        // drops and re-create tables
+        await this.resetInitialData();
+
+        const ProfessionalModel: any = this.dbClient.models.Professional;
+        const SpecialtyModel: any = this.dbClient.models.Specialty;
+        const UserModel: any = this.dbClient.models.User;
+        const ProvinceModel: any = this.dbClient.models.Province;
+        const CountryModel: any = this.dbClient.models.Country;
+
+        const province1 = await ProvinceModel.create({ code: 'BSAS', name: 'Buenos Aires' });
+        const country1 = await CountryModel.create({ code: 'ARG', name: 'Argentina' });
+        await province1.setCountry(country1);
+
+        const user1 = await UserModel.create({ name: 'Javier', surname: 'Hack', email: 'javierhack@gmail.com' });
+        await user1.setCountry(country1);
+        await user1.setProvince(province1);
+
+        const user2 = await UserModel.create({ name: 'Mariano', surname: 'Escudero', email: 'maca@gmail.com' });
+        await user2.setCountry(country1);
+        await user2.setProvince(province1);
+
+        const professional1 = await ProfessionalModel.create({ name: 'Javier', surname: 'Doctoret' });
+        const professional2 = await ProfessionalModel.create({ name: 'Pedro', surname: 'Del Medico' });
+        const professional3 = await ProfessionalModel.create({ name: 'Pablo', surname: 'Del Hopitalet' });
+        const professional4 = await ProfessionalModel.create({ name: 'Juan', surname: 'Camillet' });
+        const professional5 = await ProfessionalModel.create({ name: 'Maria', surname: 'DeGuardia' });
+
+        const kinesio = await SpecialtyModel.create({ name: 'Kinesiologia', code: 'kinesio' });
+        const radio = await SpecialtyModel.create({ name: 'Radioterapia', code: 'radio' });
+
+        await kinesio.addProfessionals([professional1, professional2, professional3]);
+        await radio.addProfessionals([professional1, professional4]);
+
+        const kinesioResults = await SpecialtyModel.findOne({
+            where: { code: 'kinesio' },
+            include: ProfessionalModel,
+        });
+        console.log('Kinesio Professional QTY:' + kinesioResults.Professionals.length);
+        kinesioResults.Professionals.forEach((specialty: any) => {
+            console.log(`Kinesio Professional - ID: ${specialty.dataValues.id} NAME: ${specialty.dataValues.name}`);
+        });
+
+        const radioResults = await SpecialtyModel.findOne({
+            where: { code: 'radio' },
+            include: ProfessionalModel,
+        });
+        console.log('Radio Professional QTY:' + radioResults.Professionals.length);
+        radioResults.Professionals.forEach((specialty: any) => {
+            console.log(`adio Professional - ID: ${specialty.dataValues.id} NAME: ${specialty.dataValues.name}`);
+        });
     }
 
     connectWithSequelize = async () => {
@@ -58,44 +119,44 @@ export default class DataService {
             dialect: 'mysql',
         });
 
-        await sequelize.authenticate();
-        this.dbClient = sequelize;
+        try {
+            await sequelize.authenticate();
+            this.dbClient = sequelize;
+            console.log('Connection to database has been established successfully.');
+        } catch (error) {
+            console.error('Unable to connect to the database:', error);
+        }
     };
 
-    initDBModels = () => {
+    initDBModels = async () => {
         // creates models and initializes them
 
-        const usuarioModel = UsuarioModel(this.dbClient);
-        const paisModel = PaisModel(this.dbClient);
-        const practicaModel = PracticaModel(this.dbClient);
-        const provinciaModel = ProvinciaModel(this.dbClient);
-        const especialidadModel = EspecialidadModel(this.dbClient);
-        const profesionalModel = ProfesionalModel(this.dbClient);
-        const profesionalespecialidadModel = ProfesionalEspecialidadModel(this.dbClient);
+        // const usuarioModel = UsuarioModel(this.dbClient);
+        const CountryModel: any = Country(this.dbClient);
+        const ProvinceModel: any = Province(this.dbClient);
+        const SpecialtyModel: any = Specialty(this.dbClient);
+        const ProfessionalModel: any = Professional(this.dbClient);
+        const PracticeModel: any = Practice(this.dbClient);
+        const UserModel: any = User(this.dbClient);
 
-        this.dbModels.usuario = usuarioModel;
-        this.dbModels.pais = paisModel;
-        this.dbModels.practica = practicaModel;
-        this.dbModels.provincia = provinciaModel;
-        this.dbModels.especialidad = especialidadModel;
-        this.dbModels.profesional = profesionalModel;
-        this.dbModels.profesionalespecialidad = profesionalespecialidadModel;
+        // associations
+        ProfessionalModel.belongsToMany(SpecialtyModel, { through: 'Specialties_Professionals' });
+        ProfessionalModel.belongsTo(CountryModel);
+        ProfessionalModel.belongsTo(ProvinceModel);
 
-        // set up the associations here
-        usuarioModel.associate(this.dbModels);
-        practicaModel.associate(this.dbModels);
-        profesionalespecialidadModel.associate(this.dbModels);
-        // profesionalModel.associate(this.dbModels);
-        // paisModel.associate(this.dbModels);
-        // provinciaModel.associate(this.dbModels);
+        SpecialtyModel.belongsToMany(ProfessionalModel, { through: 'Specialties_Professionals' });
+        ProvinceModel.belongsTo(CountryModel);
 
-        // @TODO rethink this , re associated updated models
-        this.dbModels.usuario = usuarioModel;
-        this.dbModels.pais = paisModel;
-        this.dbModels.practica = practicaModel;
-        this.dbModels.provincia = provinciaModel;
-        this.dbModels.especialidad = especialidadModel;
-        this.dbModels.profesional = profesionalModel;
-        this.dbModels.profesionalespecialidad = profesionalespecialidadModel;
+        PracticeModel.belongsTo(SpecialtyModel);
+
+        UserModel.belongsTo(CountryModel);
+        UserModel.belongsTo(ProvinceModel);
+
+        this.dbModels.user = UserModel;
+        this.dbModels.country = CountryModel;
+        this.dbModels.practice = PracticeModel;
+        this.dbModels.province = ProvinceModel;
+        this.dbModels.specialty = SpecialtyModel;
+        this.dbModels.professional = ProfessionalModel;
     };
 }

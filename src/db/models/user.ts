@@ -1,0 +1,22 @@
+import Sequelize from 'sequelize';
+
+const UserModel = (sequelize: any) => {
+    const User = sequelize.define('User', {
+        name: Sequelize.STRING,
+        surname: Sequelize.STRING,
+        pwd: Sequelize.STRING,
+        coordinates: Sequelize.STRING,
+        picture: Sequelize.STRING,
+        email: {
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
+        mobile: Sequelize.STRING,
+        city: Sequelize.STRING,
+        address: Sequelize.STRING,
+    });
+
+    return User;
+};
+
+export default UserModel;
