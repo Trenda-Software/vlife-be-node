@@ -7,23 +7,25 @@ const router = (app: any, ds: DataService) => {
 
             const specialties = await SpecialtyModel.findAll();
 
-            // Hasta aqui llegue ... hay que arreglar esto
-            const profPerSpecialties = specialties.map((specialty: any) => {
-                name: specialty.name;
-                qty: specialty.getProfessionals().length;
+            // preparar el resultado
+            const profPerSpecialties = specialties.map(async (specialty: any) => {
+                // console.log('########## Specialty: ', specialty);
+                const professionals = await specialty.getProfessionals();
+                const profPerSpecialty = {
+                    name: specialty.name,
+                    qty: professionals.length,
+                };
+                // console.log('##########  profs profPerSpecialty: ', profPerSpecialty);
+                return profPerSpecialty;
             });
-            res.send(profPerSpecialties);
-        })
-        .post((req: any, res: any) => {
-            res.status(201);
-            res.send('live POST Req Ok');
-        });
-    app.route('/cantPorEspecialidad2')
-        .get(async (req: any, res: any) => {
-            const especialidad2: any = ds.dbModels.especialidad2;
+            // console.log('##########  MAP profPerSpecialties: ', profPerSpecialties);
 
-            const especialidades2 = await especialidad2.findAll();
-            res.send(especialidades2);
+            Promise.all(profPerSpecialties)
+                .then(returnedValues => {
+                    // console.log('##########  MAP profPerSpecialties values: ', values);
+                    res.send(returnedValues);
+                })
+                .catch(console.error);
         })
         .post((req: any, res: any) => {
             res.status(201);
