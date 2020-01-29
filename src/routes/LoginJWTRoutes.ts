@@ -1,7 +1,7 @@
 import DataService from '../service/DataService';
 import { any } from 'bluebird';
 import app from '../server';
-import UsuarioModel from '../db/models/usuario';
+import UsuarioModel from '../db/models/user';
 
 const jwt = require('jsonwebtoken');
 const verifytoken = require('../validation/verifyToken');
