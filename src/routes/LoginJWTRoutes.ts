@@ -4,6 +4,7 @@ import app from '../server';
 import UsuarioModel from '../db/models/usuario';
 
 const jwt = require('jsonwebtoken');
+const verifytoken = require('../validation/verifyToken');
 
 const { loginValidation, registerValidation } = require('../validation/validation');
 
@@ -55,7 +56,7 @@ const router = (app: any, ds: DataService) => {
         });
 
 };
-
+/*
 // Format Token
 // Autorization: 1 <access_token>
 
@@ -73,4 +74,5 @@ function verifytoken(req: any, res: any, next: any) {
         res.sendStatus(403);
     }
 }
+*/
 export default router;
