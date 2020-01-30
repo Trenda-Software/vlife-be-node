@@ -29,3 +29,4 @@ yarn-error.log*
 /.env.javier.local
 /.env.sample
 /.env.test
+/src/service/DataService.test.ts

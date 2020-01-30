@@ -3,7 +3,7 @@ import DataService from '../service/DataService';
 const router = (app: any, ds: DataService) => {
     app.route('/provincia')
         .get((req: any, res: any) => {
-            const provincia: any = ds.dbModels.provincia;
+            const provincia: any = ds.dbModels.province;
 
             provincia.findAll().then((provincias: any[]) => {
                 res.send(provincias);
