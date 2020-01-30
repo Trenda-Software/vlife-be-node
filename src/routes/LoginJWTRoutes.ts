@@ -31,16 +31,25 @@ const router = (app: any, ds: DataService) => {
             const { error } = loginValidation(req.body);
             if (error) return res.status(400).send(error.details[0].message);
             //checking if the email exist
-            /*
-              Este codigo tengo que revisarlo porque me sigue trayendo todos los usuarios
-            const usuario: any = ds.dbModels.usuario;
-            const usermail = await usuario.findOne({ mail: req.body.mail });
-            console.log(usermail);
+
+            // Este codigo tengo que revisarlo porque me sigue trayendo todos los usuarios
+
+            const usuario: any = ds.dbModels.user;
+            const usermail = await usuario.findOne({
+                where: { email: req.body.email }
+            });
+
             if (!usermail) return res.status(400).send('No existe el email');
-            */
+
+            const userpwd = await usuario.findOne({
+                where: { pwd: req.body.pwd }
+            });
+
+            if (!userpwd) return res.status(400).send('No existe la clave');
+
             const user = {
-                username: req.body.mail,
-                pass: req.body.clave
+                email: req.body.email,
+                pwd: req.body.pwd
             }
             /*
                 Esta es la manera de firmam poniendo un tiempo de expiracion al token, 
