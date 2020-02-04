@@ -5,6 +5,7 @@ import app from '../server';
 
 const jwt = require('jsonwebtoken');
 const verifytoken = require('../validation/verifyToken');
+const bcrypt = require('bcryptjs');
 
 const { loginValidation, registerValidation } = require('../validation/validation');
 
@@ -32,8 +33,6 @@ const router = (app: any, ds: DataService) => {
             if (error) return res.status(400).send(error.details[0].message);
             //checking if the email exist
 
-            // Este codigo tengo que revisarlo porque me sigue trayendo todos los usuarios
-
             const usuario: any = ds.dbModels.user;
             const usermail = await usuario.findOne({
                 where: { email: req.body.email }
@@ -41,12 +40,27 @@ const router = (app: any, ds: DataService) => {
 
             if (!usermail) return res.status(400).send('No existe el email');
 
+            //Hash password
+            /*
+            const salt = await bcrypt.genSalt(10);
+
+            const hashedPassword = await bcrypt.hash(req.body.pwd, salt);
+
+            console.log(hashedPassword);
+            */
             const userpwd = await usuario.findOne({
                 where: { pwd: req.body.pwd }
             });
-
             if (!userpwd) return res.status(400).send('No existe la clave');
 
+            /*
+            const validPWD = await bcrypt.compare("maca1234", userpwd.pwd.trim());
+            console.log("Body pwd : " + req.body.pwd + "FIN");
+            console.log("Base pwd : " + userpwd.pwd.trim() + "FIN");
+            console.log(validPWD);
+
+            if (!validPWD) return res.status(400).send('Clave invalida');
+            */
             const user = {
                 email: req.body.email,
                 pwd: req.body.pwd
