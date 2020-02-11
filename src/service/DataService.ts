@@ -67,6 +67,7 @@ export default class DataService {
         const UserModel: any = this.dbClient.models.User;
         const ProvinceModel: any = this.dbClient.models.Province;
         const CountryModel: any = this.dbClient.models.Country;
+        const PracticeModel: any = this.dbClient.models.Practice;
 
         const province1 = await ProvinceModel.create({ code: 'BSAS', name: 'Buenos Aires' });
         const country1 = await CountryModel.create({ code: 'ARG', name: 'Argentina' });
@@ -88,9 +89,11 @@ export default class DataService {
 
         const kinesio = await SpecialtyModel.create({ name: 'Kinesiologia', code: 'kinesio' });
         const radio = await SpecialtyModel.create({ name: 'Radioterapia', code: 'radio' });
+        const enfer = await SpecialtyModel.create({ name: 'Enfermeria', code: 'enferm' });
 
         await kinesio.addProfessionals([professional1, professional2, professional3]);
         await radio.addProfessionals([professional1, professional4]);
+        await enfer.addProfessionals([professional2, professional4]);
 
         const kinesioResults = await SpecialtyModel.findOne({
             where: { code: 'kinesio' },
@@ -109,6 +112,13 @@ export default class DataService {
         radioResults.Professionals.forEach((specialty: any) => {
             console.log(`adio Professional - ID: ${specialty.dataValues.id} NAME: ${specialty.dataValues.name}`);
         });
+
+        const practice1 = await PracticeModel.create({ name: 'Cambio de Bolsa de colosiomia', code: 'CBC', cost: '600' });
+        const practice2 = await PracticeModel.create({ name: 'Inyeccion Intramuscular', code: 'IIM', cost: '300' });
+        const practice3 = await PracticeModel.create({ name: 'Higiene de Paciente', code: 'HIP', cost: '200' });
+        await practice1.setSpecialty(enfer);
+        await practice2.setSpecialty(enfer);
+        await practice3.setSpecialty(enfer);
     }
 
     connectWithSequelize = async () => {

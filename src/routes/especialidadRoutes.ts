@@ -1,31 +1,41 @@
 import DataService from '../service/DataService';
+const jwt = require('jsonwebtoken');
+const verifytoken = require('../validation/verifyToken');
 
 const router = (app: any, ds: DataService) => {
     app.route('/cantPorEspecialidad')
-        .get(async (req: any, res: any) => {
-            const SpecialtyModel: any = ds.dbModels.specialty;
+        .get(verifytoken, async (req: any, res: any) => {
 
-            const specialties = await SpecialtyModel.findAll();
+            jwt.verify(req.token, process.env.JWT_SECRETKEY, async (err: any, authData: any) => {
+                if (err) {
+                    res.sendStatus(403);
+                } else {
+                    const SpecialtyModel: any = ds.dbModels.specialty;
 
-            // preparar el resultado
-            const profPerSpecialties = specialties.map(async (specialty: any) => {
-                // console.log('########## Specialty: ', specialty);
-                const professionals = await specialty.getProfessionals();
-                const profPerSpecialty = {
-                    name: specialty.name,
-                    qty: professionals.length,
-                };
-                // console.log('##########  profs profPerSpecialty: ', profPerSpecialty);
-                return profPerSpecialty;
+                    const specialties = await SpecialtyModel.findAll();
+
+                    // preparar el resultado
+                    const profPerSpecialties = specialties.map(async (specialty: any) => {
+                        // console.log('########## Specialty: ', specialty);
+                        const professionals = await specialty.getProfessionals();
+                        const profPerSpecialty = {
+                            name: specialty.name,
+                            qty: professionals.length,
+                        };
+                        // console.log('##########  profs profPerSpecialty: ', profPerSpecialty);
+                        return profPerSpecialty;
+                    });
+                    // console.log('##########  MAP profPerSpecialties: ', profPerSpecialties);
+
+                    Promise.all(profPerSpecialties)
+                        .then(returnedValues => {
+                            // console.log('##########  MAP profPerSpecialties values: ', values);
+                            res.send(returnedValues);
+                        })
+                        .catch(console.error);
+
+                }
             });
-            // console.log('##########  MAP profPerSpecialties: ', profPerSpecialties);
-
-            Promise.all(profPerSpecialties)
-                .then(returnedValues => {
-                    // console.log('##########  MAP profPerSpecialties values: ', values);
-                    res.send(returnedValues);
-                })
-                .catch(console.error);
         })
         .post((req: any, res: any) => {
             res.status(201);
