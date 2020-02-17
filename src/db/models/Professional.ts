@@ -10,7 +10,7 @@ const ProfessionalModel = (sequelize: any) => {
         coordinates: Sequelize.STRING,
         address: Sequelize.STRING,
         city: Sequelize.STRING,
-        picture: Sequelize.STRING,
+        picture: Sequelize.BLOB,
         rating: Sequelize.INTEGER,
         description: Sequelize.STRING,
     });

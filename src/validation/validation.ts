@@ -14,18 +14,19 @@ const loginValidation = (data: any) => {
 //podemos ir agregando todos los schemas que vamos a validar
 const registerValidation = (data: any) => {
     const schema = Joi.object({
+        dni: Joi.string().regex(/^[0-9]+$/).min(7).max(9).required(),
         name: Joi.string().min(2).max(255).required(),
         surname: Joi.string().min(2).max(255).required(),
         pwd: Joi.string().min(6).required(),
         coordinates: Joi.string().min(2),
-        picture: Joi.string().min(2),
+        picture: Joi.string().base64(),
         email: Joi.string().min(6).required().email(),
         mobile: Joi.string().min(2).required(),
         city: Joi.string().min(2),
         address: Joi.string().min(6)
 
     });
-    
+
     return schema.validate(data);
 }
 module.exports.loginValidation = loginValidation;

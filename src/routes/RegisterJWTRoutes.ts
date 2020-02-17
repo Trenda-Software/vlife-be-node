@@ -42,6 +42,7 @@ const router = (app: any, ds: DataService) => {
 
             try {
                 const user = {
+                    dni: req.body.dni,
                     name: req.body.name,
                     surname: req.body.surname,
                     pwd: req.body.pwd,

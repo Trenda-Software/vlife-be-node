@@ -6,6 +6,8 @@ import practiceRoutes from './routes/practiceRoutes';
 import especialidadRoutes from './routes/especialidadRoutes';
 import LoginJWTRoutes from './routes/LoginJWTRoutes';
 import RegisterJWTRoutes from './routes/RegisterJWTRoutes';
+import professionalRoutes from './routes/professionalRoutes';
+import commentRouters from './routes/commentRoutes';
 import DataService from './service/DataService';
 
 // import cors from 'cors';
@@ -51,6 +53,8 @@ especialidadRoutes(app, ds);
 practiceRoutes(app, ds);
 LoginJWTRoutes(app, ds);
 RegisterJWTRoutes(app, ds);
+professionalRoutes(app, ds);
+commentRouters(app, ds);
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));
 app.post('/post', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello Maca en el Post 20200127`));

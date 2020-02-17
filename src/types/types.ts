@@ -7,6 +7,7 @@ export interface DBModelsI {
     professional: Model | null;
     practice: Model | null;
     user: Model | null;
+    comment: Model | null;
 }
 
 export interface MenuI {
