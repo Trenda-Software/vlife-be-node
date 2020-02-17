@@ -14,9 +14,9 @@ const router = (app: any, ds: DataService) => {
                     const User: any = ds.dbModels.user;
                     const Professional: any = ds.dbModels.professional;
 
-                    const comentario = CommentModel.findOne({
-                        where: { id: req.body.id },
-                        include: [User, Professional],
+                    const comentario = CommentModel.findAll({
+                        where: { ProfessionalId: req.body.id },
+                        //include: [User, Professional],
                     }).then((comment: any[]) => {
                         console.log(comment);
                         if (!comment) return res.status(400).send('No existen comentarios para el profesional solicitado');

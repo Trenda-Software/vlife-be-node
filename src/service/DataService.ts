@@ -106,7 +106,9 @@ export default class DataService {
         const comment2 = await CommentModel.create({ comment: "bien la atencion, lastima que llego tarde", like: 2 });
         comment2.setUser(user2);
         comment2.setProfessional(professional3);
-
+        const comment3 = await CommentModel.create({ comment: "bien la atencion, lastima que llego tarde", like: 2 });
+        comment3.setUser(user2);
+        comment3.setProfessional(professional1);
 
         const kinesio = await SpecialtyModel.create({ name: 'Kinesiologia', code: 'kinesio' });
         const radio = await SpecialtyModel.create({ name: 'Radioterapia', code: 'radio' });
