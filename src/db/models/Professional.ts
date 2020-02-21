@@ -13,6 +13,7 @@ const ProfessionalModel = (sequelize: any) => {
         picture: Sequelize.BLOB,
         rating: Sequelize.INTEGER,
         description: Sequelize.STRING,
+        in_service: Sequelize.BOOLEAN,
     });
 
     return Professional;

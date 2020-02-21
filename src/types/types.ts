@@ -8,6 +8,7 @@ export interface DBModelsI {
     practice: Model | null;
     user: Model | null;
     comment: Model | null;
+    request: Model | null;
 }
 
 export interface MenuI {
