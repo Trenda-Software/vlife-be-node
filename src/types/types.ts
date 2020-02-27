@@ -9,6 +9,7 @@ export interface DBModelsI {
     user: Model | null;
     comment: Model | null;
     request: Model | null;
+    ImgPrescription: Model | null;
 }
 
 export interface MenuI {

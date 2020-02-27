@@ -34,7 +34,7 @@ const requestValidation = (data: any) => {
         professionalid: Joi.string().required(),
         userid: Joi.string().required(),
         specialtyid: Joi.array().required(),
-        picture: Joi.string().base64()
+        prescription: Joi.array().items(Joi.string().base64())
     });
     return schema.validate(data);
 }

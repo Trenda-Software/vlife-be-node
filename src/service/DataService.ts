@@ -9,6 +9,7 @@ import Practice from '../db/models/Practice';
 import User from '../db/models/User';
 import Comment from '../db/models/Comment';
 import Request from '../db/models/Request';
+import ImgPrescription from '../db/models/ImgPrescription';
 const { Sequelize } = require('sequelize');
 
 export default class DataService {
@@ -23,6 +24,7 @@ export default class DataService {
         practice: null,
         comment: null,
         request: null,
+        ImgPrescription: null,
     };
 
     constructor(dbConfig: any) {
@@ -74,8 +76,8 @@ export default class DataService {
         const PracticeModel: any = this.dbClient.models.Practice;
         const CommentModel: any = this.dbClient.models.Comment;
         const RequestModel: any = this.dbClient.models.Request;
+        const ImgPrescriptionModel: any = this.dbClient.models.ImgPrescription;
 
-        //const requestm = await RequestModel.create({comment:'1234'});
         const province1 = await ProvinceModel.create({ code: 'BSAS', name: 'Buenos Aires' });
         const country1 = await CountryModel.create({ code: 'ARG', name: 'Argentina' });
         await province1.setCountry(country1);
@@ -103,6 +105,8 @@ export default class DataService {
         const professional5 = await ProfessionalModel.create({ name: 'Maria', surname: 'DeGuardia', in_service: false });
         await professional5.setCountry(country1);
         await professional5.setProvince(province1);
+
+
 
 
         const comment1 = await CommentModel.create({ comment: "Excelente atencion, muy recomendable", like: "4" });
@@ -178,6 +182,7 @@ export default class DataService {
         const UserModel: any = User(this.dbClient);
         const CommentModel: any = Comment(this.dbClient);
         const RequestModel: any = Request(this.dbClient);
+        const ImgPrescriptionModel: any = ImgPrescription(this.dbClient);
 
         // associations
         ProfessionalModel.belongsToMany(SpecialtyModel, { through: 'Specialties_Professionals' });
@@ -199,6 +204,9 @@ export default class DataService {
         RequestModel.belongsTo(UserModel);
         RequestModel.belongsTo(ProfessionalModel);
 
+        ImgPrescriptionModel.belongsTo(RequestModel);
+
+
         this.dbModels.user = UserModel;
         this.dbModels.country = CountryModel;
         this.dbModels.practice = PracticeModel;
@@ -207,5 +215,6 @@ export default class DataService {
         this.dbModels.professional = ProfessionalModel;
         this.dbModels.comment = CommentModel;
         this.dbModels.request = RequestModel;
+        this.dbModels.ImgPrescription = ImgPrescriptionModel;
     };
 }

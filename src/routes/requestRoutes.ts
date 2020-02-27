@@ -63,15 +63,21 @@ const router = (app: any, ds: DataService) => {
 
                 await request1.setUser(req.body.userid);
                 await request1.setProfessional(req.body.professionalid);
-
+                //Recorro el array de especialidades
                 const especialidades = req.body.specialtyid;
-                console.log("--------------------------------");
-                console.log("especialidades :" + especialidades);
-                console.log("--------------------------------");
 
                 for (let especialidad in especialidades) {
                     await request1.addSpecialty(especialidades[especialidad]);
                 }
+                //Recorro el array de imagenes de recetas
+                const imgrecetas = req.body.prescription;
+
+                const requestimg: any = ds.dbModels.ImgPrescription;
+                for (let imgreceta in imgrecetas) {
+                    const requestimg1 = await requestimg.create({ picture: imgrecetas[imgreceta] }, { t });
+                    await requestimg1.setRequest(request1);
+                }
+
                 await t.commit();
                 res.status(200).json({
                     message: 'Solicitud de servicio generada con exito !!'
