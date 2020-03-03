@@ -16,6 +16,8 @@ import DataService from './service/DataService';
 // import cors from 'cors';
 
 const app = express();
+//const bodyParser = require('body-parser');
+
 if (app.get('env') == 'development') {
     require('dotenv').config();
 }
@@ -38,7 +40,9 @@ ds.connect();
 console.log('############# Adding routes');
 
 //Middleware
-app.use(express.json());
+app.use(express.json({ limit: '5mb' }));
+//app.use(bodyParser.json({ limit: '10mb' }));
+//app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 // Configurar cabeceras y cors
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');

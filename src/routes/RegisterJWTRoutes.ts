@@ -64,6 +64,8 @@ const router = (app: any, ds: DataService) => {
 
                 //const user1 = await UserModel.create({ name: 'Javier', surname: 'Hack', pwd: 'javi1234', email: 'javierhack@gmail.com' });
                 const user1 = await UserModel.create(user);
+                await user1.setGender(req.body.gender);
+
                 console.log(user);
                 //await user1.setCountry(country1);
                 //await user1.setProvince(province1);
