@@ -18,8 +18,8 @@ const router = (app: any, ds: DataService) => {
                     res.sendStatus(403);
                 } else {
                     res.json({
-                        message: 'Get generado JWT',
-                        authData
+                        message: 'Get generado JWT'
+                        //authData
                     });
                 }
             });
@@ -33,12 +33,16 @@ const router = (app: any, ds: DataService) => {
             if (error) return res.status(400).send(error.details[0].message);
             //checking if the email exist
 
+            const Province: any = ds.dbModels.province;
+            const Country: any = ds.dbModels.country;
+            const Gender: any = ds.dbModels.gender;
             const usuario: any = ds.dbModels.user;
             const usermail = await usuario.findOne({
+                //include: [Province, Country, Gender],
                 where: { email: req.body.email }
             });
 
-            if (!usermail) return res.status(400).send('No existe el email');
+            if (!usermail) return res.status(400).send('El usuario y/o clave son incorrectos');
 
             //Hash password
             /*
@@ -48,10 +52,11 @@ const router = (app: any, ds: DataService) => {
 
             console.log(hashedPassword);
             */
+
             const userpwd = await usuario.findOne({
                 where: { pwd: req.body.pwd }
             });
-            if (!userpwd) return res.status(400).send('No existe la clave');
+            if (!userpwd) return res.status(400).send('El usuario y/o clave son incorrectos');
 
             /*
             const validPWD = await bcrypt.compare("maca1234", userpwd.pwd.trim());
@@ -61,9 +66,16 @@ const router = (app: any, ds: DataService) => {
 
             if (!validPWD) return res.status(400).send('Clave invalida');
             */
+            const hisGender = await usermail.getGender();
+            console.log("gender:", hisGender.name);
+
             const user = {
-                email: req.body.email,
-                pwd: req.body.pwd
+                name: usermail.name,
+                surname: usermail.surname,
+                dni: usermail.dni,
+                email: usermail.email,
+                mobile: usermail.mobile,
+                gender: hisGender.name
             }
             /*
                 Esta es la manera de firmam poniendo un tiempo de expiracion al token, 
@@ -71,8 +83,9 @@ const router = (app: any, ds: DataService) => {
                 jwt.sign({ user }, 'secretkey', { expiresIn: '30s' }, (err: any, token: any) => {
             */
             jwt.sign({ user }, process.env.JWT_SECRETKEY, (err: any, token: any) => {
-                res.json({
-                    token
+                res.status(200).json({
+                    token,
+                    user
                 });
             });
 

@@ -14,6 +14,7 @@ const ProfessionalModel = (sequelize: any) => {
         rating: Sequelize.INTEGER,
         description: Sequelize.STRING,
         in_service: Sequelize.BOOLEAN,
+        on_line: Sequelize.BOOLEAN,
     });
 
     return Professional;

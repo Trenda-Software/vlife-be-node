@@ -9,6 +9,7 @@ import RegisterJWTRoutes from './routes/RegisterJWTRoutes';
 import professionalRoutes from './routes/professionalRoutes';
 import commentRouters from './routes/commentRoutes';
 import requestRouters from './routes/requestRoutes';
+import genderRouters from './routes/genderRoutes';
 
 import DataService from './service/DataService';
 
@@ -58,6 +59,7 @@ RegisterJWTRoutes(app, ds);
 professionalRoutes(app, ds);
 commentRouters(app, ds);
 requestRouters(app, ds);
+genderRouters(app, ds);
 
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));

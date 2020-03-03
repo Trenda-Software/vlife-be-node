@@ -10,6 +10,7 @@ export interface DBModelsI {
     comment: Model | null;
     request: Model | null;
     ImgPrescription: Model | null;
+    gender: Model | null;
 }
 
 export interface MenuI {

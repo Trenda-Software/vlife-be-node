@@ -7,9 +7,10 @@ const router = (app: any, ds: DataService) => {
 
             const Province: any = ds.dbModels.province;
             const Country: any = ds.dbModels.country;
+            const Gender: any = ds.dbModels.gender;
 
             UserModel.findAll({
-                include: [Province, Country],
+                include: [Province, Country, Gender],
             }).then((users: any[]) => {
                 res.send(users);
             });

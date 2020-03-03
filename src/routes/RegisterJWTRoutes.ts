@@ -38,7 +38,7 @@ const router = (app: any, ds: DataService) => {
                 where: { email: req.body.email }
             });
 
-            if (usermail) return res.status(400).send('El email ya existe en la base de datos');
+            if (usermail) return res.status(400).send('El usuario ya existe');
 
             try {
                 const user = {
@@ -50,7 +50,8 @@ const router = (app: any, ds: DataService) => {
                     picture: req.body.picture,
                     email: req.body.email,
                     mobile: req.body.mobile,
-                    address: req.body.address
+                    address: req.body.address,
+                    gender: req.body.gender
                 }
 
                 const UserModel: any = ds.dbModels.user;
@@ -72,7 +73,7 @@ const router = (app: any, ds: DataService) => {
                     jwt.sign({ user }, 'secretkey', { expiresIn: '30s' }, (err: any, token: any) => {
                 */
                 jwt.sign({ user }, process.env.JWT_SECRETKEY, (err: any, token: any) => {
-                    res.json({
+                    res.status(200).json({
                         token
                     });
                 });
