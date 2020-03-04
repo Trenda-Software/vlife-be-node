@@ -10,6 +10,7 @@ import professionalRoutes from './routes/professionalRoutes';
 import commentRouters from './routes/commentRoutes';
 import requestRouters from './routes/requestRoutes';
 import genderRouters from './routes/genderRoutes';
+import emailrecoveryRouters from './routes/emailrecoveryRoutes';
 
 import DataService from './service/DataService';
 
@@ -64,6 +65,7 @@ professionalRoutes(app, ds);
 commentRouters(app, ds);
 requestRouters(app, ds);
 genderRouters(app, ds);
+emailrecoveryRouters(app, ds);
 
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));
