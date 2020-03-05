@@ -38,12 +38,15 @@ const router = (app: any, ds: DataService) => {
                 });
                 */
                 // Parametros Para el mail con AWS SES
+                console.log("Parametros AWS-SES");
+
                 AWS.config.update({
                     accessKeyId: process.env.AWS_ACCESSKEYID,
                     secretAccessKey: process.env.AWS_SECRETACCESSKEY,
                     region: process.env.AWS_REGION
 
                 });
+
                 console.log("Creo el transporte");
 
                 let transporter = nodemailerSES.createTransport({
