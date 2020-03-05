@@ -3,8 +3,11 @@ import { any } from 'bluebird';
 import app from '../server';
 
 
-const email = require("../service/email");
-
+// para el nodemailer
+// const email = require("../service/email");
+//Para el AWS SES
+const nodemailerSES = require("nodemailer");
+const AWS = require("aws-sdk");
 const router = (app: any, ds: DataService) => {
 
     app.route('/passrecovery')
@@ -23,6 +26,7 @@ const router = (app: any, ds: DataService) => {
                 if (!usermail) return res.status(400).send('El email no existe en la base de datos');
                 // Enviar el mail con el codigo random para recobarar la contraseña  
 
+                /* Parametros Para el mail con gmail
                 const oEmail = new email({
                     "host": process.env.EMAIL_HOST,
                     "port": process.env.EMAIL_PORT,
@@ -32,6 +36,22 @@ const router = (app: any, ds: DataService) => {
                         "pass": process.env.EMAIL_PASS
                     }
                 });
+                */
+                // Parametros Para el mail con AWS SES
+                AWS.config.update({
+                    accessKeyId: process.env.AWS_ACCESSKEYID,
+                    secretAccessKey: process.env.AWS_SECRETACCESSKEY,
+                    region: process.env.AWS_REGION
+
+                });
+                console.log("Creo el transporte");
+
+                let transporter = nodemailerSES.createTransport({
+                    SES: new AWS.SES({
+                        apiVersion: '2010-12-01'
+                    })
+                });
+
                 const n = "1234";
                 let email1 = {
                     from: "service@vlife.com",
@@ -46,8 +66,16 @@ const router = (app: any, ds: DataService) => {
                                 </div>
                             `
                 };
+                console.log("envio el mail");
+                transporter.sendMail(email1, (err: any, info: any) => {
 
-                oEmail.enviarCorreo(email1);
+                    if (err) {
+                        console.log("Error al enviar email - error " + err);
+                    } else {
+                        console.log("Correo enviado correctamente - info " + info);
+                    }
+                });
+
                 res.status(200).json({
                     message: 'Correo Enviado Correctamente!!'
                 });

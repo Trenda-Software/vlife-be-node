@@ -7,8 +7,14 @@ const jwt = require('jsonwebtoken');
 const verifytoken = require('../validation/verifyToken');
 const bcrypt = require('bcryptjs');
 
+
 const { loginValidation, registerValidation } = require('../validation/validation');
-const email = require("../service/email");
+// para el nodemailer
+// const email = require("../service/email");
+//Para el AWS SES
+const nodemailerSES = require("nodemailer");
+const AWS = require("aws-sdk");
+
 
 const router = (app: any, ds: DataService) => {
 
@@ -77,16 +83,31 @@ const router = (app: any, ds: DataService) => {
                 */
 
                 //Envio de mail de confirmacion de REgistracion
-                const oEmail = new email({
-                    "host": process.env.EMAIL_HOST,
-                    "port": process.env.EMAIL_PORT,
-                    "secure": process.env.EMAIL_SECURE,
-                    "auth": {
-                        "user": process.env.EMAIL_USER,
-                        "pass": process.env.EMAIL_PASS
-                    }
+                /* Parametros Para el mail con gmail
+                 const oEmail = new email({
+                     "host": process.env.EMAIL_HOST,
+                     "port": process.env.EMAIL_PORT,
+                     "secure": process.env.EMAIL_SECURE,
+                     "auth": {
+                         "user": process.env.EMAIL_USER,
+                         "pass": process.env.EMAIL_PASS
+                     }
+                 });
+                 */
+                // Parametros Para el mail con AWS SES
+                AWS.config.update({
+                    accessKeyId: process.env.AWS_ACCESSKEYID,
+                    secretAccessKey: process.env.AWS_SECRETACCESSKEY,
+                    region: process.env.AWS_REGION
+
                 });
-                
+
+                let transporter = nodemailerSES.createTransport({
+                    SES: new AWS.SES({
+                        apiVersion: '2010-12-01'
+                    })
+                });
+
                 let email1 = {
                     from: "service@vlife.com",
                     to: user.email,
@@ -102,8 +123,14 @@ const router = (app: any, ds: DataService) => {
                             `
                 };
 
-                oEmail.enviarCorreo(email1);
+                transporter.sendMail(email1, (err: any, info: any) => {
 
+                    if (err) {
+                        console.log("Error al enviar email - error " + err);
+                    } else {
+                        console.log("Correo enviado correctamente - info " + info);
+                    }
+                });
                 jwt.sign({ user }, process.env.JWT_SECRETKEY, (err: any, token: any) => {
                     res.status(200).json({
                         token

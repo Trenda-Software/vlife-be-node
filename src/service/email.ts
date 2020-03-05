@@ -1,9 +1,8 @@
 const nodemailer = require("nodemailer");
-
 class Email {
     createTransport: any = null;
     constructor(oConfig: any) {
-        this.createTransport = nodemailer.createTransport(oConfig);
+         this.createTransport = nodemailer.createTransport(oConfig);
     }
 
     enviarCorreo(oEmail: any) {
