@@ -24,24 +24,24 @@ const router = (app: any, ds: DataService) => {
                 // Enviar el mail con el codigo random para recobarar la contraseña  
 
                 const oEmail = new email({
-                    "host": "smtp.gmail.com",
-                    "port": "465",
-                    "secure": true,
+                    "host": process.env.EMAIL_HOST,
+                    "port": process.env.EMAIL_PORT,
+                    "secure": process.env.EMAIL_SECURE,
                     "auth": {
-                        "user": "marianoe@gmail.com",
-                        "pass": "maca1309"
+                        "user": process.env.EMAIL_USER,
+                        "pass": process.env.EMAIL_PASS
                     }
                 });
-                const n = "Maca";
+                const n = "1234";
                 let email1 = {
-                    from: req.body.email,
+                    from: "service@vlife.com",
                     to: "mescudero@soldoc.com.ar",
-                    subject: "Nuevo mensaje de usuario",
+                    subject: "Recupero de contraseña",
                     html: `
                                 <div>
+                                <p>Ingrese el siguiente codigo en la App Vlife para recuperar la contraseña</p>
+                                <p>Codigo: ${n}</p>
                                 <p></p>
-                                <p>Nombre: ${n}</p>
-                                <p>mail: ${req.body.email}</p>
                                 <p>Es un mail de prueba</p>
                                 </div>
                             `

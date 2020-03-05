@@ -8,6 +8,7 @@ const verifytoken = require('../validation/verifyToken');
 const bcrypt = require('bcryptjs');
 
 const { loginValidation, registerValidation } = require('../validation/validation');
+const email = require("../service/email");
 
 const router = (app: any, ds: DataService) => {
 
@@ -74,6 +75,35 @@ const router = (app: any, ds: DataService) => {
                     por ahora no lo voy a usar
                     jwt.sign({ user }, 'secretkey', { expiresIn: '30s' }, (err: any, token: any) => {
                 */
+
+                //Envio de mail de confirmacion de REgistracion
+                const oEmail = new email({
+                    "host": process.env.EMAIL_HOST,
+                    "port": process.env.EMAIL_PORT,
+                    "secure": process.env.EMAIL_SECURE,
+                    "auth": {
+                        "user": process.env.EMAIL_USER,
+                        "pass": process.env.EMAIL_PASS
+                    }
+                });
+                
+                let email1 = {
+                    from: "service@vlife.com",
+                    to: user.email,
+                    subject: "Bienbenido/a a Vlife",
+                    html: `
+                                <div>
+                                <p>Bienvenido/a: ${user.name} ${user.surname} </p>
+                                <p>Usuario/Email es: ${user.email} </p>
+                                <p>Tu clave es: ${user.pwd}  </p>
+                                <p></p>
+                                <p>Es un mail de prueba</p>
+                                </div>
+                            `
+                };
+
+                oEmail.enviarCorreo(email1);
+
                 jwt.sign({ user }, process.env.JWT_SECRETKEY, (err: any, token: any) => {
                     res.status(200).json({
                         token
