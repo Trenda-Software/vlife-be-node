@@ -120,7 +120,7 @@ const router = (app: any, ds: DataService) => {
                     }
                 });
                 let email1 = {
-                    from: "marianoe@gmail.com",
+                    from: process.env.EMAIL_DIRSEND,
                     to: user.email,
                     subject: "Bienbenido/a a Vlife",
                     html: `

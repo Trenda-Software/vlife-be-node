@@ -68,7 +68,7 @@ const router = (app: any, ds: DataService) => {
                 });
                 const n = "1234";
                 let email1 = {
-                    from: "marianoe@gmail.com",
+                    from: process.env.EMAIL_DIRSEND,
                     to: req.body.email,
                     subject: "Recupero de contraseña",
                     html: `
