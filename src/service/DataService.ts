@@ -95,7 +95,7 @@ export default class DataService {
         await user1.setProvince(province1);
         await user1.setGender(gender2);
 
-        const user2 = await UserModel.create({ dni: 24222111, name: 'Mariano', surname: 'Escudero', pwd: '$2a$10$2L0ZZ1D9glTYwSX/Zff..uPUhk/3XPak6/N8arA5Fk.E7FrNT7HHq', email: 'maca@gmail.com', mobile: '1122711000' });
+        const user2 = await UserModel.create({ dni: 24222111, name: 'Mariano', surname: 'Escudero', pwd: '$2a$10$2L0ZZ1D9glTYwSX/Zff..uPUhk/3XPak6/N8arA5Fk.E7FrNT7HHq', email: 'marianoe@gmail.com', mobile: '1122711000' });
         await user2.setCountry(country1);
         await user2.setProvince(province1);
         await user2.setGender(gender2);

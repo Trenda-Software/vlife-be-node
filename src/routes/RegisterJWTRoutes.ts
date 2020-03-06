@@ -83,8 +83,8 @@ const router = (app: any, ds: DataService) => {
                 */
 
                 //Envio de mail de confirmacion de REgistracion
-                /* Parametros Para el mail con gmail
-                 const oEmail = new email({
+                // Parametros Para el mail con gmail
+                /* const oEmail = new email({
                      "host": process.env.EMAIL_HOST,
                      "port": process.env.EMAIL_PORT,
                      "secure": process.env.EMAIL_SECURE,
@@ -93,23 +93,34 @@ const router = (app: any, ds: DataService) => {
                          "pass": process.env.EMAIL_PASS
                      }
                  });
-                 */
+                 /*
                 // Parametros Para el mail con AWS SES
                 AWS.config.update({
                     accessKeyId: process.env.AWS_ACCESSKEYID,
                     secretAccessKey: process.env.AWS_SECRETACCESSKEY,
                     region: process.env.AWS_REGION
-
+ 
                 });
-
+ 
                 let transporter = nodemailerSES.createTransport({
                     SES: new AWS.SES({
                         apiVersion: '2010-12-01'
                     })
                 });
+                */
+                console.log("Creo el transporte");
 
+                var transporter = nodemailerSES.createTransport({ // Yes. SMTP!
+                    "host": process.env.EMAIL_HOST,//"email-smtp.eu-west-1.amazonaws.com", // Amazon email SMTP hostname
+                    "secure": process.env.EMAIL_SECURE,//true, // use SSL
+                    "port": process.env.EMAIL_PORT,//465, // port for secure SMTP
+                    "auth": {
+                        "user": process.env.EMAIL_USER,//"AKIATZGWNNFHKDGUFCWZ", // Use from Amazon Credentials
+                        "pass": process.env.EMAIL_PASS//"BGLEqKAFPboBc4rg4gknyHESsgkAfUmdKyni1TZZdp/I", // Use from Amazon Credentials
+                    }
+                });
                 let email1 = {
-                    from: "service@vlife.com",
+                    from: "marianoe@gmail.com",
                     to: user.email,
                     subject: "Bienbenido/a a Vlife",
                     html: `

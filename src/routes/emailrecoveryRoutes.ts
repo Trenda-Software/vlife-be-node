@@ -7,7 +7,8 @@ import app from '../server';
 // const email = require("../service/email");
 //Para el AWS SES
 const nodemailerSES = require("nodemailer");
-const AWS = require("aws-sdk");
+
+//const AWS = require("aws-sdk");
 const router = (app: any, ds: DataService) => {
 
     app.route('/passrecovery')
@@ -26,38 +27,48 @@ const router = (app: any, ds: DataService) => {
                 if (!usermail) return res.status(400).send('El email no existe en la base de datos');
                 // Enviar el mail con el codigo random para recobarar la contraseña  
 
-                /* Parametros Para el mail con gmail
-                const oEmail = new email({
-                    "host": process.env.EMAIL_HOST,
-                    "port": process.env.EMAIL_PORT,
-                    "secure": process.env.EMAIL_SECURE,
-                    "auth": {
-                        "user": process.env.EMAIL_USER,
-                        "pass": process.env.EMAIL_PASS
-                    }
-                });
+                /* //Parametros Para el mail con gmail
+                 const oEmail = new email({
+                     "host": process.env.EMAIL_HOST,
+                     "port": process.env.EMAIL_PORT,
+                     "secure": process.env.EMAIL_SECURE,
+                     "auth": {
+                         "user": process.env.EMAIL_USER,
+                         "pass": process.env.EMAIL_PASS
+                     }
+                 });
+ 
+                 // Parametros Para el mail con AWS SES
+                 console.log("Parametros AWS-SES");
+ 
+                 AWS.config.update({
+                     accessKeyId: process.env.AWS_ACCESSKEYID,
+                     secretAccessKey: process.env.AWS_SECRETACCESSKEY,
+                     region: process.env.AWS_REGION
+ 
+                 });
+                 */
+                /*
+                                let transporter = nodemailerSES.createTransport({
+                                    SES: new AWS.SES({
+                                        apiVersion: '2010-12-01'
+                                    })
+                                });
                 */
-                // Parametros Para el mail con AWS SES
-                console.log("Parametros AWS-SES");
-
-                AWS.config.update({
-                    accessKeyId: process.env.AWS_ACCESSKEYID,
-                    secretAccessKey: process.env.AWS_SECRETACCESSKEY,
-                    region: process.env.AWS_REGION
-
-                });
-
                 console.log("Creo el transporte");
 
-                let transporter = nodemailerSES.createTransport({
-                    SES: new AWS.SES({
-                        apiVersion: '2010-12-01'
-                    })
+                var transporter = nodemailerSES.createTransport({ // Yes. SMTP!
+                    "host": process.env.EMAIL_HOST,//"email-smtp.eu-west-1.amazonaws.com", // Amazon email SMTP hostname
+                    "secure": process.env.EMAIL_SECURE,//true, // use SSL
+                    "port": process.env.EMAIL_PORT,//465, // port for secure SMTP
+                    "auth": {
+                        "user": process.env.EMAIL_USER,//"AKIATZGWNNFHKDGUFCWZ", // Use from Amazon Credentials
+                        "pass": process.env.EMAIL_PASS//"BGLEqKAFPboBc4rg4gknyHESsgkAfUmdKyni1TZZdp/I", // Use from Amazon Credentials
+                    }
                 });
-
                 const n = "1234";
                 let email1 = {
-                    from: "service@vlife.com",
+                    from: "marianoe@gmail.com",
                     to: "mescudero@soldoc.com.ar",
                     subject: "Recupero de contraseña",
                     html: `
@@ -77,6 +88,7 @@ const router = (app: any, ds: DataService) => {
                     } else {
                         console.log("Correo enviado correctamente - info " + info);
                     }
+                    transporter.close(); // shut down the connection pool, no more messages
                 });
 
                 res.status(200).json({
