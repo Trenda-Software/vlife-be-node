@@ -69,7 +69,7 @@ const router = (app: any, ds: DataService) => {
                 const n = "1234";
                 let email1 = {
                     from: "marianoe@gmail.com",
-                    to: "mescudero@soldoc.com.ar",
+                    to: req.body.email,
                     subject: "Recupero de contraseña",
                     html: `
                                 <div>
