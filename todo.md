@@ -1,1 +1,3 @@
-- ENV vars
+-   Docker
+-   ENV vars
+-   Testing
