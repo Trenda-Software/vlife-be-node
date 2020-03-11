@@ -89,7 +89,8 @@ const requestValidation = (data: any) => {
         professionalid: Joi.string().required(),
         userid: Joi.string().required(),
         specialtyid: Joi.array().required(),
-        prescription: Joi.array().items(Joi.string().base64())
+        prescription: Joi.array().items(Joi.string().base64()),
+        comment: Joi.string()
     });
     return schema.validate(data);
 }

@@ -6,6 +6,8 @@ import app from '../server';
 const jwt = require('jsonwebtoken');
 const verifytoken = require('../validation/verifyToken');
 const bcrypt = require('bcryptjs');
+var fs = require('fs');
+//var fs = require('file-system');
 
 
 const { loginValidation, registerValidation } = require('../validation/validation');
@@ -48,13 +50,15 @@ const router = (app: any, ds: DataService) => {
             if (usermail) return res.status(400).send('El usuario ya existe');
 
             try {
+
+
                 const user = {
                     dni: req.body.dni,
                     name: req.body.name,
                     surname: req.body.surname,
                     pwd: req.body.pwd,
                     coordinates: req.body.coordinates,
-                    picture: req.body.picture,
+                    //picture: req.body.picture,
                     email: req.body.email,
                     mobile: req.body.mobile,
                     address: req.body.address,
@@ -74,6 +78,35 @@ const router = (app: any, ds: DataService) => {
                 await user1.setGender(req.body.gender);
 
                 console.log(user);
+                //Grabo la imagen en disco
+
+
+                var filename = user1.id + ".png";
+                console.log(__dirname);
+                if (fs.existsSync("/img/users/" + filename)) {
+                    fs.unlink("/img/users/" + filename, (err: any) => {
+                        if (err) {
+                            console.log("error al borrar archivo " + err);
+                        }
+                    });
+                }
+                fs.writeFile("/img/users/" + filename, req.body.picture, 'base64', (err: any) => {
+                    if (err) {
+                        console.log("error al grabar archivo " + err);
+                    }
+                });
+
+                fs.mkdir("/img/maca", { recursive: true }, (err: any) => {
+                    if (err) {
+                        console.log("error al crear dir " + err);
+                    }
+                });
+
+                // Update con el nombre de imagen
+                const userfcm = await UserModel.update({ picture: filename }, {
+                    where: { email: req.body.email }
+                });
+
                 //await user1.setCountry(country1);
                 //await user1.setProvince(province1);
                 /*

@@ -11,6 +11,9 @@ const verifytoken = require('../validation/verifyToken');
 
 const { requestValidation } = require('../validation/validation');
 
+//var fcm = require("fcm-notification");
+var FCM = require('fcm-push');
+
 const router = (app: any, ds: DataService) => {
 
     app.route('/request')
@@ -60,7 +63,7 @@ const router = (app: any, ds: DataService) => {
                         // Aca va el codigo para crear la solicitud de servicio
                         console.log("voy a realizar el create");
                         const requestm: any = ds.dbModels.request;
-                        const request1 = await requestm.create({ comment: 'comentario 1', date: Date.now() }, { t });
+                        const request1 = await requestm.create({ comment: req.body.comment, date: Date.now() }, { t });
 
                         await request1.setUser(req.body.userid);
                         await request1.setProfessional(req.body.professionalid);
@@ -70,14 +73,34 @@ const router = (app: any, ds: DataService) => {
                         for (let especialidad in especialidades) {
                             await request1.addSpecialty(especialidades[especialidad]);
                         }
-                        //Recorro el array de imagenes de recetas
-                        const imgrecetas = req.body.prescription;
+                        // Envio de notificacion push
+                        console.log("cargo el json");
+                        var serverKey = process.env.SERVER_KEY;
+                        var fcm = new FCM(serverKey);
+                        console.log("Seteo el token " + profesional1.fcmtoken);
+                        var token = profesional1.fcmtoken;
 
-                        const requestimg: any = ds.dbModels.ImgPrescription;
-                        for (let imgreceta in imgrecetas) {
-                            const requestimg1 = await requestimg.create({ picture: imgrecetas[imgreceta] }, { t });
-                            await requestimg1.setRequest(request1);
-                        }
+                        var message = {
+                            to: token,
+                            collapse_key: '',
+                            data: { // Esto es solo opcional, puede enviar cualquier dato     
+                                solicitud: "Recibio una solicitud de servidio"
+                            },
+                            body: {
+                                title: "Notificación de Vlife",
+                                body: "Recibio una solicitud de servidio",
+                                icon: "notificacion",
+                                sound: "default"
+                            },
+                        };
+
+                        fcm.send(message, function (err: any, response: any) {
+                            if (err) {
+                                console.log("error encontrado ", err);
+                            } else {
+                                console.log("respuesta aquí", response);
+                            }
+                        });
 
                         await t.commit();
                         res.status(200).json({

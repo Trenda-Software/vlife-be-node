@@ -7,7 +7,7 @@ const UserModel = (sequelize: any) => {
         surname: Sequelize.STRING,
         pwd: Sequelize.STRING,
         coordinates: Sequelize.STRING,
-        picture: Sequelize.BLOB,
+        picture: Sequelize.STRING,
         email: {
             type: Sequelize.STRING,
             allowNull: false,
@@ -15,6 +15,7 @@ const UserModel = (sequelize: any) => {
         mobile: Sequelize.STRING,
         city: Sequelize.STRING,
         address: Sequelize.STRING,
+        fcmtoken: Sequelize.STRING,
     });
 
     return User;

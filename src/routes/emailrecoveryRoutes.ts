@@ -56,6 +56,7 @@ const router = (app: any, ds: DataService) => {
                                 });
                 */
                 console.log("Creo el transporte");
+                console.log("Maca");
 
                 var transporter = nodemailerSES.createTransport({ // Yes. SMTP!
                     "host": process.env.EMAIL_HOST,//"email-smtp.eu-west-1.amazonaws.com", // Amazon email SMTP hostname

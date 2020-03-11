@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "97204067377",
+    "firebase_url": "https://vlife-dev.firebaseio.com",
+    "project_id": "vlife-dev",
+    "storage_bucket": "vlife-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97204067377:android:a6f3beb3249e7527dd0910",
+        "android_client_info": {
+          "package_name": "com.vlife.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97204067377-f4ac73s6d6ficjmqvlrmqrrj037klm00.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD-Ksy8kzGtQfGkHe5d6rG23KKSbBIH1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97204067377-f4ac73s6d6ficjmqvlrmqrrj037klm00.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

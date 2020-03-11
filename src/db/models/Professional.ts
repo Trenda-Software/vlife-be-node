@@ -15,6 +15,8 @@ const ProfessionalModel = (sequelize: any) => {
         description: Sequelize.STRING,
         in_service: Sequelize.BOOLEAN,
         on_line: Sequelize.BOOLEAN,
+        fcmtoken: Sequelize.STRING,
+        
     });
 
     return Professional;
