@@ -162,6 +162,7 @@ export default class DataService {
         await practice1.setSpecialty(enfer);
         await practice2.setSpecialty(enfer);
         await practice3.setSpecialty(enfer);
+        console.log("Es el ultimo commit");
     }
 
     connectWithSequelize = async () => {
