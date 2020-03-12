@@ -13,7 +13,7 @@ import genderRouters from './routes/genderRoutes';
 import specialtyRouters from './routes/specialtyRoutes';
 import emailrecoveryRouters from './routes/emailrecoveryRoutes';
 import fcmTokenRoutes from './routes/fcmTokenRoutes';
-import usrgeolocRouters from './routes/usrgeolocRoutes';
+import usrGeolocRouters from './routes/usrGeolocRoutes';
 
 import DataService from './service/DataService';
 
@@ -74,7 +74,7 @@ genderRouters(app, ds);
 specialtyRouters(app, ds);
 emailrecoveryRouters(app, ds);
 fcmTokenRoutes(app, ds);
-usrgeolocRouters(app, ds);
+usrGeolocRouters(app, ds);
 
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));
