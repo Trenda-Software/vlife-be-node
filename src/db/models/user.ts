@@ -6,7 +6,8 @@ const UserModel = (sequelize: any) => {
         name: Sequelize.STRING,
         surname: Sequelize.STRING,
         pwd: Sequelize.STRING,
-        coordinates: Sequelize.STRING,
+        lat: Sequelize.STRING,
+        lng: Sequelize.STRING,
         picture: Sequelize.STRING,
         email: {
             type: Sequelize.STRING,

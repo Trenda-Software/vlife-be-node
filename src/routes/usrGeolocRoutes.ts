@@ -5,7 +5,7 @@ import app from '../server';
 
 const router = (app: any, ds: DataService) => {
 
-    app.route('/fcmtoken')
+    app.route('/usrgeoloc')
         .get((req: any, res: any) => {
             res.json({
                 message: 'Get generado JWT',
@@ -14,20 +14,20 @@ const router = (app: any, ds: DataService) => {
         .post(async (req: any, res: any) => {
             try {
                 const usuario: any = ds.dbModels.user;
-                const userfcm = await usuario.findOne({
+                const usergeo = await usuario.findOne({
                     where: { email: req.body.email }
                 });
 
-                if (!userfcm) return res.status(400).send('El email no existe en la base de datos');
+                if (!usergeo) return res.status(400).send('El email no existe en la base de datos');
 
-                const userfcmupd = await usuario.update({ fcmtoken: req.body.fcmtoken }, {
+                const usergeoupd = await usuario.update({ lng: req.body.coords.lng, lat: req.body.coords.lat }, {
                     where: { email: req.body.email }
                 });
-                console.log("update " + req.body.fcmtoken);
-                console.log("update " + userfcmupd);
+                console.log("update " + req.body.coords);
+                console.log("update " + usergeoupd);
 
                 res.status(200).json({
-                    message: 'FCM Token Almacenado Correctamente!!'
+                    message: 'Coordenadas almacenadas Correctamente!!'
                 });
             } catch (err) {
                 console.log("error -- " + err)

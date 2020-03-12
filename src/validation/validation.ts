@@ -28,7 +28,7 @@ const registerValidation = (data: any) => {
     const schema = Joi.object().keys({
         dni: Joi.string().regex(/^[0-9]+$/).min(7).max(9).required().messages({
             'string.empty': 'Por favor ingrese el DNI',
-            'string.pattern.base': 'El campo solo acepta numeros',
+            'string.pattern.base': 'El DNI solo acepta numeros',
             'string.min': 'El campo no puede tener menos de 7 caracteres',
             'string.max': 'El campo no puede tener mas de 9 caracteres',
             'any.required': 'Por favor ingrese el DNI',

@@ -96,12 +96,12 @@ const router = (app: any, ds: DataService) => {
                     }
                 });
 
-                fs.mkdir("/img/maca", { recursive: true }, (err: any) => {
-                    if (err) {
-                        console.log("error al crear dir " + err);
-                    }
-                });
-
+                /*               fs.mkdir("/img/maca", { recursive: true }, (err: any) => {
+                                   if (err) {
+                                       console.log("error al crear dir " + err);
+                                   }
+                               });
+               */
                 // Update con el nombre de imagen
                 const userfcm = await UserModel.update({ picture: filename }, {
                     where: { email: req.body.email }

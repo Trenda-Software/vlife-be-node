@@ -7,7 +7,8 @@ const ProfessionalModel = (sequelize: any) => {
         surname: Sequelize.STRING,
         mobile: Sequelize.STRING,
         email: Sequelize.STRING,
-        coordinates: Sequelize.STRING,
+        lat: Sequelize.STRING,
+        lng: Sequelize.STRING,
         address: Sequelize.STRING,
         city: Sequelize.STRING,
         picture: Sequelize.BLOB,
@@ -16,7 +17,7 @@ const ProfessionalModel = (sequelize: any) => {
         in_service: Sequelize.BOOLEAN,
         on_line: Sequelize.BOOLEAN,
         fcmtoken: Sequelize.STRING,
-        
+
     });
 
     return Professional;

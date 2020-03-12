@@ -13,6 +13,7 @@ import genderRouters from './routes/genderRoutes';
 import specialtyRouters from './routes/specialtyRoutes';
 import emailrecoveryRouters from './routes/emailrecoveryRoutes';
 import fcmtokenRouters from './routes/fcmtokenRoutes';
+import usrGeolocRouters from './routes/usrGeolocRoutes';
 
 import DataService from './service/DataService';
 
@@ -55,7 +56,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use("img/users",express.static(__dirname + "img/users"));
+app.use("img/users", express.static(__dirname + "img/users"));
 
 // add routes
 userRoutes(app, ds);
@@ -72,6 +73,7 @@ genderRouters(app, ds);
 specialtyRouters(app, ds);
 emailrecoveryRouters(app, ds);
 fcmtokenRouters(app, ds);
+usrGeolocRouters(app, ds);
 
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));
