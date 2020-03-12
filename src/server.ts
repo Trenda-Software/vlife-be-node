@@ -12,7 +12,7 @@ import requestRouters from './routes/requestRoutes';
 import genderRouters from './routes/genderRoutes';
 import specialtyRouters from './routes/specialtyRoutes';
 import emailrecoveryRouters from './routes/emailrecoveryRoutes';
-import fcmtokenRouters from './routes/fcmtokenRoutes';
+import fcmtokenRoutes from './routes/fcmtokenRoutes';
 import usrgeolocRouters from './routes/usrgeolocRoutes';
 
 import DataService from './service/DataService';
@@ -72,7 +72,7 @@ requestRouters(app, ds);
 genderRouters(app, ds);
 specialtyRouters(app, ds);
 emailrecoveryRouters(app, ds);
-fcmtokenRouters(app, ds);
+fcmtokenRoutes(app, ds);
 usrgeolocRouters(app, ds);
 
 
