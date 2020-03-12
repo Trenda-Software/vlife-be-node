@@ -97,6 +97,7 @@ export default class DataService {
 
 
         const user2 = await UserModel.create({ dni: 24222111, name: 'Mariano', surname: 'Escudero', pwd: '$2a$10$2L0ZZ1D9glTYwSX/Zff..uPUhk/3XPak6/N8arA5Fk.E7FrNT7HHq', email: 'marianoe@gmail.com', lat: "-27.320505", lng: "+49.14995", mobile: '1122711000' });
+        console.log("le puse la y lng al user " + user2)
         await user2.setCountry(country1);
         await user2.setProvince(province1);
         await user2.setGender(gender2);
