@@ -12,12 +12,13 @@ import requestRouters from './routes/requestRoutes';
 import genderRouters from './routes/genderRoutes';
 import specialtyRouters from './routes/specialtyRoutes';
 import emailrecoveryRouters from './routes/emailrecoveryRoutes';
-import fcmtokenRoutes from './routes/fcmtokenRoutes';
+import fcmTokenRoutes from './routes/fcmTokenRoutes';
 import usrgeolocRouters from './routes/usrgeolocRoutes';
 
 import DataService from './service/DataService';
 
 // import cors from 'cors';
+//Ojo con las mayusculas y minusculas
 
 const app = express();
 //const bodyParser = require('body-parser');
@@ -72,7 +73,7 @@ requestRouters(app, ds);
 genderRouters(app, ds);
 specialtyRouters(app, ds);
 emailrecoveryRouters(app, ds);
-fcmtokenRoutes(app, ds);
+fcmTokenRoutes(app, ds);
 usrgeolocRouters(app, ds);
 
 
