@@ -159,6 +159,10 @@ localhost:3000/cantPorEspecialidad FORBIDDEN? necesita loguearse con JWT
 
 To Be Updated
 
+### check process running
+
+ps x | grep nro puerto
+
 ## Heroku
 
 The remote + branch that has to be updated to trigger a deploy in heroku is the remote "heroku" branch "master"
