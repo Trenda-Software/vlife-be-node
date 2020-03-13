@@ -22,7 +22,7 @@ this can mess with the access privileges
 
 ## Typescript
 
-    for type safety and OOP.
+For type safety and OOP.
 
 ### Types to add
 
@@ -79,8 +79,6 @@ preset-es2015 and preset-stage-x are deprecated as of 6-2019
 
 \$ npm run start
 
-localhost:3002
-
 # Directory structure
 
 -   src
@@ -119,7 +117,31 @@ sequelize model:create --name Provincia ...
 
 # Deploy
 
-## Heroku
+## API - Local Endpoint
+
+localhost:3000/
+
+localhost:3000/usuario
+
+localhost:3000/practica FORBIDDEN? necesita loguearse con JWT
+
+localhost:3000/cantPorEspecialidad FORBIDDEN? necesita loguearse con JWT
+
+## AWS
+
+API deployed in EC2 (us-east-1)
+
+### connect with SSH
+
+URL: check EC2 instance connect details in AWS Account
+keys: check Key Pairs item in the NERTWORK & SECURITY section of the EC2 in the AWS Account
+Remember to update the sec group with your machine IP
+
+### check process running
+
+ps x | grep <server port number>
+
+## Heroku - DEPRECATED
 
 ### install heroku client
 
@@ -140,30 +162,6 @@ GIT URL: https://git.heroku.com/vlife-api.git
 *   push changes from the heroku-deploy branch to the remote "heroku" master branch
 
     \$ git push heroku master
-
-# ENDPOINTS
-
-# Local
-
-localhost:3000/
-
-localhost:3000/usuario
-
-localhost:3000/practica FORBIDDEN? necesita loguearse con JWT
-
-localhost:3000/cantPorEspecialidad FORBIDDEN? necesita loguearse con JWT
-
-# Deploy
-
-## AWS
-
-To Be Updated
-
-### check process running
-
-ps x | grep nro puerto
-
-## Heroku
 
 The remote + branch that has to be updated to trigger a deploy in heroku is the remote "heroku" branch "master"
 so if you do:
