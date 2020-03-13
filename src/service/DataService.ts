@@ -6,7 +6,7 @@ import Province from '../db/models/Province';
 import Specialty from '../db/models/Specialty';
 import Professional from '../db/models/Professional';
 import Practice from '../db/models/Practice';
-import User from '../db/models/User1';
+import User from '../db/models/User';
 import Comment from '../db/models/Comment';
 import Request from '../db/models/Request';
 import ImgPrescription from '../db/models/ImgPrescription';
