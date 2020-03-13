@@ -143,15 +143,21 @@ GIT URL: https://git.heroku.com/vlife-api.git
 
 # ENDPOINTS
 
-## Local
+# Local
 
-localhost:3000
+localhost:3000/
 
 localhost:3000/usuario
 
-localhost:3000/cantPorEspecialidad
+localhost:3000/practica FORBIDDEN? necesita loguearse con JWT
+
+localhost:3000/cantPorEspecialidad FORBIDDEN? necesita loguearse con JWT
 
 # Deploy
+
+## AWS
+
+To Be Updated
 
 ## Heroku
 
@@ -175,13 +181,3 @@ That will push the current master local branch changes to the remote "heroku / m
 real time log view
 
 heroku logs --tail
-
-### check API
-
-https://vlife-api.herokuapp.com
-
-https://vlife-api.herokuapp.com/usuario
-
-https://vlife-api.herokuapp.com/cantPorEspecialidad
-
-https://vlife-api.herokuapp.com/practica
