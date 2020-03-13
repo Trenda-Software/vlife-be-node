@@ -17,6 +17,7 @@
 .env.javier.local
 .env.test
 .env
+.env.aws
 
 npm-debug.log*
 yarn-debug.log*
