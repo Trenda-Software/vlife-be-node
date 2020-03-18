@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-//Profile model
+//Profile model WTF
 const ProfileModel = (sequelize: any) => {
     const Profile = sequelize.define('Profile', {
         name: Sequelize.STRING,

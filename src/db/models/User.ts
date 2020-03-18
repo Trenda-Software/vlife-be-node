@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-//User model
+//User model WTF
 const UserModel = (sequelize: any) => {
     const User = sequelize.define('User', {
         dni: Sequelize.STRING,
