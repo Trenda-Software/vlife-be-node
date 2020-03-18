@@ -15,13 +15,13 @@ const router = (app: any, ds: DataService) => {
             try {
                 const usuario: any = ds.dbModels.user;
                 const usergeo = await usuario.findOne({
-                    where: { email: req.body.email }
+                    where: { email: req.body.id }
                 });
 
                 if (!usergeo) return res.status(400).send('El email no existe en la base de datos');
 
                 const usergeoupd = await usuario.update({ lng: req.body.coords.lng, lat: req.body.coords.lat }, {
-                    where: { email: req.body.email }
+                    where: { email: req.body.id }
                 });
                 console.log("update " + req.body.coords);
                 console.log("update " + usergeoupd);

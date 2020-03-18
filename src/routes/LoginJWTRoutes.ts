@@ -70,6 +70,7 @@ const router = (app: any, ds: DataService) => {
             console.log("gender:", hisGender.name);
 
             const user = {
+                id: usermail.id,
                 name: usermail.name,
                 surname: usermail.surname,
                 dni: usermail.dni,
