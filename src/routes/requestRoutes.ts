@@ -1,16 +1,14 @@
 import DataService from '../service/DataService';
 import { any } from 'bluebird';
 import app from '../server';
-//import { TIME, NOW } from 'sequelize/types';
 
-
-//import UsuarioModel from '../db/models/User';
 
 const jwt = require('jsonwebtoken');
 const verifytoken = require('../validation/verifyToken');
 
 const { requestValidation } = require('../validation/validation');
-
+var fs = require('fs');
+const AWS = require("aws-sdk");
 //var fcm = require("fcm-notification");
 var FCM = require('fcm-push');
 
@@ -64,6 +62,7 @@ const router = (app: any, ds: DataService) => {
                         console.log("voy a realizar el create");
                         const requestm: any = ds.dbModels.request;
                         const request1 = await requestm.create({ comment: req.body.comment, date: Date.now() }, { t });
+                        const imgpres: any = ds.dbModels.ImgPrescription;
 
                         await request1.setUser(req.body.userid);
                         await request1.setProfessional(req.body.professionalid);
@@ -72,6 +71,40 @@ const router = (app: any, ds: DataService) => {
 
                         for (let especialidad in especialidades) {
                             await request1.addSpecialty(especialidades[especialidad]);
+                        }
+                        //Recorro las imagenes de las recetas
+                        //Declaro el S#
+                        const s3 = new AWS.S3({
+                            accessKeyId: "AKIATZGWNNFHODVQTJSA",
+                            secretAccessKey: "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"
+                        });
+
+                        const prescriptions = req.body.prescription;
+                        for (let prescription in prescriptions) {
+                            var filename = req.body.userid + prescription + ".png";
+                            var b64string = prescriptions[prescription];
+                            var buf = Buffer.from(b64string, 'base64')
+
+                            var parametrosPutObject = {
+                                Bucket: 'vlife-aws-s3-images',
+                                Key: 'img/prescriptions/' + filename,
+                                Body: buf
+                            }
+                            var urlname: any;
+                            var putObjectPromise = s3.upload(parametrosPutObject).promise();
+                            putObjectPromise.then(async function (data: any) {
+                                console.log("upload : " + JSON.stringify(data));
+                                urlname = data.Location;
+                                console.log("url: " + urlname);
+                                const imgpres1 = await imgpres.create({ picture: urlname }, { t });
+                                console.log(request1);
+                                console.log(request1.id);
+                                await imgpres1.setRequest(request1.id);
+                            }).catch(function (err: any) {
+                                console.log("Error upload: " + err);
+                            });
+
+
                         }
                         // Envio de notificacion push
                         console.log("cargo el json");
@@ -84,12 +117,12 @@ const router = (app: any, ds: DataService) => {
                             to: token,
                             collapse_key: '',
                             data: { // Esto es solo opcional, puede enviar cualquier dato     
-                                solicitud: "Recibio una solicitud de servidio"
+                                solicitud: "Recibió una solicitud de servicio"
                             },
                             body: {
                                 title: "Notificación de Vlife",
-                                body: "Recibio una solicitud de servidio",
-                                icon: "notificacion",
+                                body: "Recibió una solicitud de servicio",
+                                icon: "Notificación",
                                 sound: "default"
                             },
                         };

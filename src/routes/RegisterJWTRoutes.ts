@@ -7,15 +7,13 @@ const jwt = require('jsonwebtoken');
 const verifytoken = require('../validation/verifyToken');
 const bcrypt = require('bcryptjs');
 var fs = require('fs');
-//var fs = require('file-system');
-
+const AWS = require("aws-sdk");
 
 const { loginValidation, registerValidation } = require('../validation/validation');
-// para el nodemailer
-// const email = require("../service/email");
-//Para el AWS SES
+
+
 const nodemailerSES = require("nodemailer");
-const AWS = require("aws-sdk");
+
 
 
 const router = (app: any, ds: DataService) => {
@@ -79,32 +77,42 @@ const router = (app: any, ds: DataService) => {
 
                 console.log(user);
                 //Grabo la imagen en disco
-
-
-                var filename = user1.id + ".png";
-                console.log(__dirname);
-                if (fs.existsSync("/img/users/" + filename)) {
-                    fs.unlink("/img/users/" + filename, (err: any) => {
-                        if (err) {
-                            console.log("error al borrar archivo " + err);
-                        }
-                    });
-                }
-                fs.writeFile("/img/users/" + filename, req.body.picture, 'base64', (err: any) => {
-                    if (err) {
-                        console.log("error al grabar archivo " + err);
-                    }
+                //Declaro el S#
+                const s3 = new AWS.S3({
+                    accessKeyId: "AKIATZGWNNFHODVQTJSA",
+                    secretAccessKey: "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"
                 });
+                /*//Listo los Buckets
+                s3.listBuckets({}, (err: any, data: any) => {
+                    if (err) {
+                        console.log("Error ListBuckets: " + err);
+                    } else {
+                        console.log("Lista de Buckets: " + JSON.stringify(data));
+                    }
+                });*/
+                //Grabo la imagen
+                var filename = user1.id + ".png";
+                var b64string = req.body.picture;
+                var buf = Buffer.from(b64string, 'base64')
 
-                /*               fs.mkdir("/img/maca", { recursive: true }, (err: any) => {
-                                   if (err) {
-                                       console.log("error al crear dir " + err);
-                                   }
-                               });
-               */
-                // Update con el nombre de imagen
-                const userfcm = await UserModel.update({ picture: filename }, {
-                    where: { email: req.body.email }
+                var parametrosPutObject = {
+                    Bucket: 'vlife-aws-s3-images',
+                    Key: 'img/users/' + filename,
+                    Body: buf
+                }
+                var urlname: any;
+                var putObjectPromise = s3.upload(parametrosPutObject).promise();
+                putObjectPromise.then(async function (data: any) {
+                    console.log("upload : " + JSON.stringify(data));
+                    urlname = data.Location;
+                    // Update con el nombre de imagen
+                    console.log("url: " + urlname)
+                    const userfcm = await UserModel.update({ picture: urlname }, {
+                        where: { email: req.body.email }
+                    });
+
+                }).catch(function (err: any) {
+                    console.log("Error upload: " + err);
                 });
 
                 //await user1.setCountry(country1);
@@ -115,32 +123,7 @@ const router = (app: any, ds: DataService) => {
                     jwt.sign({ user }, 'secretkey', { expiresIn: '30s' }, (err: any, token: any) => {
                 */
 
-                //Envio de mail de confirmacion de REgistracion
-                // Parametros Para el mail con gmail
-                /* const oEmail = new email({
-                     "host": process.env.EMAIL_HOST,
-                     "port": process.env.EMAIL_PORT,
-                     "secure": process.env.EMAIL_SECURE,
-                     "auth": {
-                         "user": process.env.EMAIL_USER,
-                         "pass": process.env.EMAIL_PASS
-                     }
-                 });
-                 /*
-                // Parametros Para el mail con AWS SES
-                AWS.config.update({
-                    accessKeyId: process.env.AWS_ACCESSKEYID,
-                    secretAccessKey: process.env.AWS_SECRETACCESSKEY,
-                    region: process.env.AWS_REGION
- 
-                });
- 
-                let transporter = nodemailerSES.createTransport({
-                    SES: new AWS.SES({
-                        apiVersion: '2010-12-01'
-                    })
-                });
-                */
+
                 console.log("Creo el transporte");
 
                 var transporter = nodemailerSES.createTransport({ // Yes. SMTP!
@@ -155,7 +138,7 @@ const router = (app: any, ds: DataService) => {
                 let email1 = {
                     from: process.env.EMAIL_DIRSEND,
                     to: user.email,
-                    subject: "Bienbenido/a a Vlife",
+                    subject: "Bienvenido/a a Vlife",
                     html: `
                                 <div>
                                 <p>Bienvenido/a: ${user.name} ${user.surname} </p>
@@ -172,7 +155,7 @@ const router = (app: any, ds: DataService) => {
                     if (err) {
                         console.log("Error al enviar email - error " + err);
                     } else {
-                        console.log("Correo enviado correctamente - info " + info);
+                        console.log("Correo enviado correctamente - info " + JSON.stringify(info));
                     }
                 });
                 jwt.sign({ user }, process.env.JWT_SECRETKEY, (err: any, token: any) => {
