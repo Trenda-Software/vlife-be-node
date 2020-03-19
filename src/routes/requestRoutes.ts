@@ -86,7 +86,7 @@ const router = (app: any, ds: DataService) => {
                             var buf = Buffer.from(b64string, 'base64')
 
                             var parametrosPutObject = {
-                                Bucket: 'vlife-aws-s3-images',
+                                Bucket: process.env.S3_BUCKET, //'vlife-aws-s3-images',
                                 Key: 'img/prescriptions/' + filename,
                                 Body: buf
                             }

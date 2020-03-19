@@ -124,7 +124,7 @@ export default class DataService {
             in_service: false,
             on_line: true,
             fcmtoken:
-                'f6W0m89DGKs:APA91bFd_msCXCwprUP_1IprfyRMiVJs6ymG0UBszGMuSHtY3PsiobkT0JD1JBAMS9prtqqCZ892pXBh6Lm7g5LSRBqcQnp1QRiJvkciuYROAG_5BDGtXLFWInZnYcGH_PvOixthM9Nx',
+                'cX3ay2T6ULY:APA91bEvHiJTRvWWz1K9yrYrqaoZUrJs-3y_G7rqT5aR5oe-OdK-z-qpedNnM-a2a5RrpLhSa0LjEcIVSMqujiDbtdMJrP8kmUZRrVS9c8t-4hxTvEsZ3IW8GqNqPWsZbf3udhBbEFFZ',
         });
         await professional1.setCountry(country1);
         await professional1.setProvince(province1);

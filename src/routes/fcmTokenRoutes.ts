@@ -15,13 +15,13 @@ const router = (app: any, ds: DataService) => {
             try {
                 const usuario: any = ds.dbModels.user;
                 const userfcm = await usuario.findOne({
-                    where: { email: req.body.email }
+                    where: { id: req.body.id }
                 });
 
-                if (!userfcm) return res.status(400).send('El email no existe en la base de datos');
+                if (!userfcm) return res.status(400).send('El id no existe en la base de datos');
 
                 const userfcmupd = await usuario.update({ fcmtoken: req.body.fcmtoken }, {
-                    where: { email: req.body.email }
+                    where: { id: req.body.id }
                 });
                 console.log("update " + req.body.fcmtoken);
                 console.log("update " + userfcmupd);

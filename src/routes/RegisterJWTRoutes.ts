@@ -45,7 +45,7 @@ const router = (app: any, ds: DataService) => {
                 where: { email: req.body.email }
             });
 
-            if (usermail) return res.status(400).send('El usuario ya existe');
+            if (usermail) return res.status(400).send('El mail ya esta en uso');
 
             try {
 
@@ -75,7 +75,17 @@ const router = (app: any, ds: DataService) => {
                 const user1 = await UserModel.create(user);
                 await user1.setGender(req.body.gender);
 
+                const userdev = {
+                    id: user1.id,
+                    name: user1.name,
+                    surname: user1.surname,
+                    dni: user1.dni,
+                    email: user1.email,
+                    mobile: user1.mobile,
+                    gender: user1.name
+                }
                 console.log(user);
+                console.log(userdev);
                 //Grabo la imagen en disco
                 //Declaro el S#
                 const s3 = new AWS.S3({
@@ -96,7 +106,7 @@ const router = (app: any, ds: DataService) => {
                 var buf = Buffer.from(b64string, 'base64')
 
                 var parametrosPutObject = {
-                    Bucket: 'vlife-aws-s3-images',
+                    Bucket: process.env.S3_BUCKET,//'vlife-aws-s3-images',
                     Key: 'img/users/' + filename,
                     Body: buf
                 }
@@ -160,7 +170,8 @@ const router = (app: any, ds: DataService) => {
                 });
                 jwt.sign({ user }, process.env.JWT_SECRETKEY, (err: any, token: any) => {
                     res.status(200).json({
-                        token
+                        token,
+                        userdev
                     });
                 });
             } catch (err) {
