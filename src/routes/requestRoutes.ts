@@ -117,7 +117,8 @@ const router = (app: any, ds: DataService) => {
                             to: token,
                             collapse_key: '',
                             data: { // Esto es solo opcional, puede enviar cualquier dato     
-                                solicitud: "Recibió una solicitud de servicio"
+                                msg: "Recibió una solicitud de servicio",
+                                pnid: request1.id
                             },
                             body: {
                                 title: "Notificación de Vlife",

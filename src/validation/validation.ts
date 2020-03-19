@@ -53,11 +53,14 @@ const registerValidation = (data: any) => {
         coordinates: Joi.string().min(2).messages({
             'string.min': 'El campo no puede tener menos de 2 caracteres',
         }),
-        gender: Joi.number().required().messages({
+        gender: Joi.number().min(1).max(6).required().messages({
             'number.integer': 'El campo debe ser un Id',
+            'number.min': 'El valor del campo debe star entre 1 y 3',
+            'number.max': 'El valor del campo debe star entre 1 y 3',
         }),
         picture: Joi.string().base64().messages({
             'string.base64': 'El campo debe ser base64',
+            'any.required': 'Por favor ingrese la imagen',
         }),
         email: Joi.string().min(6).required().email().messages({
             'string.base': 'El email debe ser un string',
