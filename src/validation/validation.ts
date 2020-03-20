@@ -53,10 +53,10 @@ const registerValidation = (data: any) => {
         coordinates: Joi.string().min(2).messages({
             'string.min': 'El campo no puede tener menos de 2 caracteres',
         }),
-        gender: Joi.number().min(1).max(6).required().messages({
+        gender: Joi.number().min(1).max(3).required().messages({
             'number.integer': 'El campo debe ser un Id',
-            'number.min': 'El valor del campo debe star entre 1 y 3',
-            'number.max': 'El valor del campo debe star entre 1 y 3',
+            'number.min': 'El valor del campo debe estar entre 1 y 3',
+            'number.max': 'El valor del campo debe estar entre 1 y 3',
         }),
         picture: Joi.string().base64().messages({
             'string.base64': 'El campo debe ser base64',
@@ -91,7 +91,7 @@ const requestValidation = (data: any) => {
     const schema = Joi.object({
         professionalid: Joi.string().required(),
         userid: Joi.string().required(),
-        specialtyid: Joi.array().required(),
+        practicesid: Joi.array().required(),
         prescription: Joi.array().items(Joi.string().base64()),
         comment: Joi.string()
     });

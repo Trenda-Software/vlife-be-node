@@ -74,7 +74,7 @@ const router = (app: any, ds: DataService) => {
                 //const user1 = await UserModel.create({ name: 'Javier', surname: 'Hack', pwd: 'javi1234', email: 'javierhack@gmail.com' });
                 const user1 = await UserModel.create(user);
                 await user1.setGender(req.body.gender);
-
+                const hisGender = await user1.getGender();
                 const userdev = {
                     id: user1.id,
                     name: user1.name,
@@ -82,7 +82,8 @@ const router = (app: any, ds: DataService) => {
                     dni: user1.dni,
                     email: user1.email,
                     mobile: user1.mobile,
-                    gender: user1.name
+                    gender: hisGender.name,
+                    address: user1.address
                 }
                 console.log(user);
                 console.log(userdev);

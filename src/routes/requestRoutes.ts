@@ -67,7 +67,7 @@ const router = (app: any, ds: DataService) => {
                         await request1.setUser(req.body.userid);
                         await request1.setProfessional(req.body.professionalid);
                         //Recorro el array de especialidades
-                        const especialidades = req.body.specialtyid;
+                        const especialidades = req.body.practicesid;
 
                         for (let especialidad in especialidades) {
                             await request1.addSpecialty(especialidades[especialidad]);
@@ -97,8 +97,8 @@ const router = (app: any, ds: DataService) => {
                                 urlname = data.Location;
                                 console.log("url: " + urlname);
                                 const imgpres1 = await imgpres.create({ picture: urlname }, { t });
-                                console.log(request1);
-                                console.log(request1.id);
+                                //console.log(request1);
+                                //console.log(request1.id);
                                 await imgpres1.setRequest(request1.id);
                             }).catch(function (err: any) {
                                 console.log("Error upload: " + err);
