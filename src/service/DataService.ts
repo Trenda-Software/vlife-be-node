@@ -99,6 +99,8 @@ export default class DataService {
             pwd: 'javi1234',
             email: 'javierhack@gmail.com',
             mobile: '1122101000',
+            picture:
+                'https://vlife-aws-s3-images.s3.amazonaws.com/img/users/1.png',
         });
         await user1.setCountry(country1);
         await user1.setProvince(province1);
@@ -113,6 +115,9 @@ export default class DataService {
             lat: '-27.320505',
             lng: '+49.14995',
             mobile: '1122711000',
+            picture:
+                'https://vlife-aws-s3-images.s3.amazonaws.com/img/users/2.png',
+
         });
         console.log('le puse la y lng al user ' + user2);
         await user2.setCountry(country1);
