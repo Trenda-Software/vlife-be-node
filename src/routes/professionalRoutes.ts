@@ -18,18 +18,6 @@ const router = (app: any, ds: DataService) => {
                     ProfessionalModel.findAll({
                         include: [Province, Country],
                     }).then((profesional: any[]) => {
-                        //var blob = profesional.picture ;//your blob data;
-
-                        /*var reader = new FileReader();
-
-                        reader.readAsDataURL(buffer.alloc(blob)); 
-                        reader.onloadend = function() {
-                            var base64data = reader.result;                
-                            console.log(base64data);
-                            return;
-                        }*/
-                        //var buffer = new Buffer.from( blob, 'binary' );
-                        //var bufferBase64 = buffer.toString('base64');
                         res.send(profesional);
                     });
                 }

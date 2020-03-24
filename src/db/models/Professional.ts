@@ -11,7 +11,7 @@ const ProfessionalModel = (sequelize: any) => {
         lng: Sequelize.STRING,
         address: Sequelize.STRING,
         city: Sequelize.STRING,
-        picture: Sequelize.BLOB,
+        picture: Sequelize.STRING,
         rating: Sequelize.INTEGER,
         description: Sequelize.STRING,
         in_service: Sequelize.BOOLEAN,

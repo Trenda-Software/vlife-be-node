@@ -66,6 +66,22 @@ const router = (app: any, ds: DataService) => {
 
                         await request1.setUser(req.body.userid);
                         await request1.setProfessional(req.body.professionalid);
+
+                        //Consulto datos del usuario
+                        var strUsuario = "";
+
+                        const usuario: any = ds.dbModels.user;
+
+                        const usuario1 = await usuario.findOne({
+                            where: { id: req.body.userid }
+                        });
+
+                        strUsuario = usuario1.name + " " + usuario1.surname;
+                        const strImagen = usuario1.picture;
+
+                        console.log("user " + strUsuario);
+                        console.log("Img " + strImagen);
+
                         //Recorro el array de especialidades
                         const especialidades = req.body.practicesid;
 
@@ -121,8 +137,9 @@ const router = (app: any, ds: DataService) => {
                                 pnid: request1.id
                             },
                             body: {
-                                title: "Notificación de Vlife",
-                                body: "Recibió una solicitud de servicio",
+                                title: "El usuario " + strUsuario + " acaba de solicitar tu servicio",
+                                body: "Hola!",
+                                image: strImagen,
                                 icon: "Notificación",
                                 sound: "default"
                             },

@@ -6,7 +6,7 @@ const PracticeModel = (sequelize: any) => {
         code: Sequelize.STRING,
         name: Sequelize.STRING,
         cost: Sequelize.DOUBLE,
-        aditional_info: Sequelize.BOOLEAN,
+        additional_info: Sequelize.BOOLEAN,
     });
 
     return Practice;
