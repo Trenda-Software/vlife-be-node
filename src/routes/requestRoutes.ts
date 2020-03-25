@@ -53,7 +53,7 @@ const router = (app: any, ds: DataService) => {
                         }
                     });
 
-                    if (profesional2) return res.status(400).send('El Profesioanl solicitado ya tiene un servicio en curso.');
+                    if (profesional2) return res.status(400).send('El Profesional solicitado ya tiene un servicio en curso.');
 
                     const t = await ds.dbClient.transaction();
 
@@ -61,7 +61,7 @@ const router = (app: any, ds: DataService) => {
                         // Aca va el codigo para crear la solicitud de servicio
                         console.log("voy a realizar el create");
                         const requestm: any = ds.dbModels.request;
-                        const request1 = await requestm.create({ comment: req.body.comment, date: Date.now() }, { t });
+                        const request1 = await requestm.create({ commentusr: req.body.comment, date: Date.now() }, { t });
                         const imgpres: any = ds.dbModels.ImgPrescription;
 
                         await request1.setUser(req.body.userid);

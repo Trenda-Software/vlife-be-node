@@ -15,6 +15,8 @@ import emailrecoveryRouters from './routes/emailrecoveryRoutes';
 import fcmTokenRoutes from './routes/fcmTokenRoutes';
 import usrGeolocRouters from './routes/usrGeolocRoutes';
 import setProffcmTokenRoutes from './routes/setProffcmTokenRoutes';
+import responsepacientRoutes from './routes/responsepacientRoutes';
+
 
 import DataService from './service/DataService';
 
@@ -77,6 +79,7 @@ emailrecoveryRouters(app, ds);
 fcmTokenRoutes(app, ds);
 usrGeolocRouters(app, ds);
 setProffcmTokenRoutes(app, ds);
+responsepacientRoutes(app, ds);
 
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));
