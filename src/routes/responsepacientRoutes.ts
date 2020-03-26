@@ -7,9 +7,7 @@ const jwt = require('jsonwebtoken');
 const verifytoken = require('../validation/verifyToken');
 
 const { requestValidation } = require('../validation/validation');
-var fs = require('fs');
-const AWS = require("aws-sdk");
-//var fcm = require("fcm-notification");
+
 var FCM = require('fcm-push');
 
 const router = (app: any, ds: DataService) => {
@@ -54,9 +52,13 @@ const router = (app: any, ds: DataService) => {
                         // Aca va el codigo para actualizar el request
                         console.log("voy a realizar el update");
                         const requestm: any = ds.dbModels.request;
-                        const request1 = await requestm.update({ approve: req.body.approve, commentprof: req.body.comment }, {
+                        var stateRequest = 1;
+                        if (req.body.approve) {
+                            stateRequest = 2;
+                        }
+                        const request1 = await requestm.update({ approve: req.body.approve, commentprof: req.body.comment, staterequest: stateRequest }, {
                             where: { id: req.body.requestid }
-                        }, { t });
+                        });
                         //Consulto os datos del request
                         const request2 = await requestm.findOne({
                             where: { id: req.body.requestid }
@@ -100,8 +102,13 @@ const router = (app: any, ds: DataService) => {
                             to: token,
                             collapse_key: '',
                             data: { // Esto es solo opcional, puede enviar cualquier dato     
-                                msg: "Recibió una respuesta del servicio solicitado",
-                                pnid: req.body.requestid
+                                msg: "El profesional " + strProfesional + " " + strApprove + " el servicio",
+                                pnid: req.body.requestid,
+                                approve: req.body.approve,
+                                comentario: req.body.comment,
+                                distanciak: req.body.distanciak,
+                                distanciatiempo: req.body.distanciatiempo
+
                             },
                             body: {
                                 title: "El profesional " + strProfesional + " " + strApprove + " el servicio",

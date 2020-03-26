@@ -151,6 +151,8 @@ export default class DataService {
         const professional3 = await ProfessionalModel.create({
             name: 'Pablo',
             surname: 'Del Hopitalet',
+            picture:
+                'https://vlife-aws-s3-images.s3.amazonaws.com/img/professionals/3.png',
             in_service: false,
             on_line: true,
             fcmtoken:
@@ -161,6 +163,8 @@ export default class DataService {
         const professional4 = await ProfessionalModel.create({
             name: 'Juan',
             surname: 'Camillet',
+            picture:
+                'https://vlife-aws-s3-images.s3.amazonaws.com/img/professionals/4.png',
             in_service: false,
             on_line: true,
             fcmtoken:
@@ -171,6 +175,8 @@ export default class DataService {
         const professional5 = await ProfessionalModel.create({
             name: 'Maria',
             surname: 'DeGuardia',
+            picture:
+                'https://vlife-aws-s3-images.s3.amazonaws.com/img/professionals/5.png',
             in_service: false,
             on_line: true,
             fcmtoken:

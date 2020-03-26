@@ -6,7 +6,16 @@ const RequestModel = (sequelize: any) => {
         commentprof: Sequelize.STRING,
         date: Sequelize.DATE,
         approve: Sequelize.BOOLEAN,
+        staterequest: Sequelize.INTEGER,
     });
+
+    /*
+     StateRequest
+     0 = Solicitud creada
+     1 = Solicitud Rechazada
+     2 = Solicitud Aprobada
+     3 = Solicitud Finalizada
+    */
 
     return Request;
 };
