@@ -34,7 +34,7 @@ const router = (app: any, ds: DataService) => {
                     clausula = clausula.slice(0, -4);
                     console.log("where :" + clausula);
 
-                    ds.dbClient.query("select Professionals.id,name,surname,sum(cost) as cost, '1km' as distance, '10m' as time from Professionals  inner join PracticeCosts on Professionals.id = Professionalid where Professionals.id in (select Professionalid from PracticeCosts where " + clausula + " ) group by Professionalid ", { type: Sequelize.QueryTypes.SELECT })
+                    ds.dbClient.query("select Professionals.id,name,surname,sum(cost) as cost, '1km' as distance, '10m' as time, picture from Professionals  inner join PracticeCosts on Professionals.id = Professionalid where Professionals.id in (select Professionalid from PracticeCosts where " + clausula + " ) group by Professionalid ", { type: Sequelize.QueryTypes.SELECT })
                         .then((profesional: any[]) => {
                             // We don't need spread here, since only the results will be returned for select queries
                             console.log(JSON.stringify(profesional));
