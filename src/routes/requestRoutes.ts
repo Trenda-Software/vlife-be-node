@@ -86,7 +86,7 @@ const router = (app: any, ds: DataService) => {
                         const especialidades = req.body.practicesid;
 
                         for (let especialidad in especialidades) {
-                            await request1.addSpecialty(especialidades[especialidad]);
+                            await request1.addPractice(especialidades[especialidad]);
                         }
                         //Recorro las imagenes de las recetas
                         //Declaro el S#

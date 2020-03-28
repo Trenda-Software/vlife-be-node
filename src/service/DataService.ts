@@ -101,6 +101,7 @@ export default class DataService {
             mobile: '1122101000',
             picture:
                 'https://vlife-aws-s3-images.s3.amazonaws.com/img/users/1.png',
+            address: 'Alem 1234',
         });
         await user1.setCountry(country1);
         await user1.setProvince(province1);
@@ -117,9 +118,9 @@ export default class DataService {
             mobile: '1122711000',
             picture:
                 'https://vlife-aws-s3-images.s3.amazonaws.com/img/users/2.png',
-
+            address: 'Machado 1234',
         });
-        console.log('le puse la y lng al user ' + user2);
+
         await user2.setCountry(country1);
         await user2.setProvince(province1);
         await user2.setGender(gender2);
@@ -320,6 +321,7 @@ export default class DataService {
         CommentModel.belongsTo(ProfessionalModel);
 
         RequestModel.belongsToMany(SpecialtyModel, { through: 'Requests_Specialties' });
+        RequestModel.belongsToMany(PracticeModel, { through: 'Requests_Practices' });
         RequestModel.belongsTo(UserModel);
         RequestModel.belongsTo(ProfessionalModel);
 
