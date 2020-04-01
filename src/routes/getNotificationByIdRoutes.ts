@@ -15,22 +15,22 @@ const router = (app: any, ds: DataService) => {
                     const usuarios = await ds.dbClient.query("Select Requests.id,Requests.commentusr,name,surname,address,lat,lng,mobile,email,dni,picture from Users inner join Requests  on Users.id = Requests.UserId where Requests.ProfessionalId = " + req.body.id, { type: Sequelize.QueryTypes.SELECT });
 
                     const solicitudes = usuarios.map(async (usuario: any) => {
-                        const practicas = await ds.dbClient.query("select * from Practices where id in (select PracticeId from Requests_Practices where RequestId = " + usuario.id + ")", { type: Sequelize.QueryTypes.SELECT });
+                        const practicas = await ds.dbClient.query("select Practices.id,Practices.name as nombre,ImgPrescriptions.picture as imagen from Practices left join ImgPrescriptions on Practices.id = ImgPrescriptions.PracticeId and ImgPrescriptions.RequestId = " + usuario.id + " where Practices.id in (select PracticeId from Requests_Practices where RequestId = " + usuario.id + ")", { type: Sequelize.QueryTypes.SELECT });
 
-                        const imgprescriptions = await ds.dbClient.query("select * from ImgPrescriptions where RequestId = " + usuario.id, { type: Sequelize.QueryTypes.SELECT });
+                        /*                         const imgprescriptions = await ds.dbClient.query("select * from ImgPrescriptions where RequestId = " + usuario.id, { type: Sequelize.QueryTypes.SELECT });
+                        
+                                                var imgPrescriptionurl: any = [];
+                                                imgprescriptions.forEach((imgprescription: any) => {
+                                                    imgPrescriptionurl.push(imgprescription.picture);
+                        
+                                                }); */
 
-                        var imgPrescriptionurl: any = [];
-                        imgprescriptions.forEach((imgprescription: any) => {
-                            imgPrescriptionurl.push(imgprescription.picture);
-
-                        });
-
-                        var practicasNombre: any = [];
+                        //var practicasNombre: any = [];
 
                         var preacticasID = "";
 
                         practicas.forEach((practica: any) => {
-                            practicasNombre.push(practica.name);
+                            //  practicasNombre.push(practica.name);
                             preacticasID = preacticasID + "PracticeId = " + practica.id + " or "
                         });
 
@@ -60,8 +60,8 @@ const router = (app: any, ds: DataService) => {
                                 userpicture: usuario.picture,
                             },
                             requestinfo: {
-                                practicas: practicasNombre,
-                                recetas: imgPrescriptionurl,
+                                practicas: practicas,
+                                //recetas: imgPrescriptionurl,
                                 comentario: usuario.commentusr,
                                 valortotal: servicios.cost,
                                 distancek: servicios.distance,

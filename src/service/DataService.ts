@@ -326,6 +326,7 @@ export default class DataService {
         RequestModel.belongsTo(ProfessionalModel);
 
         ImgPrescriptionModel.belongsTo(RequestModel);
+        ImgPrescriptionModel.belongsTo(PracticeModel);
 
         this.dbModels.user = UserModel;
         this.dbModels.country = CountryModel;

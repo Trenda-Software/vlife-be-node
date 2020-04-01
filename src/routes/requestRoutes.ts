@@ -83,12 +83,88 @@ const router = (app: any, ds: DataService) => {
                         console.log("Img " + strImagen);
 
                         //Recorro el array de especialidades
-                        const especialidades = req.body.practicesid;
+                        const especialidades = req.body.practices;
 
+                        console.log("---------------------------");
                         for (let especialidad in especialidades) {
-                            await request1.addPractice(especialidades[especialidad]);
+                            await request1.addPractice(especialidades[especialidad].id);
+                            console.log("ID Especialidad" + especialidades[especialidad].id)
+
+                            //Recorro las imagenes de las recetas
+                            //Declaro el S#
+                            const s3 = new AWS.S3({
+                                accessKeyId: "AKIATZGWNNFHODVQTJSA",
+                                secretAccessKey: "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"
+                            });
+
+                            if (especialidades[especialidad].prescription) {
+
+                               // console.log("ID Especialidad" + especialidades[especialidad].prescription)
+
+                                var filename = req.body.userid + especialidad + ".png";
+                                var b64string = especialidades[especialidad].prescription;
+                                var buf = Buffer.from(b64string, 'base64')
+
+                                var parametrosPutObject = {
+                                    Bucket: process.env.S3_BUCKET, //'vlife-aws-s3-images',
+                                    Key: 'img/prescriptions/' + filename,
+                                    Body: buf
+                                }
+                                var urlname: any;
+                                var putObjectPromise = s3.upload(parametrosPutObject).promise();
+                                putObjectPromise.then(async function (data: any) {
+                                    console.log("upload : " + JSON.stringify(data));
+                                    urlname = data.Location;
+                                    console.log("url: " + urlname);
+                                    const imgpres1 = await imgpres.create({ picture: urlname }, { t });
+                                    //console.log(request1);
+                                    //console.log(request1.id);
+                                    await imgpres1.setRequest(request1.id);
+                                    await imgpres1.setPractice(especialidades[especialidad].id);
+                                }).catch(function (err: any) {
+                                    console.log("Error upload: " + err);
+                                });
+
+
+                            }
                         }
-                        //Recorro las imagenes de las recetas
+                        // Envio de notificacion push
+                        console.log("cargo el json");
+                        var serverKey = process.env.SERVER_KEY;
+                        var fcm = new FCM(serverKey);
+                        console.log("Seteo el token " + profesional1.fcmtoken);
+                        var token = profesional1.fcmtoken;
+
+                        var message = {
+                            to: token,
+                            notification: {
+                                title: "Recibiste una petición de servicio",
+                                image: strImagen
+                            },
+                            collapse_key: '',
+                            data: { // Esto es solo opcional, puede enviar cualquier dato     
+                                msg: "Recibió una solicitud de servicio",
+                                pnid: request1.id
+                            },
+                            body: {
+                                title: "El usuario " + strUsuario + " acaba de solicitar tu servicio",
+                                body: "Hola!",
+                                image: strImagen,
+                                icon: "Notificación",
+                                sound: "default"
+                            },
+                        };
+
+                        fcm.send(message, function (err: any, response: any) {
+                            if (err) {
+                                console.log("error encontrado ", err);
+                            } else {
+                                console.log("respuesta aquí", response);
+                            }
+                        });
+
+                        console.log("---------------------------");
+/*                         //Recorro las imagenes de las recetas
                         //Declaro el S#
                         const s3 = new AWS.S3({
                             accessKeyId: "AKIATZGWNNFHODVQTJSA",
@@ -116,6 +192,7 @@ const router = (app: any, ds: DataService) => {
                                 //console.log(request1);
                                 //console.log(request1.id);
                                 await imgpres1.setRequest(request1.id);
+                                //await imgpres1.setPractice(request1.id);
                             }).catch(function (err: any) {
                                 console.log("Error upload: " + err);
                             });
@@ -134,7 +211,7 @@ const router = (app: any, ds: DataService) => {
                             notification: {
                                 title: "Recibiste una petición de servicio",
                                 image: strImagen
-                               },
+                            },
                             collapse_key: '',
                             data: { // Esto es solo opcional, puede enviar cualquier dato     
                                 msg: "Recibió una solicitud de servicio",
@@ -157,7 +234,7 @@ const router = (app: any, ds: DataService) => {
                             }
                         });
 
-                        await t.commit();
+ */                     await t.commit();
                         res.status(200).json({
                             message: 'Solicitud de servicio generada con exito !!'
                         });

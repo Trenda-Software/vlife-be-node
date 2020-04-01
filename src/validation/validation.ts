@@ -81,6 +81,7 @@ const registerValidation = (data: any) => {
         address: Joi.string().min(6).messages({
             'string.empty': 'Por favor ingrese dirección',
             'string.min': 'El campo no puede tener menos de 6 caracteres',
+            'any.required': 'Por favor ingrese dirección',
         }),
 
     });
@@ -91,8 +92,9 @@ const requestValidation = (data: any) => {
     const schema = Joi.object({
         professionalid: Joi.string().required(),
         userid: Joi.string().required(),
-        practicesid: Joi.array().required(),
-        prescription: Joi.array().items(Joi.string().base64()),
+        practices: Joi.array(),
+        //practicesid: Joi.array().required(),
+        //prescription: Joi.array().items(Joi.string().base64()),
         comment: Joi.string()
     });
     return schema.validate(data);
