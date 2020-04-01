@@ -12,12 +12,12 @@ const router = (app: any, ds: DataService) => {
                     res.sendStatus(403);
                 } else {
 
-                    const usuarios = await ds.dbClient.query("Select requests.id,requests.commentusr,name,surname,address,lat,lng,mobile,email,dni,picture from users inner join requests  on users.id = requests.UserId where requests.ProfessionalId = " + req.body.id, { type: Sequelize.QueryTypes.SELECT });
+                    const usuarios = await ds.dbClient.query("Select Requests.id,Requests.commentusr,name,surname,address,lat,lng,mobile,email,dni,picture from Users inner join Requests  on Users.id = Requests.UserId where Requests.ProfessionalId = " + req.body.id, { type: Sequelize.QueryTypes.SELECT });
 
                     const solicitudes = usuarios.map(async (usuario: any) => {
-                        const practicas = await ds.dbClient.query("select * from practices where id in (select PracticeId from requests_practices where RequestId = " + usuario.id + ")", { type: Sequelize.QueryTypes.SELECT });
+                        const practicas = await ds.dbClient.query("select * from Practices where id in (select PracticeId from Requests_Practices where RequestId = " + usuario.id + ")", { type: Sequelize.QueryTypes.SELECT });
 
-                        const imgprescriptions = await ds.dbClient.query("select * from imgprescriptions where RequestId = " + usuario.id, { type: Sequelize.QueryTypes.SELECT });
+                        const imgprescriptions = await ds.dbClient.query("select * from ImgPrescriptions where RequestId = " + usuario.id, { type: Sequelize.QueryTypes.SELECT });
 
                         var imgPrescriptionurl: any = [];
                         imgprescriptions.forEach((imgprescription: any) => {
