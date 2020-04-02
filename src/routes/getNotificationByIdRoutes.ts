@@ -38,36 +38,29 @@ const router = (app: any, ds: DataService) => {
                         ///Llamad al APi de Google distance-matrix
                         console.log("voy a hacer el request a Googlemaps");
 
-                        var request = require('request');
-                        var options = {
-                            'method': 'GET',
-                            'url': 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=' + origenGM + '&destinations=' + destinoGM + '&language=es-ES&key=' + decryptedString,
-                            'headers': {
-                            }
-                        };
-
                         var usrDistancia = "";
                         var usrTiempo = "";
-                        await request(options, function (error: any, response: any) {
-                            if (error) throw new Error(error);
-                            console.log("--------------INICIO get api google---------------");
-                            console.log(response.body);
-                            console.log("--------------FIN get api google---------------");
-                            let json = JSON.parse(response.body);
-                            console.log(json);
-                            console.log(json.destination_addresses);
-                            console.log(json.rows[0].elements[0].status);
-                            if (json.rows[0].elements[0].status = "OK") {
 
-                                usrDistancia = json.rows[0].elements[0].distance.text;
-                                usrTiempo = json.rows[0].elements[0].duration.text
-                                console.log("distancia " + usrDistancia + "tiempo " + usrTiempo);
-                            }
-                        });
+                        const axios = require('axios');
 
+                        const response = await axios.get('https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=' + origenGM + '&destinations=' + destinoGM + '&language=es-ES&key=' + decryptedString);
+                        // handle success
+                        console.log("--------------INICIO get api google---------------");
+                        console.log(response.data);
+                        console.log("--------------FIN get api google---------------");
+
+
+                        console.log(response.data.destination_addresses);
+                        console.log(response.data.rows[0].elements[0].status);
+
+                        if (response.data.rows[0].elements[0].status = "OK") {
+
+                            usrDistancia = response.data.rows[0].elements[0].distance.text;
+                            usrTiempo = response.data.rows[0].elements[0].duration.text
+                            console.log("distancia " + usrDistancia + "tiempo " + usrTiempo);
+                        }
 
                         const practicas = await ds.dbClient.query("select Practices.id,Practices.name as nombre,ImgPrescriptions.picture as imagen from Practices left join ImgPrescriptions on Practices.id = ImgPrescriptions.PracticeId and ImgPrescriptions.RequestId = " + usuario.id + " where Practices.id in (select PracticeId from Requests_Practices where RequestId = " + usuario.id + ")", { type: Sequelize.QueryTypes.SELECT });
-
 
                         var preacticasID = "";
 
