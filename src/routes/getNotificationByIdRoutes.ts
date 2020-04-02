@@ -37,7 +37,7 @@ const router = (app: any, ds: DataService) => {
 
                         ///Llamad al APi de Google distance-matrix
                         console.log("voy a hacer el rquest a Googlemaps");
-
+                        console.log("voy a hacer el rquest a Googlemaps");
                         console.log("voy a hacer el request a GM");
 
                         var request = require('request');
