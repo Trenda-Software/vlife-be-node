@@ -12,6 +12,15 @@ const router = (app: any, ds: DataService) => {
                     res.sendStatus(403);
                 } else {
 
+
+                    const Cryptr = require('cryptr');
+                    const cryptr = new Cryptr('goyeneche');
+
+                    //const encryptedString = cryptr.encrypt('AIzaSyD4HK2DucBEZplPHjwWAb1ALvuEImprrOw');
+                    const decryptedString = cryptr.decrypt(process.env.GM_API_KEY);
+
+                    //console.log("Encriptada " + encryptedString + "FIN");
+                    console.log("Desencriptada " + decryptedString);
                     const profesional: any = ds.dbModels.professional;
 
                     const profesional1 = await profesional.findOne({
@@ -31,14 +40,14 @@ const router = (app: any, ds: DataService) => {
                         var request = require('request');
                         var options = {
                             'method': 'GET',
-                            'url': 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=' + origenGM + '&destinations=' + destinoGM + '&language=es-ES&key=AIzaSyDUAU0RLjaFsQUKdw0yzvaDy8yCbxXUd8s',
+                            'url': 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=' + origenGM + '&destinations=' + destinoGM + '&language=es-ES&key=' + decryptedString,
                             'headers': {
                             }
                         };
 
                         var usrDistancia = "";
                         var usrTiempo = "";
-                        request(options, function (error: any, response: any) {
+                        await request(options, function (error: any, response: any) {
                             if (error) throw new Error(error);
                             console.log("--------------INICIO get api google---------------");
                             console.log(response.body);
@@ -46,10 +55,12 @@ const router = (app: any, ds: DataService) => {
                             let json = JSON.parse(response.body);
                             console.log(json);
                             console.log(json.destination_addresses);
-
+                            console.log(json.rows[0].elements[0].status);
                             if (json.rows[0].elements[0].status = "OK") {
+
                                 usrDistancia = json.rows[0].elements[0].distance.text;
                                 usrTiempo = json.rows[0].elements[0].duration.text
+                                console.log("distancia " + usrDistancia + "tiempo " + usrTiempo);
                             }
                         });
 
