@@ -18,6 +18,7 @@ import setProffcmTokenRoutes from './routes/setProffcmTokenRoutes';
 import responsepacientRoutes from './routes/responsepacientRoutes';
 import terminarservRoutes from './routes/terminarservRoutes';
 import getNotificationByIdRoutes from './routes/getNotificationByIdRoutes';
+import profGeolocRoutes from './routes/profGeolocRoutes';
 
 
 import DataService from './service/DataService';
@@ -84,6 +85,8 @@ setProffcmTokenRoutes(app, ds);
 responsepacientRoutes(app, ds);
 terminarservRoutes(app, ds);
 getNotificationByIdRoutes(app, ds);
+profGeolocRoutes(app, ds);
+
 
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));

@@ -12,20 +12,50 @@ const router = (app: any, ds: DataService) => {
                     res.sendStatus(403);
                 } else {
 
+                    const profesional: any = ds.dbModels.professional;
+
+                    const profesional1 = await profesional.findOne({
+                        where: { id: req.body.id }
+                    });
+
+                    const origenGM = profesional1.lat + "," + profesional1.lng
+
                     const usuarios = await ds.dbClient.query("Select Requests.id,Requests.commentusr,name,surname,address,lat,lng,mobile,email,dni,picture from Users inner join Requests  on Users.id = Requests.UserId where Requests.ProfessionalId = " + req.body.id, { type: Sequelize.QueryTypes.SELECT });
 
                     const solicitudes = usuarios.map(async (usuario: any) => {
+
+                        const destinoGM = usuario.lat + "," + usuario.lng
+
+                        ///Llamad al APi de Google distance-matrix
+
+                        var request = require('request');
+                        var options = {
+                            'method': 'GET',
+                            'url': 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=' + origenGM + '&destinations=' + destinoGM + '&language=es-ES&key=AIzaSyDUAU0RLjaFsQUKdw0yzvaDy8yCbxXUd8s',
+                            'headers': {
+                            }
+                        };
+
+                        var usrDistancia = "";
+                        var usrTiempo = "";
+                        request(options, function (error: any, response: any) {
+                            if (error) throw new Error(error);
+                            console.log("--------------INICIO get api google---------------");
+                            console.log(response.body);
+                            console.log("--------------FIN get api google---------------");
+                            let json = JSON.parse(response.body);
+                            console.log(json);
+                            console.log(json.destination_addresses);
+
+                            if (json.rows[0].elements[0].status = "OK") {
+                                usrDistancia = json.rows[0].elements[0].distance.text;
+                                usrTiempo = json.rows[0].elements[0].duration.text
+                            }
+                        });
+
+
                         const practicas = await ds.dbClient.query("select Practices.id,Practices.name as nombre,ImgPrescriptions.picture as imagen from Practices left join ImgPrescriptions on Practices.id = ImgPrescriptions.PracticeId and ImgPrescriptions.RequestId = " + usuario.id + " where Practices.id in (select PracticeId from Requests_Practices where RequestId = " + usuario.id + ")", { type: Sequelize.QueryTypes.SELECT });
 
-                        /*                         const imgprescriptions = await ds.dbClient.query("select * from ImgPrescriptions where RequestId = " + usuario.id, { type: Sequelize.QueryTypes.SELECT });
-                        
-                                                var imgPrescriptionurl: any = [];
-                                                imgprescriptions.forEach((imgprescription: any) => {
-                                                    imgPrescriptionurl.push(imgprescription.picture);
-                        
-                                                }); */
-
-                        //var practicasNombre: any = [];
 
                         var preacticasID = "";
 
@@ -55,7 +85,7 @@ const router = (app: any, ds: DataService) => {
                                     lat: usuario.lat,
                                     lng: usuario.lng,
                                 },
-                                telefono: usuario.mobile,
+                                //telefono: usuario.mobile,
                                 dni: usuario.dni,
                                 userpicture: usuario.picture,
                             },
@@ -64,8 +94,8 @@ const router = (app: any, ds: DataService) => {
                                 //recetas: imgPrescriptionurl,
                                 comentario: usuario.commentusr,
                                 valortotal: servicios.cost,
-                                distancek: servicios.distance,
-                                distancetiempo: servicios.time,
+                                distancek: usrDistancia,
+                                distancetiempo: usrTiempo,
                             }
                         };
 
