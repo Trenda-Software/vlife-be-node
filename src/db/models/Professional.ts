@@ -3,8 +3,10 @@ import Sequelize from 'sequelize';
 const ProfessionalModel = (sequelize: any) => {
     const Professional = sequelize.define('Professional', {
         code: Sequelize.STRING,
+        dni: Sequelize.STRING,
         name: Sequelize.STRING,
         surname: Sequelize.STRING,
+        pwd: Sequelize.STRING,
         mobile: Sequelize.STRING,
         email: Sequelize.STRING,
         lat: Sequelize.STRING,

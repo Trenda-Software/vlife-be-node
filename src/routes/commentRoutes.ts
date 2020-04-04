@@ -10,9 +10,9 @@ const router = (app: any, ds: DataService) => {
                     res.sendStatus(403);
                 } else {
                     const CommentModel: any = ds.dbModels.comment;
-
+                    console.log("id " + req.query.id);
                     const comentario = await CommentModel.findOne({
-                        where: { ProfessionalId: req.body.id }
+                        where: { ProfessionalId: req.query.id }
                     });
                     console.log(comentario);
                     if (!comentario) return res.status(400).send('No existen comentarios para el profesional solicitado');

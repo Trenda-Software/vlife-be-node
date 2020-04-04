@@ -24,12 +24,12 @@ const router = (app: any, ds: DataService) => {
                     const profesional: any = ds.dbModels.professional;
 
                     const profesional1 = await profesional.findOne({
-                        where: { id: req.body.id }
+                        where: { id: req.query.id }
                     });
 
                     const origenGM = profesional1.lat + "," + profesional1.lng
 
-                    const usuarios = await ds.dbClient.query("Select Requests.id,Requests.commentusr,name,surname,address,lat,lng,mobile,email,dni,picture from Users inner join Requests  on Users.id = Requests.UserId where Requests.ProfessionalId = " + req.body.id, { type: Sequelize.QueryTypes.SELECT });
+                    const usuarios = await ds.dbClient.query("Select Requests.id,Requests.commentusr,name,surname,address,lat,lng,mobile,email,dni,picture from Users inner join Requests  on Users.id = Requests.UserId where Requests.staterequest = 0 and Requests.ProfessionalId = " + req.query.id, { type: Sequelize.QueryTypes.SELECT });
 
                     const solicitudes = usuarios.map(async (usuario: any) => {
 
@@ -71,9 +71,9 @@ const router = (app: any, ds: DataService) => {
 
                         preacticasID = preacticasID.slice(0, -4);
 
-                        console.log("select Professionals.id,name,surname,sum(cost) as cost, '1km' as distance, '10m' as time, picture from Professionals  inner join PracticeCosts on Professionals.id = Professionalid where Professionals.id in (select Professionalid from PracticeCosts where (" + preacticasID + ") and ProfessionalId = " + req.body.id + " ) group by Professionalid");
+                        console.log("select Professionals.id,name,surname,sum(cost) as cost, '1km' as distance, '10m' as time, picture from Professionals  inner join PracticeCosts on Professionals.id = Professionalid where Professionals.id in (select Professionalid from PracticeCosts where (" + preacticasID + ") and ProfessionalId = " + req.query.id + " ) group by Professionalid");
 
-                        const servicios = await ds.dbClient.query("select Professionals.id,name,surname,sum(cost) as cost, '1km' as distance, '10m' as time, picture from Professionals  inner join PracticeCosts on Professionals.id = Professionalid where Professionals.id in (select Professionalid from PracticeCosts where (" + preacticasID + ") and ProfessionalId = " + req.body.id + " ) group by Professionalid", { type: Sequelize.QueryTypes.SELECT });
+                        const servicios = await ds.dbClient.query("select Professionals.id,name,surname,sum(cost) as cost, '1km' as distance, '10m' as time, picture from Professionals  inner join PracticeCosts on Professionals.id = Professionalid where Professionals.id in (select Professionalid from PracticeCosts where (" + preacticasID + ") and ProfessionalId = " + req.query.id + " ) group by Professionalid", { type: Sequelize.QueryTypes.SELECT });
 
                         console.log("--------------------");
                         console.log(usuario.id);
