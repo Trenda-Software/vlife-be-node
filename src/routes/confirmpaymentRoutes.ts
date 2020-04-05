@@ -117,7 +117,7 @@ const router = (app: any, ds: DataService) => {
 
                         await t.commit();
                         res.status(200).json({
-                            message: 'Respuesta de servicio generada con exito !!'
+                            message: 'Confirmación de pago generada con exito !!'
                         });
                     } catch (err) {
                         console.log("error " + err);

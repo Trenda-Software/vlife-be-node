@@ -1,47 +1,129 @@
 import DataService from '../service/DataService';
 import { any } from 'bluebird';
 import app from '../server';
-//MAca ojo mayuscula y minuscula
+
+
+const jwt = require('jsonwebtoken');
+const verifytoken = require('../validation/verifyToken');
+
+const { requestValidation } = require('../validation/validation');
+
+var FCM = require('fcm-push');
 
 const router = (app: any, ds: DataService) => {
 
     app.route('/cancelserv')
-        .get((req: any, res: any) => {
-            res.json({
-                message: 'Get generado JWT',
+        .get(verifytoken, (req: any, res: any) => {
+            jwt.verify(req.token, process.env.JWT_SECRETKEY, (err: any, authData: any) => {
+                if (err) {
+                    res.sendStatus(403);
+                } else {
+                    res.json({
+                        message: 'Get generado JWT'
+                    });
+                }
             });
+            // res.status(201);
+            //res.send('Get LoginJWT ok');
         })
-        .post(async (req: any, res: any) => {
-            try {
-                const request: any = ds.dbModels.request;
-                const request1 = await request.findOne({
-                    where: { id: req.body.id }
-                });
+        .post(verifytoken, async (req: any, res: any) => {
+            jwt.verify(req.token, process.env.JWT_SECRETKEY, async (err: any) => {
+                if (err) {
+                    res.sendStatus(403);
+                } else {
 
-                if (!request1) return res.status(400).send('El id no existe en la base de datos');
-
-                const userID = request1.UserId;
-                const professioanlID = request1.ProfessionalId;
-
-                const request2 = await request.update({ staterequest: 4 }, {
-                    where: { id: req.body.id }
-                });
-
-                const prefessional: any = ds.dbModels.professional;
-                const prof1 = await prefessional.update({ in_service: false }, {
-                    where: { id: professioanlID }
-                });
-
-                console.log("update " + req.body.id);
+                    console.log(req.body.id);
 
 
-                res.status(200).json({
-                    message: 'Servicio finalizado Correctamente!!'
-                });
-            } catch (err) {
-                console.log("error -- " + err)
-                return res.status(400).json({ message: err });
-            }
+                    const t = await ds.dbClient.transaction();
+
+                    try {
+
+                        // Aca va el codigo para actualizar el request
+                        console.log("voy a realizar el update");
+                        const requestm: any = ds.dbModels.request;
+                        var stateRequest = 4;
+                        const request1 = await requestm.update({ staterequest: stateRequest }, {
+                            where: { id: req.body.id }
+                        });
+                        //Consulto os datos del request
+                        const request2 = await requestm.findOne({
+                            where: { id: req.body.id }
+                        });
+
+                        console.log(JSON.stringify(request2));
+                        console.log("voy a consultar el usuario " + request2.UserId);
+
+                        const usuario: any = ds.dbModels.user;
+                        const user1 = await usuario.findOne({
+                            where: { id: request2.UserId }
+                        });
+
+                        var strUser = "";
+                        strUser = user1.name + " " + user1.surname;
+                        const strImagen = user1.picture;
+
+                        console.log("user " + strUser);
+                        console.log("Img " + strImagen);
+
+                        //Consulto datos del profesional
+                        const profesional: any = ds.dbModels.professional;
+
+
+                        const profesional2 = await profesional.findOne({
+                            where: { id: request2.ProfessionalId }
+                        });
+
+
+
+                        // Envio de notificacion push
+
+                        var serverKey = process.env.SERVER_KEY;
+                        var fcm = new FCM(serverKey);
+                        console.log("Seteo el token " + profesional2.fcmtoken);
+                        var token = profesional2.fcmtoken;
+
+
+                        var message = {
+                            to: token,
+                            notification: {
+                                title: "Se recibió una cancelación de servicio",
+                                image: strImagen
+                            },
+                            collapse_key: '',
+                            data: { // Esto es solo opcional, puede enviar cualquier dato     
+                                msg: strUser + " canceló el servicio",
+                                pnid: req.body.requestid
+                            },
+                            body: {
+                                title: strUser + " canceló el servicio",
+                                body: "Hola!",
+                                image: strImagen,
+                                icon: "Notificación",
+                                sound: "default"
+                            },
+                        };
+
+                        console.log("msg PN " + JSON.stringify(message));
+                        fcm.send(message, function (err: any, response: any) {
+                            if (err) {
+                                console.log("error encontrado ", JSON.stringify(err));
+                            } else {
+                                console.log("respuesta aquí", JSON.stringify(response));
+                            }
+                        });
+
+                        await t.commit();
+                        res.status(200).json({
+                            message: 'Cancelación de servicio generada con exito !!'
+                        });
+                    } catch (err) {
+                        console.log("error " + err);
+                        await t.rollback();
+                        return res.json({ message: JSON.stringify(err) });
+                    }
+                }
+            });
         });
 
 

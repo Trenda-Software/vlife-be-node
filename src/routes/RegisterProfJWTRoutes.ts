@@ -14,8 +14,6 @@ const { loginValidation, registerProfValidation } = require('../validation/valid
 
 const nodemailerSES = require("nodemailer");
 
-
-
 const router = (app: any, ds: DataService) => {
 
     app.route('/RegisterProfJWT')
@@ -62,15 +60,49 @@ const router = (app: any, ds: DataService) => {
                     address: req.body.address,
                     gender: req.body.gender,
                     description: req.body.description,
-                    in_service:0,
-                    on_line:1
+                    in_service: 0,
+                    on_line: 1
                 }
 
                 const profModel: any = ds.dbModels.professional;
 
                 const prof1 = await profModel.create(prof);
+                //Seteo el genero
                 await prof1.setGender(req.body.gender);
                 const hisGender = await prof1.getGender();
+                //Seteo la especialidad
+                const specialty: any = ds.dbModels.specialty;
+                const specialty1 = await specialty.findOne({
+                    where: { id: req.body.especialidadid }
+                });
+
+                await specialty1.addProfessionals([prof1]);
+
+                //Seteo las practicas asociadas
+                const PracticeCostModel: any = ds.dbModels.practicecost;
+
+                const practicas1 = req.body.practicas;
+
+                const practicas = practicas1.map(async (practica: any) => {
+
+                    const PracticeCost = await PracticeCostModel.create({
+                        cost: practica.cost,
+                    });
+                    await PracticeCost.setProfessional(prof1);
+                    await PracticeCost.setPractice(practica.id);
+                    return practicas;
+                });
+                Promise.all(practicas)
+                    .then(returnedValues => {
+                        // console.log('##########  MAP profPerSpecialties values: ', values);
+                        console.log("practicas: " + JSON.stringify(practicas));
+                    })
+                    .catch(reason => {
+                        console.log(reason);
+                        return res.json({ message: JSON.stringify(reason) });
+                    });
+
+
                 const profdev = {
                     id: prof1.id,
                     name: prof1.name,

@@ -144,6 +144,11 @@ const registerProfValidation = (data: any) => {
         description: Joi.string().optional().allow('').messages({
             'string.empty': 'Por favor ingrese dirección',
         }),
+        especialidadid: Joi.number().min(1).required().messages({
+            'number.integer': 'El campo debe ser un Id',
+            'number.min': 'El valor del campo debe ser mayor a 0',
+        }),
+        practicas: Joi.array()
     });
 
     return schema.validate(data);

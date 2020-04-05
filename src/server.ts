@@ -23,6 +23,8 @@ import profGeolocRoutes from './routes/profGeolocRoutes';
 import RegisterProfJWTRoutes from './routes/RegisterProfJWTRoutes';
 import confirmpaymentRoutes from './routes/confirmpaymentRoutes';
 import setProfonlineRoutes from './routes/setProfonlineRoutes';
+import getpracticesRoute from './routes/getpracticesRoute';
+
 
 
 
@@ -95,6 +97,8 @@ RegisterProfJWTRoutes(app, ds);
 cancelservRoutes(app, ds);
 confirmpaymentRoutes(app, ds);
 setProfonlineRoutes(app, ds);
+getpracticesRoute(app, ds);
+
 
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));

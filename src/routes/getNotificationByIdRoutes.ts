@@ -119,7 +119,10 @@ const router = (app: any, ds: DataService) => {
                             console.log("Solicitudes: " + JSON.stringify(returnedValues));
                             res.send(returnedValues);
                         })
-                        .catch(console.error);
+                        .catch(reason => {
+                            console.log(reason);
+                            return res.json({ message: JSON.stringify(reason) });
+                        });
                 }
             });
 
