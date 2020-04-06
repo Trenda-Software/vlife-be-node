@@ -53,7 +53,7 @@ const router = (app: any, ds: DataService) => {
                         console.log(response.data.destination_addresses);
                         console.log(response.data.rows[0].elements[0].status);
 
-                        if (response.data.rows[0].elements[0].status = "OK") {
+                        if (response.data.rows.status = "OK") {
 
                             usrDistancia = response.data.rows[0].elements[0].distance.text;
                             usrTiempo = response.data.rows[0].elements[0].duration.text

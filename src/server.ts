@@ -24,6 +24,7 @@ import RegisterProfJWTRoutes from './routes/RegisterProfJWTRoutes';
 import confirmpaymentRoutes from './routes/confirmpaymentRoutes';
 import setProfonlineRoutes from './routes/setProfonlineRoutes';
 import getpracticesRoute from './routes/getpracticesRoute';
+import LoginprofJWTRoutes from './routes/LoginprofJWTRoutes';
 
 
 
@@ -98,6 +99,7 @@ cancelservRoutes(app, ds);
 confirmpaymentRoutes(app, ds);
 setProfonlineRoutes(app, ds);
 getpracticesRoute(app, ds);
+LoginprofJWTRoutes(app, ds);
 
 
 
