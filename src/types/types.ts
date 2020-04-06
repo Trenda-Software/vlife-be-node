@@ -12,6 +12,7 @@ export interface DBModelsI {
     ImgPrescription: Model | null;
     gender: Model | null;
     practicecost: Model | null;
+    pacienttype: Model | null;
 }
 
 export interface MenuI {

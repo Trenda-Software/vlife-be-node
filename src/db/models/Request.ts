@@ -19,6 +19,8 @@ const RequestModel = (sequelize: any) => {
      5 = Solicitud con Pago Confirmado x el usuario por el usuario
     */
 
+
+
     return Request;
 };
 

@@ -2,11 +2,11 @@ import Sequelize from 'sequelize';
 import { DBModelsI } from '../../types/types';
 
 const PracticeCostModel = (sequelize: any) => {
-    const Practice = sequelize.define('PracticeCost', {
+    const PracticeCost = sequelize.define('PracticeCost', {
         cost: Sequelize.DOUBLE,
     });
 
-    return Practice;
+    return PracticeCost;
 };
 
 export default PracticeCostModel;

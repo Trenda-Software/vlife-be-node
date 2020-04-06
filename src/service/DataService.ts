@@ -12,6 +12,8 @@ import Request from '../db/models/Request';
 import ImgPrescription from '../db/models/ImgPrescription';
 import Gender from '../db/models/Gender';
 import PracticeCost from '../db/models/PracticeCost';
+import Pacienttype from '../db/models/Pacienttype';
+
 const { Sequelize } = require('sequelize');
 
 export default class DataService {
@@ -29,6 +31,7 @@ export default class DataService {
         ImgPrescription: null,
         gender: null,
         practicecost: null,
+        pacienttype: null,
     };
 
     constructor(dbConfig: any) {
@@ -83,6 +86,7 @@ export default class DataService {
         const ImgPrescriptionModel: any = this.dbClient.models.ImgPrescription;
         const GenderModel: any = this.dbClient.models.Gender;
         const PracticeCostModel: any = this.dbClient.models.PracticeCost;
+        const PacienttypeModel: any = this.dbClient.models.Pacienttype;
 
         const province1 = await ProvinceModel.create({ code: 'BSAS', name: 'Buenos Aires' });
         const country1 = await CountryModel.create({ code: 'ARG', name: 'Argentina' });
@@ -260,6 +264,18 @@ export default class DataService {
         });
         await PracticeCost3.setProfessional(professional4);
         await PracticeCost3.setPractice(practice3);
+        const Pacienttype1 = await PacienttypeModel.create({
+            name: 'Niño/a',
+        });
+        const Pacienttype2 = await PacienttypeModel.create({
+            name: 'Embarazada',
+        });
+        const Pacienttype3 = await PacienttypeModel.create({
+            name: 'Mayor',
+        });
+        const Pacienttype4 = await PacienttypeModel.create({
+            name: 'Adulto/a',
+        });
     }
 
     connectWithSequelize = async () => {
@@ -294,6 +310,7 @@ export default class DataService {
         const ImgPrescriptionModel: any = ImgPrescription(this.dbClient);
         const GenderModel: any = Gender(this.dbClient);
         const PracticeCostModel: any = PracticeCost(this.dbClient);
+        const PacienttypeModel: any = Pacienttype(this.dbClient);
 
         // associations
         ProfessionalModel.belongsToMany(SpecialtyModel, { through: 'Specialties_Professionals' });
@@ -325,6 +342,7 @@ export default class DataService {
         RequestModel.belongsToMany(PracticeModel, { through: 'Requests_Practices' });
         RequestModel.belongsTo(UserModel);
         RequestModel.belongsTo(ProfessionalModel);
+        RequestModel.belongsTo(PacienttypeModel);
 
         ImgPrescriptionModel.belongsTo(RequestModel);
         ImgPrescriptionModel.belongsTo(PracticeModel);
@@ -340,5 +358,6 @@ export default class DataService {
         this.dbModels.ImgPrescription = ImgPrescriptionModel;
         this.dbModels.gender = GenderModel;
         this.dbModels.practicecost = PracticeCostModel;
+        this.dbModels.pacienttype = PacienttypeModel;
     };
 }

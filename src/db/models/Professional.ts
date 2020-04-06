@@ -19,6 +19,7 @@ const ProfessionalModel = (sequelize: any) => {
         in_service: Sequelize.BOOLEAN,
         on_line: Sequelize.BOOLEAN,
         fcmtoken: Sequelize.STRING,
+        comvlife: Sequelize.DOUBLE(11, 10),
 
     });
 

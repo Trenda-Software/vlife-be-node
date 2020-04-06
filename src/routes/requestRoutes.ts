@@ -66,6 +66,7 @@ const router = (app: any, ds: DataService) => {
 
                         await request1.setUser(req.body.userid);
                         await request1.setProfessional(req.body.professionalid);
+                        await request1.setPacienttype(req.body.pacienttype);
 
                         //Consulto datos del usuario
                         var strUsuario = "";
@@ -99,7 +100,7 @@ const router = (app: any, ds: DataService) => {
 
                             if (especialidades[especialidad].prescription) {
 
-                               // console.log("ID Especialidad" + especialidades[especialidad].prescription)
+                                // console.log("ID Especialidad" + especialidades[especialidad].prescription)
 
                                 var filename = req.body.userid + especialidad + ".png";
                                 var b64string = especialidades[especialidad].prescription;

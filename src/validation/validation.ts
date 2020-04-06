@@ -160,7 +160,8 @@ const requestValidation = (data: any) => {
         practices: Joi.array(),
         //practicesid: Joi.array().required(),
         //prescription: Joi.array().items(Joi.string().base64()),
-        comment: Joi.string().optional().allow('')
+        comment: Joi.string().optional().allow(''),
+        pacienttype: Joi.number().required().min(1).max(4)
     });
     return schema.validate(data);
 }
