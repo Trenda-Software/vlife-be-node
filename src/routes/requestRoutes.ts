@@ -131,7 +131,7 @@ const router = (app: any, ds: DataService) => {
                         }
                         // Envio de notificacion push
                         console.log("cargo el json");
-                        var serverKey = process.env.SERVER_KEY;
+                        var serverKey = process.env.PROF_SERVER_KEY;
                         var fcm = new FCM(serverKey);
                         console.log("Seteo el token " + profesional1.fcmtoken);
                         var token = profesional1.fcmtoken;
