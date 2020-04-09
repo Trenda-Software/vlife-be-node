@@ -37,12 +37,12 @@ const router = (app: any, ds: DataService) => {
             const Country: any = ds.dbModels.country;
             const Gender: any = ds.dbModels.gender;
             const usuario: any = ds.dbModels.user;
-            const usermail = await usuario.findOne({
+            const userMail = await usuario.findOne({
                 //include: [Province, Country, Gender],
                 where: { email: req.body.email }
             });
 
-            if (!usermail) return res.status(400).send('El usuario y/o clave son incorrectos');
+            if (!userMail) return res.status(400).send('El usuario y/o clave son incorrectos');
 
             //Hash password
             /*
@@ -53,10 +53,10 @@ const router = (app: any, ds: DataService) => {
             console.log(hashedPassword);
             */
 
-            const userpwd = await usuario.findOne({
+            const userPwd = await usuario.findOne({
                 where: { pwd: req.body.pwd }
             });
-            if (!userpwd) return res.status(400).send('El usuario y/o clave son incorrectos');
+            if (!userPwd) return res.status(400).send('El usuario y/o clave son incorrectos');
 
             /*
             const validPWD = await bcrypt.compare("maca1234", userpwd.pwd.trim());
@@ -66,18 +66,18 @@ const router = (app: any, ds: DataService) => {
 
             if (!validPWD) return res.status(400).send('Clave invalida');
             */
-            const hisGender = await usermail.getGender();
+            const hisGender = await userMail.getGender();
             console.log("gender:", hisGender.name);
 
             const user = {
-                id: usermail.id,
-                name: usermail.name,
-                surname: usermail.surname,
-                dni: usermail.dni,
-                email: usermail.email,
-                mobile: usermail.mobile,
+                id: userMail.id,
+                name: userMail.name,
+                surname: userMail.surname,
+                dni: userMail.dni,
+                email: userMail.email,
+                mobile: userMail.mobile,
                 gender: hisGender.name,
-                address: usermail.address
+                address: userMail.address
             }
             /*
                 Esta es la manera de firmam poniendo un tiempo de expiracion al token, 
@@ -95,23 +95,5 @@ const router = (app: any, ds: DataService) => {
 
 
 };
-/*
-// Format Token
-// Autorization: 1 <access_token>
 
-
-function verifytoken(req: any, res: any, next: any) {
-    const bearerHeader = req.headers['authorization'];
-
-    if (bearerHeader) {
-        const bearer = bearerHeader.split(' ');
-        const bearerToken = bearer[1];
-        req.token = bearerToken;
-        next();
-    } else {
-        // Forbidden
-        res.sendStatus(403);
-    }
-}
-*/
 export default router;

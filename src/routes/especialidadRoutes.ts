@@ -10,9 +10,9 @@ const router = (app: any, ds: DataService) => {
                 if (err) {
                     res.sendStatus(403);
                 } else {
-                    const SpecialtyModel: any = ds.dbModels.specialty;
+                    const specialtyModel: any = ds.dbModels.specialty;
 
-                    const specialties = await SpecialtyModel.findAll();
+                    const specialties = await specialtyModel.findAll();
 
                     // preparar el resultado
                     const profPerSpecialties = specialties.map(async (specialty: any) => {

@@ -13,10 +13,8 @@ const router = (app: any, ds: DataService) => {
                     const Cryptr = require('cryptr');
                     const cryptr = new Cryptr('goyeneche');
 
-                    //const encryptedString = cryptr.encrypt('AIzaSyD4HK2DucBEZplPHjwWAb1ALvuEImprrOw');
                     const decryptedString = cryptr.decrypt(process.env.GM_API_KEY);
 
-                    //console.log("Encriptada " + encryptedString + "FIN");
                     console.log("Desencriptada " + decryptedString);
 
                     const usuarios: any = ds.dbModels.user;
@@ -36,9 +34,10 @@ const router = (app: any, ds: DataService) => {
                     const destinoGM = usuario1.lat + "," + usuario1.lng
 
 
-                    var prfDistancia = "";
-                    var prfTiempo = "";
+                    var prfDistancia = "N/D";
+                    var prfTiempo = "N/D";
                     ///Llamad al APi de Google distance-matrix
+
                     console.log("voy a hacer el request a Googlemaps");
 
                     const response = await axios.get('https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=' + origenGM + '&destinations=' + destinoGM + '&language=es-ES&key=' + decryptedString);
@@ -51,13 +50,14 @@ const router = (app: any, ds: DataService) => {
                     console.log(response.data.destination_addresses);
                     console.log(response.data.rows[0].elements[0].status);
 
-                    if (response.data.rows[0].elements[0].status = "OK") {
+                    if (response.data.rows.status == "OK") {
+                        if (response.data.rows[0].elements[0].status == "OK") {
 
-                        prfDistancia = response.data.rows[0].elements[0].distance.text;
-                        prfTiempo = response.data.rows[0].elements[0].duration.text
-                        console.log("distancia " + prfDistancia + "tiempo " + prfTiempo);
+                            prfDistancia = response.data.rows[0].elements[0].distance.text;
+                            prfTiempo = response.data.rows[0].elements[0].duration.text;
+                            console.log("distancia " + prfDistancia + "tiempo " + prfTiempo);
+                        }
                     }
-
                     const practicas = await ds.dbClient.query("select Professionals.id as ProfId,lat,lng,Professionals.name,surname,Practices.id as PracticaId, Practices.name as PracticaName,PracticeCosts.cost as cost, '1km' as distance, '10m' as time, picture from Professionals  inner join PracticeCosts on Professionals.id = Professionalid inner join Practices on PracticeCosts.PracticeId = Practices.id where Professionals.id in (select Professionalid from PracticeCosts ) and Professionals.id = " + req.query.Professionalid, { type: Sequelize.QueryTypes.SELECT });
 
                     var practicasArray: any = [];
@@ -137,7 +137,7 @@ const router = (app: any, ds: DataService) => {
                     const solicitudes = practicas1.map((practica: any, index: any) => {
 
                         /// ver aca que genera una coma de mas
-                        destinoGM1 =  practica.lat + "," + practica.lng 
+                        destinoGM1 = practica.lat + "," + practica.lng
 
                         console.log("destinoGM " + practica.lat + "," + practica.lng);
                         console.log("destinoGM1 " + destinoGM1);
@@ -149,7 +149,7 @@ const router = (app: any, ds: DataService) => {
                             // console.log('##########  MAP profPerSpecialties values: ', values);
                             console.log("SolicitudesGM: " + returnedValues);
                             for (let returnedValue in returnedValues) {
-                                destinoGM = destinoGM +  returnedValues[returnedValue] + "|";
+                                destinoGM = destinoGM + returnedValues[returnedValue] + "|";
                             }
                             destinoGM = destinoGM.slice(0, -1);
                             console.log("destinoGM final: " + destinoGM);
@@ -176,7 +176,7 @@ const router = (app: any, ds: DataService) => {
                             console.log(response.data.destination_addresses);
                             console.log(response.data.rows[0].elements[0].status);
 
-                            if (response.data.rows.status = "OK") {
+                            if (response.data.rows.status == "OK") {
 
                                 prfDistancia = response.data.rows[0].elements[0].distance.text;
                                 prfTiempo = response.data.rows[0].elements[0].duration.text

@@ -68,7 +68,7 @@ export default class DataService {
     }
 
     async resetInitialData() {
-        await this.dbClient.sync({ force: true });
+        await this.dbClient.sync({ force: false });
     }
 
     async initDBData() {
@@ -88,7 +88,7 @@ export default class DataService {
         const PracticeCostModel: any = this.dbClient.models.PracticeCost;
         const PacienttypeModel: any = this.dbClient.models.Pacienttype;
 
-        const province1 = await ProvinceModel.create({ code: 'BSAS', name: 'Buenos Aires' });
+/*         const province1 = await ProvinceModel.create({ code: 'BSAS', name: 'Buenos Aires' });
         const country1 = await CountryModel.create({ code: 'ARG', name: 'Argentina' });
         await province1.setCountry(country1);
 
@@ -200,12 +200,12 @@ export default class DataService {
         comment3.setUser(user2);
         comment3.setProfessional(professional1);
 
-        const kinesio = await SpecialtyModel.create({ name: 'Kinesiologia', code: 'kinesio' });
-        const radio = await SpecialtyModel.create({ name: 'Radioterapia', code: 'radio' });
-        const enfer = await SpecialtyModel.create({ name: 'Enfermeria', code: 'enferm' });
+        const kinesio = await SpecialtyModel.create({ name: 'Kinesiología', code: 'kinesio' });
+        const medic = await SpecialtyModel.create({ name: 'Médico', code: 'medic' });
+        const enfer = await SpecialtyModel.create({ name: 'Enfermería', code: 'enferm' });
 
         await kinesio.addProfessionals([professional1, professional2, professional3]);
-        await radio.addProfessionals([professional1, professional4]);
+        await medic.addProfessionals([professional1, professional4]);
         await enfer.addProfessionals([professional2, professional4]);
 
         const kinesioResults = await SpecialtyModel.findOne({
@@ -217,50 +217,246 @@ export default class DataService {
             console.log(`Kinesio Professional - ID: ${specialty.dataValues.id} NAME: ${specialty.dataValues.name}`);
         });
 
-        const radioResults = await SpecialtyModel.findOne({
-            where: { code: 'radio' },
+        const medicResults = await SpecialtyModel.findOne({
+            where: { code: 'medic' },
             include: ProfessionalModel,
         });
-        console.log('Radio Professional QTY:' + radioResults.Professionals.length);
-        radioResults.Professionals.forEach((specialty: any) => {
-            console.log(`adio Professional - ID: ${specialty.dataValues.id} NAME: ${specialty.dataValues.name}`);
+        console.log('Radio Professional QTY:' + medicResults.Professionals.length);
+        medicResults.Professionals.forEach((specialty: any) => {
+            console.log(`Medic Professional - ID: ${specialty.dataValues.id} NAME: ${specialty.dataValues.name}`);
         });
 
+        //Medico
         const practice1 = await PracticeModel.create({
-            name: 'Cambio de Bolsa de colosiomia',
-            code: 'CBC',
-            cost: '600',
-            additional_info: true,
+            name: 'Herida de Piel',
+            code: 'HEP',
+            cost: '625',
+            additional_info: false,
         });
         const practice2 = await PracticeModel.create({
-            name: 'Inyeccion Intramuscular',
-            code: 'IIM',
+            name: 'Fiebre',
+            code: 'FIE',
+            cost: '625',
+            additional_info: false,
+        });
+        const practice3 = await PracticeModel.create({
+            name: 'Dolor Abdominal',
+            code: 'DOA',
+            cost: '625',
+            additional_info: false,
+        });
+        const practice4 = await PracticeModel.create({
+            name: 'Tos Frecuente',
+            code: 'TOF',
+            cost: '625',
+            additional_info: false,
+        });
+        const practice5 = await PracticeModel.create({
+            name: 'Diarrea',
+            code: 'DIA',
+            cost: '625',
+            additional_info: false,
+        });
+        const practice6 = await PracticeModel.create({
+            name: 'Dolor de Oido',
+            code: 'DOI',
+            cost: '625',
+            additional_info: false,
+        });
+        const practice7 = await PracticeModel.create({
+            name: 'Dolor de Garganta',
+            code: 'DOG',
+            cost: '625',
+            additional_info: false,
+        });
+        const practice8 = await PracticeModel.create({
+            name: 'Fatiga',
+            code: 'FAT',
+            cost: '625',
+            additional_info: false,
+        });
+
+        //Enfermeria
+
+        const practice9 = await PracticeModel.create({
+            name: 'Toma de Signo Vital',
+            code: 'TSV',
+            cost: '250',
+            additional_info: false,
+        });
+        const practice10 = await PracticeModel.create({
+            name: 'Inyección',
+            code: 'INY',
             cost: '300',
             additional_info: true,
         });
-        const practice3 = await PracticeModel.create({
-            name: 'Higiene de Paciente',
-            code: 'HIP',
-            cost: '200',
+        const practice11 = await PracticeModel.create({
+            name: 'Curación de Heridas',
+            code: 'CUH',
+            cost: '400',
             additional_info: false,
         });
-        await practice1.setSpecialty(enfer);
-        await practice2.setSpecialty(enfer);
-        await practice3.setSpecialty(enfer);
+        const practice12 = await PracticeModel.create({
+            name: 'Enema',
+            code: 'ENE',
+            cost: '625',
+            additional_info: false,
+        });
+        const practice13 = await PracticeModel.create({
+            name: 'Cambio de Bolsa de Ostomía',
+            code: 'CBO',
+            cost: '750',
+            additional_info: false,
+        });
+        const practice14 = await PracticeModel.create({
+            name: 'Higiene de Paciente',
+            code: 'HIP',
+            cost: '750',
+            additional_info: false,
+        });
+        const practice15 = await PracticeModel.create({
+            name: 'Cuidado de Paciente Express 4hs',
+            code: 'CPE',
+            cost: '1000',
+            additional_info: false,
+        });
+        const practice16 = await PracticeModel.create({
+            name: 'Cuidado de Paciente Full 6hs',
+            code: 'CPF',
+            cost: '1500',
+            additional_info: false,
+        });
+        const practice17 = await PracticeModel.create({
+            name: 'Cuidado de Paciente Full Time 8hs',
+            code: 'CPT',
+            cost: '2000',
+            additional_info: false,
+        });
+        const practice18 = await PracticeModel.create({
+            name: 'Guardia Activa 12hs',
+            code: 'GA1',
+            cost: '3100',
+            additional_info: false,
+        });
+        const practice19 = await PracticeModel.create({
+            name: 'Guardia Activa 24hs',
+            code: 'GA2',
+            cost: '6250',
+            additional_info: false,
+        });
+
+        const practice20 = await PracticeModel.create({
+            name: 'Guardia Pasiva 12hs',
+            code: 'GP1',
+            cost: '3100',
+            additional_info: false,
+        });
+        const practice21 = await PracticeModel.create({
+            name: 'Guardia Pasiva 24hs',
+            code: 'GP2',
+            cost: '6250',
+            additional_info: false,
+        });
+
+        //Kinesiologia
+
+        const practice22 = await PracticeModel.create({
+            name: 'Terapia Adulto Mayor',
+            code: 'TAM',
+            cost: '700',
+            additional_info: true,
+        });
+        const practice23 = await PracticeModel.create({
+            name: 'Neuro Rehabilitación',
+            code: 'NRE',
+            cost: '700',
+            additional_info: true,
+        });
+        const practice24 = await PracticeModel.create({
+            name: 'Respiratoria',
+            code: 'RES',
+            cost: '700',
+            additional_info: true,
+        });
+        const practice25 = await PracticeModel.create({
+            name: 'Traumatología y Ortopedia',
+            code: 'TRO',
+            cost: '700',
+            additional_info: true,
+        });
+        const practice26 = await PracticeModel.create({
+            name: 'Electroterapia',
+            code: 'ELE',
+            cost: '700',
+            additional_info: true,
+        });
+        const practice27 = await PracticeModel.create({
+            name: 'Deportivo',
+            code: 'DEP',
+            cost: '700',
+            additional_info: true,
+        });
+        const practice28 = await PracticeModel.create({
+            name: 'Lesiones',
+            code: 'LES',
+            cost: '700',
+            additional_info: true,
+        });
+        const practice29 = await PracticeModel.create({
+            name: 'Algias Generalizadas',
+            code: 'ALG',
+            cost: '700',
+            additional_info: true,
+        });
+
+        //Medico
+        await practice1.setSpecialty(medic);
+        await practice2.setSpecialty(medic);
+        await practice3.setSpecialty(medic);
+        await practice4.setSpecialty(medic);
+        await practice5.setSpecialty(medic);
+        await practice6.setSpecialty(medic);
+        await practice7.setSpecialty(medic);
+        await practice8.setSpecialty(medic);
+
+        //Enferneria
+        await practice9.setSpecialty(enfer);
+        await practice10.setSpecialty(enfer);
+        await practice11.setSpecialty(enfer);
+        await practice12.setSpecialty(enfer);
+        await practice13.setSpecialty(enfer);
+        await practice14.setSpecialty(enfer);
+        await practice15.setSpecialty(enfer);
+        await practice16.setSpecialty(enfer);
+        await practice17.setSpecialty(enfer);
+        await practice18.setSpecialty(enfer);
+        await practice19.setSpecialty(enfer);
+        await practice20.setSpecialty(enfer);
+        await practice21.setSpecialty(enfer);
+
+        //Kineseologia
+        await practice22.setSpecialty(kinesio);
+        await practice23.setSpecialty(kinesio);
+        await practice24.setSpecialty(kinesio);
+        await practice25.setSpecialty(kinesio);
+        await practice26.setSpecialty(kinesio);
+        await practice27.setSpecialty(kinesio);
+        await practice28.setSpecialty(kinesio);
+        await practice29.setSpecialty(kinesio);
 
         const PracticeCost1 = await PracticeCostModel.create({
-            cost: '600',
+            cost: '625',
         });
         await PracticeCost1.setProfessional(professional2);
         await PracticeCost1.setPractice(practice1);
 
         const PracticeCost2 = await PracticeCostModel.create({
-            cost: '300',
+            cost: '625',
         });
         await PracticeCost2.setProfessional(professional4);
         await PracticeCost2.setPractice(practice2);
         const PracticeCost3 = await PracticeCostModel.create({
-            cost: '200',
+            cost: '625',
         });
         await PracticeCost3.setProfessional(professional4);
         await PracticeCost3.setPractice(practice3);
@@ -276,7 +472,7 @@ export default class DataService {
         const Pacienttype4 = await PacienttypeModel.create({
             name: 'Adulto/a',
         });
-    }
+ */    }
 
     connectWithSequelize = async () => {
         console.log('connectWithSequelize');

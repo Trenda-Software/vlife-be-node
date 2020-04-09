@@ -1,7 +1,6 @@
 import DataService from '../service/DataService';
 import { any } from 'bluebird';
 import app from '../server';
-//import UsuarioModel from '../db/models/User';
 
 const jwt = require('jsonwebtoken');
 const verifytoken = require('../validation/verifyToken');
@@ -28,22 +27,19 @@ const router = (app: any, ds: DataService) => {
                     });
                 }
             });
-            // res.status(201);
-            //res.send('Get LoginJWT ok');
+
         })
         .post(async (req: any, res: any) => {
-            // Lets validate data 
-            //const { error } = Joi.validate(req.body, schema);
             const { error } = registerProfValidation(req.body);
             if (error) return res.status(400).send(error.details[0].message);
             //checking if the email exist
 
             const profesional: any = ds.dbModels.professional;
-            const profmail = await profesional.findOne({
+            const profMail = await profesional.findOne({
                 where: { email: req.body.email }
             });
 
-            if (profmail) return res.status(400).send('El mail ya esta en uso');
+            if (profMail) return res.status(400).send('El mail ya esta en uso');
 
             try {
 
@@ -53,8 +49,6 @@ const router = (app: any, ds: DataService) => {
                     name: req.body.name,
                     surname: req.body.surname,
                     pwd: req.body.pwd,
-                    //coordinates: req.body.coordinates,
-                    //picture: req.body.picture,
                     email: req.body.email,
                     mobile: req.body.mobile,
                     address: req.body.address,
@@ -94,7 +88,6 @@ const router = (app: any, ds: DataService) => {
                 });
                 Promise.all(practicas)
                     .then(returnedValues => {
-                        // console.log('##########  MAP profPerSpecialties values: ', values);
                         console.log("practicas: " + JSON.stringify(practicas));
                     })
                     .catch(reason => {
@@ -148,24 +141,15 @@ const router = (app: any, ds: DataService) => {
                     console.log("Error upload: " + err);
                 });
 
-                //await user1.setCountry(country1);
-                //await user1.setProvince(province1);
-                /*
-                    Esta es la manera de firmam poniendo un tiempo de expiracion al token, 
-                    por ahora no lo voy a usar
-                    jwt.sign({ user }, 'secretkey', { expiresIn: '30s' }, (err: any, token: any) => {
-                */
-
-
                 console.log("Creo el transporte");
 
-                var transporter = nodemailerSES.createTransport({ // Yes. SMTP!
-                    "host": process.env.EMAIL_HOST,//"email-smtp.eu-west-1.amazonaws.com", // Amazon email SMTP hostname
-                    "secure": process.env.EMAIL_SECURE,//true, // use SSL
-                    "port": process.env.EMAIL_PORT,//465, // port for secure SMTP
+                var transporter = nodemailerSES.createTransport({
+                    "host": process.env.EMAIL_HOST,
+                    "secure": process.env.EMAIL_SECURE,
+                    "port": process.env.EMAIL_PORT,
                     "auth": {
-                        "user": process.env.EMAIL_USER,//"AKIATZGWNNFHKDGUFCWZ", // Use from Amazon Credentials
-                        "pass": process.env.EMAIL_PASS//"BGLEqKAFPboBc4rg4gknyHESsgkAfUmdKyni1TZZdp/I", // Use from Amazon Credentials
+                        "user": process.env.EMAIL_USER,
+                        "pass": process.env.EMAIL_PASS
                     }
                 });
                 let email1 = {
@@ -186,7 +170,7 @@ const router = (app: any, ds: DataService) => {
                 transporter.sendMail(email1, (err: any, info: any) => {
 
                     if (err) {
-                        console.log("Error al enviar email - error " + err);
+                        console.log("Error al enviar email - error " + JSON.stringify(err));
                     } else {
                         console.log("Correo enviado correctamente - info " + JSON.stringify(info));
                     }

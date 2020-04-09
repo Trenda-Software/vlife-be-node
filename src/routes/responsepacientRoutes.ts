@@ -23,19 +23,15 @@ const router = (app: any, ds: DataService) => {
                     });
                 }
             });
-            // res.status(201);
-            //res.send('Get LoginJWT ok');
+
         })
         .post(verifytoken, async (req: any, res: any) => {
             jwt.verify(req.token, process.env.JWT_SECRETKEY, async (err: any) => {
                 if (err) {
                     res.sendStatus(403);
                 } else {
-                    //const { error } = requestValidation(req.body);
-                    //if (error) return res.status(400).send(error.details[0].message);
-                    //checking if the email exist
-                    console.log(req.body.professionalid);
 
+                    console.log(req.body.professionalid);
 
                     const t = await ds.dbClient.transaction();
 
@@ -137,7 +133,7 @@ const router = (app: any, ds: DataService) => {
                             message: 'Respuesta de servicio generada con exito !!'
                         });
                     } catch (err) {
-                        console.log("error " + err);
+                        console.log("error " + JSON.stringify(err));
                         await t.rollback();
                         return res.json({ message: JSON.stringify(err) });
                     }

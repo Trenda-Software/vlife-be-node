@@ -30,22 +30,19 @@ const router = (app: any, ds: DataService) => {
                     });
                 }
             });
-            // res.status(201);
-            //res.send('Get LoginJWT ok');
+
         })
         .post(async (req: any, res: any) => {
-            // Lets validate data 
-            //const { error } = Joi.validate(req.body, schema);
             const { error } = registerValidation(req.body);
             if (error) return res.status(400).send(error.details[0].message);
             //checking if the email exist
 
             const usuario: any = ds.dbModels.user;
-            const usermail = await usuario.findOne({
+            const userMail = await usuario.findOne({
                 where: { email: req.body.email }
             });
 
-            if (usermail) return res.status(400).send('El mail ya esta en uso');
+            if (userMail) return res.status(400).send('El mail ya esta en uso');
 
             try {
 
@@ -93,21 +90,14 @@ const router = (app: any, ds: DataService) => {
                     accessKeyId: "AKIATZGWNNFHODVQTJSA",
                     secretAccessKey: "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"
                 });
-                /*//Listo los Buckets
-                s3.listBuckets({}, (err: any, data: any) => {
-                    if (err) {
-                        console.log("Error ListBuckets: " + err);
-                    } else {
-                        console.log("Lista de Buckets: " + JSON.stringify(data));
-                    }
-                });*/
+
                 //Grabo la imagen
                 var filename = user1.id + ".png";
                 var b64string = req.body.picture;
                 var buf = Buffer.from(b64string, 'base64')
 
                 var parametrosPutObject = {
-                    Bucket: process.env.S3_BUCKET,//'vlife-aws-s3-images',
+                    Bucket: process.env.S3_BUCKET,
                     Key: 'img/users/' + filename,
                     Body: buf
                 }
@@ -125,25 +115,15 @@ const router = (app: any, ds: DataService) => {
                 }).catch(function (err: any) {
                     console.log("Error upload: " + err);
                 });
-
-                //await user1.setCountry(country1);
-                //await user1.setProvince(province1);
-                /*
-                    Esta es la manera de firmam poniendo un tiempo de expiracion al token, 
-                    por ahora no lo voy a usar
-                    jwt.sign({ user }, 'secretkey', { expiresIn: '30s' }, (err: any, token: any) => {
-                */
-
-
                 console.log("Creo el transporte");
 
-                var transporter = nodemailerSES.createTransport({ // Yes. SMTP!
-                    "host": process.env.EMAIL_HOST,//"email-smtp.eu-west-1.amazonaws.com", // Amazon email SMTP hostname
+                var transporter = nodemailerSES.createTransport({
+                    "host": process.env.EMAIL_HOST,
                     "secure": process.env.EMAIL_SECURE,//true, // use SSL
-                    "port": process.env.EMAIL_PORT,//465, // port for secure SMTP
+                    "port": process.env.EMAIL_PORT,
                     "auth": {
-                        "user": process.env.EMAIL_USER,//"AKIATZGWNNFHKDGUFCWZ", // Use from Amazon Credentials
-                        "pass": process.env.EMAIL_PASS//"BGLEqKAFPboBc4rg4gknyHESsgkAfUmdKyni1TZZdp/I", // Use from Amazon Credentials
+                        "user": process.env.EMAIL_USER,
+                        "pass": process.env.EMAIL_PASS
                     }
                 });
                 let email1 = {
@@ -164,7 +144,7 @@ const router = (app: any, ds: DataService) => {
                 transporter.sendMail(email1, (err: any, info: any) => {
 
                     if (err) {
-                        console.log("Error al enviar email - error " + err);
+                        console.log("Error al enviar email - error " + JSON.stringify(err));
                     } else {
                         console.log("Correo enviado correctamente - info " + JSON.stringify(info));
                     }
@@ -176,7 +156,7 @@ const router = (app: any, ds: DataService) => {
                     });
                 });
             } catch (err) {
-                res.json({ message: err });
+                res.json({ message: JSON.stringify(err) });
             }
 
         });

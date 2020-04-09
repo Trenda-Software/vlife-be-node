@@ -1,7 +1,7 @@
 import DataService from '../service/DataService';
 import { any } from 'bluebird';
 import app from '../server';
-//import UsuarioModel from '../db/models/User';
+
 
 const jwt = require('jsonwebtoken');
 const verifytoken = require('../validation/verifyToken');
@@ -23,26 +23,23 @@ const router = (app: any, ds: DataService) => {
                     });
                 }
             });
-            // res.status(201);
-            //res.send('Get LoginJWT ok');
         })
         .post(async (req: any, res: any) => {
-            // Lets validate data 
-            //const { error } = Joi.validate(req.body, schema);
+
             const { error } = loginValidation(req.body);
             if (error) return res.status(400).send(error.details[0].message);
-            //checking if the email exist
+
 
             const Province: any = ds.dbModels.province;
             const Country: any = ds.dbModels.country;
             const Gender: any = ds.dbModels.gender;
             const profesional: any = ds.dbModels.professional;
-            const profmail = await profesional.findOne({
+            const profMail = await profesional.findOne({
                 //include: [Province, Country, Gender],
                 where: { email: req.body.email }
             });
 
-            if (!profmail) return res.status(400).send('El usuario y/o clave son incorrectos');
+            if (!profMail) return res.status(400).send('El usuario y/o clave son incorrectos');
 
             //Hash password
             /*
@@ -53,10 +50,10 @@ const router = (app: any, ds: DataService) => {
             console.log(hashedPassword);
             */
 
-            const profpwd = await profesional.findOne({
+            const profPwd = await profesional.findOne({
                 where: { pwd: req.body.pwd }
             });
-            if (!profpwd) return res.status(400).send('El usuario y/o clave son incorrectos');
+            if (!profPwd) return res.status(400).send('El usuario y/o clave son incorrectos');
 
             /*
             const validPWD = await bcrypt.compare("maca1234", userpwd.pwd.trim());
@@ -66,18 +63,18 @@ const router = (app: any, ds: DataService) => {
 
             if (!validPWD) return res.status(400).send('Clave invalida');
             */
-            const hisGender = await profmail.getGender();
+            const hisGender = await profMail.getGender();
             console.log("gender:", hisGender.name);
 
             const prof = {
-                id: profmail.id,
-                name: profmail.name,
-                surname: profmail.surname,
-                dni: profmail.dni,
-                email: profmail.email,
-                mobile: profmail.mobile,
+                id: profMail.id,
+                name: profMail.name,
+                surname: profMail.surname,
+                dni: profMail.dni,
+                email: profMail.email,
+                mobile: profMail.mobile,
                 gender: hisGender.name,
-                address: profmail.address
+                address: profMail.address
             }
             /*
                 Esta es la manera de firmam poniendo un tiempo de expiracion al token, 

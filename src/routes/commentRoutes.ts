@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const verifytoken = require('../validation/verifyToken');
 
 const router = (app: any, ds: DataService) => {
-    app.route('/comentario')
+    app.route('/comment')
         .get(verifytoken, (req: any, res: any) => {
             jwt.verify(req.token, process.env.JWT_SECRETKEY, async (err: any, authData: any) => {
                 if (err) {
