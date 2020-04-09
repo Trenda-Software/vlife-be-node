@@ -168,7 +168,7 @@ const router = (app: any, ds: DataService) => {
                             message: 'Solicitud de servicio generada con exito !!'
                         });
                     } catch (err) {
-                        console.log("error " + JSON.stringify(err));
+                        console.log("error " + err);
                         await t.rollback();
                         return res.json({ message: JSON.stringify(err) });
                     }
