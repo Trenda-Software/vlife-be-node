@@ -68,7 +68,7 @@ export default class DataService {
     }
 
     async resetInitialData() {
-        await this.dbClient.sync({ force: false });
+        await this.dbClient.sync({ force: true });
     }
 
     async initDBData() {
@@ -88,7 +88,7 @@ export default class DataService {
         const PracticeCostModel: any = this.dbClient.models.PracticeCost;
         const PacienttypeModel: any = this.dbClient.models.Pacienttype;
 
-/*         const province1 = await ProvinceModel.create({ code: 'BSAS', name: 'Buenos Aires' });
+        const province1 = await ProvinceModel.create({ code: 'BSAS', name: 'Buenos Aires' });
         const country1 = await CountryModel.create({ code: 'ARG', name: 'Argentina' });
         await province1.setCountry(country1);
 
@@ -472,7 +472,7 @@ export default class DataService {
         const Pacienttype4 = await PacienttypeModel.create({
             name: 'Adulto/a',
         });
- */    }
+    }
 
     connectWithSequelize = async () => {
         console.log('connectWithSequelize');
