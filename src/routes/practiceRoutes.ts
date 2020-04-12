@@ -90,14 +90,14 @@ const router = (app: any, ds: DataService) => {
 
                             console.log(response.data.destination_addresses);
                             console.log(response.data.rows[0].elements[0].status);
-
-                            if (response.data.rows.status == "OK") {
-                                if (response.data.rows[0].elements[0].status == "OK") {
-                                    prfDistancia = response.data.rows[0].elements[0].distance.text;
-                                    prfTiempo = response.data.rows[0].elements[0].duration.text
-                                    console.log("distancia " + prfDistancia + "tiempo " + prfTiempo);
-                                }
+                            console.log("status 1 " + response.data.rows.status);
+                            //if (response.data.rows.status == "OK") {
+                            if (response.data.rows[0].elements[0].status == "OK") {
+                                prfDistancia = response.data.rows[0].elements[0].distance.text;
+                                prfTiempo = response.data.rows[0].elements[0].duration.text
+                                console.log("distancia " + prfDistancia + "tiempo " + prfTiempo);
                             }
+                            //}
 
                             //const practicas1 = await ds.dbClient.query("select Professionals.id,name,surname,sum(cost) as cost, lat,lng, picture from Professionals  inner join PracticeCosts on Professionals.id = Professionalid where Professionals.id in (select Professionalid from PracticeCosts where " + clausula + " ) group by Professionalid ", { type: Sequelize.QueryTypes.SELECT })
 
@@ -110,15 +110,15 @@ const router = (app: any, ds: DataService) => {
                                 var prfDistancia = "N/D";
                                 var prfTiempo = "N/D";
 
-                                if (response.data.rows.status == "OK") {
-                                    if (response.data.rows[0].elements[0].status == "OK") {
-                                        console.log("index " + index)
-                                        console.log("elements " + JSON.stringify(response.data.rows[0].elements))
-                                        prfDistancia = response.data.rows[0].elements[index].distance.text;
-                                        prfTiempo = response.data.rows[0].elements[index].duration.text
-                                        console.log("distancia " + prfDistancia + "tiempo " + prfTiempo);
-                                    }
+                                //if (response.data.rows.status == "OK") {
+                                if (response.data.rows[0].elements[index].status == "OK") {
+                                    console.log("index " + index)
+                                    console.log("elements " + JSON.stringify(response.data.rows[0].elements))
+                                    prfDistancia = response.data.rows[0].elements[index].distance.text;
+                                    prfTiempo = response.data.rows[0].elements[index].duration.text
+                                    console.log("distancia " + prfDistancia + "tiempo " + prfTiempo);
                                 }
+                                //}
                                 const pract = [practica.PracticaId, practica.PracticaName, practica.cost, prfDistancia, prfTiempo];
                                 console.log("practica " + pract);
                                 practicasArray.push(pract);

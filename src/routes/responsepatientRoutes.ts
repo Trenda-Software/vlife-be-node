@@ -12,7 +12,7 @@ var FCM = require('fcm-push');
 
 const router = (app: any, ds: DataService) => {
 
-    app.route('/responsepacient')
+    app.route('/responsetopatient')
         .get(verifytoken, (req: any, res: any) => {
             jwt.verify(req.token, process.env.JWT_SECRETKEY, (err: any, authData: any) => {
                 if (err) {
@@ -133,9 +133,11 @@ const router = (app: any, ds: DataService) => {
                             message: 'Respuesta de servicio generada con exito !!'
                         });
                     } catch (err) {
-                        console.log("error " + JSON.stringify(err));
+
                         await t.rollback();
-                        return res.json({ message: JSON.stringify(err) });
+
+                        return res.json({ message: " " + err });
+
                     }
                 }
             });
