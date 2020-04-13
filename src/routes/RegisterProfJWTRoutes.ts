@@ -55,7 +55,8 @@ const router = (app: any, ds: DataService) => {
                     gender: req.body.gender,
                     description: req.body.description,
                     in_service: 0,
-                    on_line: 1
+                    on_line: 1,
+                    comvlife: 0.8
                 }
 
                 const profModel: any = ds.dbModels.professional;

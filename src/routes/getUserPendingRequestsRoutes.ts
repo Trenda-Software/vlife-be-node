@@ -5,7 +5,7 @@ const verifytoken = require('../validation/verifyToken');
 const { Sequelize } = require('sequelize');
 
 const router = (app: any, ds: DataService) => {
-    app.route('/getNotificationById')
+    app.route('/getUserPendingRequests')
         .get(verifytoken, (req: any, res: any) => {
             jwt.verify(req.token, process.env.JWT_SECRETKEY, async (err: any, authData: any) => {
                 if (err) {
@@ -20,15 +20,15 @@ const router = (app: any, ds: DataService) => {
 
                         console.log("Desencriptada " + decryptedString);
 
-                        const profesional: any = ds.dbModels.professional;
+                        const usuario: any = ds.dbModels.user;
 
-                        const profesional1 = await profesional.findOne({
+                        const usuario1 = await usuario.findOne({
                             where: { id: req.query.id }
                         });
 
-                        const origenGM = profesional1.lat + "," + profesional1.lng
+                        const origenGM = usuario1.lat + "," + usuario1.lng
 
-                        const usuarios = await ds.dbClient.query("Select Requests.id,Requests.commentusr,Users.name,surname,address,lat,lng,mobile,email,dni,picture,Patienttypes.name as PTName from Users inner join Requests on Users.id = Requests.UserId inner join Patienttypes on Requests.Patienttypeid = Patienttypes.id where Requests.staterequest = 0 and Requests.ProfessionalId = " + req.query.id, { type: Sequelize.QueryTypes.SELECT });
+                        const usuarios = await ds.dbClient.query("Select Requests.id,Requests.commentusr,Professionals.id as ProfId,Professionals.name,surname,address,lat,lng,mobile,email,dni,picture,Patienttypes.name as PTName from Professionals inner join Requests on Professionals.id = Requests.ProfessionalId inner join Patienttypes on Requests.Patienttypeid = Patienttypes.id where Requests.staterequest = 0 and Requests.UserId = " + req.query.id, { type: Sequelize.QueryTypes.SELECT });
                         var solicitud: any = [];
                         //const solicitudes = usuarios.map(async (usuario: any) => {
 
@@ -77,7 +77,7 @@ const router = (app: any, ds: DataService) => {
 
 
 
-                            const servicios = await ds.dbClient.query("select Professionals.id,name,surname,sum(cost) as cost, comvlife, picture from Professionals  inner join PracticeCosts on Professionals.id = Professionalid where Professionals.id in (select Professionalid from PracticeCosts where (" + preacticasID + ") and ProfessionalId = " + req.query.id + " ) group by Professionalid", { type: Sequelize.QueryTypes.SELECT });
+                            const servicios = await ds.dbClient.query("select Professionals.id,name,surname,sum(cost) as cost, comvlife, picture from Professionals  inner join PracticeCosts on Professionals.id = Professionalid where Professionals.id in (select Professionalid from PracticeCosts where (" + preacticasID + ") and ProfessionalId = " + usuarios[usuario].ProfId + " ) group by Professionalid", { type: Sequelize.QueryTypes.SELECT });
 
                             var servCost: any = "";
 
@@ -105,17 +105,10 @@ const router = (app: any, ds: DataService) => {
                             Math.round(servCostN * 100) / 100
                             const sol = {
                                 id: usuarios[usuario].id,
-                                pacientinfo: {
+                                professionalInfo: {
                                     nombre: usuarios[usuario].name,
                                     apellido: usuarios[usuario].surname,
-                                    direccion: usuarios[usuario].address,
-                                    geoloc: {
-                                        lat: usuarios[usuario].lat,
-                                        lng: usuarios[usuario].lng,
-                                    },
-                                    //telefono: usuario.mobile,
-                                    dni: usuarios[usuario].dni,
-                                    userpicture: usuarios[usuario].picture,
+                                    profPicture: usuarios[usuario].picture,
                                 },
                                 requestinfo: {
                                     practicas: practicas,
@@ -124,7 +117,6 @@ const router = (app: any, ds: DataService) => {
                                     valortotal: servCost,
                                     distancek: usrDistancia,
                                     distancetiempo: usrTiempo,
-                                    ganancia: parseFloat((Math.round((servCost * comvlife) * 100) / 100).toString()).toFixed(2),
                                     typo_paciente: usuarios[usuario].PTName,
                                 }
                             };

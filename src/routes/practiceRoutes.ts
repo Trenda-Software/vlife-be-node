@@ -128,7 +128,7 @@ const router = (app: any, ds: DataService) => {
                                     id: practica.id,
                                     name: practica.name,
                                     surname: practica.surname,
-                                    cost: practica.cost,
+                                    cost: parseFloat((Math.round(practica.cost * 100) / 100).toString()).toFixed(2),
                                     distance: prfDistancia,
                                     time: prfTiempo,
                                     picture: practica.picture

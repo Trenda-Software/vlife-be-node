@@ -25,6 +25,7 @@ import confirmpaymentRoutes from './routes/confirmpaymentRoutes';
 import setProfonlineRoutes from './routes/setProfonlineRoutes';
 import getpracticesRoute from './routes/getpracticesRoute';
 import LoginprofJWTRoutes from './routes/LoginprofJWTRoutes';
+import getUserPendingRequestsRoutes from './routes/getUserPendingRequestsRoutes';
 
 
 
@@ -100,6 +101,7 @@ confirmpaymentRoutes(app, ds);
 setProfonlineRoutes(app, ds);
 getpracticesRoute(app, ds);
 LoginprofJWTRoutes(app, ds);
+getUserPendingRequestsRoutes(app, ds);
 
 
 

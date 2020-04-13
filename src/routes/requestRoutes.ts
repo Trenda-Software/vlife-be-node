@@ -64,7 +64,7 @@ const router = (app: any, ds: DataService) => {
 
                         await request1.setUser(req.body.userid);
                         await request1.setProfessional(req.body.professionalid);
-                        await request1.setPacienttype(req.body.pacienttype);
+                        await request1.setPatienttype(req.body.patienttype);
 
                         //Consulto datos del usuario
                         var strUsuario = "";
@@ -168,6 +168,7 @@ const router = (app: any, ds: DataService) => {
 
                         await t.commit();
                         res.status(200).json({
+                            requestid: request1.id,
                             message: 'Solicitud de servicio generada con exito !!'
                         });
                     } catch (err) {
