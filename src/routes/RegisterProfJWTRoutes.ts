@@ -106,7 +106,8 @@ const router = (app: any, ds: DataService) => {
                     mobile: prof1.mobile,
                     gender: hisGender.name,
                     address: prof1.address,
-                    description: prof1.description
+                    description: prof1.description,
+                    aprroved: true
                 }
                 console.log(prof);
                 console.log(profdev);
@@ -117,7 +118,7 @@ const router = (app: any, ds: DataService) => {
                     secretAccessKey: "xEzxfRNo6b05AOE9azXWGZuh1vR7zRtUWH5VuiZR"
                 });
 
-                //Grabo la imagen
+                //Grabo la imagen del prof
                 var filename = prof1.id + ".png";
                 var b64string = req.body.picture;
                 var buf = Buffer.from(b64string, 'base64')
@@ -137,9 +138,35 @@ const router = (app: any, ds: DataService) => {
                     const proffcm = await profModel.update({ picture: urlname }, {
                         where: { email: req.body.email }
                     });
+                    //Grabo la imagen del certificado o titulo
+
+                    var fileNameCert = "c" + prof1.id + ".png";
+                    var b64StringCert = req.body.certpicture;
+
+                    var bufCert = Buffer.from(b64StringCert, 'base64')
+
+                    var parametrosPutObjectCert = {
+                        Bucket: process.env.S3_BUCKET,//'vlife-aws-s3-images',
+                        Key: 'img/professionals/' + fileNameCert,
+                        Body: bufCert
+                    }
+                    var urlNameCert: any;
+                    var putObjectPromiseCert = s3.upload(parametrosPutObjectCert).promise();
+                    putObjectPromiseCert.then(async function (data: any) {
+                        console.log("upload : " + JSON.stringify(data));
+                        urlNameCert = data.Location;
+                        // Update con el nombre de imagen
+                        console.log("url: " + urlname)
+                        const profFcmCert = await profModel.update({ certpicture: urlNameCert }, {
+                            where: { email: req.body.email }
+                        });
+
+                    }).catch(function (err: any) {
+                        console.log("Error upload2: " + err);
+                    });
 
                 }).catch(function (err: any) {
-                    console.log("Error upload: " + err);
+                    console.log("Error upload1: " + err);
                 });
 
                 console.log("Creo el transporte");
@@ -183,7 +210,7 @@ const router = (app: any, ds: DataService) => {
                     });
                 });
             } catch (err) {
-                res.json({ message: JSON.stringify(err) });
+                res.json({ message: err });
             }
 
         });

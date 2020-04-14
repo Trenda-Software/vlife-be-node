@@ -77,7 +77,7 @@ const router = (app: any, ds: DataService) => {
 
 
 
-                            const servicios = await ds.dbClient.query("select Professionals.id,name,surname,sum(cost) as cost, comvlife, picture from Professionals  inner join PracticeCosts on Professionals.id = Professionalid where Professionals.id in (select Professionalid from PracticeCosts where (" + preacticasID + ") and ProfessionalId = " + req.query.id + " ) group by Professionalid", { type: Sequelize.QueryTypes.SELECT });
+                            const servicios = await ds.dbClient.query("select Professionals.id,name,surname,sum(cost) as cost, comvlife, picture from PracticeCosts  inner join Professionals on Professionalid = Professionals.id where (" + preacticasID + ") and ProfessionalId = " + req.query.id + " group by Professionalid", { type: Sequelize.QueryTypes.SELECT });
 
                             var servCost: any = "";
 

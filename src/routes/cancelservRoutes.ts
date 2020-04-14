@@ -34,6 +34,11 @@ const router = (app: any, ds: DataService) => {
 
                     console.log(req.body.id);
 
+                    var stateRequest = 4; //CAncelado x el Usuario
+
+                    if (req.body.prof) {
+                        stateRequest = 6; //CAncelado x el Profesional
+                    }
 
                     const t = await ds.dbClient.transaction();
 
@@ -42,10 +47,15 @@ const router = (app: any, ds: DataService) => {
                         // Aca va el codigo para actualizar el request
                         console.log("voy a realizar el update");
                         const requestm: any = ds.dbModels.request;
-                        var stateRequest = 4;
-                        const request1 = await requestm.update({ staterequest: stateRequest }, {
-                            where: { id: req.body.id }
-                        });
+                        if (req.body.prof) {
+                            const request1 = await requestm.update({ staterequest: stateRequest, commentprof: req.body.comment }, {
+                                where: { id: req.body.id }
+                            });
+                        } else {
+                            const request1 = await requestm.update({ staterequest: stateRequest, commentusr: req.body.comment }, {
+                                where: { id: req.body.id }
+                            });
+                        }
                         //Consulto os datos del request
                         const request2 = await requestm.findOne({
                             where: { id: req.body.id }
@@ -61,7 +71,7 @@ const router = (app: any, ds: DataService) => {
 
                         var strUser = "";
                         strUser = user1.name + " " + user1.surname;
-                        const strImagen = user1.picture;
+                        var strImagen = user1.picture;
 
                         console.log("user " + strUser);
                         console.log("Img " + strImagen);
@@ -75,14 +85,18 @@ const router = (app: any, ds: DataService) => {
                         });
 
 
-
                         // Envio de notificacion push
 
                         var serverKey = process.env.USR_SERVER_KEY;
-                        var fcm = new FCM(serverKey);
                         console.log("Seteo el token " + profesional2.fcmtoken);
                         var token = profesional2.fcmtoken;
-
+                        if (req.body.prof) {
+                            serverKey = process.env.PROF_SERVER_KEY;
+                            token = user1.fcmtoken
+                            strImagen = profesional2.picture;
+                            strUser = profesional2.name + " " + profesional2.surname;
+                        }
+                        var fcm = new FCM(serverKey);
 
                         var message = {
                             to: token,

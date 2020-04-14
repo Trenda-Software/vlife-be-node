@@ -17,6 +17,7 @@ const RequestModel = (sequelize: any) => {
      3 = Solicitud Finalizada
      4 = Solicitud Cancelada por el usuario
      5 = Solicitud con Pago Confirmado x el usuario por el usuario
+     6 = Solicitud Cancelada por el profesional
     */
 
 
