@@ -12,10 +12,32 @@ import requestRouters from './routes/requestRoutes';
 import genderRouters from './routes/genderRoutes';
 import specialtyRouters from './routes/specialtyRoutes';
 import emailrecoveryRouters from './routes/emailrecoveryRoutes';
+import fcmTokenRoutes from './routes/fcmTokenRoutes';
+import usrGeolocRouters from './routes/usrGeolocRoutes';
+import setProffcmTokenRoutes from './routes/setProffcmTokenRoutes';
+import responsepatientRoutes from './routes/responsepatientRoutes';
+import terminarservRoutes from './routes/terminarservRoutes';
+import cancelservRoutes from './routes/cancelservRoutes';
+import getNotificationByIdRoutes from './routes/getNotificationByIdRoutes';
+import profGeolocRoutes from './routes/profGeolocRoutes';
+import RegisterProfJWTRoutes from './routes/RegisterProfJWTRoutes';
+import confirmpaymentRoutes from './routes/confirmpaymentRoutes';
+import setProfonlineRoutes from './routes/setProfonlineRoutes';
+import getpracticesRoute from './routes/getpracticesRoute';
+import LoginprofJWTRoutes from './routes/LoginprofJWTRoutes';
+import getUserPendingRequestsRoutes from './routes/getUserPendingRequestsRoutes';
+import practicesProfRoutes from './routes/practicesProfRoutes';
+import activeServicesRoutes from './routes/activeServicesRoutes';
+
+
+
+
+
 
 import DataService from './service/DataService';
 
 // import cors from 'cors';
+//Ojo con las mayusculas y minusculas
 
 const app = express();
 //const bodyParser = require('body-parser');
@@ -54,6 +76,8 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use("img/users", express.static(__dirname + "img/users"));
+
 // add routes
 userRoutes(app, ds);
 countryRoutes(app, ds);
@@ -68,6 +92,25 @@ requestRouters(app, ds);
 genderRouters(app, ds);
 specialtyRouters(app, ds);
 emailrecoveryRouters(app, ds);
+fcmTokenRoutes(app, ds);
+usrGeolocRouters(app, ds);
+setProffcmTokenRoutes(app, ds);
+responsepatientRoutes(app, ds);
+terminarservRoutes(app, ds);
+getNotificationByIdRoutes(app, ds);
+profGeolocRoutes(app, ds);
+RegisterProfJWTRoutes(app, ds);
+cancelservRoutes(app, ds);
+confirmpaymentRoutes(app, ds);
+setProfonlineRoutes(app, ds);
+getpracticesRoute(app, ds);
+LoginprofJWTRoutes(app, ds);
+getUserPendingRequestsRoutes(app, ds);
+practicesProfRoutes(app, ds);
+activeServicesRoutes(app, ds);
+
+
+
 
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));

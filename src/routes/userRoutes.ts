@@ -1,5 +1,6 @@
 import DataService from '../service/DataService';
 
+
 const router = (app: any, ds: DataService) => {
     app.route('/usuario')
         .get((req: any, res: any) => {
@@ -12,6 +13,7 @@ const router = (app: any, ds: DataService) => {
             UserModel.findAll({
                 include: [Province, Country, Gender],
             }).then((users: any[]) => {
+
                 res.send(users);
             });
         })

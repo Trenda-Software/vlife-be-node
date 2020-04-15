@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const verifytoken = require('../validation/verifyToken');
 
 const router = (app: any, ds: DataService) => {
-    app.route('/provincia')
+    app.route('/province')
         .get(verifytoken, (req: any, res: any) => {
             const provincia: any = ds.dbModels.province;
 

@@ -1,13 +1,14 @@
 import Sequelize from 'sequelize';
-//User model
+//User model WTF
 const UserModel = (sequelize: any) => {
     const User = sequelize.define('User', {
         dni: Sequelize.STRING,
         name: Sequelize.STRING,
         surname: Sequelize.STRING,
         pwd: Sequelize.STRING,
-        coordinates: Sequelize.STRING,
-        picture: Sequelize.BLOB,
+        lat: Sequelize.STRING,
+        lng: Sequelize.STRING,
+        picture: Sequelize.STRING,
         email: {
             type: Sequelize.STRING,
             allowNull: false,
@@ -15,6 +16,7 @@ const UserModel = (sequelize: any) => {
         mobile: Sequelize.STRING,
         city: Sequelize.STRING,
         address: Sequelize.STRING,
+        fcmtoken: Sequelize.STRING,
     });
 
     return User;

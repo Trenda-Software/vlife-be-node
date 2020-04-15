@@ -4,19 +4,102 @@ const verifytoken = require('../validation/verifyToken');
 const { Sequelize } = require('sequelize');
 
 const router = (app: any, ds: DataService) => {
-    app.route('/practica')
+    app.route('/getpractices')
         .get(verifytoken, (req: any, res: any) => {
             jwt.verify(req.token, process.env.JWT_SECRETKEY, async (err: any, authData: any) => {
                 if (err) {
                     res.sendStatus(403);
                 } else {
-                    const PracticeModel: any = ds.dbModels.practice;
-                    PracticeModel.findAll({
-                        include: [{ model: ds.dbModels.specialty }],
-                    }).then((practices: any[]) => {
-                        res.send(practices);
+                    const Cryptr = require('cryptr');
+                    const cryptr = new Cryptr('goyeneche');
+
+                    const decryptedString = cryptr.decrypt(process.env.GM_API_KEY);
+
+                    console.log("Desencriptada " + decryptedString);
+
+                    const usuarios: any = ds.dbModels.user;
+
+                    const usuario1 = await usuarios.findOne({
+                        where: { id: req.query.Userid }
+                    });
+                    const profesionales: any = ds.dbModels.professional;
+
+                    const profeseional1 = await profesionales.findOne({
+                        where: { id: req.query.Professionalid }
+                    });
+
+                    const axios = require('axios');
+
+                    const origenGM = profeseional1.lat + "," + profeseional1.lng
+                    const destinoGM = usuario1.lat + "," + usuario1.lng
+
+
+                    var prfDistancia = "N/D";
+                    var prfTiempo = "N/D";
+                    ///Llamad al APi de Google distance-matrix
+
+                    console.log("voy a hacer el request a Googlemaps");
+
+                    const response = await axios.get('https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=' + origenGM + '&destinations=' + destinoGM + '&language=es-ES&key=' + decryptedString);
+                    // handle success
+                    console.log("--------------INICIO get api google---------------");
+                    console.log(response.data);
+                    console.log("--------------FIN get api google---------------");
+
+
+                    console.log(response.data.destination_addresses);
+                    console.log(response.data.rows[0].elements[0].status);
+
+                    if (response.data.rows.status == "OK") {
+                        if (response.data.rows[0].elements[0].status == "OK") {
+
+                            prfDistancia = response.data.rows[0].elements[0].distance.text;
+                            prfTiempo = response.data.rows[0].elements[0].duration.text;
+                            console.log("distancia " + prfDistancia + "tiempo " + prfTiempo);
+                        }
+                    }
+                    const practicas = await ds.dbClient.query("select Professionals.id as ProfId,lat,lng,Professionals.name,surname,Practices.id as PracticaId, Practices.name as PracticaName,PracticeCosts.cost as cost, '1km' as distance, '10m' as time, picture from Professionals  inner join PracticeCosts on Professionals.id = Professionalid inner join Practices on PracticeCosts.PracticeId = Practices.id where Professionals.id in (select Professionalid from PracticeCosts ) and Professionals.id = " + req.query.Professionalid, { type: Sequelize.QueryTypes.SELECT });
+
+                    var practicasArray: any = [];
+
+                    var sol: any = {};
+
+
+                    const solicitudes = practicas.map(async (practica: any) => {
+
+
+                        const pract = [practica.PracticaId, practica.PracticaName, practica.cost, prfDistancia, prfTiempo];
+                        console.log("practica " + pract);
+                        practicasArray.push(pract);
+
+                        console.log("Arrary de precticas " + practicasArray)
+                        sol = {
+                            Profesional: {
+                                ProfID: practica.ProfId,
+                                Nombre: practica.name + " " + practica.surname,
+                                Apellido: practica.sruname,
+                                Imagen: practica.picture
+                            },
+                            Practicas: practicasArray,
+                        }
+
+                        //solicitudes.push(sol);
+                        console.log("solicitud: " + JSON.stringify(sol));
+
+                        return practicasArray;
 
                     });
+
+                    Promise.all(solicitudes)
+                        .then(returnedValues => {
+                            // console.log('##########  MAP profPerSpecialties values: ', values);
+                            console.log("Solicitudes: " + JSON.stringify(returnedValues));
+                            res.send(sol);
+                        })
+                        .catch(reason => {
+                            console.log(reason);
+                            return res.json({ message: JSON.stringify(reason) });
+                        });
                 }
             });
 
@@ -38,8 +121,10 @@ const router = (app: any, ds: DataService) => {
                     const Cryptr = require('cryptr');
                     const cryptr = new Cryptr('goyeneche');
 
+                    //const encryptedString = cryptr.encrypt('AIzaSyD4HK2DucBEZplPHjwWAb1ALvuEImprrOw');
                     const decryptedString = cryptr.decrypt(process.env.GM_API_KEY);
 
+                    //console.log("Encriptada " + encryptedString + "FIN");
                     console.log("Desencriptada " + decryptedString);
 
                     const profesionales: any = ds.dbModels.professional;
@@ -48,7 +133,7 @@ const router = (app: any, ds: DataService) => {
                     var destinoGM = "";
                     var destinoGM1 = "";
 
-                    const practicas1 = await ds.dbClient.query("select Professionals.id,name,surname,sum(cost) as cost, lat,lng, picture from PracticeCosts  inner join Professionals on Professionalid = Professionals.id where " + clausula + " group by Professionalid ", { type: Sequelize.QueryTypes.SELECT })
+                    const practicas1 = await ds.dbClient.query("select Professionals.id,name,surname,sum(cost) as cost, lat,lng, picture from Professionals  inner join PracticeCosts on Professionals.id = Professionalid where Professionals.id in (select Professionalid from PracticeCosts where " + clausula + " ) group by Professionalid ", { type: Sequelize.QueryTypes.SELECT })
                     const solicitudes = practicas1.map((practica: any, index: any) => {
 
                         /// ver aca que genera una coma de mas
@@ -61,7 +146,7 @@ const router = (app: any, ds: DataService) => {
 
                     Promise.all(solicitudes)
                         .then(async returnedValues => {
-
+                            // console.log('##########  MAP profPerSpecialties values: ', values);
                             console.log("SolicitudesGM: " + returnedValues);
                             for (let returnedValue in returnedValues) {
                                 destinoGM = destinoGM + returnedValues[returnedValue] + "|";
@@ -71,8 +156,8 @@ const router = (app: any, ds: DataService) => {
                             //Tengo que poner aca adentro la llamada al gogmaps
                             const axios = require('axios');
 
-                            var prfDistancia = "N/D";
-                            var prfTiempo = "N/D";
+                            var prfDistancia = "";
+                            var prfTiempo = "";
                             ///Llamad al APi de Google distance-matrix
                             console.log("voy a hacer el request a Googlemaps");
 
@@ -90,14 +175,13 @@ const router = (app: any, ds: DataService) => {
 
                             console.log(response.data.destination_addresses);
                             console.log(response.data.rows[0].elements[0].status);
-                            console.log("status 1 " + response.data.rows.status);
-                            //if (response.data.rows.status == "OK") {
-                            if (response.data.rows[0].elements[0].status == "OK") {
+
+                            if (response.data.rows.status == "OK") {
+
                                 prfDistancia = response.data.rows[0].elements[0].distance.text;
                                 prfTiempo = response.data.rows[0].elements[0].duration.text
                                 console.log("distancia " + prfDistancia + "tiempo " + prfTiempo);
                             }
-                            //}
 
                             //const practicas1 = await ds.dbClient.query("select Professionals.id,name,surname,sum(cost) as cost, lat,lng, picture from Professionals  inner join PracticeCosts on Professionals.id = Professionalid where Professionals.id in (select Professionalid from PracticeCosts where " + clausula + " ) group by Professionalid ", { type: Sequelize.QueryTypes.SELECT })
 
@@ -107,18 +191,13 @@ const router = (app: any, ds: DataService) => {
 
 
                             const solicitudes1 = practicas1.map((practica: any, index: any) => {
-                                var prfDistancia = "N/D";
-                                var prfTiempo = "N/D";
 
-                                //if (response.data.rows.status == "OK") {
-                                if (response.data.rows[0].elements[index].status == "OK") {
-                                    console.log("index " + index)
-                                    console.log("elements " + JSON.stringify(response.data.rows[0].elements))
-                                    prfDistancia = response.data.rows[0].elements[index].distance.text;
-                                    prfTiempo = response.data.rows[0].elements[index].duration.text
-                                    console.log("distancia " + prfDistancia + "tiempo " + prfTiempo);
-                                }
-                                //}
+                                console.log("index " + index)
+                                console.log("elements " + JSON.stringify(response.data.rows[0].elements))
+                                prfDistancia = response.data.rows[0].elements[index].distance.text;
+                                prfTiempo = response.data.rows[0].elements[index].duration.text
+                                console.log("distancia " + prfDistancia + "tiempo " + prfTiempo);
+
                                 const pract = [practica.PracticaId, practica.PracticaName, practica.cost, prfDistancia, prfTiempo];
                                 console.log("practica " + pract);
                                 practicasArray.push(pract);
@@ -128,7 +207,7 @@ const router = (app: any, ds: DataService) => {
                                     id: practica.id,
                                     name: practica.name,
                                     surname: practica.surname,
-                                    cost: parseFloat((Math.round(practica.cost * 100) / 100).toString()).toFixed(2),
+                                    cost: practica.cost,
                                     distance: prfDistancia,
                                     time: prfTiempo,
                                     picture: practica.picture
@@ -143,6 +222,7 @@ const router = (app: any, ds: DataService) => {
 
                             Promise.all(solicitudes1)
                                 .then(returnedValues => {
+                                    // console.log('##########  MAP profPerSpecialties values: ', values);
                                     console.log("Solicitudes: " + JSON.stringify(returnedValues));
                                     res.send(returnedValues);
                                 })
@@ -151,6 +231,7 @@ const router = (app: any, ds: DataService) => {
                                     return res.json({ message: JSON.stringify(reason) });
                                 });
 
+                            //res.send(returnedValues);
                         })
                         .catch(reason => {
                             console.log(reason);

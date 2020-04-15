@@ -22,7 +22,7 @@ this can mess with the access privileges
 
 ## Typescript
 
-    for type safety and OOP.
+For type safety and OOP.
 
 ### Types to add
 
@@ -79,8 +79,6 @@ preset-es2015 and preset-stage-x are deprecated as of 6-2019
 
 \$ npm run start
 
-localhost:3002
-
 # Directory structure
 
 -   src
@@ -119,69 +117,26 @@ sequelize model:create --name Provincia ...
 
 # Deploy
 
-## Heroku
+## API - Local Endpoint
 
-### install heroku client
-
-    https://devcenter.heroku.com/articles/heroku-cli
-
-### Commands
-
--   check remotes
-
-    git remote -v
-
-GIT URL: https://git.heroku.com/vlife-api.git
-
--   login into the git account with SSH
-
-    heroku login
-
-*   push changes from the heroku-deploy branch to the remote "heroku" master branch
-
-    \$ git push heroku master
-
-# ENDPOINTS
-
-## Local
-
-localhost:3000
+localhost:3000/
 
 localhost:3000/usuario
 
-localhost:3000/cantPorEspecialidad
+localhost:3000/practica FORBIDDEN? necesita loguearse con JWT
 
-# Deploy
+localhost:3000/cantPorEspecialidad FORBIDDEN? necesita loguearse con JWT
 
-## Heroku
+## AWS
 
-The remote + branch that has to be updated to trigger a deploy in heroku is the remote "heroku" branch "master"
-so if you do:
+API deployed in EC2 (us-east-1)
 
-We will organise like this:
+### connect with SSH
 
-In "origin" remote repository, we will have a "master" branch were we put the changes we want to go to heroku, we merge our changes to this branch (origin/master) and then push them to heroku / master
+URL: check EC2 instance connect details in AWS Account
+keys: check Key Pairs item in the NERTWORK & SECURITY section of the EC2 in the AWS Account
+Remember to update the sec group with your machine IP
 
-    origin / master -> heroku / master
+### check process running
 
-    In the master branch
-
-    $ git push heroku master
-
-That will push the current master local branch changes to the remote "heroku / master" triggering a new deploy.
-
-### check logs
-
-real time log view
-
-heroku logs --tail
-
-### check API
-
-https://vlife-api.herokuapp.com
-
-https://vlife-api.herokuapp.com/usuario
-
-https://vlife-api.herokuapp.com/cantPorEspecialidad
-
-https://vlife-api.herokuapp.com/practica
+ps x | grep <server port number>

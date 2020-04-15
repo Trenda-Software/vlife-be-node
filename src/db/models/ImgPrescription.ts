@@ -1,11 +1,11 @@
 import Sequelize from 'sequelize';
 //User model
-const ImgPescriptionModel = (sequelize: any) => {
-    const ImgPescription = sequelize.define('ImgPescription', {
-        picture: Sequelize.BLOB,
+const ImgPrescriptionModel = (sequelize: any) => {
+    const ImgPrescription = sequelize.define('ImgPrescription', {
+        picture: Sequelize.STRING,
     });
 
-    return ImgPescription;
+    return ImgPrescription;
 };
 
-export default ImgPescriptionModel;
+export default ImgPrescriptionModel;

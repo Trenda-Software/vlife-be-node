@@ -3,16 +3,16 @@ const jwt = require('jsonwebtoken');
 const verifytoken = require('../validation/verifyToken');
 
 const router = (app: any, ds: DataService) => {
-    app.route('/comentario')
+    app.route('/comment')
         .get(verifytoken, (req: any, res: any) => {
             jwt.verify(req.token, process.env.JWT_SECRETKEY, async (err: any, authData: any) => {
                 if (err) {
                     res.sendStatus(403);
                 } else {
                     const CommentModel: any = ds.dbModels.comment;
-
+                    console.log("id " + req.query.id);
                     const comentario = await CommentModel.findOne({
-                        where: { ProfessionalId: req.body.id }
+                        where: { ProfessionalId: req.query.id }
                     });
                     console.log(comentario);
                     if (!comentario) return res.status(400).send('No existen comentarios para el profesional solicitado');
