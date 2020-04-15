@@ -87,11 +87,11 @@ const router = (app: any, ds: DataService) => {
 
                         // Envio de notificacion push
 
-                        var serverKey = process.env.USR_SERVER_KEY;
+                        var serverKey = process.env.PROF_SERVER_KEY;
                         console.log("Seteo el token " + profesional2.fcmtoken);
                         var token = profesional2.fcmtoken;
                         if (req.body.prof) {
-                            serverKey = process.env.PROF_SERVER_KEY;
+                            serverKey = process.env.USR_SERVER_KEY;
                             token = user1.fcmtoken
                             strImagen = profesional2.picture;
                             strUser = profesional2.name + " " + profesional2.surname;
