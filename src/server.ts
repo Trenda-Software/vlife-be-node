@@ -27,6 +27,8 @@ import getpracticesRoute from './routes/getpracticesRoute';
 import LoginprofJWTRoutes from './routes/LoginprofJWTRoutes';
 import getUserPendingRequestsRoutes from './routes/getUserPendingRequestsRoutes';
 import practicesProfRoutes from './routes/practicesProfRoutes';
+import activeServicesRoutes from './routes/activeServicesRoutes';
+
 
 
 
@@ -105,6 +107,8 @@ getpracticesRoute(app, ds);
 LoginprofJWTRoutes(app, ds);
 getUserPendingRequestsRoutes(app, ds);
 practicesProfRoutes(app, ds);
+activeServicesRoutes(app, ds);
+
 
 
 

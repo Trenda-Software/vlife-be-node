@@ -102,13 +102,10 @@ const router = (app: any, ds: DataService) => {
                             },
                             collapse_key: '',
                             data: { // Esto es solo opcional, puede enviar cualquier dato     
-                                msg: "El profesional " + strProfesional + " " + strApprove + " el servicio",
-                                pnid: req.body.requestid,
-                                approve: req.body.approve,
-                                comentario: req.body.comment,
-                                distanciak: req.body.distanciak,
-                                distanciatiempo: req.body.distanciatiempo
-
+                                status: stateRequest,
+                                requestID: req.body.requestid,
+                                title: "Recibiste una respuesta de servicio",
+                                image: strImagen
                             },
                             body: {
                                 title: "El profesional " + strProfesional + " " + strApprove + " el servicio",

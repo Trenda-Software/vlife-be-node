@@ -143,9 +143,11 @@ const router = (app: any, ds: DataService) => {
                                 image: strImagen
                             },
                             collapse_key: '',
-                            data: { // Esto es solo opcional, puede enviar cualquier dato     
-                                msg: "Recibió una solicitud de servicio",
-                                pnid: request1.id
+                            data: { // Esto es solo opcional, puede enviar cualquier dato 
+                                status: 0,
+                                requestID: request1.id,
+                                title: "Recibiste una petición de servicio",
+                                image: strImagen
                             },
                             body: {
                                 title: "El usuario " + strUsuario + " acaba de solicitar tu servicio",

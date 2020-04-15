@@ -48,7 +48,7 @@ const router = (app: any, ds: DataService) => {
                         console.log("voy a realizar el update");
                         const requestm: any = ds.dbModels.request;
                         if (req.body.prof) {
-                            const request1 = await requestm.update({ staterequest: stateRequest, commentprof: req.body.comment }, {
+                            const request1 = await requestm.update({ staterequest: stateRequest, commentprof: req.body.comment}, {
                                 where: { id: req.body.id }
                             });
                         } else {
@@ -106,8 +106,10 @@ const router = (app: any, ds: DataService) => {
                             },
                             collapse_key: '',
                             data: { // Esto es solo opcional, puede enviar cualquier dato     
-                                msg: strUser + " canceló el servicio",
-                                pnid: req.body.requestid
+                                status: stateRequest,
+                                requestID: req.body.id,
+                                title: "Se recibió una cancelación de servicio",
+                                image: strImagen
                             },
                             body: {
                                 title: strUser + " canceló el servicio",

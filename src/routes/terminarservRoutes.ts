@@ -30,11 +30,11 @@ const router = (app: any, ds: DataService) => {
                 var stateRequest = 7; //Finalizado x el usuario
                 if (req.body.prof) {
                     stateRequest = 3; //Finalizado x el profesional
-                    const request2 = await request.update({ staterequest: stateRequest, commentprof: req.body.comment }, {
+                    const request2 = await request.update({ staterequest: stateRequest, commentprof: req.body.comment, satisfied: req.body.satisfied }, {
                         where: { id: req.body.id }
                     });
                 } else {
-                    const request2 = await request.update({ staterequest: stateRequest, commentusr: req.body.comment }, {
+                    const request2 = await request.update({ staterequest: stateRequest, commentusr: req.body.comment, satisfied: req.body.satisfied }, {
                         where: { id: req.body.id }
                     });
                 }
@@ -87,8 +87,10 @@ const router = (app: any, ds: DataService) => {
                             },
                             collapse_key: '',
                             data: { // Esto es solo opcional, puede enviar cualquier dato     
-                                msg: strUser + " termioó el servicio",
-                                pnid: req.body.requestid
+                                status: stateRequest,
+                                requestID: req.body.id,
+                                title: "Se recibió la notificación de la finalización del servicio",
+                                image: strImagen
                             },
                             body: {
                                 title: strUser + " terminó el servicio",

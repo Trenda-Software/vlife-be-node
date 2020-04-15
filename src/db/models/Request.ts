@@ -7,7 +7,7 @@ const RequestModel = (sequelize: any) => {
         date: Sequelize.DATE,
         approve: Sequelize.BOOLEAN,
         staterequest: Sequelize.INTEGER,
-        satisfiefd: Sequelize.BOOLEAN,
+        satisfied: Sequelize.BOOLEAN,
     });
 
     /*

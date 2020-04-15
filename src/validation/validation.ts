@@ -149,9 +149,9 @@ const registerProfValidation = (data: any) => {
             'number.min': 'El valor del campo especialidadid debe ser mayor a 0',
         }),
         practicas: Joi.array(),
-        certpicture: Joi.string().base64().messages({
+        certpicture: Joi.string().allow('').base64().messages({
             'string.base64': 'El campo imagen debe ser base64',
-            'any.required': 'Por favor ingrese la imagen',
+            //'any.required': 'Por favor ingrese la imagen',
         }),
     });
 
