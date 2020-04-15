@@ -28,10 +28,7 @@ import LoginprofJWTRoutes from './routes/LoginprofJWTRoutes';
 import getUserPendingRequestsRoutes from './routes/getUserPendingRequestsRoutes';
 import practicesProfRoutes from './routes/practicesProfRoutes';
 import activeServicesRoutes from './routes/activeServicesRoutes';
-
-
-
-
+import cancelAllRequestsRoutes from './routes/cancelAllRequestsRoutes';
 
 
 import DataService from './service/DataService';
@@ -108,6 +105,7 @@ LoginprofJWTRoutes(app, ds);
 getUserPendingRequestsRoutes(app, ds);
 practicesProfRoutes(app, ds);
 activeServicesRoutes(app, ds);
+cancelAllRequestsRoutes(app, ds);
 
 
 

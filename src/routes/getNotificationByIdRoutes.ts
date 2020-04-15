@@ -28,7 +28,7 @@ const router = (app: any, ds: DataService) => {
 
                         const origenGM = profesional1.lat + "," + profesional1.lng
 
-                        const usuarios = await ds.dbClient.query("Select Requests.id,Requests.commentusr,Users.name,surname,address,lat,lng,mobile,email,dni,picture,Patienttypes.name as PTName from Users inner join Requests on Users.id = Requests.UserId inner join Patienttypes on Requests.Patienttypeid = Patienttypes.id where Requests.staterequest = 0 and Requests.ProfessionalId = " + req.query.id, { type: Sequelize.QueryTypes.SELECT });
+                        const usuarios = await ds.dbClient.query("Select Requests.id,Requests.commentusr,Users.name,surname,address,lat,lng,mobile,email,dni,picture,Patienttypes.name as PTName, Requests.date from Users inner join Requests on Users.id = Requests.UserId inner join Patienttypes on Requests.Patienttypeid = Patienttypes.id where Requests.staterequest = 0 and Requests.ProfessionalId = " + req.query.id, { type: Sequelize.QueryTypes.SELECT });
                         var solicitud: any = [];
                         //const solicitudes = usuarios.map(async (usuario: any) => {
 
@@ -126,6 +126,7 @@ const router = (app: any, ds: DataService) => {
                                     distancetiempo: usrTiempo,
                                     ganancia: parseFloat((Math.round((servCost * comvlife) * 100) / 100).toString()).toFixed(2),
                                     typo_paciente: usuarios[usuario].PTName,
+                                    daterequest: usuarios[usuario].date,
                                 }
                             };
 

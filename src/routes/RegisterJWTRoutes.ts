@@ -80,7 +80,7 @@ const router = (app: any, ds: DataService) => {
                     email: user1.email,
                     mobile: user1.mobile,
                     gender: hisGender.name,
-                    address: user1.address
+                    address: user1.address,
                 }
                 console.log(user);
                 console.log(userdev);
