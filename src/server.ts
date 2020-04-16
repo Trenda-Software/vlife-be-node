@@ -29,11 +29,6 @@ import getUserPendingRequestsRoutes from './routes/getUserPendingRequestsRoutes'
 import practicesProfRoutes from './routes/practicesProfRoutes';
 import activeServicesRoutes from './routes/activeServicesRoutes';
 
-
-
-
-
-
 import DataService from './service/DataService';
 
 // import cors from 'cors';
@@ -70,13 +65,16 @@ app.use(express.json({ limit: '5mb' }));
 // Configurar cabeceras y cors
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header(
+        'Access-Control-Allow-Headers',
+        'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method'
+    );
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
     res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
     next();
 });
 
-app.use("img/users", express.static(__dirname + "img/users"));
+app.use('img/users', express.static(__dirname + 'img/users'));
 
 // add routes
 userRoutes(app, ds);
@@ -109,10 +107,6 @@ getUserPendingRequestsRoutes(app, ds);
 practicesProfRoutes(app, ds);
 activeServicesRoutes(app, ds);
 
-
-
-
-
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));
 app.post('/post', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello Maca en el Post 20200127`));
 // app.use(function(req, res, next) {
@@ -131,5 +125,4 @@ app.listen(PORT, () => {
         `VLife server app running in: http://localhost:${PORT} in the ${process.env.ENVIRONMENT} env WITH Typescript!!!`
     );
 });
-
 export default app;

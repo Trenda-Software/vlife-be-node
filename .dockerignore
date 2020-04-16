@@ -1,1 +1,6 @@
+# this won't be copied into the container when copying source. You dont need these files in the running container
 node_modules/
+.git/
+.DS_Store
+.vscode
+/dist

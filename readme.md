@@ -140,3 +140,24 @@ Remember to update the sec group with your machine IP
 ### check process running
 
 ps x | grep <server port number>
+
+# Using Docker
+
+Install docker in your machine
+
+## Build
+
+    $ docker build . -t vlife-api
+
+## Run
+
+    $ docker run -d -p <your host machine port>:3000 vlife-api
+    $ docker run -d -p 8080:3000 vlife-api
+
+## Check the container, log into it
+
+    $ docker exec -it <container name / ID> /bin/bash --> be sure that the container distro has the bash binaries (e.g. alpine does not have it, it uses ash)
+
+# attach the container input/output to a terminal
+
+    $ docker attach <container name / ID>
