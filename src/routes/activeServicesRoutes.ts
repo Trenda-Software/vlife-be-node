@@ -13,7 +13,7 @@ const router = (app: any, ds: DataService) => {
                 } else {
 
                     var clausula = " Requests.UserId = " + req.query.id
-                    var sqlQuery = "select Requests.Id as requestId, Users.id as patientId, Users.name as userName, Users.surname as userSurname,Professionals.id as professionalId,Professionals.name as professionalName,Professionals.surname as professionalSurname, Requests.staterequest as status from Requests inner join Users on Requests.UserId = Users.id inner join Professionals on Professionals.id = Requests.ProfessionalId  where Requests.staterequest in (1,2,3,6) and (timestampdiff(hour,  Requests.updatedAt,now() ) <= 96) and " + clausula;
+                    var sqlQuery = "select Requests.Id as requestId, Users.id as patientId, Users.name as userName, Users.surname as userSurname,Professionals.id as professionalId,Professionals.name as professionalName,Professionals.surname as professionalSurname, Requests.staterequest as status from Requests inner join Users on Requests.UserId = Users.id inner join Professionals on Professionals.id = Requests.ProfessionalId  where Requests.staterequest in (1,2,3,6) and (timestampdiff(hour,  Requests.updatedAt,now() ) <= 24) and " + clausula;
                     console.log("sqlQuery " + sqlQuery)
                     console.log("req.query.prof " + req.query.prof);
 
