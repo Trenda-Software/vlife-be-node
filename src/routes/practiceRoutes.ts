@@ -48,7 +48,7 @@ const router = (app: any, ds: DataService) => {
                     var destinoGM = "";
                     var destinoGM1 = "";
 
-                    const practicas1 = await ds.dbClient.query("select Professionals.id,name,surname,sum(cost) as cost, lat,lng, picture from PracticeCosts  inner join Professionals on Professionalid = Professionals.id where " + clausula + " and Professionals.in_service = false and Professionals.id not in (select ProfessionalId from Requests where staterequest = 0 and UserId = " + req.body.userid + " ) group by Professionalid", { type: Sequelize.QueryTypes.SELECT })
+                    const practicas1 = await ds.dbClient.query("select Professionals.id,name,surname,sum(cost) as cost, lat,lng, picture from PracticeCosts  inner join Professionals on Professionalid = Professionals.id where " + clausula + " and Professionals.on_line = true  and Professionals.in_service = false and Professionals.id not in (select ProfessionalId from Requests where staterequest = 0 and UserId = " + req.body.userid + " ) group by Professionalid", { type: Sequelize.QueryTypes.SELECT })
 
                     const solicitudes = practicas1.map((practica: any, index: any) => {
 

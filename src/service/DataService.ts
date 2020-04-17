@@ -64,9 +64,29 @@ export default class DataService {
 
         console.log('Re-Loading DB');
         await this.initDBData();
-        console.log('Init Data re-loaded');
-    }
 
+        console.log('Init Data re-loaded');
+
+        //Funcion que cancela los servicios que no fueron contestados
+        //  this.cancelRequestsByTime()
+
+    }
+    async cancelRequestsByTime() {
+        setInterval(async () => {
+            console.log('entre al cancel')
+            const RequestModel: any = this.dbClient.models.Request;
+            const request1 = await RequestModel.findOne({
+                where: {
+                    Professionalid: 1
+                }
+            });
+            console.log('-------------------------------------------------------');
+            console.log('Pasaron 6 segundos');
+            console.log('request ' + JSON.stringify(request1));
+            console.log('-------------------------------------------------------');
+
+        }, 6000)
+    }
     async resetInitialData() {
         await this.dbClient.sync({ force: false });
     }
