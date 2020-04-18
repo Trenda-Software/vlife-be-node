@@ -171,6 +171,7 @@ const router = (app: any, ds: DataService) => {
                         await t.commit();
                         res.status(200).json({
                             requestid: request1.id,
+                            mobile: profesional1.mobile,
                             message: 'Solicitud de servicio generada con exito !!'
                         });
                     } catch (err) {
