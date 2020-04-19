@@ -36,10 +36,16 @@ const router = (app: any, ds: DataService) => {
 
                         const activeService = {
                             requestId: servicios[servicio].requestId,
-                            patientId: servicios[servicio].patientId,
-                            patientName: servicios[servicio].userName + " " + servicios[servicio].userSurname,
-                            professioanlId: servicios[servicio].professionalId,
-                            professionalName: servicios[servicio].professionalName + " " + servicios[servicio].professionalSurname,
+                            patient:{
+                                id: servicios[servicio].patientId,
+                                name: servicios[servicio].userName,
+                                surname: servicios[servicio].userSurname
+                            },
+                            professional:{
+                                id: servicios[servicio].professionalId,
+                                name: servicios[servicio].professionalName,
+                                surname: servicios[servicio].professionalSurname
+                            }
                             status: servicios[servicio].status,
                             practices: practicas
                         }
