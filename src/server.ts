@@ -112,7 +112,6 @@ pnValidatedProfessionalRoutes(app, ds);
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));
 app.post('/post', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello Maca en el Post 20200127`));
 
-console.log("DIR " + __dirname + '/ssl/privateKey.pem');
 https.createServer({
     key: fs.readFileSync(__dirname + '/ssl/privateKey.pem'),
     cert: fs.readFileSync(__dirname + '/ssl/server.crt')
