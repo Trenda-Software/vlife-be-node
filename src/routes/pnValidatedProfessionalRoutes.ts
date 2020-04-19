@@ -23,7 +23,7 @@ const router = (app: any, ds: DataService) => {
                     where: { id: req.body.professionalid }
                 });
 
-                if (!profesional1) return res.status(400).send('El Profesional no existe en la base de datos');
+                if (!profesional1) return res.status(200).send('El Profesional no existe en la base de datos');
 
                 // Envio de notificacion push
 

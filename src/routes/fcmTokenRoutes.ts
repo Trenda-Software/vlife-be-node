@@ -18,7 +18,7 @@ const router = (app: any, ds: DataService) => {
                     where: { id: req.body.id }
                 });
 
-                if (!userFcm) return res.status(400).send('El id no existe en la base de datos');
+                if (!userFcm) return res.status(200).send('El id no existe en la base de datos');
 
                 const userFcmUpd = await usuario.update({ fcmtoken: req.body.fcmtoken }, {
                     where: { id: req.body.id }

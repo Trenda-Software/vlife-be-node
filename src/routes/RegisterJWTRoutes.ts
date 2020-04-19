@@ -42,7 +42,7 @@ const router = (app: any, ds: DataService) => {
                 where: { email: req.body.email }
             });
 
-            if (userMail) return res.status(400).send('El mail ya esta en uso');
+            if (userMail) return res.status(200).send('El mail ya esta en uso');
 
             try {
 

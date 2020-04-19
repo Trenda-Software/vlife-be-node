@@ -26,9 +26,7 @@ const router = (app: any, ds: DataService) => {
                     const servicios = await ds.dbClient.query(sqlQuery, { type: Sequelize.QueryTypes.SELECT });
 
                     if (servicios.length == 0) {
-                        return res.status(200).json({
-                            message: servicios
-                        });
+                        return res.status(200).json(servicios);
                     }
 
                     var activeServiceArray: any = [];

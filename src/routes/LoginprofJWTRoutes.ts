@@ -39,7 +39,7 @@ const router = (app: any, ds: DataService) => {
                 where: { email: req.body.email }
             });
 
-            if (!profMail) return res.status(400).send('El usuario y/o clave son incorrectos');
+            if (!profMail) return res.status(200).send('El usuario y/o clave son incorrectos');
 
             //Hash password
             /*
@@ -53,7 +53,7 @@ const router = (app: any, ds: DataService) => {
             const profPwd = await profesional.findOne({
                 where: { pwd: req.body.pwd }
             });
-            if (!profPwd) return res.status(400).send('El usuario y/o clave son incorrectos');
+            if (!profPwd) return res.status(200).send('El usuario y/o clave son incorrectos');
 
             /*
             const validPWD = await bcrypt.compare("maca1234", userpwd.pwd.trim());

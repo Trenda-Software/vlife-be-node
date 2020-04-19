@@ -18,7 +18,7 @@ const router = (app: any, ds: DataService) => {
                     where: { id: req.body.id }
                 });
 
-                if (!profGeo) return res.status(400).send('El id no existe en la base de datos');
+                if (!profGeo) return res.status(200).send('El id no existe en la base de datos');
 
                 const profGeoUpd = await profesional.update({ lng: req.body.coords.lng, lat: req.body.coords.lat }, {
                     where: { id: req.body.id }

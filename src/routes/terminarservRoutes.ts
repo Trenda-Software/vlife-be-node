@@ -22,7 +22,7 @@ const router = (app: any, ds: DataService) => {
                     where: { id: req.body.id }
                 });
 
-                if (!request1) return res.status(400).send('El id no existe en la base de datos');
+                if (!request1) return res.status(200).send('El id no existe en la base de datos');
 
                 const userID = request1.UserId;
                 const professionalID = request1.ProfessionalId;
