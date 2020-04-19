@@ -45,7 +45,7 @@ const router = (app: any, ds: DataService) => {
                                 id: servicios[servicio].professionalId,
                                 name: servicios[servicio].professionalName,
                                 surname: servicios[servicio].professionalSurname
-                            }
+                            },
                             status: servicios[servicio].status,
                             practices: practicas
                         }
