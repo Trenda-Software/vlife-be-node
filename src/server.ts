@@ -34,8 +34,8 @@ import pnValidatedProfessionalRoutes from './routes/pnValidatedProfessionalRoute
 
 import DataService from './service/DataService';
 
-// import cors from 'cors';
-//Ojo con las mayusculas y minusculas
+var https = require('https');
+var fs = require('fs');
 
 const app = express();
 //const bodyParser = require('body-parser');
@@ -74,7 +74,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use("img/users", express.static(__dirname + "img/users"));
+//app.use("img/users", express.static(__dirname + "img/users"));
 
 // add routes
 userRoutes(app, ds);
@@ -112,11 +112,18 @@ pnValidatedProfessionalRoutes(app, ds);
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));
 app.post('/post', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello Maca en el Post 20200127`));
 
-
-app.listen(PORT, () => {
+console.log("DIR " + __dirname + '/ssl/privateKey.pem');
+https.createServer({
+    key: fs.readFileSync(__dirname + '/ssl/privateKey.pem'),
+    cert: fs.readFileSync(__dirname + '/ssl/server.crt')
+}, app).listen(PORT, function () {
+    console.log(`VLife server app running in: http://localhost:${PORT} in the ${process.env.ENVIRONMENT} env WITH Typescript!!!`);
+});
+/* app.listen(PORT, () => {
     console.log(
         `VLife server app running in: http://localhost:${PORT} in the ${process.env.ENVIRONMENT} env WITH Typescript!!!`
     );
-});
+}); */
+
 
 export default app;
