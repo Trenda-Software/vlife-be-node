@@ -115,16 +115,13 @@ sequelize model:create --name Practica
 sequelize model:create --name Profesional
 sequelize model:create --name Provincia ...
 
-# Deploy
+# API
 
-## API - Local Endpoint
+## Local Endpoints
 
 localhost:3000/
-
 localhost:3000/usuario
-
 localhost:3000/practica FORBIDDEN? necesita loguearse con JWT
-
 localhost:3000/cantPorEspecialidad FORBIDDEN? necesita loguearse con JWT
 
 ## AWS
@@ -152,11 +149,11 @@ Install docker in your machine
 ## Run
 
     $ docker run -d -p <your host machine port>:3000 vlife-api
-    $ docker run -d -p 8080:3000 vlife-api
+    $ docker run -d -p 3000:3000 vlife-api
 
 ## Check the container, log into it
 
-    $ docker exec -it <container name / ID> /bin/bash --> be sure that the container distro has the bash binaries (e.g. alpine does not have it, it uses ash)
+    $ docker exec -it <container name / ID> /bin/bash --> be sure that the container distro has the bash binaries (e.g. node-alpine does not have it, it uses ash shell)
 
 # attach the container input/output to a terminal
 
