@@ -32,14 +32,20 @@ const router = (app: any, ds: DataService) => {
                     var activeServiceArray: any = [];
 
                     for (let servicio in servicios) {
-                        const practicas = await ds.dbClient.query("select id as practiceId, name as practiceName from Practices where Practices.id in ( select practiceId from Requests_Practices where RequestId = " + servicios[servicio].requestId + " )", { type: Sequelize.QueryTypes.SELECT });
+                        const practicas = await ds.dbClient.query("select id, name from Practices where Practices.id in ( select practiceId from Requests_Practices where RequestId = " + servicios[servicio].requestId + " )", { type: Sequelize.QueryTypes.SELECT });
 
                         const activeService = {
                             requestId: servicios[servicio].requestId,
-                            patientId: servicios[servicio].patientId,
-                            patientName: servicios[servicio].userName + " " + servicios[servicio].userSurname,
-                            professioanlId: servicios[servicio].professionalId,
-                            professionalName: servicios[servicio].professionalName + " " + servicios[servicio].professionalSurname,
+                            patient:{
+                                id: servicios[servicio].patientId,
+                                name: servicios[servicio].userName,
+                                surname: servicios[servicio].userSurname
+                            },
+                            professional:{
+                                id: servicios[servicio].professionalId,
+                                name: servicios[servicio].professionalName,
+                                surname: servicios[servicio].professionalSurname
+                            },
                             status: servicios[servicio].status,
                             practices: practicas
                         }
