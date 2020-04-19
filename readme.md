@@ -155,6 +155,10 @@ Install docker in your machine
 
     $ docker exec -it <container name / ID> /bin/bash --> be sure that the container distro has the bash binaries (e.g. node-alpine does not have it, it uses ash shell)
 
-# attach the container input/output to a terminal
+## attach the container input/output to a terminal
 
     $ docker attach <container name / ID>
+
+# Deploy with Elastic Beanstalk
+
+# Deploy with Serverless AWS Lambda
