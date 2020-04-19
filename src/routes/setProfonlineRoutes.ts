@@ -18,7 +18,7 @@ const router = (app: any, ds: DataService) => {
                     where: { id: req.body.id }
                 });
 
-                if (!profFcm) return res.status(400).send('El id no existe en la base de datos');
+                if (!profFcm) return res.status(200).send('El id no existe en la base de datos');
 
                 const profFcmUpd = await profesional.update({ on_line: req.body.on_line }, {
                     where: { id: req.body.id }

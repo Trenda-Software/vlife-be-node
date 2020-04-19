@@ -18,7 +18,7 @@ const router = (app: any, ds: DataService) => {
                         where: { id: req.query.id }
                     });
 
-                    if (!profId) return res.status(400).send('El profesional no existe en la base');
+                    if (!profId) return res.status(200).send('El profesional no existe en la base');
 
                     // Borro las practicas viejas
 

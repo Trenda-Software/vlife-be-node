@@ -15,7 +15,7 @@ const router = (app: any, ds: DataService) => {
                         where: { ProfessionalId: req.query.id }
                     });
                     console.log(comentario);
-                    if (!comentario) return res.status(400).send('No existen comentarios para el profesional solicitado');
+                    if (!comentario) return res.status(200).send('No existen comentarios para el profesional solicitado');
                     res.status(200).send(comentario);
 
                 }

@@ -23,7 +23,7 @@ const router = (app: any, ds: DataService) => {
 
                 console.log("request state 5 " + JSON.stringify(request1));
 
-                if (request1) return res.status(400).send('Posee un servicio pago, no puede cancelarlo');
+                if (request1) return res.status(200).send('Posee un servicio pago, no puede cancelarlo');
 
                 const requestUpdate = await request.update({ staterequest: 8, commentprof: 'Cancelado por logout' }, {
                     where: {

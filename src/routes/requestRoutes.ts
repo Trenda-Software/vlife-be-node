@@ -43,7 +43,7 @@ const router = (app: any, ds: DataService) => {
                         where: { id: req.body.professionalid }
                     });
 
-                    if (!profesional1) return res.status(400).send('No existe el profesional.');
+                    if (!profesional1) return res.status(200).send('No existe el profesional.');
                     const profesional2 = await profesional.findOne({
                         where: {
                             id: req.body.professionalid,
