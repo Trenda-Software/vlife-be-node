@@ -42,7 +42,7 @@ const router = (app: any, ds: DataService) => {
                 where: { email: req.body.email }
             });
 
-            if (!userMail) return res.status(200).send('El usuario y/o clave son incorrectos');
+            if (!userMail) return res.status(400).send('El usuario y/o clave son incorrectos');
 
             //Hash password
             /*
