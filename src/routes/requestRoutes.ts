@@ -59,7 +59,7 @@ const router = (app: any, ds: DataService) => {
                         // Aca va el codigo para crear la solicitud de servicio
                         console.log("voy a realizar el create");
                         const requestm: any = ds.dbModels.request;
-                        const request1 = await requestm.create({ commentusr: req.body.comment, date: Date.now(), staterequest: 0 }, { t });
+                        const request1 = await requestm.create({ commentusr: req.body.comment, date: Date.now(), staterequest: 0, preferenceid: req.body.preferenceid }, { t });
                         const imgpres: any = ds.dbModels.ImgPrescription;
 
                         await request1.setUser(req.body.userid);

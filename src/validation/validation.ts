@@ -165,7 +165,8 @@ const requestValidation = (data: any) => {
         //practicesid: Joi.array().required(),
         //prescription: Joi.array().items(Joi.string().base64()),
         comment: Joi.string().optional().allow(''),
-        patienttype: Joi.number().required().min(1).max(4)
+        patienttype: Joi.number().required().min(1).max(4),
+        preferenceid: Joi.string().optional().allow(''),
     });
     return schema.validate(data);
 }
