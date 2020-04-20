@@ -8,6 +8,7 @@ const RequestModel = (sequelize: any) => {
         approve: Sequelize.BOOLEAN,
         staterequest: Sequelize.INTEGER,
         satisfied: Sequelize.BOOLEAN,
+        preferenceid: Sequelize.STRING,
     });
 
     /*
