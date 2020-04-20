@@ -83,6 +83,8 @@ const router = (app: any, ds: DataService) => {
                         console.log("Seteo el token " + profesional2.fcmtoken);
                         var token = profesional2.fcmtoken;
 
+                        console.log("mercadoPagoData.transactionAmount " + req.body.mercadoPagoData.transactionAmount)
+                        console.log("req.body.mercadoPagoData.id " + req.body.mercadoPagoData.id)
 
                         var message = {
                             to: token,
@@ -94,8 +96,8 @@ const router = (app: any, ds: DataService) => {
                             data: { // Esto es solo opcional, puede enviar cualquier dato     
                                 msg: strUser + " confirmo el servicio",
                                 pnid: req.body.requestid,
-                                importe: "$500",
-                                codigopago: "ABC1234"
+                                importe: req.body.mercadoPagoData.transactionAmount,
+                                codigopago: req.body.mercadoPagoData.id
                             },
                             body: {
                                 title: strUser + " confirmo el servicio",
