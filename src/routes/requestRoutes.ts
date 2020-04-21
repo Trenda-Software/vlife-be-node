@@ -43,7 +43,7 @@ const router = (app: any, ds: DataService) => {
                         where: { id: req.body.professionalid }
                     });
 
-                    if (!profesional1) return res.status(400).send('No existe el profesional.');
+                    if (!profesional1) return res.status(200).send('No existe el profesional.');
                     const profesional2 = await profesional.findOne({
                         where: {
                             id: req.body.professionalid,
@@ -59,7 +59,7 @@ const router = (app: any, ds: DataService) => {
                         // Aca va el codigo para crear la solicitud de servicio
                         console.log("voy a realizar el create");
                         const requestm: any = ds.dbModels.request;
-                        const request1 = await requestm.create({ commentusr: req.body.comment, date: Date.now(), staterequest: 0 }, { t });
+                        const request1 = await requestm.create({ commentusr: req.body.comment, date: Date.now(), staterequest: 0, preferenceid: req.body.preferenceid }, { t });
                         const imgpres: any = ds.dbModels.ImgPrescription;
 
                         await request1.setUser(req.body.userid);
@@ -171,6 +171,7 @@ const router = (app: any, ds: DataService) => {
                         await t.commit();
                         res.status(200).json({
                             requestid: request1.id,
+                            mobile: profesional1.mobile,
                             message: 'Solicitud de servicio generada con exito !!'
                         });
                     } catch (err) {

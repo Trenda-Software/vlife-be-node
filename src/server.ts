@@ -28,7 +28,8 @@ import LoginprofJWTRoutes from './routes/LoginprofJWTRoutes';
 import getUserPendingRequestsRoutes from './routes/getUserPendingRequestsRoutes';
 import practicesProfRoutes from './routes/practicesProfRoutes';
 import activeServicesRoutes from './routes/activeServicesRoutes';
-
+import cancelAllRequestsRoutes from './routes/cancelAllRequestsRoutes';
+import pnValidatedProfessionalRoutes from './routes/pnValidatedProfessionalRoutes';
 import DataService from './service/DataService';
 
 // import cors from 'cors';
@@ -106,19 +107,11 @@ LoginprofJWTRoutes(app, ds);
 getUserPendingRequestsRoutes(app, ds);
 practicesProfRoutes(app, ds);
 activeServicesRoutes(app, ds);
+cancelAllRequestsRoutes(app, ds);
+pnValidatedProfessionalRoutes(app, ds);
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));
 app.post('/post', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello Maca en el Post 20200127`));
-// app.use(function(req, res, next) {
-//   console.log(`${req.method} request for '${req.url}`);
-//   next();
-// });
-
-// apply CORS middleware to allow requests from any domain
-// app.use(cors());
-
-// // serve static files for test environment
-// app.use(express.static('public'));
 
 app.listen(PORT, () => {
     console.log(

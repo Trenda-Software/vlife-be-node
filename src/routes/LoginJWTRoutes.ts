@@ -56,7 +56,7 @@ const router = (app: any, ds: DataService) => {
             const userPwd = await usuario.findOne({
                 where: { pwd: req.body.pwd }
             });
-            if (!userPwd) return res.status(400).send('El usuario y/o clave son incorrectos');
+            if (!userPwd) return res.status(200).send('El usuario y/o clave son incorrectos');
 
             /*
             const validPWD = await bcrypt.compare("maca1234", userpwd.pwd.trim());
@@ -77,7 +77,8 @@ const router = (app: any, ds: DataService) => {
                 email: userMail.email,
                 mobile: userMail.mobile,
                 gender: hisGender.name,
-                address: userMail.address
+                address: userMail.address,
+                picture: userMail.picture
             }
             /*
                 Esta es la manera de firmam poniendo un tiempo de expiracion al token, 

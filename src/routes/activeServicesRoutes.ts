@@ -13,30 +13,49 @@ const router = (app: any, ds: DataService) => {
                 } else {
 
                     var clausula = " Requests.UserId = " + req.query.id
-                    if (req.query.prof) {
+                    var sqlQuery = "select Requests.Id as requestId, Users.id as patientId, Users.name as userName, Users.surname as userSurname,Professionals.id as professionalId,Professionals.name as professionalName,Professionals.surname as professionalSurname, Professionals.mobile as professionalMobile, Requests.preferenceid, Requests.staterequest as status from Requests inner join Users on Requests.UserId = Users.id inner join Professionals on Professionals.id = Requests.ProfessionalId  where Requests.staterequest in (1,2,3,6) and (timestampdiff(hour,  Requests.updatedAt,now() ) <= 24) and " + clausula;
+                    console.log("sqlQuery " + sqlQuery)
+                    console.log("req.query.prof " + req.query.prof);
+
+                    if (req.query.prof == 'true') {
+                        console.log("entre al if");
                         clausula = " Requests.ProfessionalId = " + req.query.id
+                        sqlQuery = "select Requests.Id as requestId, Users.id as patientId, Users.name as userName, Users.surname as userSurname,Professionals.id as professionalId,Professionals.name as professionalName,Professionals.surname as professionalSurname, Professionals.mobile as professionalMobile, Requests.preferenceid, Requests.staterequest as status from Requests inner join Users on Requests.UserId = Users.id inner join Professionals on Professionals.id = Requests.ProfessionalId where Requests.Id = (select max(id) from Requests where Requests.staterequest in (2,4,5) and " + clausula + " )";
                     }
 
-                    const servicios = await ds.dbClient.query("select max(Requests.Id) as requestId, Users.id as patientId, Users.name as userName, Users.surname as userSurname,Professionals.id as professionalId,Professionals.name as professionalName,Professionals.surname as professionalSurname, Requests.staterequest as status from Requests inner join Users on Requests.UserId = Users.id inner join Professionals on Professionals.id = Requests.ProfessionalId where Requests.Id = (select max(id) from Requests where " + clausula + " )", { type: Sequelize.QueryTypes.SELECT });
-
+                    const servicios = await ds.dbClient.query(sqlQuery, { type: Sequelize.QueryTypes.SELECT });
 
                     if (servicios.length == 0) {
-                        return res.status(400).send('No existe el servicio.');
+                        return res.status(200).json(servicios);
                     }
 
-                    const practicas = await ds.dbClient.query("select id as practiceId, name as practiceName from Practices where Practices.id in ( select practiceId from Requests_Practices where RequestId = " + servicios[0].requestId + " )", { type: Sequelize.QueryTypes.SELECT });
+                    var activeServiceArray: any = [];
 
-                    const activeService = {
-                        requestId: servicios[0].requestId,
-                        patientId: servicios[0].patientId,
-                        patientName: servicios[0].userName + " " + servicios[0].userSurname,
-                        professioanlId: servicios[0].professionalId,
-                        professionalName: servicios[0].professionalName + " " + servicios[0].professionalSurname,
-                        status: servicios[0].status,
-                        practices: practicas
-                    }
+                    for (let servicio in servicios) {
+                        const practicas = await ds.dbClient.query("select id, name from Practices where Practices.id in ( select practiceId from Requests_Practices where RequestId = " + servicios[servicio].requestId + " )", { type: Sequelize.QueryTypes.SELECT });
 
-                    res.send(activeService)
+                        const activeService = {
+                            requestId: servicios[servicio].requestId,
+                            preferenceId: servicios[servicio].preferenceid,
+                            patient: {
+                                id: servicios[servicio].patientId,
+                                name: servicios[servicio].userName,
+                                surname: servicios[servicio].userSurname
+                            },
+                            professional: {
+                                id: servicios[servicio].professionalId,
+                                name: servicios[servicio].professionalName,
+                                surname: servicios[servicio].professionalSurname,
+                                mobile: servicios[servicio].professionalMobile
+                            },
+                            status: servicios[servicio].status,
+                            practices: practicas
+                        }
+                        // console.log("activeService " + JSON.stringify(activeService))
+                        activeServiceArray.push(activeService)
+                    };
+                    //console.log("ActiveserviceArray " + activeServiceArray)
+                    res.send(activeServiceArray)
                 }
             });
         })

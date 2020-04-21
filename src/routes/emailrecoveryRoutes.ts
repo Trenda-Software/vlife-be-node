@@ -20,7 +20,7 @@ const router = (app: any, ds: DataService) => {
                     where: { email: req.body.email }
                 });
 
-                if (!userMail) return res.status(400).send('El email no existe en la base de datos');
+                if (!userMail) return res.status(200).send('El email no existe en la base de datos');
                 // Enviar el mail con el codigo random para recobarar la contraseña  
 
                 console.log("Creo el transporte");
