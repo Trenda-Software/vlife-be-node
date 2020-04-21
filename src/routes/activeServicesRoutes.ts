@@ -13,14 +13,14 @@ const router = (app: any, ds: DataService) => {
                 } else {
 
                     var clausula = " Requests.UserId = " + req.query.id
-                    var sqlQuery = "select Requests.Id as requestId, Users.id as patientId, Users.name as userName, Users.surname as userSurname,Professionals.id as professionalId,Professionals.name as professionalName,Professionals.surname as professionalSurname, Professionals.mobile as professionalMobile, Requests.preferenceid, Requests.staterequest as status from Requests inner join Users on Requests.UserId = Users.id inner join Professionals on Professionals.id = Requests.ProfessionalId  where Requests.staterequest in (1,2,3,6) and (timestampdiff(hour,  Requests.updatedAt,now() ) <= 24) and " + clausula;
+                    var sqlQuery = "select Requests.Id as requestId, Users.id as patientId, Users.name as userName, Users.surname as userSurname,Users.Picture as userPicture,Users.lat as userLat, Users.lng as userLng,Professionals.id as professionalId,Professionals.name as professionalName,Professionals.surname as professionalSurname, Professionals.mobile as professionalMobile, Professionals.picture as professionalPicture, Requests.preferenceid, Requests.staterequest as status from Requests inner join Users on Requests.UserId = Users.id inner join Professionals on Professionals.id = Requests.ProfessionalId  where Requests.staterequest in (1,2,3,6) and (timestampdiff(hour,  Requests.updatedAt,now() ) <= 24) and " + clausula;
                     console.log("sqlQuery " + sqlQuery)
                     console.log("req.query.prof " + req.query.prof);
 
                     if (req.query.prof == 'true') {
                         console.log("entre al if");
                         clausula = " Requests.ProfessionalId = " + req.query.id
-                        sqlQuery = "select Requests.Id as requestId, Users.id as patientId, Users.name as userName, Users.surname as userSurname,Professionals.id as professionalId,Professionals.name as professionalName,Professionals.surname as professionalSurname, Professionals.mobile as professionalMobile, Requests.preferenceid, Requests.staterequest as status from Requests inner join Users on Requests.UserId = Users.id inner join Professionals on Professionals.id = Requests.ProfessionalId where Requests.Id = (select max(id) from Requests where Requests.staterequest in (2,4,5) and " + clausula + " )";
+                        sqlQuery = "select Requests.Id as requestId, Users.id as patientId, Users.name as userName, Users.surname as userSurname,Users.Picture as userPicture,Users.lat as userLat, Users.lng as userLng,Professionals.id as professionalId,Professionals.name as professionalName,Professionals.surname as professionalSurname, Professionals.mobile as professionalMobile, Professionals.picture as professionalPicture, Requests.preferenceid, Requests.staterequest as status from Requests inner join Users on Requests.UserId = Users.id inner join Professionals on Professionals.id = Requests.ProfessionalId where Requests.Id = (select max(id) from Requests where Requests.staterequest in (2,4,5) and " + clausula + " )";
                     }
 
                     const servicios = await ds.dbClient.query(sqlQuery, { type: Sequelize.QueryTypes.SELECT });
@@ -40,13 +40,19 @@ const router = (app: any, ds: DataService) => {
                             patient: {
                                 id: servicios[servicio].patientId,
                                 name: servicios[servicio].userName,
-                                surname: servicios[servicio].userSurname
+                                surname: servicios[servicio].userSurname,
+                                image: servicios[servicio].userPicture,
+                                geoloc: {
+                                    lat: parseFloat(servicios[servicio].userLat),
+                                    lng: parseFloat(servicios[servicio].userLng)
+                                }
                             },
                             professional: {
                                 id: servicios[servicio].professionalId,
                                 name: servicios[servicio].professionalName,
                                 surname: servicios[servicio].professionalSurname,
-                                mobile: servicios[servicio].professionalMobile
+                                mobile: servicios[servicio].professionalMobile,
+                                image: servicios[servicio].professionalPicture
                             },
                             status: servicios[servicio].status,
                             practices: practicas
