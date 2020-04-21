@@ -4,9 +4,9 @@ import app from '../server';
 const verifytoken = require('../validation/verifyToken');
 const jwt = require('jsonwebtoken');
 const { Sequelize } = require('sequelize');
+import { getPractices } from '../service/ProfesionalService';
 
 const router = (app: any, ds: DataService) => {
-
     app.route('/practicesProf')
         .get(verifytoken, (req: any, res: any) => {
             jwt.verify(req.token, process.env.JWT_SECRETKEY, async (err: any, authData: any) => {
@@ -15,22 +15,20 @@ const router = (app: any, ds: DataService) => {
                 } else {
                     const profesional: any = ds.dbModels.professional;
                     const profId = await profesional.findOne({
-                        where: { id: req.query.id }
+                        where: { id: req.query.id },
                     });
 
                     if (!profId) return res.status(200).send('El profesional no existe en la base');
 
                     // Borro las practicas viejas
 
-                    const practicas = await ds.dbClient.query("select Practices.id as PracticesID, Practices.name, PracticeCosts.cost from PracticeCosts inner join Practices on PracticeCosts.PracticeId = Practices.id  where PracticeCosts.ProfessionalId = " + req.query.id, { type: Sequelize.QueryTypes.SELECT })
-
+                    const practicas = getPractices(profId);
 
                     res.json({
-                        message: practicas
+                        message: practicas,
                     });
                 }
             });
-
         })
         .post(verifytoken, async (req: any, res: any) => {
             jwt.verify(req.token, process.env.JWT_SECRETKEY, async (err: any, authData: any) => {
@@ -43,7 +41,7 @@ const router = (app: any, ds: DataService) => {
                     try {
                         const profesional: any = ds.dbModels.professional;
                         const profId = await profesional.findOne({
-                            where: { id: req.body.id }
+                            where: { id: req.body.id },
                         });
 
                         if (!profId) return res.status(400).send('El profesional no existe en la base');
@@ -51,11 +49,11 @@ const router = (app: any, ds: DataService) => {
                         // Borro las practicas viejas
                         const PracticeCostModel: any = ds.dbModels.practicecost;
                         const practicasCost = await PracticeCostModel.findOne({
-                            where: { ProfessionalId: req.body.id }
+                            where: { ProfessionalId: req.body.id },
                         });
 
                         await PracticeCostModel.destroy({
-                            where: { ProfessionalId: req.body.id }
+                            where: { ProfessionalId: req.body.id },
                         });
                         // UPDATE "posts" SET "deletedAt"=[timestamp] WHERE "deletedAt" IS NULL AND "id" = 1
 
@@ -64,7 +62,6 @@ const router = (app: any, ds: DataService) => {
                         const practicas1 = req.body.practices;
 
                         const practicas = practicas1.map(async (practica: any) => {
-
                             const PracticeCost = await PracticeCostModel.create({
                                 cost: practica.cost,
                             });
@@ -73,18 +70,16 @@ const router = (app: any, ds: DataService) => {
                             return practicas;
                         });
                         Promise.all(practicas)
-                            .then(async returnedValues => {
-                                console.log("practicas: " + JSON.stringify(practicas));
+                            .then(async (returnedValues) => {
+                                console.log('practicas: ' + JSON.stringify(practicas));
                                 await t.commit();
-                                res.json({ message: "Practicas actualizadas correctamente" });
+                                const practicas = service.getPractices(profId);
+                                res.json({ message: 'Practicas actualizadas correctamente' });
                             })
-                            .catch(reason => {
+                            .catch((reason) => {
                                 console.log(reason);
                                 return res.json({ message: JSON.stringify(reason) });
                             });
-
-
-
                     } catch (err) {
                         await t.rollback();
                         res.json({ message: JSON.stringify(err) });
@@ -92,7 +87,5 @@ const router = (app: any, ds: DataService) => {
                 }
             });
         });
-
-
 };
 export default router;
