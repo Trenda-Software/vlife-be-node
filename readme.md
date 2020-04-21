@@ -121,6 +121,7 @@ sequelize model:create --name Provincia ...
 
 localhost:3000/
 localhost:3000/usuario
+localhost:3000/especialidad
 localhost:3000/practica FORBIDDEN? necesita loguearse con JWT
 localhost:3000/cantPorEspecialidad FORBIDDEN? necesita loguearse con JWT
 
@@ -148,8 +149,8 @@ Install docker in your machine
 
 ## Run
 
-    $ docker run -d -p <your host machine port>:3000 vlife-api
-    $ docker run -d -p 3000:3000 vlife-api
+    $ docker run -d -p <your HOST machine port>:<container exposed port> vlife-api
+    $ docker run -d -p 5000:3000 vlife-api
 
 ## Check the container, log into it
 
@@ -160,5 +161,7 @@ Install docker in your machine
     $ docker attach <container name / ID>
 
 # Deploy with Elastic Beanstalk
+
+    $ eb
 
 # Deploy with Serverless AWS Lambda
