@@ -22,11 +22,17 @@ const router = (app: any, ds: DataService) => {
 
                     // Borro las practicas viejas
 
-                    const practicas = getPractices(profId);
+                    //const practicas = await ds.dbClient.query("select Practices.id as PracticesID, Practices.name, if(PracticeCosts.cost>0, PracticeCosts.cost,Practices.cost) as cost, if(PracticeCosts.cost>0, true,false) as selected from PracticeCosts  right join Practices on PracticeCosts.PracticeId = Practices.id where isnull(PracticeCosts.ProfessionalId) or PracticeCosts.ProfessionalId = " + req.query.id + " order by PracticesID", { type: Sequelize.QueryTypes.SELECT })
+                    const practicas = await ds.dbClient.query(
+                        '(select Practices.id as PracticesID, Practices.name, PracticeCosts.cost, true as selected from PracticeCosts  inner join Practices on PracticeCosts.PracticeId = Practices.id where PracticeCosts.ProfessionalId = ' +
+                            req.query.id +
+                            ' order by PracticesID) union (select Practices.id as PracticesID, Practices.name, Practices.cost, false as selected from Practices where Practices.id not in (select PracticeId from PracticeCosts where ProfessionalId = 1) and Practices.specialtyid in (select specialtyid from Practices where id in (select PracticeID from PracticeCosts where ProfessionalId = ' +
+                            req.query.id +
+                            ' ))) order by PracticesID',
+                        { type: Sequelize.QueryTypes.SELECT }
+                    );
 
-                    res.json({
-                        message: practicas,
-                    });
+                    res.json(practicas);
                 }
             });
         })
@@ -73,8 +79,15 @@ const router = (app: any, ds: DataService) => {
                             .then(async (returnedValues) => {
                                 console.log('practicas: ' + JSON.stringify(practicas));
                                 await t.commit();
-                                const practicas = service.getPractices(profId);
-                                res.json({ message: 'Practicas actualizadas correctamente' });
+                                const practicas1 = await ds.dbClient.query(
+                                    '(select Practices.id as PracticesID, Practices.name, PracticeCosts.cost, true as selected from PracticeCosts  inner join Practices on PracticeCosts.PracticeId = Practices.id where PracticeCosts.ProfessionalId = ' +
+                                        req.body.id +
+                                        ' order by PracticesID) union (select Practices.id as PracticesID, Practices.name, Practices.cost, false as selected from Practices where Practices.id not in (select PracticeId from PracticeCosts where ProfessionalId = 1) and Practices.specialtyid in (select specialtyid from Practices where id in (select PracticeID from PracticeCosts where ProfessionalId = ' +
+                                        req.body.id +
+                                        ' ))) order by PracticesID',
+                                    { type: Sequelize.QueryTypes.SELECT }
+                                );
+                                res.json(practicas1);
                             })
                             .catch((reason) => {
                                 console.log(reason);

@@ -13,6 +13,9 @@ import ImgPrescription from '../db/models/ImgPrescription';
 import Gender from '../db/models/Gender';
 import PracticeCost from '../db/models/PracticeCost';
 import Patienttype from '../db/models/Patienttype';
+import ServicePayment from '../db/models/ServicePayment';
+import VlifeParam from '../db/models/VlifeParam';
+
 
 const { Sequelize } = require('sequelize');
 
@@ -32,6 +35,8 @@ export default class DataService {
         gender: null,
         practicecost: null,
         patienttype: null,
+        servicepayment: null,
+        vlifeparam: null,
     };
 
     constructor(dbConfig: any) {
@@ -101,6 +106,8 @@ export default class DataService {
         const GenderModel: any = this.dbClient.models.Gender;
         const PracticeCostModel: any = this.dbClient.models.PracticeCost;
         const PatienttypeModel: any = this.dbClient.models.Patienttype;
+        const ServicePaymentModel: any = this.dbClient.models.ServicePayment;
+        const VlifeParamModel: any = this.dbClient.models.VlifeParam;
 
         /*         const province1 = await ProvinceModel.create({ code: 'BSAS', name: 'Buenos Aires' });
                 const country1 = await CountryModel.create({ code: 'ARG', name: 'Argentina' });
@@ -109,6 +116,8 @@ export default class DataService {
                 const gender1 = await GenderModel.create({ code: 'FEM', name: 'Femenino' });
                 const gender2 = await GenderModel.create({ code: 'MAS', name: 'Masculino' });
                 const gender3 = await GenderModel.create({ code: 'IND', name: 'Indistinto' });
+        
+                const vlifeparam = await VlifeParamModel.create({ comvlifeprof: 0.8, plusxdistancia: 1.1, plusxhorario: 1.1, distanciaplus: 10 });
          */
         /*        
                                  const user1 = await UserModel.create({
@@ -458,37 +467,38 @@ export default class DataService {
                 await practice27.setSpecialty(kinesio);
                 await practice28.setSpecialty(kinesio);
                 await practice29.setSpecialty(kinesio);
-         */        /*    
-                                    const PracticeCost1 = await PracticeCostModel.create({
-                                       cost: '625',
-                                   });
-                                   await PracticeCost1.setProfessional(professional2);
-                                   await PracticeCost1.setPractice(practice1);
-                           
-                                   const PracticeCost2 = await PracticeCostModel.create({
-                                       cost: '625',
-                                   });
-                                   await PracticeCost2.setProfessional(professional4);
-                                   await PracticeCost2.setPractice(practice2);
-                                   const PracticeCost3 = await PracticeCostModel.create({
-                                       cost: '625',
-                                   });
-                                   await PracticeCost3.setProfessional(professional4);
-                                   await PracticeCost3.setPractice(practice3);
-                  */
-        /*        const Pacienttype1 = await PatienttypeModel.create({
-                   name: 'Niño/a',
-               });
-               const Pacienttype2 = await PatienttypeModel.create({
-                   name: 'Embarazada',
-               });
-               const Pacienttype3 = await PatienttypeModel.create({
-                   name: 'Mayor',
-               });
-               const Pacienttype4 = await PatienttypeModel.create({
-                   name: 'Adulto/a',
-               }); */
-
+         */
+        /*  
+                           const PracticeCost1 = await PracticeCostModel.create({
+                              cost: '625',
+                          });
+                          await PracticeCost1.setProfessional(professional2);
+                          await PracticeCost1.setPractice(practice1);
+                  
+                          const PracticeCost2 = await PracticeCostModel.create({
+                              cost: '625',
+                          });
+                          await PracticeCost2.setProfessional(professional4);
+                          await PracticeCost2.setPractice(practice2);
+                          const PracticeCost3 = await PracticeCostModel.create({
+                              cost: '625',
+                          });
+                          await PracticeCost3.setProfessional(professional4);
+                          await PracticeCost3.setPractice(practice3);
+         */
+        /*         const Pacienttype1 = await PatienttypeModel.create({
+                    name: 'Niño/a',
+                });
+                const Pacienttype2 = await PatienttypeModel.create({
+                    name: 'Embarazada',
+                });
+                const Pacienttype3 = await PatienttypeModel.create({
+                    name: 'Mayor',
+                });
+                const Pacienttype4 = await PatienttypeModel.create({
+                    name: 'Adulto/a',
+                });
+         */
     }
 
     connectWithSequelize = async () => {
@@ -524,6 +534,8 @@ export default class DataService {
         const GenderModel: any = Gender(this.dbClient);
         const PracticeCostModel: any = PracticeCost(this.dbClient);
         const PatienttypeModel: any = Patienttype(this.dbClient);
+        const ServicePaymentModel: any = ServicePayment(this.dbClient);
+        const VlifeParamModel: any = VlifeParam(this.dbClient);
 
         // associations
         ProfessionalModel.belongsToMany(SpecialtyModel, { through: 'Specialties_Professionals' });
@@ -531,7 +543,9 @@ export default class DataService {
         ProfessionalModel.belongsTo(ProvinceModel);
         ProfessionalModel.hasMany(PracticeCostModel);
         ProfessionalModel.belongsTo(GenderModel);
+        ProfessionalModel.hasMany(RequestModel);
 
+        ServicePaymentModel.belongsTo(RequestModel);
 
         SpecialtyModel.belongsToMany(ProfessionalModel, { through: 'Specialties_Professionals' });
         SpecialtyModel.hasMany(PracticeModel);
@@ -544,6 +558,7 @@ export default class DataService {
         UserModel.belongsTo(CountryModel);
         UserModel.belongsTo(ProvinceModel);
         UserModel.belongsTo(GenderModel);
+        UserModel.hasMany(RequestModel);
 
         PracticeCostModel.belongsTo(PracticeModel);
         PracticeCostModel.belongsTo(ProfessionalModel);
@@ -556,6 +571,7 @@ export default class DataService {
         RequestModel.belongsTo(UserModel);
         RequestModel.belongsTo(ProfessionalModel);
         RequestModel.belongsTo(PatienttypeModel);
+        //RequestModel.belongsTo(ServicePaymentModel);
 
         ImgPrescriptionModel.belongsTo(RequestModel);
         ImgPrescriptionModel.belongsTo(PracticeModel);
@@ -572,5 +588,7 @@ export default class DataService {
         this.dbModels.gender = GenderModel;
         this.dbModels.practicecost = PracticeCostModel;
         this.dbModels.patienttype = PatienttypeModel;
+        this.dbModels.servicepayment = ServicePaymentModel;
+        this.dbModels.vlifeparam = VlifeParamModel;
     };
 }

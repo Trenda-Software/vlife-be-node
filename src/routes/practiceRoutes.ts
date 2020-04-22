@@ -1,4 +1,5 @@
 import DataService from '../service/DataService';
+import VlifeParamModel from '../db/models/VlifeParam';
 const jwt = require('jsonwebtoken');
 const verifytoken = require('../validation/verifyToken');
 const { Sequelize } = require('sequelize');
@@ -26,6 +27,9 @@ const router = (app: any, ds: DataService) => {
                 if (err) {
                     res.sendStatus(403);
                 } else {
+
+                    const VlifeParam: any = ds.dbModels.vlifeparam;
+                    const vlifep = await VlifeParam.findAll();
 
                     const practicas = req.body.practicesid;
                     var clausula = "";
@@ -129,11 +133,18 @@ const router = (app: any, ds: DataService) => {
                                 practicasArray.push(pract);
 
                                 console.log("Arrary de precticas " + practicasArray)
+
+                                var costo = practica.cost;
+                                if (parseInt(prfDistancia.slice(0, -2)) > vlifep[0].distanciaplus) {
+                                    costo = costo * vlifep[0].plusxdistancia
+                                }
+
+                                //cost: parseFloat((Math.round(practica.cost * 100) / 100).toString()).toFixed(2),
                                 sol = {
                                     id: practica.id,
                                     name: practica.name,
                                     surname: practica.surname,
-                                    cost: parseFloat((Math.round(practica.cost * 100) / 100).toString()).toFixed(2),
+                                    cost: parseFloat((Math.round(costo * 100) / 100).toString()).toFixed(2),
                                     distance: prfDistancia,
                                     time: prfTiempo,
                                     picture: practica.picture
