@@ -13,6 +13,9 @@ export interface DBModelsI {
     gender: Model | null;
     practicecost: Model | null;
     patienttype: Model | null;
+    servicepayment: Model | null;
+    vlifeparam: Model | null;
+
 }
 
 export interface MenuI {

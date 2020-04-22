@@ -34,10 +34,22 @@ const router = (app: any, ds: DataService) => {
 
                     console.log(req.body.id);
 
+                    const request: any = ds.dbModels.request;
+                    const req1 = await request.findOne({
+                        where: { id: req.body.id }
+                    });
+
+                    if (req1.length > 0) { return res.status(200).json({ message: 'Ya existe un pago realizado para este servicio' }); }
 
                     const t = await ds.dbClient.transaction();
 
                     try {
+
+                        // Genero el ServicePayment
+                        const ServiceP: any = ds.dbModels.servicepayment;
+                        const sp1 = await ServiceP.create({ name: 'MercadoPago', currencyId: req.body.mercadoPagoData.currencyId, dateApproved: req.body.mercadoPagoData.dateApproved, dateCreated: req.body.mercadoPagoData.dateCreated, idTransaction: req.body.mercadoPagoData.id, operationType: req.body.mercadoPagoData.operationType, paymentMethodId: req.body.mercadoPagoData.paymentMethodId, paymentTypeId: req.body.mercadoPagoData.paymentTypeId, status: req.body.mercadoPagoData.status, statusDetail: req.body.mercadoPagoData.statusDetail, transactionAmount: req.body.mercadoPagoData.transactionAmount }, { t });
+
+                        await sp1.setRequest(req.body.id);
 
                         // Aca va el codigo para actualizar el request
                         console.log("voy a realizar el update");
@@ -50,6 +62,8 @@ const router = (app: any, ds: DataService) => {
                         const request2 = await requestm.findOne({
                             where: { id: req.body.id }
                         });
+
+                        //await request2.setSercvicePayment(sp1);
 
                         console.log(JSON.stringify(request2));
                         console.log("voy a consultar el usuario " + request2.UserId);
@@ -95,7 +109,8 @@ const router = (app: any, ds: DataService) => {
                             collapse_key: '',
                             data: { // Esto es solo opcional, puede enviar cualquier dato     
                                 msg: strUser + " confirmo el servicio",
-                                pnid: req.body.requestid,
+                                status: stateRequest,
+                                requestID: req.body.requestid,
                                 importe: req.body.mercadoPagoData.transactionAmount,
                                 codigopago: req.body.mercadoPagoData.id
                             },
@@ -124,7 +139,7 @@ const router = (app: any, ds: DataService) => {
                     } catch (err) {
                         console.log("error " + err);
                         await t.rollback();
-                        return res.json({ message: JSON.stringify(err) });
+                        return res.json({ message: err });
                     }
                 }
             });
