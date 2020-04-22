@@ -1,0 +1,24 @@
+service: serverless
+
+provider:
+    name: aws
+    runtime: nodejs12.x
+    region: us-east-1
+    profile: info-southswell-lambda-deployer
+    stage: dev
+
+plugins:
+    - serverless-offline
+    - serverless-webpack
+
+functions:
+    api:
+        handler: src/index-sls.handler
+        events:
+            - http: ANY /
+            - http: 'ANY {proxy+}'
+
+custom:
+    webpack:
+        webpackConfig: ./webpack.config.js
+        includeModules: true

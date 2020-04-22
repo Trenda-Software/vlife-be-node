@@ -31,3 +31,6 @@ yarn-error.log*
 /.env.sample
 /.env.test
 /src/service/DataService.test.ts
+
+# serverless files
+.webpack/
