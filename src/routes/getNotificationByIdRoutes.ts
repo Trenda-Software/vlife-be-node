@@ -13,6 +13,9 @@ const router = (app: any, ds: DataService) => {
                 } else {
 
                     try {
+                        const VlifeParam: any = ds.dbModels.vlifeparam;
+                        const vlifep = await VlifeParam.findAll();
+
                         const Cryptr = require('cryptr');
                         const cryptr = new Cryptr('goyeneche');
 
@@ -88,6 +91,11 @@ const router = (app: any, ds: DataService) => {
                                 servCost = parseFloat((Math.round(servicio.cost * 100) / 100).toString()).toFixed(2);
                                 comvlife = servicio.comvlife;
                             });
+
+                            var costo = servCost;
+                            if (parseInt(usrDistancia.slice(0, -2)) > vlifep[0].distanciaplus) {
+                                servCost = costo * vlifep[0].plusxdistancia
+                            }
 
 
 

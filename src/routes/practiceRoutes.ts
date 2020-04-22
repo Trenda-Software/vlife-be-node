@@ -135,17 +135,16 @@ const router = (app: any, ds: DataService) => {
                                 console.log("Arrary de precticas " + practicasArray)
 
                                 var costo = practica.cost;
-                                console.log("costo base " + costo);
-                                console.log("distancia sin km " + prfDistancia.slice(0, -2))
-                                if (parseInt(prfDistancia.slice(0, -2)) > 5) {
-                                    costo = costo * vlifep.plusxdistancia
+                                if (parseInt(prfDistancia.slice(0, -2)) > vlifep[0].distanciaplus) {
+                                    costo = costo * vlifep[0].plusxdistancia
                                 }
-                                console.log("costo plus " + costo)
+
+                                //cost: parseFloat((Math.round(practica.cost * 100) / 100).toString()).toFixed(2),
                                 sol = {
                                     id: practica.id,
                                     name: practica.name,
                                     surname: practica.surname,
-                                    cost: parseFloat((Math.round(practica.cost * 100) / 100).toString()).toFixed(2),
+                                    cost: parseFloat((Math.round(costo * 100) / 100).toString()).toFixed(2),
                                     distance: prfDistancia,
                                     time: prfTiempo,
                                     picture: practica.picture

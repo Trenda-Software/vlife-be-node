@@ -5,6 +5,7 @@ const VlifeParamModel = (sequelize: any) => {
         comvlifeprof: Sequelize.DECIMAL(11, 2),
         plusxdistancia: Sequelize.DECIMAL(11, 2),
         plusxhorario: Sequelize.DECIMAL(11, 2),
+        distanciaplus: Sequelize.INTEGER,
     });
 
     return VlifeParam;

@@ -36,10 +36,13 @@ const router = (app: any, ds: DataService) => {
 
                     const request: any = ds.dbModels.request;
                     const req1 = await request.findOne({
-                        where: { id: req.body.id }
+                        where: {
+                            id: req.body.id,
+                            staterequest: 5
+                        }
                     });
 
-                    if (req1.length > 0) { return res.status(200).json({ message: 'Ya existe un pago realizado para este servicio' }); }
+                    if (req1) return res.status(200).json({ message: 'Ya existe un pago realizado para este servicio' });
 
                     const t = await ds.dbClient.transaction();
 
