@@ -150,7 +150,7 @@ Install docker in your machine
 ## Run
 
     $ docker run -d -p <your HOST machine port>:<container exposed port> vlife-api
-    $ docker run -d -p 5000:3000 vlife-api
+    $ docker run -d -p 3000:3000 vlife-api
 
 ## Check the container, log into it
 
