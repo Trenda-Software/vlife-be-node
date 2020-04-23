@@ -173,9 +173,19 @@ Install docker in your machine
 
 ## run local
 
-    $ eb local run --port 5000
+eb local setenv ENVIRONMENT=TEST-EB-LOCAL;
+eb local setenv PORT=3000;
+eb local setenv DB_HOST=database-1.ckxgxe21zsrx.us-east-1.rds.amazonaws.com;
+eb local setenv DB_NAME=vlife_test;
+eb local setenv DB_PORT=3306;
+eb local setenv DB_USER=admin;
+eb local setenv DB_PWD='qhA8!t#eBczY27w'; // CORREGIR ESTA PWD QUE FALLA EL SET ENV
 
-    creates a random named container based on the Dockerfile
+,JWT_SECRETKEY=calamar,EMAIL_HOST=smtp.gmail.com,EMAIL_PORT=465,EMAIL_SECURE=true,EMAIL_USER=marianoe@gmail.com,EMAIL_PASS=maca1309,USR_SERVER_KEY=AIzaSyA33GDLsSd9lJaqAMNDPG0p1sNl_wCjqC4,PROF_SERVER_KEY=AIzaSyA33GDLsSd9lJaqAMNDPG0p1sNl_wCjqC4,REGISTRATION_TOKEN=f6W0m89DGKs:APA91bFd_msCXCwprUP_1IprfyRMiVJs6ymG0UBszGMuSHtY3PsiobkT0JD1JBAMS9prtqqCZ892pXBh6Lm7g5LSRBqcQnp1QRiJvkciuYROAG_5BDGtXLFWInZnYcGH_PvOixthM9Nx,S3_BUCKET=vlife-aws-s3-images
+
+eb local run --port 5000 --envvars ENVIRONMENT=TEST-EB-LOCAL,PORT=3000,DB_HOST=database-1.ckxgxe21zsrx.us-east-1.rds.amazonaws.com,DB_PORT=3306,DB_NAME=vlife_test,DB_USER=admin,DB_PWD=qhA8!t#eBczY27w,JWT_SECRETKEY=calamar,EMAIL_HOST=smtp.gmail.com,EMAIL_PORT=465,EMAIL_SECURE=true,EMAIL_USER=marianoe@gmail.com,EMAIL_PASS=maca1309,USR_SERVER_KEY=AIzaSyA33GDLsSd9lJaqAMNDPG0p1sNl_wCjqC4,PROF_SERVER_KEY=AIzaSyA33GDLsSd9lJaqAMNDPG0p1sNl_wCjqC4,REGISTRATION_TOKEN=f6W0m89DGKs:APA91bFd_msCXCwprUP_1IprfyRMiVJs6ymG0UBszGMuSHtY3PsiobkT0JD1JBAMS9prtqqCZ892pXBh6Lm7g5LSRBqcQnp1QRiJvkciuYROAG_5BDGtXLFWInZnYcGH_PvOixthM9Nx,S3_BUCKET=vlife-aws-s3-images
+
+    creates a random named container based on the Dockerfile, and passes the env vars defined to the Docker container too
 
 ## check the appp runs ok
 
@@ -185,7 +195,7 @@ Install docker in your machine
 
     $ eb local open
 
-## deploy in TEST
+## create app in AWS
 
     Create and add a profile
 
@@ -193,7 +203,28 @@ Install docker in your machine
 
     $ eb terminate vlife-api
 
-    Setup env vars in EB app
-    Elastic Beanstalk -> Environments -> vlife-api
+    If fails, try from the console
 
-    $ eb create  vlife-api --profile vlife-2-test-eb-deployer --instance-types t2.micro --single --region us-east-1
+    Setup env vars in EB app. EB has restrictions on env vars and their content, check doc for limits.
+    https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-cfg-softwaresettings.html
+
+    Three ways to set env vars
+    - Using conf files: TBD ... RESEARCH
+    - From the console: Elastic Beanstalk -> Environments -> vlife-api
+    - In the create command: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb3-create.html
+
+    Using the create command
+
+    $ eb create  vlife-api --profile vlife-2-test-eb-deployer --instance-types t2.micro --single --region us-east-1 --envvars PORT=3000,ENVIRONMENT=TEST-EB-AWS,DB_HOST=database-1.ckxgxe21zsrx.us-east-1.rds.amazonaws.com,DB_PORT=3306,DB_NAME=vlife_test,DB_USER=admin,JWT_SECRETKEY=calamar,EMAIL_HOST=smtp.gmail.com,EMAIL_PORT=465,EMAIL_SECURE=true,EMAIL_USER=marianoe@gmail.com,EMAIL_PASS=maca1309,USR_SERVER_KEY=AIzaSyA33GDLsSd9lJaqAMNDPG0p1sNl_wCjqC4,PROF_SERVER_KEY=AIzaSyA33GDLsSd9lJaqAMNDPG0p1sNl_wCjqC4,S3_BUCKET=vlife-aws-s3-images,CANCEL_REQUEST_MINUTES=15,CANCEL_REQUEST_RUN_TIME=300000
+
+    After the app is finifhes successfully, you need to put these env vars by hand
+
+        DB_PWD=
+        REGISTRATION_TOKEN=
+        GM_API_KEY=
+
+## deploy a new version / update the app
+
+It has to have all source commited in git
+
+    $ eb deploy vlife-api

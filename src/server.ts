@@ -115,13 +115,13 @@ pnValidatedProfessionalRoutes(app, ds);
 totalProfessionalsOnLineRoutes(app, ds);
 
 app.get('/', (req: any, res: any) =>
-    res.send(`VLife API on PORT: ${PORT} ENV: ${ENVIRONMENT} DB SCHEMA: ${process.env.DB_NAME}`)
+    res.send(`VLife API on PORT: ${PORT} ENV: ${ENVIRONMENT} DB SCHEMA: ${process.env.DB_NAME} update 1`)
 );
 app.post('/post', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello Maca en el Post 20200127`));
 
 app.listen(PORT, () => {
     console.log(
-        `VLife server app running in: http://localhost:${PORT} in the ${process.env.ENVIRONMENT} env WITH Typescript!!!`
+        `VLife server app running in: http://localhost:${PORT} ENV: ${ENVIRONMENT} DB SCHEMA: ${process.env.DB_NAME}`
     );
 });
 export default app;
