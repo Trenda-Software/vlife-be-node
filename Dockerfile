@@ -14,8 +14,6 @@ RUN npm audit fix
 
 COPY --chown=node:node . .
 
-COPY --chown=node:node ./env-files/.env.test ./.env
-
 RUN npm run build
 
 EXPOSE 3000

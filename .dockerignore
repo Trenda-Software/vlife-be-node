@@ -5,6 +5,10 @@ node_modules/
 .vscode
 /dist
 
+# do not use .env files in docker, they have to be setup externally for security
+.env
+/env-files
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 .git

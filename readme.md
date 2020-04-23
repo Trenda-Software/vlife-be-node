@@ -149,8 +149,11 @@ Install docker in your machine
 
 ## Run
 
-    $ docker run -d -p <your HOST machine port>:<container exposed port> vlife-api
-    $ docker run -d -p 3000:3000 vlife-api
+    $ docker run -d -p --env-file ./env-files/.env.docker.test <your HOST machine port>:<container exposed port> vlife-api
+    $ docker run -d -p 3000:3000 --env-file ./env-files/.env.docker.test vlife-api
+
+    NOTES:
+    - the env file must not have white spaces in the key=value (e.g. key = value)
 
 ## Check the container, log into it
 
@@ -162,11 +165,35 @@ Install docker in your machine
 
 # Deploy with Elastic Beanstalk
 
-    $ eb init -p docker vlife-api
+## init (every time you change the Dockerfile)
 
-    test
-    eb local run --port 5000
+    $ eb init --region us-east-1 -p docker vlife-api
+
+    Remember to expose a port in Dockerfile (only needed for EB)
+
+## run local
+
+    $ eb local run --port 5000
+
+    creates a random named container based on the Dockerfile
+
+## check the appp runs ok
+
+    localhost:5000
+
+    or
+
+    $ eb local open
+
+## deploy in TEST
+
+    Create and add a profile
 
     Profile (local aws credentials): vlife-2-test-eb-deployer
 
-# Deploy with Serverless AWS Lambda
+    $ eb terminate vlife-api
+
+    Setup env vars in EB app
+    Elastic Beanstalk -> Environments -> vlife-api
+
+    $ eb create  vlife-api --profile vlife-2-test-eb-deployer --instance-types t2.micro --single --region us-east-1
