@@ -171,7 +171,7 @@ Install docker in your machine
 
     Remember to expose a port in Dockerfile (only needed for EB)
 
-## run local
+## run local - FIX THIS (ENV VARS)
 
 eb local setenv ENVIRONMENT=TEST-EB-LOCAL;
 eb local setenv PORT=3000;
@@ -223,8 +223,12 @@ eb local run --port 5000 --envvars ENVIRONMENT=TEST-EB-LOCAL,PORT=3000,DB_HOST=d
         REGISTRATION_TOKEN=
         GM_API_KEY=
 
+## check it
+
+http://vlife-api.eba-yv5minih.us-east-1.elasticbeanstalk.com/
+
 ## deploy a new version / update the app
 
-It has to have all source commited in git
+It has to have all source commited in git, and always use the profile , otherwise will go to the default profile in the aws credentials
 
-    $ eb deploy vlife-api
+    $ eb deploy vlife-api --profile vlife-2-test-eb-deployer
