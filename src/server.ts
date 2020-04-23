@@ -53,6 +53,7 @@ const dbConfig = {
 };
 
 const PORT = process.env.PORT || 3000;
+const ENVIRONMENT = process.env.ENVIRONMENT;
 // console.log('############# dbConfig: ', dbConfig);
 
 const ds = new DataService(dbConfig);
@@ -113,7 +114,9 @@ cancelAllRequestsRoutes(app, ds);
 pnValidatedProfessionalRoutes(app, ds);
 totalProfessionalsOnLineRoutes(app, ds);
 
-app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));
+app.get('/', (req: any, res: any) =>
+    res.send(`VLife API on PORT: ${PORT} ENV: ${ENVIRONMENT} DB SCHEMA: ${process.env.DB_NAME}`)
+);
 app.post('/post', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello Maca en el Post 20200127`));
 
 app.listen(PORT, () => {
