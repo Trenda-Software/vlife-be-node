@@ -14,7 +14,7 @@ RUN npm audit fix
 
 COPY --chown=node:node . .
 
-COPY --chown=node:node ./.env.dev ./.env
+COPY --chown=node:node ./env-files/.env.test ./.env
 
 RUN npm run build
 
