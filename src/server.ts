@@ -115,9 +115,10 @@ pnValidatedProfessionalRoutes(app, ds);
 totalProfessionalsOnLineRoutes(app, ds);
 
 app.get('/', (req: any, res: any) =>
-    res.send(`VLife API on PORT: ${PORT} ENV: ${ENVIRONMENT} DB SCHEMA: ${process.env.DB_NAME} update 1`)
+    res.send(`VLife API on PORT: ${PORT} ENV: ${ENVIRONMENT} DB SCHEMA: ${process.env.DB_NAME} update 1 hello Maca en el Post 20200423 Elastic Beanstalk`)
 );
-app.post('/post', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello Maca en el Post 20200127`));
+app.post('/post', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello Maca en el Post 20200423 Elastic Beanstalk`));
+// prueba deploy con EB
 
 app.listen(PORT, () => {
     console.log(
