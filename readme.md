@@ -162,6 +162,11 @@ Install docker in your machine
 
 # Deploy with Elastic Beanstalk
 
-    $ eb
+    $ eb init -p docker vlife-api
+
+    test
+    eb local run --port 5000
+
+    Profile (local aws credentials): vlife-2-test-eb-deployer
 
 # Deploy with Serverless AWS Lambda

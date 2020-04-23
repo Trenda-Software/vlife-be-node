@@ -14,6 +14,10 @@ RUN npm audit fix
 
 COPY --chown=node:node . .
 
+COPY --chown=node:node ./.env.dev ./.env
+
 RUN npm run build
+
+EXPOSE 3000
 
 CMD ["node", "./dist/server.js"]

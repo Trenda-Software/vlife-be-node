@@ -4,3 +4,10 @@ node_modules/
 .DS_Store
 .vscode
 /dist
+/env-files
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+.git
+.gitignore
+
