@@ -113,6 +113,13 @@ const router = (app: any, ds: DataService) => {
                         address: user1.address,
                         picture: urlname
                     }
+
+                    jwt.sign({ userdev }, process.env.JWT_SECRETKEY, (err: any, token: any) => {
+                        res.status(200).json({
+                            token,
+                            userdev
+                        });
+                    });
                 }).catch(function (err: any) {
                     console.log("Error upload: " + err);
                 });
@@ -149,12 +156,6 @@ const router = (app: any, ds: DataService) => {
                     } else {
                         console.log("Correo enviado correctamente - info " + JSON.stringify(info));
                     }
-                });
-                jwt.sign({ userdev }, process.env.JWT_SECRETKEY, (err: any, token: any) => {
-                    res.status(200).json({
-                        token,
-                        userdev
-                    });
                 });
             } catch (err) {
                 res.json({ message: JSON.stringify(err) });
