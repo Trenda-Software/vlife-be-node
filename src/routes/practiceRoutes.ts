@@ -27,6 +27,13 @@ const router = (app: any, ds: DataService) => {
                 if (err) {
                     res.sendStatus(403);
                 } else {
+                    const token = req.token;
+                    var decoded = jwt.decode(token);
+
+                    // get the decoded payload and header
+                    var decoded = jwt.decode(token, { complete: true });
+                    console.log("decode token " + JSON.stringify(decoded.header));
+                    console.log("decode payload " + JSON.stringify(decoded.payload))
 
                     const VlifeParam: any = ds.dbModels.vlifeparam;
                     const vlifep = await VlifeParam.findAll();

@@ -72,16 +72,7 @@ const router = (app: any, ds: DataService) => {
                 const user1 = await UserModel.create(user);
                 await user1.setGender(req.body.gender);
                 const hisGender = await user1.getGender();
-                const userdev = {
-                    id: user1.id,
-                    name: user1.name,
-                    surname: user1.surname,
-                    dni: user1.dni,
-                    email: user1.email,
-                    mobile: user1.mobile,
-                    gender: hisGender.name,
-                    address: user1.address,
-                }
+                var userdev = {};
                 console.log(user);
                 console.log(userdev);
                 //Grabo la imagen en disco
@@ -111,7 +102,17 @@ const router = (app: any, ds: DataService) => {
                     const userfcm = await UserModel.update({ picture: urlname }, {
                         where: { email: req.body.email }
                     });
-
+                    const userdev = {
+                        id: user1.id,
+                        name: user1.name,
+                        surname: user1.surname,
+                        dni: user1.dni,
+                        email: user1.email,
+                        mobile: user1.mobile,
+                        gender: hisGender.name,
+                        address: user1.address,
+                        picture: urlname
+                    }
                 }).catch(function (err: any) {
                     console.log("Error upload: " + err);
                 });
@@ -149,7 +150,7 @@ const router = (app: any, ds: DataService) => {
                         console.log("Correo enviado correctamente - info " + JSON.stringify(info));
                     }
                 });
-                jwt.sign({ user }, process.env.JWT_SECRETKEY, (err: any, token: any) => {
+                jwt.sign({ userdev }, process.env.JWT_SECRETKEY, (err: any, token: any) => {
                     res.status(200).json({
                         token,
                         userdev
