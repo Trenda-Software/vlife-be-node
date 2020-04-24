@@ -83,7 +83,7 @@ const router = (app: any, ds: DataService) => {
                             to: token,
                             notification: {
                                 title: "Se recibió la notificación de la finalización del servicio",
-                                image: strImagen
+                                icon: strImagen
                             },
                             collapse_key: '',
                             data: { // Esto es solo opcional, puede enviar cualquier dato     

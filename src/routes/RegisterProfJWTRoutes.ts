@@ -59,6 +59,7 @@ const router = (app: any, ds: DataService) => {
                     comvlife: 0.8
                 }
 
+                var profdev = {};
                 const profModel: any = ds.dbModels.professional;
 
                 const prof1 = await profModel.create(prof);
@@ -96,21 +97,8 @@ const router = (app: any, ds: DataService) => {
                         return res.json({ message: JSON.stringify(reason) });
                     });
 
-
-                const profdev = {
-                    id: prof1.id,
-                    name: prof1.name,
-                    surname: prof1.surname,
-                    dni: prof1.dni,
-                    email: prof1.email,
-                    mobile: prof1.mobile,
-                    gender: hisGender.name,
-                    address: prof1.address,
-                    description: prof1.description,
-                    aprroved: true
-                }
                 console.log(prof);
-                console.log(profdev);
+
                 //Grabo la imagen en disco
                 //Declaro el S#
                 const s3 = new AWS.S3({
@@ -138,6 +126,21 @@ const router = (app: any, ds: DataService) => {
                     const proffcm = await profModel.update({ picture: urlname }, {
                         where: { email: req.body.email }
                     });
+
+                    profdev = {
+                        id: prof1.id,
+                        name: prof1.name,
+                        surname: prof1.surname,
+                        dni: prof1.dni,
+                        email: prof1.email,
+                        mobile: prof1.mobile,
+                        gender: hisGender.name,
+                        address: prof1.address,
+                        description: prof1.description,
+                        aprroved: true,
+                        picture: urlname
+                    };
+                    console.log(profdev);
                     //Grabo la imagen del certificado o titulo
 
                     var fileNameCert = "c" + prof1.id + ".png";
@@ -165,6 +168,12 @@ const router = (app: any, ds: DataService) => {
                         console.log("Error upload2: " + err);
                     });
 
+                    jwt.sign({ profdev }, process.env.JWT_SECRETKEY, (err: any, token: any) => {
+                        res.status(200).json({
+                            token,
+                            profdev
+                        });
+                    });
                 }).catch(function (err: any) {
                     console.log("Error upload1: " + err);
                 });
@@ -202,12 +211,6 @@ const router = (app: any, ds: DataService) => {
                     } else {
                         console.log("Correo enviado correctamente - info " + JSON.stringify(info));
                     }
-                });
-                jwt.sign({ prof }, process.env.JWT_SECRETKEY, (err: any, token: any) => {
-                    res.status(200).json({
-                        token,
-                        profdev
-                    });
                 });
             } catch (err) {
                 res.json({ message: err });

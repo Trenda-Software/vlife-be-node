@@ -98,7 +98,7 @@ const router = (app: any, ds: DataService) => {
                             to: token,
                             notification: {
                                 title: "Recibiste una respuesta de servicio",
-                                image: strImagen
+                                icon: strImagen
                             },
                             collapse_key: '',
                             data: { // Esto es solo opcional, puede enviar cualquier dato     
