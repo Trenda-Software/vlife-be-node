@@ -541,6 +541,7 @@ export default class DataService {
         ProfessionalModel.belongsToMany(SpecialtyModel, { through: 'Specialties_Professionals' });
         ProfessionalModel.belongsTo(CountryModel);
         ProfessionalModel.belongsTo(ProvinceModel);
+        
         ProfessionalModel.hasMany(PracticeCostModel);
         ProfessionalModel.belongsTo(GenderModel);
         ProfessionalModel.hasMany(RequestModel);

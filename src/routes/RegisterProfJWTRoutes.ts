@@ -67,6 +67,7 @@ const router = (app: any, ds: DataService) => {
                 await prof1.setGender(req.body.gender);
                 const hisGender = await prof1.getGender();
                 //Seteo la especialidad
+                
                 const specialty: any = ds.dbModels.specialty;
                 const specialty1 = await specialty.findOne({
                     where: { id: req.body.especialidadid }
@@ -126,7 +127,7 @@ const router = (app: any, ds: DataService) => {
                     const proffcm = await profModel.update({ picture: urlname }, {
                         where: { email: req.body.email }
                     });
-
+                    
                     profdev = {
                         id: prof1.id,
                         name: prof1.name,
@@ -138,7 +139,8 @@ const router = (app: any, ds: DataService) => {
                         address: prof1.address,
                         description: prof1.description,
                         aprroved: true,
-                        picture: urlname
+                        picture: urlname,
+                        specialtyid: req.body.especialidadid
                     };
                     console.log(profdev);
                     //Grabo la imagen del certificado o titulo

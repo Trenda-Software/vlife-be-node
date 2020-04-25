@@ -1,6 +1,7 @@
 import DataService from '../service/DataService';
 import { any } from 'bluebird';
 import app from '../server';
+const { Sequelize } = require('sequelize');
 
 
 const jwt = require('jsonwebtoken');
@@ -35,7 +36,7 @@ const router = (app: any, ds: DataService) => {
             const Gender: any = ds.dbModels.gender;
             const profesional: any = ds.dbModels.professional;
             const profMail = await profesional.findOne({
-                //include: [Province, Country, Gender],
+                //include: [Specialties_Professionals],
                 where: { email: req.body.email }
             });
 
@@ -66,6 +67,9 @@ const router = (app: any, ds: DataService) => {
             const hisGender = await profMail.getGender();
             console.log("gender:", hisGender.name);
 
+            const SpeID = await ds.dbClient.query("Select * from Specialties_Professionals where ProfessionalId = " + profMail.id, { type: Sequelize.QueryTypes.SELECT });
+            console.log("spID " + SpeID[0].SpecialtyId);
+            
             const prof = {
                 id: profMail.id,
                 name: profMail.name,
@@ -75,7 +79,8 @@ const router = (app: any, ds: DataService) => {
                 mobile: profMail.mobile,
                 gender: hisGender.name,
                 address: profMail.address,
-                picture: profMail.picture
+                picture: profMail.picture,
+                specialtyid: SpeID[0].SpecialtyId
             }
             /*
                 Esta es la manera de firmam poniendo un tiempo de expiracion al token, 
