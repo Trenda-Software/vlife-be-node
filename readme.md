@@ -150,6 +150,7 @@ Install docker in your machine
 ## Run
 
     $ docker run -d -p --env-file ./env-files/.env.docker.test <your HOST machine port>:<container exposed port> vlife-api
+
     $ docker run -d -p 3000:3000 --env-file ./env-files/.env.docker.test vlife-api
 
     NOTES:
@@ -229,6 +230,11 @@ http://vlife-api.eba-yv5minih.us-east-1.elasticbeanstalk.com/
 
 ## deploy a new version / update the app
 
-It has to have all source commited in git, and always use the profile , otherwise will go to the default profile in the aws credentials
+SUPER IMPORTANT: 
+- Always run "eb init ..." when you modified the Dockerfile
+- It has to have all source commited in git, and always use the profile , otherwise will go to the default profile in the aws credentials
 
     $ eb deploy vlife-api --profile vlife-2-test-eb-deployer
+
+### Troubleshooting
+- Check AWS console EB logs: Elastic Beanstalk -> Environments -> vlife-api -> Logs 
