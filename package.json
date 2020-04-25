@@ -20,6 +20,7 @@
     "dependencies": {
         "@hapi/joi": "^17.1.0",
         "aws-sdk": "^2.639.0",
+        "axios": "^0.19.2",
         "bcryptjs": "^2.4.3",
         "cryptr": "^6.0.2",
         "express": "^4.15.3",
