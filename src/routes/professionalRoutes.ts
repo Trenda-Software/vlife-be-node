@@ -16,7 +16,7 @@ const router = (app: any, ds: DataService) => {
                     const Country: any = ds.dbModels.country;
 
                     ProfessionalModel.findAll({
-                        include: [Province, Country,Specialties_professionals],
+                        include: [Province, Country],
                     }).then((profesional: any[]) => {
                         res.send(profesional);
                     });
