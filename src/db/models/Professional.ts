@@ -21,6 +21,8 @@ const ProfessionalModel = (sequelize: any) => {
         fcmtoken: Sequelize.STRING,
         comvlife: Sequelize.DOUBLE(11, 10),
         certpicture: Sequelize.STRING,
+        paymethod: Sequelize.INTEGER,
+        cbu: Sequelize.STRING,
 
     });
 

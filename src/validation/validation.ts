@@ -153,6 +153,15 @@ const registerProfValidation = (data: any) => {
             'string.base64': 'El campo imagen debe ser base64',
             //'any.required': 'Por favor ingrese la imagen',
         }),
+        paymethod: Joi.number().min(1).max(2).required().messages({
+            'number.integer': 'El paymethod debe ser un vaalor entre 1 y 2',
+            'number.min': 'El paymethod debe ser un vaalor entre 1 y 2',
+            'number.max': 'El paymethod debe ser un vaalor entre 1 y 2',
+        }),
+        cbu: Joi.string().allow('').messages({
+            'string.base64': 'Debe ingresar un CBU válido',
+            //'any.required': 'Por favor ingrese la imagen',
+        }),
     });
 
     return schema.validate(data);

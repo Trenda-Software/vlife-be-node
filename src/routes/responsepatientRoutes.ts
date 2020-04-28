@@ -93,12 +93,13 @@ const router = (app: any, ds: DataService) => {
                         if (req.body.approve) {
                             strApprove = "aprobó";
                         }
-
+                        var color = "#197476"
                         var message = {
                             to: token,
                             notification: {
                                 title: "Recibiste una respuesta de servicio",
-                                icon: strImagen
+                                icon: "icon",
+                                color: color
                             },
                             collapse_key: '',
                             data: { // Esto es solo opcional, puede enviar cualquier dato     

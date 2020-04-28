@@ -135,12 +135,14 @@ const router = (app: any, ds: DataService) => {
                         var fcm = new FCM(serverKey);
                         console.log("Seteo el token " + profesional1.fcmtoken);
                         var token = profesional1.fcmtoken;
+                        var color = "#194876";
 
                         var message = {
                             to: token,
                             notification: {
                                 title: "Recibiste una petición de servicio",
-                                icon: strImagen
+                                icon: "icon",
+                                color: color
                             },
                             collapse_key: '',
                             data: { // Esto es solo opcional, puede enviar cualquier dato 

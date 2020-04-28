@@ -56,7 +56,9 @@ const router = (app: any, ds: DataService) => {
                     description: req.body.description,
                     in_service: 0,
                     on_line: 1,
-                    comvlife: 0.8
+                    comvlife: 0.8,
+                    paymethod: req.body.paymethod,
+                    cbu: req.body.cbu
                 }
 
                 var profdev = {};

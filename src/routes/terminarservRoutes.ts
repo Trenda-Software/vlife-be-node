@@ -70,12 +70,14 @@ const router = (app: any, ds: DataService) => {
 
                     // Envio de notificacion push
 
+                    var color = "#194876";
 
                     if (req.body.prof) {
                         var serverKey = process.env.USR_SERVER_KEY;
                         var token = user1.fcmtoken
                         strImagen = profesional2.picture;
                         strUser = profesional2.name + " " + profesional2.surname;
+                        color = "#197476";
 
                         var fcm = new FCM(serverKey);
 
@@ -83,7 +85,8 @@ const router = (app: any, ds: DataService) => {
                             to: token,
                             notification: {
                                 title: "Se recibió la notificación de la finalización del servicio",
-                                icon: strImagen
+                                icon: "icon",
+                                color: color
                             },
                             collapse_key: '',
                             data: { // Esto es solo opcional, puede enviar cualquier dato     

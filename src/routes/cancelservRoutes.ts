@@ -90,11 +90,13 @@ const router = (app: any, ds: DataService) => {
                         var serverKey = process.env.PROF_SERVER_KEY;
                         console.log("Seteo el token " + profesional2.fcmtoken);
                         var token = profesional2.fcmtoken;
+                        var color = "#194876"
                         if (req.body.prof) {
                             serverKey = process.env.USR_SERVER_KEY;
                             token = user1.fcmtoken
                             strImagen = profesional2.picture;
                             strUser = profesional2.name + " " + profesional2.surname;
+                            color = "#197476";
                         }
                         var fcm = new FCM(serverKey);
 
@@ -102,7 +104,8 @@ const router = (app: any, ds: DataService) => {
                             to: token,
                             notification: {
                                 title: "Se recibió una cancelación de servicio",
-                                icon: strImagen
+                                icon: "icon",
+                                color: color
                             },
                             collapse_key: '',
                             data: { // Esto es solo opcional, puede enviar cualquier dato     

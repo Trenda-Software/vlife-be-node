@@ -99,6 +99,7 @@ const router = (app: any, ds: DataService) => {
                         var fcm = new FCM(serverKey);
                         console.log("Seteo el token " + profesional2.fcmtoken);
                         var token = profesional2.fcmtoken;
+                        var color = "#194876";
 
                         console.log("mercadoPagoData.transactionAmount " + req.body.mercadoPagoData.transactionAmount)
                         console.log("req.body.mercadoPagoData.id " + req.body.mercadoPagoData.id)
@@ -107,7 +108,8 @@ const router = (app: any, ds: DataService) => {
                             to: token,
                             notification: {
                                 title: "Se recibió la confirmación de pago del servicio",
-                                icon: strImagen
+                                icon: "icon",
+                                color: color
                             },
                             collapse_key: '',
                             data: { // Esto es solo opcional, puede enviar cualquier dato     

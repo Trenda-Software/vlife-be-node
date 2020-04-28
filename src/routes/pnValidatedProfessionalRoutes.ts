@@ -33,12 +33,14 @@ const router = (app: any, ds: DataService) => {
                 const strProf = profesional1.name + " " + profesional1.surname;
 
                 var fcm = new FCM(serverKey);
+                var color = "#194876";
 
                 var message = {
                     to: token,
                     notification: {
                         title: "Se recibió la notificación de Aprobación del Profesional",
-                        icon: strImagen
+                        icon: "icon",
+                        color: color
                     },
                     collapse_key: '',
                     data: { // Esto es solo opcional, puede enviar cualquier dato     

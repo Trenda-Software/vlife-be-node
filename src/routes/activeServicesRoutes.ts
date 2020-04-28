@@ -13,7 +13,7 @@ const router = (app: any, ds: DataService) => {
                 } else {
 
                     var clausula = " Requests.UserId = " + req.query.id
-                    var sqlQuery = "select Requests.Id as requestId, Users.id as patientId, Users.name as userName, Users.surname as userSurname,Users.Picture as userPicture,Users.lat as userLat, Users.lng as userLng,Professionals.id as professionalId,Professionals.name as professionalName,Professionals.surname as professionalSurname, Professionals.mobile as professionalMobile, Professionals.picture as professionalPicture, Requests.preferenceid, Requests.staterequest as status from Requests inner join Users on Requests.UserId = Users.id inner join Professionals on Professionals.id = Requests.ProfessionalId  where Requests.staterequest in (1,2,3,6) and (timestampdiff(hour,  Requests.updatedAt,now() ) <= 24) and " + clausula;
+                    var sqlQuery = "select Requests.Id as requestId, Users.id as patientId, Users.name as userName, Users.surname as userSurname,Users.Picture as userPicture,Users.lat as userLat, Users.lng as userLng,Professionals.id as professionalId,Professionals.name as professionalName,Professionals.surname as professionalSurname, Professionals.mobile as professionalMobile, Professionals.picture as professionalPicture, Requests.preferenceid, Requests.staterequest as status from Requests inner join Users on Requests.UserId = Users.id inner join Professionals on Professionals.id = Requests.ProfessionalId  where Requests.staterequest in (0,1,2,3,5,6,8,9,10) and (timestampdiff(hour,  Requests.updatedAt,now() ) <= 24) and " + clausula;
                     console.log("sqlQuery " + sqlQuery)
                     console.log("req.query.prof " + req.query.prof);
 
@@ -26,7 +26,8 @@ const router = (app: any, ds: DataService) => {
                     const servicios = await ds.dbClient.query(sqlQuery, { type: Sequelize.QueryTypes.SELECT });
 
                     if (servicios.length == 0) {
-                        return res.status(200).json(servicios);
+                        //return res.status(200).json(servicios);
+                        const serv1 = "";
                     }
 
                     var activeServiceArray: any = [];
@@ -60,8 +61,30 @@ const router = (app: any, ds: DataService) => {
                         // console.log("activeService " + JSON.stringify(activeService))
                         activeServiceArray.push(activeService)
                     };
+                    var lastRequestStatus = ""
+                    var response = {};
+                    if (req.query.prof == 'true') {
+                        // consulto el ultimo servicio 
+                        sqlQuery = "select max(id) as id, staterequest from Requests where Requests.staterequest in (3,4,6,7,9,10) and Requests.ProfessionalId = " + req.query.id;
+                        const servicios1 = await ds.dbClient.query(sqlQuery, { type: Sequelize.QueryTypes.SELECT });
+
+                        if (servicios1.length == 0) {
+                            //return res.status(200).json(servicios);
+                            lastRequestStatus = "";
+                        } else {
+                            lastRequestStatus = servicios1[0].staterequest;
+                        }
+                        response = {
+                            request: activeServiceArray,
+                            lastRequestSatus: lastRequestStatus
+                        }
+                    } else {
+                        response = {
+                            request: activeServiceArray
+                        }
+                    }
                     //console.log("ActiveserviceArray " + activeServiceArray)
-                    res.send(activeServiceArray)
+                    res.send(response)
                 }
             });
         })
