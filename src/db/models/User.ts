@@ -17,6 +17,7 @@ const UserModel = (sequelize: any) => {
         city: Sequelize.STRING,
         address: Sequelize.STRING,
         fcmtoken: Sequelize.STRING,
+        recoverycode: Sequelize.STRING,
     });
 
     return User;

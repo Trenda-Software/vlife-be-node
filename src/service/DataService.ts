@@ -89,7 +89,7 @@ export default class DataService {
         }, interval) // se ejecuta cada 5 minutos
     }
  */    async resetInitialData() {
-        await this.dbClient.sync({ force: true });
+        await this.dbClient.sync({ force: false });
     }
 
     async initDBData() {
@@ -111,7 +111,7 @@ export default class DataService {
         const ServicePaymentModel: any = this.dbClient.models.ServicePayment;
         const VlifeParamModel: any = this.dbClient.models.VlifeParam;
 
-        const province1 = await ProvinceModel.create({ code: 'BSAS', name: 'Buenos Aires' });
+        /* const province1 = await ProvinceModel.create({ code: 'BSAS', name: 'Buenos Aires' });
         const country1 = await CountryModel.create({ code: 'ARG', name: 'Argentina' });
         await province1.setCountry(country1);
 
@@ -120,7 +120,7 @@ export default class DataService {
         const gender3 = await GenderModel.create({ code: 'IND', name: 'Indistinto' });
 
         const vlifeparam = await VlifeParamModel.create({ comvlifeprof: 0.8, plusxdistancia: 1.1, plusxhorario: 1.1, distanciaplus: 10 });
-
+ */
         /*        
                                  const user1 = await UserModel.create({
                                     dni: 24111222,
@@ -226,10 +226,10 @@ export default class DataService {
                                 comment3.setUser(user2);
                                 comment3.setProfessional(professional1);
              */
-        const kinesio = await SpecialtyModel.create({ name: 'Kinesiología', code: 'kinesio' });
-        const medic = await SpecialtyModel.create({ name: 'Médico', code: 'medic' });
-        const enfer = await SpecialtyModel.create({ name: 'Enfermería', code: 'enferm' });
-
+        /*         const kinesio = await SpecialtyModel.create({ name: 'Kinesiología', code: 'kinesio' });
+                const medic = await SpecialtyModel.create({ name: 'Médico', code: 'medic' });
+                const enfer = await SpecialtyModel.create({ name: 'Enfermería', code: 'enferm' });
+         */
         /*                    await kinesio.addProfessionals([professional1, professional2, professional3]);
                             await medic.addProfessionals([professional1, professional4]);
                             await enfer.addProfessionals([professional2, professional4]);
@@ -253,7 +253,7 @@ export default class DataService {
                             });
             */
         //Medico
-        const practice1 = await PracticeModel.create({
+        /* const practice1 = await PracticeModel.create({
             name: 'Herida de Piel',
             code: 'HEP',
             cost: '625',
@@ -469,7 +469,7 @@ export default class DataService {
         await practice27.setSpecialty(kinesio);
         await practice28.setSpecialty(kinesio);
         await practice29.setSpecialty(kinesio);
-
+ */
         /*  
                            const PracticeCost1 = await PracticeCostModel.create({
                               cost: '625',
@@ -488,18 +488,18 @@ export default class DataService {
                           await PracticeCost3.setProfessional(professional4);
                           await PracticeCost3.setPractice(practice3);
          */
-        const Pacienttype1 = await PatienttypeModel.create({
-            name: 'Niño/a',
-        });
-        const Pacienttype2 = await PatienttypeModel.create({
-            name: 'Embarazada',
-        });
-        const Pacienttype3 = await PatienttypeModel.create({
-            name: 'Mayor',
-        });
-        const Pacienttype4 = await PatienttypeModel.create({
-            name: 'Adulto/a',
-        });
+        /*         const Pacienttype1 = await PatienttypeModel.create({
+                    name: 'Niño/a',
+                });
+                const Pacienttype2 = await PatienttypeModel.create({
+                    name: 'Embarazada',
+                });
+                const Pacienttype3 = await PatienttypeModel.create({
+                    name: 'Mayor',
+                });
+                const Pacienttype4 = await PatienttypeModel.create({
+                    name: 'Adulto/a',
+                }); */
 
     }
 

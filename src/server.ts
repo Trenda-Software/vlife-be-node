@@ -31,6 +31,10 @@ import activeServicesRoutes from './routes/activeServicesRoutes';
 import cancelAllRequestsRoutes from './routes/cancelAllRequestsRoutes';
 import pnValidatedProfessionalRoutes from './routes/pnValidatedProfessionalRoutes';
 import totalProfessionalsOnLineRoutes from './routes/totalProfessionalsOnLineRoutes';
+import setNewPassRoutes from './routes/setNewPassRoutes';
+import checkRecoveryCodeRoutes from './routes/checkRecoveryCodeRoutes';
+
+
 
 import DataService from './service/DataService';
 
@@ -112,6 +116,10 @@ activeServicesRoutes(app, ds);
 cancelAllRequestsRoutes(app, ds);
 pnValidatedProfessionalRoutes(app, ds);
 totalProfessionalsOnLineRoutes(app, ds);
+setNewPassRoutes(app, ds);
+checkRecoveryCodeRoutes(app, ds);
+
+
 
 app.get('/', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello javi 20200120`));
 app.post('/post', (req: any, res: any) => res.send(`VLife API on PORT: ${PORT} hello Maca en el Post 20200127`));

@@ -23,6 +23,7 @@ const ProfessionalModel = (sequelize: any) => {
         certpicture: Sequelize.STRING,
         paymethod: Sequelize.INTEGER,
         cbu: Sequelize.STRING,
+        recoverycode: Sequelize.STRING,
 
     });
 

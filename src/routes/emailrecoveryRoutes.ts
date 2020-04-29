@@ -7,7 +7,7 @@ const nodemailerSES = require("nodemailer");
 //const AWS = require("aws-sdk");
 const router = (app: any, ds: DataService) => {
 
-    app.route('/passrecovery')
+    app.route('/sendRecoveryCode')
         .get((req: any, res: any) => {
             res.json({
                 message: 'Get generado JWT',
@@ -15,13 +15,31 @@ const router = (app: any, ds: DataService) => {
         })
         .post(async (req: any, res: any) => {
             try {
-                const usuario: any = ds.dbModels.user;
-                const userMail = await usuario.findOne({
-                    where: { email: req.body.email }
-                });
+                //Genero el codigo de 5 digitos para el mail
 
-                if (!userMail) return res.status(200).send('El email no existe en la base de datos');
-                // Enviar el mail con el codigo random para recobarar la contraseña  
+                const n = Math.floor(Math.random() * 90000) + 10000;
+                console.log("codigo de recupero " + n);
+                if (req.body.prof) {
+                    const profesional: any = ds.dbModels.professional;
+                    const profMail = await profesional.findOne({
+                        where: { email: req.body.email }
+                    });
+                    if (!profMail) return res.status(200).json({ message: "El email no existe en la base de datos" });
+
+                    const profUpdate = await profesional.update({ recoverycode: n, updateAt: Date.now() }, {
+                        where: { email: req.body.email }
+                    });
+
+                } else {
+                    const usuario: any = ds.dbModels.user;
+                    const userMail = await usuario.findOne({
+                        where: { email: req.body.email }
+                    });
+                    if (!userMail) return res.status(200).json({ message: "El email no existe en la base de datos" });
+                    const usrUpdate = await usuario.update({ recoverycode: n, updateAt: Date.now() }, {
+                        where: { email: req.body.email }
+                    });
+                }
 
                 console.log("Creo el transporte");
                 console.log("Maca");
@@ -35,19 +53,19 @@ const router = (app: any, ds: DataService) => {
                         "pass": process.env.EMAIL_PASS
                     }
                 });
-                const n = "1234";
+
                 let email1 = {
                     from: process.env.EMAIL_DIRSEND,
                     to: req.body.email,
                     subject: "Recupero de contraseña",
                     html: `
-                                <div>
-                                <p>Ingrese el siguiente codigo en la App Vlife para recuperar la contraseña</p>
-                                <p>Codigo: ${n}</p>
-                                <p></p>
-                                <p>Es un mail de prueba</p>
-                                </div>
-                            `
+                                        <div>
+                                        <p>Ingrese el siguiente codigo en la App Vlife para recuperar la contraseña</p>
+                                        <p>Codigo: ${n}</p>
+                                        <p>Tiene una validez de 24 hs</p>
+                                        <p>Es un mail de prueba</p>
+                                        </div>
+                                    `
                 };
                 console.log("envio el mail");
                 transporter.sendMail(email1, (err: any, info: any) => {
@@ -67,6 +85,8 @@ const router = (app: any, ds: DataService) => {
                 console.log("error -- " + err)
                 return res.json({ message: JSON.stringify(err) });
             }
+
+
         });
 
 
