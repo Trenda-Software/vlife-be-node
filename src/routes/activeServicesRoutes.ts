@@ -76,7 +76,7 @@ const router = (app: any, ds: DataService) => {
                         }
                         response = {
                             request: activeServiceArray,
-                            lastRequestSatus: lastRequestStatus
+                            lastRequestStatus: lastRequestStatus
                         }
                     } else {
                         response = {
