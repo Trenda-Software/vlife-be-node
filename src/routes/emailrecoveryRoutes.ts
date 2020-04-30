@@ -24,7 +24,7 @@ const router = (app: any, ds: DataService) => {
                     const profMail = await profesional.findOne({
                         where: { email: req.body.email }
                     });
-                    if (!profMail) return res.status(200).json({ message: "El email no existe en la base de datos" });
+                    if (!profMail) return res.status(200).json({ message: false });
 
                     const profUpdate = await profesional.update({ recoverycode: n, updateAt: Date.now() }, {
                         where: { email: req.body.email }
@@ -35,7 +35,7 @@ const router = (app: any, ds: DataService) => {
                     const userMail = await usuario.findOne({
                         where: { email: req.body.email }
                     });
-                    if (!userMail) return res.status(200).json({ message: "El email no existe en la base de datos" });
+                    if (!userMail) return res.status(200).json({ message: false });
                     const usrUpdate = await usuario.update({ recoverycode: n, updateAt: Date.now() }, {
                         where: { email: req.body.email }
                     });
@@ -79,7 +79,7 @@ const router = (app: any, ds: DataService) => {
                 });
 
                 res.status(200).json({
-                    message: 'Correo Enviado Correctamente!!'
+                    message: true
                 });
             } catch (err) {
                 console.log("error -- " + err)

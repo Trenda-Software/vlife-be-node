@@ -34,10 +34,10 @@ const router = (app: any, ds: DataService) => {
 
                     console.log(req.body.id);
 
-                    var stateRequest = 4; //CAncelado x el Usuario
+                    var stateRequest = 4; //Cancelado x el Usuario
 
                     if (req.body.prof) {
-                        stateRequest = 6; //CAncelado x el Profesional
+                        stateRequest = 6; //Cancelado x el Profesional
                     }
 
                     const t = await ds.dbClient.transaction();
@@ -52,6 +52,13 @@ const router = (app: any, ds: DataService) => {
                                 where: { id: req.body.id }
                             });
                         } else {
+
+                            const request0 = await requestm.findOne({
+                                where: { id: req.body.id, staterequest: 0 }
+                            });
+                            if (request0) {
+                                stateRequest = 11; //Cancelado x el Usuario y el estado anterior era 0
+                            }
                             const request1 = await requestm.update({ staterequest: stateRequest, commentusr: req.body.comment }, {
                                 where: { id: req.body.id }
                             });
@@ -61,6 +68,10 @@ const router = (app: any, ds: DataService) => {
                             where: { id: req.body.id }
                         });
 
+                        const profesional: any = ds.dbModels.professional;
+                        const prof1 = await profesional.update({ in_service: false }, {
+                            where: { id: request2.ProfessionalId }
+                        });
                         console.log(JSON.stringify(request2));
                         console.log("voy a consultar el usuario " + request2.UserId);
 
@@ -68,6 +79,8 @@ const router = (app: any, ds: DataService) => {
                         const user1 = await usuario.findOne({
                             where: { id: request2.UserId }
                         });
+
+
 
                         var strUser = "";
                         strUser = user1.name + " " + user1.surname;
@@ -77,8 +90,6 @@ const router = (app: any, ds: DataService) => {
                         console.log("Img " + strImagen);
 
                         //Consulto datos del profesional
-                        const profesional: any = ds.dbModels.professional;
-
 
                         const profesional2 = await profesional.findOne({
                             where: { id: request2.ProfessionalId }

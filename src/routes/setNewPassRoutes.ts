@@ -19,7 +19,7 @@ const router = (app: any, ds: DataService) => {
                         where: { email: req.body.email }
                     });
 
-                    if (!prof) return res.status(200).json({ message: "El mail no existe en la base de datos" });
+                    if (!prof) return res.status(200).json({ message: false });
 
                     const profUpd = await profesional.update({ pwd: req.body.pass, recoverycode: null }, {
                         where: { email: req.body.email }
@@ -30,16 +30,19 @@ const router = (app: any, ds: DataService) => {
                         where: { email: req.body.email }
                     });
 
-                    if (!usr) return res.status(200).json({ message: "El mail no existe en la base de datos" });
+                    if (!usr) return res.status(200).json({ message: false });
 
                     const usrUpd = await usuario.update({ pwd: req.body.pass, recoverycode: null }, {
-                        where: { email: req.body.email }
+                        where: { email: req.body.email, recoverycode: req.body.refreshCode }
                     });
+                    console.log(usrUpd);
+                    console.log(req.body.refreshCode);
+                    if (usrUpd == 0) return res.status(200).json({ message: false });
                 }
 
 
                 res.status(200).json({
-                    message: 'Clave Almacenadaa Correctamente!!'
+                    message: true
                 });
             } catch (err) {
                 console.log("error -- " + JSON.stringify(err))

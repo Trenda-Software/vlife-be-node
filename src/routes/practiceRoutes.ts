@@ -3,6 +3,7 @@ import VlifeParamModel from '../db/models/VlifeParam';
 const jwt = require('jsonwebtoken');
 const verifytoken = require('../validation/verifyToken');
 const { Sequelize } = require('sequelize');
+const sortJsonData = require('../service/sortJsonData');
 
 const router = (app: any, ds: DataService) => {
     app.route('/practica')
@@ -166,8 +167,10 @@ const router = (app: any, ds: DataService) => {
 
                             Promise.all(solicitudes1)
                                 .then(returnedValues => {
+                                    let solOrder = sortJsonData(returnedValues, 'distance', 'asc')
                                     console.log("Solicitudes: " + JSON.stringify(returnedValues));
-                                    res.send(returnedValues);
+                                    console.log("Solicitudes Ordenadas : " + JSON.stringify(solOrder));
+                                    res.send(solOrder);
                                 })
                                 .catch(reason => {
                                     console.log(reason);

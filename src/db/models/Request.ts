@@ -23,6 +23,8 @@ const RequestModel = (sequelize: any) => {
      7 = Solicitud Finalizada x el usuario
      8 = Solicitud Cancelada por logout profesional
      9 = Solicitud Cancelada porque el profesional no contesto despues de 15min
+     10 = Solicitud Cancelada por falta de pago del usr despues de 15min
+     11 = Solicitud Cancelada por el usuario y la misma tenia anteriormente estado 0
     */
 
 

@@ -31,6 +31,12 @@ const router = (app: any, ds: DataService) => {
                         staterequest: [0, 2]
                     }
                 });
+                const profesional: any = ds.dbModels.professional;
+
+                const prof1 = await profesional.update({ in_service: false }, {
+                    where: { id: req.body.professionalid }
+                });
+
                 console.log("request update " + JSON.stringify(requestUpdate));
                 console.log("update " + req.body.professionalid);
 
