@@ -33,6 +33,7 @@ import pnValidatedProfessionalRoutes from './routes/pnValidatedProfessionalRoute
 import totalProfessionalsOnLineRoutes from './routes/totalProfessionalsOnLineRoutes';
 import setNewPassRoutes from './routes/setNewPassRoutes';
 import checkRecoveryCodeRoutes from './routes/checkRecoveryCodeRoutes';
+import logOutUserRoutes from './routes/logOutUserRoutes';
 
 
 
@@ -118,6 +119,7 @@ pnValidatedProfessionalRoutes(app, ds);
 totalProfessionalsOnLineRoutes(app, ds);
 setNewPassRoutes(app, ds);
 checkRecoveryCodeRoutes(app, ds);
+logOutUserRoutes(app, ds);
 
 
 

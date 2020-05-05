@@ -1,4 +1,4 @@
-
+import DataService from '../service/DataService';
 const { Sequelize } = require('sequelize');
 var FCM = require('fcm-push');
 
@@ -16,6 +16,11 @@ module.exports = function (interval: any, dbClient: any) {
         const cancelRequests = await dbClient.query("select Requests.id as RequestId, Professionals.id as profid, Professionals.fcmtoken as proffcmtoken, Professionals.picture as profpicture,Professionals.name as profname, Professionals.surname as profsurname, Users.id as usrid, Users.fcmtoken as usrfcmtoken, Users.picture as usrpicture, Users.name as usrname, Users.surname as usrsurname from Requests inner join Professionals on Professionals.id = Requests.ProfessionalId inner join Users on Users.id = Requests.UserId where (timestampdiff(minute,  Requests.updatedAt,now() ) > " + process.env.CANCEL_REQUEST_MINUTES + " )  and staterequest = 2 and Requests.id <> -1", { type: Sequelize.QueryTypes.SELECT });
         for (let cancelRequest in cancelRequests) {
             // Envio de notificacion push al profesional
+
+            const profesional: any = dbClient.dbModels.professional;
+            const prof1 = await profesional.update({ in_service: false }, {
+                where: { id: cancelRequests[cancelRequest].profid }
+            });
 
             var serverKey = process.env.PROF_SERVER_KEY;
 

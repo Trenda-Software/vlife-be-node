@@ -150,7 +150,11 @@ const registerProfValidation = (data: any) => {
         }),
         practicas: Joi.array(),
         certpicture: Joi.string().allow('').base64().messages({
-            'string.base64': 'El campo imagen debe ser base64',
+            'string.base64': 'El campo certpicture debe ser base64',
+            //'any.required': 'Por favor ingrese la imagen',
+        }),
+        certnumber: Joi.string().allow('').messages({
+            //'string.base64': 'El campo imagen debe ser base64',
             //'any.required': 'Por favor ingrese la imagen',
         }),
         paymethod: Joi.number().min(1).max(2).required().messages({
