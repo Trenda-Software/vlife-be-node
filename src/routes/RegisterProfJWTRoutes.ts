@@ -141,7 +141,7 @@ const router = (app: any, ds: DataService) => {
                         gender: hisGender.name,
                         address: prof1.address,
                         description: prof1.description,
-                        aprroved: true,
+                        approved: true,
                         picture: urlname,
                         specialtyid: req.body.especialidadid,
                         certNumber: prof1.certnumber

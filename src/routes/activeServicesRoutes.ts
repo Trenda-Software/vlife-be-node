@@ -13,14 +13,14 @@ const router = (app: any, ds: DataService) => {
                 } else {
 
                     var clausula = " Requests.UserId = " + req.query.id
-                    var sqlQuery = "select Requests.Id as requestId, Users.id as patientId, Users.name as userName, Users.surname as userSurname,Users.Picture as userPicture,Users.lat as userLat, Users.lng as userLng,Professionals.id as professionalId,Professionals.name as professionalName,Professionals.surname as professionalSurname, Professionals.mobile as professionalMobile, Professionals.picture as professionalPicture, Requests.preferenceid, Requests.staterequest as status from Requests inner join Users on Requests.UserId = Users.id inner join Professionals on Professionals.id = Requests.ProfessionalId  where Requests.staterequest in (0,1,2,3,5,6,8,9,10) and (timestampdiff(hour,  Requests.updatedAt,now() ) <= 24) and " + clausula;
+                    var sqlQuery = "select Requests.Id as requestId, Users.id as patientId, Users.name as userName, Users.surname as userSurname,Users.Picture as userPicture,Users.lat as userLat, Users.lng as userLng, Users.mobile as userMobile, Professionals.id as professionalId,Professionals.name as professionalName,Professionals.surname as professionalSurname, Professionals.mobile as professionalMobile, Professionals.picture as professionalPicture, Requests.preferenceid, Requests.staterequest as status from Requests inner join Users on Requests.UserId = Users.id inner join Professionals on Professionals.id = Requests.ProfessionalId  where Requests.staterequest in (0,1,2,3,5,6,8,9,10) and (timestampdiff(hour,  Requests.updatedAt,now() ) <= 24) and " + clausula;
                     console.log("sqlQuery " + sqlQuery)
                     console.log("req.query.prof " + req.query.prof);
 
                     if (req.query.prof == 'true') {
                         console.log("entre al if");
                         clausula = " Requests.ProfessionalId = " + req.query.id
-                        sqlQuery = "select Requests.Id as requestId, Users.id as patientId, Users.name as userName, Users.surname as userSurname,Users.Picture as userPicture,Users.lat as userLat, Users.lng as userLng,Professionals.id as professionalId,Professionals.name as professionalName,Professionals.surname as professionalSurname, Professionals.mobile as professionalMobile, Professionals.picture as professionalPicture, Requests.preferenceid, Requests.staterequest as status from Requests inner join Users on Requests.UserId = Users.id inner join Professionals on Professionals.id = Requests.ProfessionalId where Requests.Id = (select max(id) from Requests where Requests.staterequest in (2,5) and " + clausula + " )";
+                        sqlQuery = "select Requests.Id as requestId, Users.id as patientId, Users.name as userName, Users.surname as userSurname,Users.Picture as userPicture,Users.lat as userLat, Users.lng as userLng, Users.mobile as userMobile, Professionals.id as professionalId,Professionals.name as professionalName,Professionals.surname as professionalSurname, Professionals.mobile as professionalMobile, Professionals.picture as professionalPicture, Requests.preferenceid, Requests.staterequest as status from Requests inner join Users on Requests.UserId = Users.id inner join Professionals on Professionals.id = Requests.ProfessionalId where Requests.Id = (select max(id) from Requests where Requests.staterequest in (2,5) and " + clausula + " )";
                     }
 
                     const servicios = await ds.dbClient.query(sqlQuery, { type: Sequelize.QueryTypes.SELECT });
@@ -42,6 +42,7 @@ const router = (app: any, ds: DataService) => {
                                 id: servicios[servicio].patientId,
                                 name: servicios[servicio].userName,
                                 surname: servicios[servicio].userSurname,
+                                mobile: servicios[servicio].userMobile,
                                 image: servicios[servicio].userPicture,
                                 geoloc: {
                                     lat: parseFloat(servicios[servicio].userLat),

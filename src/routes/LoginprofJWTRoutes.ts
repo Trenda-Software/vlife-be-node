@@ -80,7 +80,8 @@ const router = (app: any, ds: DataService) => {
                 gender: hisGender.name,
                 address: profMail.address,
                 picture: profMail.picture,
-                specialtyid: SpeID[0].SpecialtyId
+                specialtyid: SpeID[0].SpecialtyId,
+                approved: true
             }
             /*
                 Esta es la manera de firmam poniendo un tiempo de expiracion al token, 

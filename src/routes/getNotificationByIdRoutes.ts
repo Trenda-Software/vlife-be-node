@@ -117,6 +117,7 @@ const router = (app: any, ds: DataService) => {
                                     nombre: usuarios[usuario].name,
                                     apellido: usuarios[usuario].surname,
                                     direccion: usuarios[usuario].address,
+                                    mobile: usuarios[usuario].mobile,
                                     geoloc: {
                                         lat: usuarios[usuario].lat,
                                         lng: usuarios[usuario].lng,
