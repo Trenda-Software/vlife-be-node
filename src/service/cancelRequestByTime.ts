@@ -17,7 +17,7 @@ module.exports = function (interval: any, dbClient: any) {
         for (let cancelRequest in cancelRequests) {
             // Envio de notificacion push al profesional
 
-            const profesional: any = dbClient.dbModels.professional;
+            const profesional: any = dbClient.models.Professional;
             const prof1 = await profesional.update({ in_service: false }, {
                 where: { id: cancelRequests[cancelRequest].profid }
             });
