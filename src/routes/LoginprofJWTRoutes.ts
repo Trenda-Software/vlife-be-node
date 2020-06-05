@@ -69,7 +69,7 @@ const router = (app: any, ds: DataService) => {
 
             const SpeID = await ds.dbClient.query("Select * from Specialties_Professionals where ProfessionalId = " + profMail.id, { type: Sequelize.QueryTypes.SELECT });
             console.log("spID " + SpeID[0].SpecialtyId);
-            
+
             const prof = {
                 id: profMail.id,
                 name: profMail.name,
@@ -81,7 +81,7 @@ const router = (app: any, ds: DataService) => {
                 address: profMail.address,
                 picture: profMail.picture,
                 specialtyid: SpeID[0].SpecialtyId,
-                approved: true
+                approved: profMail.approved
             }
             /*
                 Esta es la manera de firmam poniendo un tiempo de expiracion al token, 

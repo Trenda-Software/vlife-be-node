@@ -59,7 +59,8 @@ const router = (app: any, ds: DataService) => {
                     comvlife: 0.8,
                     paymethod: req.body.paymethod,
                     cbu: req.body.cbu,
-                    certnumber: req.body.certnumber
+                    certnumber: req.body.certnumber,
+                    approved: 0
                 }
 
                 var profdev = {};
@@ -141,7 +142,7 @@ const router = (app: any, ds: DataService) => {
                         gender: hisGender.name,
                         address: prof1.address,
                         description: prof1.description,
-                        approved: true,
+                        approved: prof1.approved,
                         picture: urlname,
                         specialtyid: req.body.especialidadid,
                         certNumber: prof1.certnumber

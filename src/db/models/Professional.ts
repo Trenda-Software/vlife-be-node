@@ -25,9 +25,15 @@ const ProfessionalModel = (sequelize: any) => {
         paymethod: Sequelize.INTEGER,
         cbu: Sequelize.STRING,
         recoverycode: Sequelize.STRING,
+        approved: Sequelize.INTEGER,
 
     });
-
+    /*
+    approved
+    -0 si la cuenta todavia esta pendiente de revision (de la foto de matricula)
+    -1 si fue rechazada
+    -2 si fue aceptada
+    */
     return Professional;
 };
 

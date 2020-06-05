@@ -34,8 +34,8 @@ import totalProfessionalsOnLineRoutes from './routes/totalProfessionalsOnLineRou
 import setNewPassRoutes from './routes/setNewPassRoutes';
 import checkRecoveryCodeRoutes from './routes/checkRecoveryCodeRoutes';
 import logOutUserRoutes from './routes/logOutUserRoutes';
-
-
+import approveAccountRoutes from './routes/approveAccountRoutes';
+import checkApprovedRoutes from './routes/checkApprovedRoutes';
 
 import DataService from './service/DataService';
 
@@ -120,6 +120,9 @@ totalProfessionalsOnLineRoutes(app, ds);
 setNewPassRoutes(app, ds);
 checkRecoveryCodeRoutes(app, ds);
 logOutUserRoutes(app, ds);
+approveAccountRoutes(app, ds);
+checkApprovedRoutes(app, ds);
+
 
 
 
