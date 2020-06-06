@@ -12,15 +12,33 @@ const router = (app: any, ds: DataService) => {
                 } else {
                     const ProfessionalModel: any = ds.dbModels.professional;
 
-                    const Province: any = ds.dbModels.province;
-                    const Country: any = ds.dbModels.country;
+                    const Gender: any = ds.dbModels.gender;
+                    /*
+                        approved
+                        -0 si la cuenta todavia esta pendiente de revision (de la foto de matricula)
+                        -1 si fue rechazada
+                        -2 si fue aceptada
+                    */
+                    var approved = req.query.approved || '';
+                    var where = {};
+                    console.log(approved);
+
+                    if (approved != '') {
+                        console.log('entre');
+                        where = {
+                            approved: approved
+                        };
+                    }
 
                     ProfessionalModel.findAll({
-                        include: [Province, Country],
+                        include: [Gender],
+                        attributes: { exclude: ['code', 'pwd', 'city', 'rating', 'CountryId', 'ProvinceId'] },
+                        where: where
                     }).then((profesional: any[]) => {
                         res.send(profesional);
                     });
                 }
+
             });
         })
         .post((req: any, res: any) => {
