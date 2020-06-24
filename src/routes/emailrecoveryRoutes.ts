@@ -63,7 +63,7 @@ const router = (app: any, ds: DataService) => {
                                         <p>Ingrese el siguiente codigo en la App Vlife para recuperar la contraseña</p>
                                         <p>Codigo: ${n}</p>
                                         <p>Tiene una validez de 24 hs</p>
-                                        <p>Es un mail de prueba</p>
+                                        
                                         </div>
                                     `
                 };

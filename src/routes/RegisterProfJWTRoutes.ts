@@ -206,7 +206,7 @@ const router = (app: any, ds: DataService) => {
                                 <p>Usuario/Email es: ${prof.email} </p>
                                 <p>Tu clave es: ${prof.pwd}  </p>
                                 <p></p>
-                                <p>Es un mail de prueba</p>
+                                
                                 </div>
                             `
                 };
