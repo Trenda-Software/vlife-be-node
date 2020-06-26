@@ -8,15 +8,6 @@ module.exports = function (interval: any, dbClient: any) {
 
         console.log('-------------------------------------------------------');
         console.log('Cancelacion de los Request que no tuvieron respuesta x min ' + process.env.CANCEL_REQUEST_MINUTES);
-        const cancelRequestsNR = await dbClient.query("select Requests.id as RequestId, Professionals.id as profid from Requests inner join Professionals on Professionals.id = Requests.ProfessionalId inner join Users on Users.id = Requests.UserId where (timestampdiff(minute,  Requests.updatedAt,now() ) > " + process.env.CANCEL_REQUEST_MINUTES + " )  and staterequest = 0 and Requests.id <> -1", { type: Sequelize.QueryTypes.SELECT });
-        for (let cancelRequest in cancelRequestsNR) {
-            // Envio de notificacion push al profesional
-
-            const profesional1: any = dbClient.models.Professional;
-            const prof2 = await profesional1.update({ in_service: false }, {
-                where: { id: cancelRequestsNR[cancelRequest].profid }
-            });
-        }
         const requests = await dbClient.query("update Requests set commentprof = 'Cancelado por no respuesta del profesional',staterequest=9 where (timestampdiff(minute,  Requests.updatedAt,now() ) > " + process.env.CANCEL_REQUEST_MINUTES + " )  and staterequest = 0 and id <> -1", { type: Sequelize.QueryTypes.UPDATE });
         console.log('request ' + JSON.stringify(requests));
         console.log('-------------------------------------------------------');
