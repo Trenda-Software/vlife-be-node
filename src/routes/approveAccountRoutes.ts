@@ -2,6 +2,7 @@ import DataService from '../service/DataService';
 import { any } from 'bluebird';
 import app from '../server';
 var FCM = require('fcm-push');
+const nodemailerSES = require("nodemailer");
 
 const router = (app: any, ds: DataService) => {
 
@@ -55,7 +56,7 @@ const router = (app: any, ds: DataService) => {
                         title: "Recibiste la respuesta de la aprobación del registro",
                     },
                     body: {
-                        title: "Su soicitud de registro ha sido " + strApproved,
+                        title: "Su solicitud de registro ha sido " + strApproved,
                         body: "Hola!",
                         icon: "Notificación",
                         sound: "default"
@@ -67,6 +68,36 @@ const router = (app: any, ds: DataService) => {
                         console.log("error encontrado ", err);
                     } else {
                         console.log("respuesta aquí", response);
+                    }
+                });
+
+                var transporter = nodemailerSES.createTransport({
+                    "host": process.env.EMAIL_HOST,
+                    "secure": process.env.EMAIL_SECURE,//true, // use SSL
+                    "port": process.env.EMAIL_PORT,
+                    "auth": {
+                        "user": process.env.EMAIL_USER,
+                        "pass": process.env.EMAIL_PASS
+                    }
+                });
+                let email1 = {
+                    from: process.env.EMAIL_DIRSEND,
+                    to: prof.email,
+                    subject: "Respuesta de la aprobación del registro",
+                    html: `
+                                <div>
+                                <p>Su solicitud de registro ha sido ${strApproved} </p>
+                                <p>Si su solicitud fue rechazada envie un mail a info@vlifesalud.com</p>                     
+                                </div>
+                            `
+                };
+
+                transporter.sendMail(email1, (err: any, info: any) => {
+
+                    if (err) {
+                        console.log("Error al enviar email - error " + JSON.stringify(err));
+                    } else {
+                        console.log("Correo enviado correctamente - info " + JSON.stringify(info));
                     }
                 });
 
