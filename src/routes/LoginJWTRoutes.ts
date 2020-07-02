@@ -39,7 +39,7 @@ const router = (app: any, ds: DataService) => {
             const usuario: any = ds.dbModels.user;
             const userMail = await usuario.findOne({
                 //include: [Province, Country, Gender],
-                where: { email: req.body.email }
+                where: { email: req.body.email, pwd: req.body.pwd }
             });
 
             if (!userMail) return res.status(200).json({ message: 'El usuario y/o clave son incorrectos' });
@@ -53,10 +53,10 @@ const router = (app: any, ds: DataService) => {
             console.log(hashedPassword);
             */
 
-            const userPwd = await usuario.findOne({
-                where: { pwd: req.body.pwd }
-            });
-            if (!userPwd) return res.status(200).json({ message: 'El usuario y/o clave son incorrectos' });
+            /*             const userPwd = await usuario.findOne({
+                            where: { pwd: req.body.pwd }
+                        });
+                        if (!userPwd) return res.status(200).json({ message: 'El usuario y/o clave son incorrectos' }); */
 
 
             /*

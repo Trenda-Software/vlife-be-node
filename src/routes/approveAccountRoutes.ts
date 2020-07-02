@@ -34,7 +34,7 @@ const router = (app: any, ds: DataService) => {
 
                 // Envio de notificacion push
                 console.log("genero la push");
-                console.log(process.env.PROF_SERVER_KEY);
+                //console.log(process.env.PROF_SERVER_KEY);
                 var serverKey = process.env.PROF_SERVER_KEY;
 
                 console.log("Server Key " + serverKey);
@@ -105,6 +105,8 @@ const router = (app: any, ds: DataService) => {
                     value: true, message: 'Operación realizada con exito'
                 });
             } catch (err) {
+                console.log('paso por el error');
+
                 console.log("error -- " + JSON.stringify(err))
                 return res.status(400).json({ value: false, message: JSON.stringify(err) });
             }
