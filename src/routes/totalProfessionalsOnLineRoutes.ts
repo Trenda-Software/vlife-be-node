@@ -18,9 +18,9 @@ const router = (app: any, ds: DataService) => {
 
                     if (id > 0) {
                         const profOnLine1 = await ds.dbClient.query("select count(*) as count from Professionals inner join Specialties_Professionals on Specialties_Professionals.ProfessionalId = Professionals.id where Professionals.on_line = true and Specialties_Professionals.SpecialtyId = " + id, { type: Sequelize.QueryTypes.SELECT });
-                        console.log('count', profOnLine1.length);
+                        console.log('count', profOnLine1[0].count);
 
-                        res.json(profOnLine1.length);
+                        res.json(profOnLine1[0].count);
                     } else {
                         const profesional: any = ds.dbModels.professional;
                         const profOnLine = await profesional.findAll({
