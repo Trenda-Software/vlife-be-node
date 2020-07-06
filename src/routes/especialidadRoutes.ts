@@ -19,6 +19,7 @@ const router = (app: any, ds: DataService) => {
                         // console.log('########## Specialty: ', specialty);
                         const professionals = await specialty.getProfessionals();
                         const profPerSpecialty = {
+                            id: specialty.id,
                             name: specialty.name,
                             qty: professionals.length,
                         };

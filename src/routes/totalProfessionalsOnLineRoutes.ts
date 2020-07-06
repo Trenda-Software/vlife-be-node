@@ -13,14 +13,25 @@ const router = (app: any, ds: DataService) => {
                 if (err) {
                     res.sendStatus(403);
                 } else {
-                    const profesional: any = ds.dbModels.professional;
-                    const profOnLine = await profesional.findAll({
-                        where: { on_line: true }
-                    });
+                    const id = req.query.id || '';
 
-                    console.log("Cantidad de prof online " + profOnLine.length)
 
-                    res.json(profOnLine.length);
+                    if (id > 0) {
+                        const profOnLine1 = await ds.dbClient.query("select count(*) as count from Professionals inner join Specialties_Professionals on Specialties_Professionals.ProfessionalId = Professionals.id where Professionals.on_line = true and Specialties_Professionals.SpecialtyId = " + id, { type: Sequelize.QueryTypes.SELECT });
+                        console.log('count', profOnLine1.length);
+
+                        res.json(profOnLine1.length);
+                    } else {
+                        const profesional: any = ds.dbModels.professional;
+                        const profOnLine = await profesional.findAll({
+                            where: { on_line: true }
+                        });
+
+                        console.log("Cantidad de prof online " + profOnLine.length)
+
+                        res.json(profOnLine.length);
+                    }
+
                 }
             });
 
