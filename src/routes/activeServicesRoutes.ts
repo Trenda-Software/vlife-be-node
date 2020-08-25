@@ -66,7 +66,7 @@ const router = (app: any, ds: DataService) => {
                     var response = {};
                     if (req.query.prof == 'true') {
                         // consulto el ultimo servicio 
-                        sqlQuery = "select max(id) as id, staterequest from Requests where Requests.staterequest in (3,4,6,7,9,10) and Requests.ProfessionalId = " + req.query.id;
+                        sqlQuery = "select id, staterequest from Requests where Requests.staterequest in (3,4,6,7,9,10) and Requests.ProfessionalId = " + req.query.id + " order by Requests.id desc";
                         const servicios1 = await ds.dbClient.query(sqlQuery, { type: Sequelize.QueryTypes.SELECT });
 
                         if (servicios1.length == 0) {
