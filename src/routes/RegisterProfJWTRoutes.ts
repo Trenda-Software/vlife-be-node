@@ -107,8 +107,8 @@ const router = (app: any, ds: DataService) => {
                 //Grabo la imagen en disco
                 //Declaro el S#
                 const s3 = new AWS.S3({
-                    accessKeyId: "AKIATZGWNNFHODVQTJSA",
-                    secretAccessKey: "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"
+                    accessKeyId: process.env.S3_AWS_ACCESS_KEY_ID,
+                    secretAccessKey: process.env.S3_AWS_SECRET_ACCESS_KEY
                 });
 
                 //Grabo la imagen del prof
